@@ -7,9 +7,7 @@
         <router-link :to="{ name: 'Explore'}">Explore  </router-link>
       </div>
     </div>
-    <button class="right bg-green_light p-3 rounded-full flex">
-      <router-link class=" text-xs uppercase text-green" :to="{ name: 'Register'}">Login / Register</router-link>
-    </button>
+    <NavUser></NavUser>
   </div>
 
   <router-view />
@@ -27,6 +25,16 @@
     </div>
   </div>
 </template>
+
+<script>
+ import NavUser from './components/NavUser.vue'
+
+  export default {
+    components: {
+      NavUser
+    }
+  }
+</script>
 
 <style scoped>
   .header {
