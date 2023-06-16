@@ -1,5 +1,5 @@
 <template>
-  <div class="header fixed top-0 flex flex-wrap justify-between items-center text-green flex-row p-5 border-b w-screen   border-solid">
+  <div class="header sticky top-0 flex flex-wrap justify-between items-center text-green flex-row p-5 border-b w-screen border-solid">
     <div class="left flex flex-row items-center">
       <router-link class="logo font-cursive normal-case font-bold text-3xl justify-start" to="/">PalatePicks</router-link>
       <div class="nav-menu ml-6 space-x-9">
@@ -8,13 +8,13 @@
       </div>
     </div>
     <button class="right bg-green_light p-3 rounded-full flex">
-      <router-link class=" text-xs uppercase" :to="{ name: 'Register'}">Login / Register</router-link>
+      <router-link class=" text-xs uppercase text-green" :to="{ name: 'Register'}">Login / Register</router-link>
     </button>
   </div>
 
   <router-view />
 
-  <div class="footer fixed w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
+  <div class="footer w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
       <div class="logo font-cursive normal-case font-bold text-3xl">PalatePicks</div>
       <div class="font-light">Fueling Student Appetites, One Bite at a Time</div>
