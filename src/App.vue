@@ -1,5 +1,5 @@
 <template>
-  <div class="header sticky top-0 flex flex-wrap justify-between items-center text-green flex-row p-5 border-b w-screen border-solid">
+  <div class="header sticky top-0 flex flex-wrap justify-between items-center bg-white text-green flex-row p-5 border-b w-screen border-solid">
     <div class="left flex flex-row items-center">
       <router-link class="logo font-cursive normal-case font-bold text-3xl justify-start" to="/">PalatePicks</router-link>
       <div class="nav-menu ml-6 space-x-9">
