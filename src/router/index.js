@@ -40,7 +40,7 @@ const routes = [
     component: Explore
   },
   {
-    path: '/restaurant/:resto-id',
+    path: '/restaurant/:resto',
     name: 'RestoProfile',
     component: RestoProfile
   }
