@@ -17,7 +17,7 @@
           Top Restaurants
         </div>
         <div class="top-restaurants-list flex flex-wrap">
-          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" />
+          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
         </div>
       </div>
       <div class="budget-restaurants">
@@ -25,7 +25,7 @@
           Budget Restaurants
         </div>
         <div class="budget-restaurants-list flex flex-wrap">
-          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" />
+          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
         </div>
       </div>
     </section>
@@ -46,49 +46,57 @@
             name: 'Happy N\' Healthy',
             imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4.0
+            rating: 4,
+            price: 3
           },
           {
             name: 'Restaurant 2',
             imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4.0
+            rating: 5,
+            price: 2
           },
           {
             name: 'Restaurant 3',
             imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4.0
+            rating: 3,
+            price: 1
           },
           {
             name: 'Restaurant 4',
             imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4.0
+            rating: 1,
+            price: 3
           },
           {
             name: 'Restaurant 5',
             imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4.0
+            rating: 4,
+            price: 2
           },
           {
             name: 'Restaurant 6',
             imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4.0
+            rating: 2,
+            price: 3
           },
           {
             name: 'Restaurant 7',
             imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4.0
+            rating: 1,
+            price: 2
           },
           {
             name: 'Restaurant 8',
             imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4.0
+            rating: 4,
+            price: 3
           }
         ]
       }

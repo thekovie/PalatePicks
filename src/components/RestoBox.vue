@@ -6,20 +6,17 @@
     </div>
     <div class="resto-info p-6">
       <div class="budget-rate flex">
-        <img class="peso-icon w-4 h-4 mr-1" src="../assets/Peso.svg" alt="Peso" />
-        <img class="peso-icon w-4 h-4 mr-1" src="../assets/Peso.svg" alt="Peso" />
-        <img class="peso-icon w-4 h-4 mr-1" src="../assets/Peso.svg" alt="Peso" />
+        <div v-for="i in price" class="budget-icon text-xl text-green pr-1" :key="i">
+          ₱
+        </div>
       </div>
-      <div class="resto-name-rating font-semibold mt-1 mb-2 flex justify-between">
+      <div class="resto-name-rating font-semibold mb-2 flex justify-between">
         <div class="resto-name text-2xl">
           {{ name }}
         </div>
         <div class="rating flex items-center px-3">
-          <img class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../assets/Star-blank.svg" alt="star" />
+          <img v-for="i in rating" class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" :key="i" />
+          <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="../assets/Star-blank.svg" alt="star" :key="i" />
         </div>
       </div>
       <div class="description text-sm">
@@ -41,6 +38,12 @@
       },
       description: {
         type: String
+      },
+      rating: {
+        type: Number
+      },
+      price: {
+        type: Number
       }
     }
   }
