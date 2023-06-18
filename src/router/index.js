@@ -40,9 +40,15 @@ const routes = [
     component: Explore
   },
   {
-    path: '/restaurant/:resto-id',
+    path: '/restaurant/:resto',
     name: 'RestoProfile',
-    component: RestoProfile
+    component: RestoProfile,
+    props: true
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: Home
   }
 ]
 

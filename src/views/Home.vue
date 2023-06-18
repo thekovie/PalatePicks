@@ -1,5 +1,5 @@
 <template>
-  <body class="pb-80">
+  <div class="pb-80">
     <div class="upper-part h-[586px] gradient-bg flex flex-col justify-center items-center">
       <div class="text-center text-3xl font-bold text-white">
           Hi, Juan! What are you craving lately?
@@ -17,12 +17,7 @@
           Top Restaurants
         </div>
         <div class="top-restaurants-list flex flex-wrap">
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
+          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
         </div>
       </div>
       <div class="budget-restaurants">
@@ -30,16 +25,11 @@
           Budget Restaurants
         </div>
         <div class="budget-restaurants-list flex flex-wrap">
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
-          <RestoBox imageHeader="../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" name="Happy N' Healthy" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa. Condimentum mattis pellentesque id nibh. Pellentesque id nibh tortor id aliquet. Neque ornare aenean euismod elementum. Nulla pharetra diam sit amet nisl suscipit. Nunc sed id semper risus in hendrerit gravida. Nisl suscipit adipiscing bibendum est ultricies integer. Pellentesque habitant morbi tristique senectus." />
+          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
         </div>
       </div>
     </section>
-  </body>
+  </div>
 </template>
 
 <script>
@@ -48,6 +38,68 @@
   export default {
     components: {
       RestoBox
+    },
+    data() {
+      return {
+        establishments: [
+          {
+            name: 'Happy N\' Healthy',
+            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
+            rating: 4,
+            price: 3
+          },
+          {
+            name: 'Restaurant 2',
+            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
+            rating: 5,
+            price: 2
+          },
+          {
+            name: 'Restaurant 3',
+            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
+            rating: 3,
+            price: 1
+          },
+          {
+            name: 'Restaurant 4',
+            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
+            rating: 1,
+            price: 3
+          },
+          {
+            name: 'Restaurant 5',
+            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
+            rating: 4,
+            price: 2
+          },
+          {
+            name: 'Restaurant 6',
+            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
+            rating: 2,
+            price: 3
+          },
+          {
+            name: 'Restaurant 7',
+            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
+            rating: 1,
+            price: 2
+          },
+          {
+            name: 'Restaurant 8',
+            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
+            rating: 4,
+            price: 3
+          }
+        ]
+      }
     }
   }
 </script>
