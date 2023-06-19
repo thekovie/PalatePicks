@@ -48,6 +48,7 @@
               Reviews
             </div>
             <div class="reviews-list flex flex-col gap-8">
+              <InputReviewBox v-if="openInputReviewBox" :name="resto" />
               <ReviewBox />
               <ReviewBox />
               <ReviewBox />
@@ -57,7 +58,7 @@
           </div>
           <div class="review-filters mt-20 flex flex-col w-auto items-end">
             <div class="create-review">
-              <button class="create-review-btn bg-green rounded-3xl flex items-center font-light px-8 py-4">
+              <button v-show="!isRestoOwner" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
                 <span class="text-white text-base uppercase mr-6">Make a review</span>
                 <img src="../../assets/Plus.svg" />
               </button>
@@ -105,11 +106,29 @@
 
 <script>
   import ReviewBox from '../../components/ReviewBox.vue'
+  import InputReviewBox from '../../components/InputReviewBox.vue'
+
   export default {
     components: {
-      ReviewBox
+      ReviewBox, InputReviewBox
     },
-    props: ['resto', 'description', 'imgHeader'],
+    props: {
+      resto: {
+        type: String,
+        default: 'Resto Name',
+      },
+    },
+    data() {
+      return {
+        openInputReviewBox: true,
+        isRestoOwner: false,
+      }
+    },
+  methods: {
+    openReviewBox() {
+      this.openInputReviewBox = !this.openInputReviewBox
+      }
+    }
   }
 </script>
 
