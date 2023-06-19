@@ -1,5 +1,5 @@
 <template>
-  <body class="min-h-screen">
+  <body class="min-h-screen pb-80">
     <div class="cover-page h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white">
       <div class="resto-title font-bold text-5xl">
         {{ resto }}
