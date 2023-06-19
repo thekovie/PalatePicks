@@ -8,9 +8,9 @@
       <span> Hi, Kovie!</span>
     </button>
     <div class="bg-green_light px-3 rounded-b-2xl text-black dropdown-menu" :class="{ 'show': isDropdownOpen }">
-      <button class="table-cell text-sm px-1 py-2">View Profile</button>
-      <button class="table-cell text-sm px-1 py-2">Edit Profile</button>
-      <button class="table-cell text-sm px-1 py-2 text-red">Logout</button>
+      <router-link class="block text-sm px-2 py-2" to="/">View Profile</router-link>
+      <router-link class="block text-sm px-2 py-2" :to="{ name:'ProfileSettings'}">Edit Profile</router-link>
+      <router-link class="block text-sm px-2 py-2 text-red" to="/">Logout</router-link>
     </div>
   </div>
 </template>
