@@ -7,10 +7,10 @@
       <img src="../assets/images/user.jpg" alt="Avatar" class="center w-6 h-6 rounded-full mr-3"/>
       <span> Hi, Kovie!</span>
     </button>
-    <div class="bg-green_light px-2 rounded-b-3xl text-black dropdown-menu" :class="{ 'show': isDropdownOpen }">
-      <button class="table-cell px-1 py-2">View Profile</button>
-      <button class="table-cell px-1 py-2">Edit Profile</button>
-      <button class="table-cell px-1 py-2 text-red">Logout</button>
+    <div class="bg-green_light px-3 rounded-b-2xl text-black dropdown-menu" :class="{ 'show': isDropdownOpen }">
+      <button class="table-cell text-sm px-1 py-2">View Profile</button>
+      <button class="table-cell text-sm px-1 py-2">Edit Profile</button>
+      <button class="table-cell text-sm px-1 py-2 text-red">Logout</button>
     </div>
   </div>
 </template>

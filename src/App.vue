@@ -7,7 +7,8 @@
         <router-link :to="{ name: 'Explore'}">Explore  </router-link>
       </div>
     </div>
-    <NavUser></NavUser>
+    <NavUser v-if="!isLoggedIn"/>
+    <NavUserProfile v-else="isLoggedIn"/>
   </div>
 
   <router-view />
@@ -28,10 +29,21 @@
 
 <script>
  import NavUser from './components/NavUser.vue'
+ import NavUserProfile from './components/NavUserProfile.vue'
 
   export default {
     components: {
-      NavUser
+      NavUser, NavUserProfile
+    },
+    data() {
+      return {
+        isLoggedIn: true,
+      }
+    },
+    methods: {
+      logout() {
+        this.isLoggedIn = false
+      }
     }
   }
 </script>
