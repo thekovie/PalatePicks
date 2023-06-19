@@ -16,9 +16,20 @@
           <div class="flex flex-row">
 
             <!-- Profile Picture -->
-            <div class="bg-green min-w-[104px] min-h-[104px] max-w-[104px] max-h-[104px] rounded-[100%] p-[2.69px] mr-[22px]">
-              <div class="bg-white w-[100%] h-[100%] rounded-[100%]"></div>
+            <div @click="toggleUploadModal" class="bg-green min-w-[104px] min-h-[104px] max-w-[104px] max-h-[104px] rounded-[100%] p-[2.69px] mr-[22px] cursor-pointer">
+              <div class="bg-white w-[100%] h-[100%] rounded-[100%]">
+
+                <div v-if="isImageDefault" class="upload-bg-default w-[60%] h-[60%] rounded-[100%] relative top-[22px] left-[21px]"></div>
+                <img v-else :src="image" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%]">
+
+              </div>
             </div>
+
+            <!-- Upload Picture Modal -->
+            <div class="absolute top-0 bottom-0 left-0 right-0" v-if="showUploadModal">
+              <UploadPicture @close="toggleUploadModal" @return="getImageSrc($event)"/>
+            </div>
+
 
             <!-- Container for first name, last name, and username -->
             <div class="flex flex-col w-[100%] justify-between">
@@ -59,7 +70,6 @@
           <!-- Redirect to login page -->
           <div class="text-grey">Already a member? <router-link class="font-bold" :to="{ name: 'Login'}">Login here!</router-link> </div>
 
-
         </div>
       </form>
 
@@ -76,7 +86,12 @@
 </template>
 
 <script>
+import UploadPicture from '../components/UploadPicture.vue'
+
 export default {
+  components: {
+    UploadPicture
+  },
   data(){
     return{
       firstName: '',
@@ -85,12 +100,23 @@ export default {
       email: '',
       password: '',
       school: '',
-      bio: ''
+      bio: '',
+      showUploadModal: false,
+      image: "",
+      isImageDefault: true
     }
   },
   methods: {
     handleSubmit(){
       alert('Your accound has been successfully registered!');
+    },
+    toggleUploadModal(){
+      this.showUploadModal = !(this.showUploadModal);
+      console.log('Trigger')
+    },
+    getImageSrc(e){
+      this.image = e;
+      this.isImageDefault = false;
     }
   },
 }
@@ -106,4 +132,9 @@ export default {
   input{
     @apply py-[10px] px-[32px] rounded-[34.5px] h-[40px] border-[1px] border-solid border-green;
   }
+  .upload-bg-default{
+  background-image: url("../assets/images/camera-icon.png");
+  background-position: center;
+  background-size: cover;
+}
 </style>
