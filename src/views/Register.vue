@@ -1,7 +1,7 @@
 <template>
 
     <!-- Whole Register Division Container -->
-    <div class="flex flex-row bg-green_lightbg w-screen min-h-screen">
+    <div class="flex flex-row bg-green_lightbg min-w-screen min-h-screen">
 
       <!-- Register Division -->
       <form class="flex flex-grow justify-center align-middle" @submit.prevent="handleSubmit">

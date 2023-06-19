@@ -1,5 +1,5 @@
 <template>
-  <div class="error-404 flex flex-col min-h-screen mt-80 mx-52">
+  <div class="error-404 flex flex-col h-screen mt-80 mx-52">
     <div class="error-404-title text-6xl font-semibold">
       404
     </div>
