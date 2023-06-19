@@ -1,11 +1,11 @@
 <template>
   <div class="nav-user-profile">
     <button
-      :class="['right', 'bg-green_light', 'px-6', 'py-2', { 'rounded-3xl': !rounded, 'rounded-t-3xl': rounded }, 'flex', 'dropdown-button']"
+      :class="['center', 'bg-green_light', 'px-4', 'py-2', { 'rounded-3xl': !rounded, 'rounded-t-3xl': rounded }, 'flex', 'dropdown-button']"
       @click="toggleDropdown"
     >
-      <img src="../assets/images/user.jpg" alt="Avatar" class="w-6 h-6 rounded-full"/>
-      <span>Hi, Kovie! </span>
+      <img src="../assets/images/user.jpg" alt="Avatar" class="center w-6 h-6 rounded-full mr-3"/>
+      <span> Hi, Kovie!</span>
     </button>
     <div class="bg-green_light px-2 rounded-b-3xl text-black dropdown-menu" :class="{ 'show': isDropdownOpen }">
       <button class="table-cell px-1 py-2">View Profile</button>
