@@ -1,4 +1,5 @@
 <template>
+  <div class="flex flex-row w-screen">
 
     <!-- Login Image -->
     <div class="bg-green_light -z-50">
@@ -32,8 +33,6 @@
           <!-- Login Button -->
           <button class="login-button bg-green rounded-[34.5px] h-[69px] text-white text-[24px] my-[32px]" >Login</button>
 
-
-          <!-- Redirect to sign up/register page -->
           <div class="text-grey text-[20px] mb-[180px]">New to PalatePicks? <router-link class="font-bold" :to="{ name: 'Register'}">Sign up here!</router-link></div>
 
         </form>
@@ -44,3 +43,32 @@
 
   </div>
 </template>
+
+<script>
+export default {
+  data(){
+    return {
+      userName: '',
+      password: '',
+      rememberMe: false
+    }
+  },
+  methods: {
+    handleSubmit(){
+      console.log('Login Initiated');
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .login-bg {
+    background-image: url("../assets/images/login-image.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  ::placeholder{
+    color: #c0c0c0;
+  }
+</style>
