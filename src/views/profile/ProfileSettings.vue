@@ -1,5 +1,5 @@
 <template>
-  <div class="my-10 mx-80"> <!--Content Section-->
+  <div class="my-10 mx-40"> <!--Content Section-->
 
     <div class="flex flex-row items-center"> <!--Profile Section-->
 
