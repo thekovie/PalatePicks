@@ -1,7 +1,7 @@
 <template>
 
     <!-- Whole Register Division Container -->
-    <div class="flex flex-row bg-green_lightbg w-screen">
+    <div class="flex flex-row bg-green_lightbg w-screen min-h-screen">
 
       <!-- Register Division -->
       <form class="flex flex-grow justify-center align-middle" @submit.prevent="handleSubmit">
@@ -67,7 +67,7 @@
       <!-- Register Picture -->
 
 
-      <div class="register-bg w-[772px] min-h-[874px]">ASD</div>
+      <div class="register-bg w-[1100px] min-h-[874px]">ASD</div>
 
 
 
