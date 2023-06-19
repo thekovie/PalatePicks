@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row w-screen min-h-screen ">
+  <div class="flex flex-row min-w-screen min-h-screen ">
 
     <!-- Login Image -->
     <div class="bg-green_light -z-50">

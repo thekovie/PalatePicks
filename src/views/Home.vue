@@ -1,6 +1,6 @@
 <template>
-  <div class="pb-80">
-    <div class="upper-part h-[586px] w-screen gradient-bg flex flex-col justify-center items-center">
+  <div class="min-h-screen">
+    <div class="upper-part h-[586px] min-w-screen gradient-bg flex flex-col justify-center items-center">
       <div class="text-center text-3xl font-bold text-white">
           Hi, Juan! What are you craving lately?
       </div>
