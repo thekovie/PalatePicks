@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row w-screen min-h-screen">
+  <div class="flex flex-row w-screen min-h-screen ">
 
     <!-- Login Image -->
     <div class="bg-green_light -z-50">
@@ -7,8 +7,11 @@
     </div>
 
     <!-- Login Information Side -->
-    <div class="bg-green_light w-screen">
-      <div class="flex flex-col ml-52 mr-72">
+
+    <div class="bg-green_light w-screen px-32">
+
+      <!-- Login Division Container -->
+      <div class="flex flex-col mx-auto max-w-[745px]">
 
         <!-- Login Introduction -->
         <div class="font-bold text-[64px] mt-[110px]">Welcome!</div>
