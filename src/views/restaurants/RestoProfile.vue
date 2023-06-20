@@ -120,7 +120,7 @@
     },
     data() {
       return {
-        openInputReviewBox: true,
+        openInputReviewBox: false,
         isRestoOwner: false,
       }
     },
