@@ -36,12 +36,12 @@
 
                 <div class="basis-1/2 mt-5 me-10">
                   <label>First Name<br></label>
-                  <input type="text" value="Kovie" class="border-green border rounded w-full px-2" @click="clickTextBox">
+                  <input type="text" value="Kovie" class="border-green border rounded w-full px-2" @click="clickTextBox"  @input="handleInputChange" >
                 </div>
 
                 <div class="basis-1/2 mt-5">
                   <label>Last Name<br></label>
-                  <input type="text" value="Niño" class="border-green border rounded w-full  px-2" @click="clickTextBox">
+                  <input type="text" value="Niño" class="border-green border rounded w-full  px-2" @click="clickTextBox"  @input="handleInputChange" >
                 </div>
 
               </div>
@@ -50,7 +50,7 @@
 
                 <div class="mt-5"> <!--Username-->
                   <label>Username<br></label>
-                  <input type="text" value="@Tofudubu" class="border-green border rounded w-full  px-2" @click="clickTextBox">
+                  <input type="text" value="@Tofudubu" class="border-green border rounded w-full  px-2" @click="clickTextBox"  @input="handleInputChange">
                 </div>
 
               </div>
@@ -59,7 +59,7 @@
 
                 <div class="mt-5"> <!--School-->
                   <label>School/University<br></label>
-                  <input type="text" value="De La Salle University" class="border-green border rounded w-full  px-2" @click="clickTextBox">
+                  <input type="text" value="De La Salle University" class="border-green border rounded w-full  px-2" @click="clickTextBox" @input="handleInputChange" >
                 </div>
 
               </div>
@@ -75,7 +75,7 @@
 
           <div class="mt-5"> <!--Bio-->
             <label>Bio<br></label>
-            <textarea rows="4" @click="clickTextBox" class="border-green border rounded w-full px-2" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Ultrices mi tempus imperdiet nulla malesuada.">
+            <textarea rows="4" @click="clickTextBox" @input="handleInputChange" class="border-green border rounded w-full px-2" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Ultrices mi tempus imperdiet nulla malesuada.">
             </textarea>
           </div>
 
@@ -93,7 +93,7 @@
           <div class="flex">
             <div class="basis-4/5 mt-5">
               <label>Email<br></label>
-              <input type="text" value="kovie_nino@dlsu.edu.ph" class="border-green border rounded w-full px-2" required @click="clickTextBox">
+              <input type="text" value="kovie_nino@dlsu.edu.ph" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
             </div>
 
             <div class="mt-10 ms-10 bg-green text-white px-12 rounded-3xl">
@@ -106,7 +106,7 @@
 
             <div class="mr-20 mt-5">
               <label>Code<br></label>
-              <input :disabled="isDisabled" type="text" value="000 - 000" class="border-green border rounded w-full px-2" @click="clickTextBox">
+              <input :disabled="isDisabled" type="text" value="000 - 000" class="border-green border rounded w-full px-2" @click="clickTextBox"  @input="handleInputChange" >
               <p class="opacity-60 text-xs my-2">Insert the 6 digit code sent to your email to confirm the change of email</p>
             </div>
 
@@ -129,7 +129,7 @@
 
             <div class="mr-20 mt-5">
               <label>Current Password<br></label>
-              <input type="password" value="**********" class="border-green border rounded w-full px-2" required @click="clickTextBox">
+              <input type="password" value="**********" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
             </div>
 
           </div>
@@ -140,12 +140,12 @@
 
               <div class="basis-1/2 mt-5 me-10">
                 <label>New Password<br></label>
-                <input type="password" value="************" class="border-green border rounded w-full px-2" required @click="clickTextBox">
+                <input type="password" value="************" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
               </div>
 
               <div class="basis-1/2 mt-5">
                 <label>Confirm New Password<br></label>
-                <input type="password" value="************" class="border-green border rounded w-full px-2" required @click="clickTextBox">
+                <input type="password" value="************" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
               </div>
             </div>
 
@@ -177,12 +177,21 @@ export default {
     },
     maskPassword(event, property) {
       this[property] = event.target.value;
+    },
+    handleInputChange() {
+      this.isDisabled = !this.isTextboxFilled;
     }
   },
   data() {
     return {
+      inputValue: '',
       isDisabled: true
     };
+  },
+  computed: {
+    isTextboxFilled() {
+      return this.inputValue.length > 0;
+    }
   },
 }
 </script>
