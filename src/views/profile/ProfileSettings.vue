@@ -27,59 +27,37 @@
         </div>
 
         <form @submit.prevent="saveChanges">
-
           <div class="flex">
-
             <div class="basis-3/4">
-
               <div class="flex"> <!--Name-->
-
                 <div class="basis-1/2 mt-5 me-10">
                   <label>First Name<br></label>
-                  <input type="text" value="Kovie" class="border-green border rounded w-full px-2" @click="clickTextBox"  @input="handleInputChange" >
+                  <input type="text" v-model="firstName" class="border-green border rounded w-full px-2" @click="clickTextBox">
                 </div>
-
                 <div class="basis-1/2 mt-5">
                   <label>Last Name<br></label>
-                  <input type="text" value="Niño" class="border-green border rounded w-full  px-2" @click="clickTextBox"  @input="handleInputChange" >
+                  <input type="text" v-model="lastName" class="border-green border rounded w-full px-2" @click="clickTextBox">
                 </div>
-
               </div>
-
-              <div>
-
-                <div class="mt-5"> <!--Username-->
-                  <label>Username<br></label>
-                  <input type="text" value="@Tofudubu" class="border-green border rounded w-full  px-2" @click="clickTextBox"  @input="handleInputChange">
-                </div>
-
+              <div class="mt-5"> <!--Username-->
+                <label>Username<br></label>
+                <input type="text" v-model="username" class="border-green border rounded w-full px-2" @click="clickTextBox">
               </div>
-
-              <div>
-
-                <div class="mt-5"> <!--School-->
-                  <label>School/University<br></label>
-                  <input type="text" value="De La Salle University" class="border-green border rounded w-full  px-2" @click="clickTextBox" @input="handleInputChange" >
-                </div>
-
+              <div class="mt-5"> <!--School-->
+                <label>School/University<br></label>
+                <input type="text" v-model="school" class="border-green border rounded w-full px-2" @click="clickTextBox">
               </div>
-
             </div>
-
             <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->
               <img src="../../assets/images/user.jpg" alt="Avatar" class="w-36 h-36 rounded-full me-3"/>
               <button class="bg-green text-white px-7 mx-14 mt-5 py-1 rounded-3xl">Change Avatar</button>
             </div>
-
           </div>
-
           <div class="mt-5"> <!--Bio-->
             <label>Bio<br></label>
-            <textarea rows="4" @click="clickTextBox" @input="handleInputChange" class="border-green border rounded w-full px-2" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Ultrices mi tempus imperdiet nulla malesuada.">
-            </textarea>
+            <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2" @click="clickTextBox"></textarea>
           </div>
-
-          <button class="bg-green text-white px-12  mt-5 py-1 rounded-3xl">Save Changes</button>
+          <button class="bg-green text-white px-12 mt-5 py-1 rounded-3xl" :disabled="isButtonDisabled">Save Changes</button>
         </form>
       </div>
 
@@ -93,11 +71,11 @@
           <div class="flex">
             <div class="basis-4/5 mt-5">
               <label>Email<br></label>
-              <input type="text" value="kovie_nino@dlsu.edu.ph" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
+              <input type="text" v-model="email" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
             </div>
 
             <div class="mt-10 ms-10 bg-green text-white px-12 rounded-3xl">
-              <button class="py-1" :disabled="isDisabled"> Send Code</button>
+              <button class="py-1 sendCode" :disabled="isDisabled"> Send Code</button>
             </div>
 
           </div>
@@ -129,7 +107,7 @@
 
             <div class="mr-20 mt-5">
               <label>Current Password<br></label>
-              <input type="password" value="**********" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
+              <input type="password" v-model="password" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
             </div>
 
           </div>
@@ -140,12 +118,12 @@
 
               <div class="basis-1/2 mt-5 me-10">
                 <label>New Password<br></label>
-                <input type="password" value="************" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
+                <input type="password" v-model="newPassword" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
               </div>
 
               <div class="basis-1/2 mt-5">
                 <label>Confirm New Password<br></label>
-                <input type="password" value="************" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
+                <input type="password" v-model="confirmNewPassword" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
               </div>
             </div>
 
@@ -167,10 +145,14 @@
 </template>
 
 <script>
+
 export default {
   methods: {
     saveChanges(){
       alert('Your changes has been successfully saved!');
+    },
+    codeSent(){
+      alert('Code has been sent to your email!');
     },
     maskPasswordValue(password) {
       return password.replace(/./g, '*');
@@ -178,21 +160,29 @@ export default {
     maskPassword(event, property) {
       this[property] = event.target.value;
     },
-    handleInputChange() {
-      this.isDisabled = !this.isTextboxFilled;
+    handleInputChange(value) {
+      this.inputValue = value;
     }
   },
   data() {
     return {
-      inputValue: '',
-      isDisabled: true
+      inputValue: " ",
+      firstName: 'Kovie',
+      lastName: 'Niño',
+      username: '@Tofudubu',
+      school: 'De La Salle University',
+      email: 'thegamingkovie@gmail.com',
+      password: 'password',
+      newPassword: 'password',
+      confirmNewPassword: 'password',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Ultrices mi tempus imperdiet nulla malesuada.',
     };
   },
   computed: {
-    isTextboxFilled() {
-      return this.inputValue.length > 0;
-    }
-  },
+    isButtonDisabled() {
+      return !this.firstName || !this.lastName || !this.username || !this.school || !this.bio || !this.email || !this.password;
+    },
+  }
 }
 </script>
 
