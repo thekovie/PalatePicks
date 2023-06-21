@@ -3,8 +3,8 @@
     <div class="flex flex-col min-h-screen">
 
         <!-- Introduction Div -->
-        <div class="gradient-bg h-[708px] w-screen -z-50 py-[273px]">
-          <div class="text-white font-bold text-[64px] z-50 w-[670px] text-center mx-auto">Find food with ease, for the busy you.</div>
+        <div class="gradient-bg h-[708px] min-w-screen -z-50 py-[273px]">
+          <div class="text-white font-bold text-6xl z-50 w-[670px] text-center mx-auto">Find food with ease, for the busy you.</div>
           <div class="bg-black/60 absolute top-0 left-0 w-[100%] h-[100%] -z-50">
         </div>
 
@@ -14,7 +14,7 @@
       <!-- Content Div Container -->
       <div class="px-[55px] mb-[94px]">
           <!-- Explore foods caption-->
-          <div class="font-bold text-[64px] my-[44px] border-b-[1.5px] border-b-[#d9d9d9]">Explore Foods and Restaurants </div>
+          <div class="font-bold text-5xl my-[44px] pb-7 border-b-[1.5px] border-b-[#d9d9d9]">Explore Foods and Restaurants </div>
 
           <!-- Restaurants Div Container-->
           <div class="flex flex-wrap">
@@ -38,7 +38,7 @@
           {
             name: 'Happy N\' Healthy',
             imageHeader: 'src/assets/images/happy-n-healthy.png',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             rating: 4,
             price: 3
           },
@@ -66,7 +66,7 @@
           {
             name: 'Tapa King',
             imageHeader: "src/assets/images/tapaking.jpg",
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             rating: 5,
             price: 3
           },
