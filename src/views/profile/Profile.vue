@@ -1,7 +1,7 @@
 <template>
 <div class="profile justify-center flex flex-col items-center"> <!--Profile-->
 
-  <img src="../../assets/images/user.jpg" alt="Avatar" class="w-44 h-44 rounded-full"/>
+  <img src="../../assets/images/user.jpg" alt="Avatar" class="w-44 h-44 rounded-full mt-5"/>
   <p class="text-green text-xl font-bold mt-5">Kovie Niño</p>
   <p class="font-bold mt-1">@tofudubu</p>
   <p class="mt-1">De La Salle University</p>
