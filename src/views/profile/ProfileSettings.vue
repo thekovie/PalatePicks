@@ -67,7 +67,7 @@
           <p class="font-bold text-xl border-b border-green mt-10">Email</p>
         </div>
 
-        <form @submit.prevent="saveChanges">
+        <form @submit.prevent="codeSent">
           <div class="flex">
             <div class="basis-4/5 mt-5">
               <label>Email<br></label>
@@ -79,7 +79,8 @@
             </div>
 
           </div>
-
+          </form>
+          <form @submit.prevent="saveChanges">
           <div>
 
             <div class="mr-20 mt-5">
@@ -91,7 +92,7 @@
           </div>
 
           <div>
-            <button class="bg-green text-white px-12  mt-5 py-1 rounded-3xl">Update Email</button>
+            <button class="bg-green text-white px-12  mt-5 py-1 rounded-3xl" :disabled="isDisabled">Update Email</button>
           </div>
         </form>
       </div>
@@ -131,7 +132,7 @@
           <p class="opacity-60 text-xs my-2">Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter.</p>
 
           <div>
-            <button class="bg-green text-white px-8 py-1 mt-5 rounded-3xl">Update Password</button>
+            <button class="bg-green text-white px-8 py-1 mt-5 rounded-3xl" :disabled="isDisabled">Update Password</button>
           </div>
         </form>
       </div>
