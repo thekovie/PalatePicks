@@ -151,15 +151,6 @@
                   date: "06-30-2023 09:25",
                   comment: "Nulla ut risus nibh. Aenean purus nisi, vestibulum id sem at, commodo auctor mi. Maecenas a sapien nec lacus porttitor ultricies ut at elit. Aliquam eget nulla diam."
                 },
-                {
-                  name: "Jane Doe",
-                  username: "@imarealperson",
-                  profilePicSrc: "",
-                  school: '',
-                  isEstablishmentOwner: true,
-                  date: "06-30-2023 09:25",
-                  comment: "Nulla ut risus nibh. Aenean purus nisi, vestibulum id sem at, commodo auctor mi. Maecenas a sapien nec lacus porttitor ultricies ut at elit. Aliquam eget nulla diam."
-                },
               ]
             },
             {
