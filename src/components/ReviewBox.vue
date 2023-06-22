@@ -68,46 +68,46 @@ export default {
     FullReview
   },
   props: {
-      isRestoOwner: {
-        type: Boolean,
-        default: false,
-      },
-      isReviewOwner: {
-        type: Boolean,
-        default: false,
-      }
-      reviewerPhotoSrc: {
-        type: String
-      },
-      name: {
-        type: String
-      },
-      username: {
-        type: String
-      },
-      school: {
-        type: String
-      },
-      reviewSubject: {
-        type: String
-      },
-      mainReview: {
-        type: String
-      },
-      rating: {
-        type: Number
-      },
-      date: {
-        type: String
-      },
-      helpfulCount: {
-        type: Number
-      },
-      comments: {
-        type: Array
-      }
+    isRestoOwner: {
+      type: Boolean,
+      default: false,
     },
-  data(){
+    isReviewOwner: {
+      type: Boolean,
+      default: false,
+    },
+    reviewerPhotoSrc: {
+      type: String
+    },
+    name: {
+      type: String
+    },
+    username: {
+      type: String
+    },
+    school: {
+      type: String
+    },
+    reviewSubject: {
+      type: String
+    },
+    mainReview: {
+      type: String
+    },
+    rating: {
+      type: Number
+    },
+    date: {
+      type: String
+    },
+    helpfulCount: {
+      type: Number
+    },
+    comments: {
+      type: Array
+    }
+  },
+  data() {
     return{
       showFullReview: false
     }
