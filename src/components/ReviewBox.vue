@@ -14,6 +14,7 @@
       <div class="flex flex-col justify-end">
         <div class="reviewer-rating text-xl flex justify-end px-3 pt-5">
           <img v-for="i in rating" class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" :key="i" />
+          <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="../assets/Star-blank.svg" alt="star" :key="i" />
         </div>
       </div>
     </div>
