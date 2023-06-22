@@ -41,7 +41,13 @@
         <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleFullReview">
           View Comments
         </button>
-        <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3">
+        <button v-show="isReviewOwner" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+          Modify Review
+        </button>
+        <button v-show="isRestoOwner" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+          Delete Review
+        </button>
+        <button v-show="!isRestoOwner && !isReviewOwner" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Mark as Helpful
         </button>
 
@@ -53,9 +59,6 @@
   </div>
 </template>
 
-
-
-
 <script>
 
 import FullReview from './FullReview.vue'
@@ -65,38 +68,46 @@ export default {
     FullReview
   },
   props: {
-      reviewerPhotoSrc: {
-        type: String
-      },
-      name: {
-        type: String
-      },
-      username: {
-        type: String
-      },
-      school: {
-        type: String
-      },
-      reviewSubject: {
-        type: String
-      },
-      mainReview: {
-        type: String
-      },
-      rating: {
-        type: Number
-      },
-      date: {
-        type: String
-      },
-      helpfulCount: {
-        type: Number
-      },
-      comments: {
-        type: Array
-      }
+    isRestoOwner: {
+      type: Boolean,
+      default: false,
     },
-  data(){
+    isReviewOwner: {
+      type: Boolean,
+      default: false,
+    },
+    reviewerPhotoSrc: {
+      type: String
+    },
+    name: {
+      type: String
+    },
+    username: {
+      type: String
+    },
+    school: {
+      type: String
+    },
+    reviewSubject: {
+      type: String
+    },
+    mainReview: {
+      type: String
+    },
+    rating: {
+      type: Number
+    },
+    date: {
+      type: String
+    },
+    helpfulCount: {
+      type: Number
+    },
+    comments: {
+      type: Array
+    }
+  },
+  data() {
     return{
       showFullReview: false
     }
