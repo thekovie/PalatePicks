@@ -48,7 +48,7 @@
               Reviews
             </div>
             <div class="reviews-list flex flex-col gap-8">
-              <InputReviewBox v-if="openInputReviewBox" :name="resto" />
+              <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="resto"  :isVisible="isReviewBoxOpen"/>
               <ReviewBox />
               <ReviewBox />
               <ReviewBox />
@@ -120,14 +120,17 @@
     },
     data() {
       return {
-        openInputReviewBox: false,
+        isReviewBoxOpen: false,
         isRestoOwner: false,
       }
     },
   methods: {
     openReviewBox() {
-      this.openInputReviewBox = !this.openInputReviewBox
-      }
+      this.isReviewBoxOpen = true
+      },
+    closeReviewBox() {
+      this.isReviewBoxOpen = false
+      },
     }
   }
 </script>
