@@ -13,9 +13,9 @@
       :class="{ 'show': isDropdownOpen }"
       ref="dropdownMenu"
     >
-      <router-link class="block text-sm px-2 py-2" to="/">View Profile</router-link>
-      <router-link class="block text-sm px-2 py-2" :to="{ name:'ProfileSettings'}">Edit Profile</router-link>
-      <router-link class="block text-sm px-2 py-2 text-red" to="/">Logout</router-link>
+      <router-link class="block text-sm px-2 py-2" to="/" @click="closeDropdown('click')">View Profile</router-link>
+      <router-link class="block text-sm px-2 py-2" :to="{ name:'ProfileSettings'}" @click="closeDropdown('click')">Edit Profile</router-link>
+      <router-link class="block text-sm px-2 py-2 text-red" to="/" @click="closeDropdown('click')">Logout</router-link>
     </div>
   </div>
 </template>
