@@ -14,23 +14,15 @@
 
   <button class="bg-green text-white px-12 mt-4 mb-4 py-1 rounded-3xl" v-if="isUser"><router-link :to="{ name: 'ProfileSettings'}">Edit Profile</router-link></button>
 </div>
-<div class="px-20">
-  <p class="font-bold p-3">View Kovie's Reviews</p>
-  <UserReview />
-</div>
 <!--Component Here-->
 </template>
 
 <script>
-import UserReview from '../../components/UserReview.vue';
 export default {
   data() {
       return {
         isUser: true,
       }
     },
-  components: {
-    UserReview
-  }
 }
 </script>
