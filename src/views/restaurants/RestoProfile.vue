@@ -119,7 +119,7 @@
           mainReview: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa illum inventore esse et eos itaque molestias eligendi ut, exercitationem voluptas vel ex quasi dicta! Voluptate odio modi, ullam cum doloremque blanditiis! Neque ducimus in sed, dignissimos distinctio labore laboriosam soluta? Qui dolorem quae, ullam laboriosam ipsum atque dolore explicabo vitae amet sunt nulla commodi quo quasi ipsa blanditiis. Adipisci, eos. Veniam labore omnis ut, nostrum illo totam id velit asperiores exercitationem ab dignissimos rerum porro.",
           rating: 5,
           date: "06-11-2023 16:15",
-          helpfulCount: "1,734",
+          helpfulCount: 1734,
           comments: [
             {
               name: "John Doe",
@@ -192,7 +192,7 @@
           mainReview: "Aenean aliquet libero vitae vehicula euismod. Nullam maximus dignissim sapien quis fringilla. In rhoncus vestibulum leo, vel accumsan mauris blandit vitae. Aenean vitae tortor eget ipsum feugiat posuere eget in justo. Aliquam auctor, elit eu tempor lacinia, elit tellus dictum mi, id hendrerit turpis ex.",
           rating: 4,
           date: "02-20-2023 14:13",
-          helpfulCount: "215",
+          helpfulCount: 215,
           comments: []
         },
         {
@@ -205,7 +205,7 @@
           mainReview: "Aliquam turpis enim, varius sed viverra vel, tristique vitae metus. Aenean vitae lectus finibus, facilisis erat ac, tempor orci. Vestibulum malesuada nec nisl quis laoreet. Proin efficitur quis augue at elementum. Sed eget massa tincidunt elit maximus mollis. Ut bibendum justo et scelerisque facilisis. Nullam sed odio bibendum magna lacinia elementum. Nulla facilisi. Fusce consequat mi at quam aliquet laoreet. Curabitur rutrum vel neque in.",
           rating: 5,
           date: "09-25-2021 19:56",
-          helpfulCount: "2,123",
+          helpfulCount: 2123,
           comments: []
 
         },
@@ -219,7 +219,7 @@
           mainReview: "Vestibulum ac arcu condimentum, fringilla neque sed, laoreet lorem. Etiam porta massa at odio dictum, sed gravida tellus cursus. Curabitur quis imperdiet lacus. Proin ultrices, nibh at dictum consequat, erat quam accumsan risus, at dictum nulla ante ac mauris. Aenean eget magna pulvinar, ultrices nunc at, ultrices lacus. Proin fringilla, magna tincidunt tincidunt convallis, dolor ligula aliquet nibh, a iaculis dolor lacus sed felis. Duis cursus fringilla ultricies. Nulla in eleifend dolor. Proin nec orci.",
           rating: 3,
           date: "01-12-2020 02:26",
-          helpfulCount: "59",
+          helpfulCount: 59,
           comments: []
         },
         {
@@ -232,7 +232,7 @@
           mainReview: "Integer mattis augue ut ex porttitor pulvinar. Suspendisse vel iaculis dui, id tristique lectus. Phasellus viverra elit id ligula rutrum vestibulum. Nunc et posuere enim, consequat pulvinar ipsum. Donec pulvinar urna in lacinia ornare. Nullam lacinia nulla at pellentesque tincidunt. Proin varius sapien eu turpis pulvinar vestibulum. In finibus justo et massa semper condimentum. In vel libero nibh. Vestibulum viverra ac justo quis commodo. Mauris.",
           rating: 5,
           date: "11-25-2019 12:34",
-          helpfulCount: "1,432",
+          helpfulCount: 1432,
           comments: []
         },
 

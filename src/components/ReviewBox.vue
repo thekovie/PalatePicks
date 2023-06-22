@@ -34,7 +34,7 @@
     </div>
     <div class="review-footer flex justify-between align-middle mt-5">
       <div class="found-helpful">
-          <div class="helpful-count text-2xl font-semibold">{{ helpfulCount }}</div>
+          <div class="helpful-count text-2xl font-semibold">{{ helpfulCount.toLocaleString("en-US")}}</div>
           <div class="helpful-text text-sm font-light text-grey">found this review helpful</div>
       </div>
       <div class="right-buttons flex justify-around mr-3">
