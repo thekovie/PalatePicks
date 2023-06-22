@@ -1,10 +1,10 @@
 <template>
-  <body class="flex-grow">
-    <div class="cover-page h-[586px] flex flex-col pl-56 pr-64 justify-center text-white">
+  <body class="min-h-screen pb-80">
+    <div class="cover-page h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white">
       <div class="resto-title font-bold text-5xl">
         {{ resto }}
       </div>
-      <div class="resto-ratings flex flex-row mt-3">
+      <div class="resto-ratings flex mt-3">
         <div class="resto-rating text-2xl flex pr-3">
           <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
           <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="resto-description text-lg font-light mt-3">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis laboriosam magnam delectus aspernatur unde eius at, repellat numquam ratione dolor soluta cum et eveniet quasi sapiente fugiat quia! Reiciendis, beatae optio perferendis cum harum reprehenderit temporibus vitae commodi nostrum rem fugiat quidem ad. Nostrum tempore, architecto accusamus laudantium animi obcaecati, recusandae vitae nemo neque consectetur aliquam cumque perspiciatis deserunt quaerat non debitis provident deleniti aspernatur omnis ex itaque minima labore? Ullam tempora sunt praesentium velit pariatur repudiandae dignissimos iste suscipit!
       </div>
     </div>
     <div class="body px-20">
