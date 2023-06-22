@@ -1,13 +1,18 @@
 <template>
   <div class="nav-user-profile">
     <button
-      :class="['center', 'bg-green_light', 'px-4', 'py-2', { 'rounded-3xl': !rounded, 'rounded-t-3xl': rounded }, 'flex', 'dropdown-button']"
-      @click="toggleDropdown"
+      :class="['center', 'bg-green_light', 'px-4', 'py-2', { 'rounded-3xl': !rounded, 'rounded-t-3xl': rounded }, 'flex', 'dropdown-button', { 'active': isDropdownOpen }]"
+      v-on:click="toggleDropdown"
+      ref="dropdownButton"
     >
       <img src="../assets/images/user.jpg" alt="Avatar" class="center w-6 h-6 rounded-full mr-3"/>
       <span> Hi, Kovie!</span>
     </button>
-    <div class="bg-green_light px-3 rounded-b-2xl text-black dropdown-menu" :class="{ 'show': isDropdownOpen }">
+    <div
+      class="bg-green_light px-3 rounded-b-2xl text-black dropdown-menu"
+      :class="{ 'show': isDropdownOpen }"
+      ref="dropdownMenu"
+    >
       <router-link class="block text-sm px-2 py-2" to="/">View Profile</router-link>
       <router-link class="block text-sm px-2 py-2" :to="{ name:'ProfileSettings'}">Edit Profile</router-link>
       <router-link class="block text-sm px-2 py-2 text-red" to="/">Logout</router-link>
@@ -27,7 +32,22 @@ export default {
     toggleDropdown() {
       this.rounded = !this.rounded;
       this.isDropdownOpen = !this.isDropdownOpen;
-    }
+    },
+    closeDropdown(event) {
+      if (
+        !this.$refs.dropdownButton.contains(event.target) &&
+        !this.$refs.dropdownMenu.contains(event.target)
+      ) {
+        this.isDropdownOpen = false;
+        this.rounded = false;
+      }
+    },
+  },
+  mounted() {
+    document.addEventListener('click', this.closeDropdown);
+  },
+  beforeUnmount() {
+    document.removeEventListener('click', this.closeDropdown);
   },
 };
 </script>
@@ -50,4 +70,5 @@ export default {
 .dropdown-button {
   cursor: pointer;
 }
+
 </style>
