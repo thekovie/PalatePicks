@@ -84,7 +84,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .gradient-bg {
     background: url("../../assets/images/wp10322952-restaurant-food-wallpapers.jpg");
     position: relative;
