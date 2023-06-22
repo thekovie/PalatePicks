@@ -2,22 +2,15 @@
   <div class="review-box flex flex-col bg-green_lightbg p-10 w-[1000px] rounded-3xl">
     <div class="reviewer-info grid grid-cols-2 items-start">
       <div class="overall-userinfo flex items-center">
-        <div class="reviewer-photo w-[104px] h-[104px] rounded-full mr-3 border-4 border-green">
-          <img class="w-full h-full rounded-full object-cover" src="../../assets/images/user.jpg" alt="user" />
-        </div>
         <div class="user-info">
-          <div class="user-name text-2xl font-semibold">Kovie Nino</div>
-          <div class="username text-sm font-light text-grey">@tofudubu</div>
-          <div class="user-school text-sm font-light text-grey">De La Salle University</div>
-        </div>
-      </div>
-      <div class="flex flex-col justify-end">
-        <div class="reviewer-rating text-xl flex justify-end px-3 pt-5">
+          <div class="user-name text-2xl font-semibold">Happy N' Healthy</div>
+          <div class="reviewer-rating text-xl flex pt-2">
           <img v-for="i in 5" class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" :key="i" />
+        </div>
         </div>
       </div>
     </div>
-    <div class="review-title text-2xl font-semibold my-3">
+    <div class="review-title text-xl font-semibold mb-2 mt-5">
       Expensive, but worth it!
     </div>
     <div class="review-content text-lg font-light">
