@@ -13,7 +13,7 @@
   <p class="font-bold p-3">View Kovie's Reviews</p>
 
   <div class="reviews-list flex flex-col gap-8">
-    <UserReview />
+    <UserReview class="mb-6" />
   </div>
 </div>
 </template>
