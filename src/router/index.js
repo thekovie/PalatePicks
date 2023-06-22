@@ -6,7 +6,6 @@ import Profile from '../views/profile/Profile.vue'
 import Explore from '../views/restaurants/Explore.vue'
 import RestoProfile from '../views/restaurants/RestoProfile.vue'
 import ProfileSettings from '../views/profile/ProfileSettings.vue'
-import Error404 from '../views/Error404.vue'
 
 
 const routes = [
@@ -48,8 +47,8 @@ const routes = [
   },
   {
     path: '/:catchAll(.*)',
-    name: 'Error404',
-    component: Error404
+    name: 'NotFound',
+    component: Home
   }
 ]
 
