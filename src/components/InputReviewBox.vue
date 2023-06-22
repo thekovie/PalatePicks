@@ -27,7 +27,8 @@
           </div>
           <div class="review-gallery flex">
             <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-6 mb-6 cursor-pointer" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
-              <img class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" />
+              <img v-if="media.isImage" class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" />
+              <video v-else class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" no-controls autoplay muted loop />
               <div v-if="media.hovered" class="absolute bg-black bg-opacity-30 w-[90px] h-[90px] p-8 rounded-3xl" @click="removeMedia(index)">
                 <img class="w-full h-full" src="../assets/Trash.svg" />
               </div>
@@ -98,10 +99,15 @@ export default {
       const files = event.target.files;
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
+        const isImage = file.type.startsWith('image/');
+        const isVideo = file.type.startsWith('video/');
 
         this.mediaItems.push ({
           url: URL.createObjectURL(file),
-          hovered: false
+          hovered: false,
+          isImage,
+          isVideo,
+          label: isImage ? 'Image' : isVideo ? 'Video' : 'Unknown'
         });
       }
     },
