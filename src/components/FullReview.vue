@@ -1,7 +1,7 @@
 <template>
 
 <!-- Backdrop -->
-  <div class="bg-[#000000]/50 top-0 left-0 w-screen h-[100vh] fixed flex" @click.self="closeFullReview">
+  <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex" @click.self="closeFullReview">
 
 
     <!-- Main Review Div Container-->
