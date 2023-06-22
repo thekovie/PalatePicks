@@ -3,11 +3,11 @@
     <div class="reviewer-info grid grid-cols-2 items-start">
       <div class="overall-userinfo flex items-center">
         <div class="reviewer-photo w-[104px] h-[104px] rounded-full mr-3 border-4 border-green">
-          <img class="w-full h-full rounded-full object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="user" />
+          <img class="w-full h-full rounded-full object-cover" src="../../assets/images/user.jpg" alt="user" />
         </div>
         <div class="user-info">
-          <div class="user-name text-2xl font-semibold">Juan Dela Cruz</div>
-          <div class="username text-sm font-light text-grey">@juandelacruz</div>
+          <div class="user-name text-2xl font-semibold">Kovie Nino</div>
+          <div class="username text-sm font-light text-grey">@tofudubu</div>
           <div class="user-school text-sm font-light text-grey">De La Salle University</div>
         </div>
       </div>
@@ -40,10 +40,23 @@
         <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           View Comments
         </button>
-        <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3">
+        <button class="bg-white text-green rounded-3xl flex items-center font-light px-6 py-3" v-if="isUser">
+          Modify Review
+        </button>
+        <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" v-if="!isUser">
           Mark as Helpful
         </button>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+      return {
+        isUser: true,
+      }
+    },
+  }
+</script>

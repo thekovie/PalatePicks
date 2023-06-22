@@ -4,7 +4,7 @@
       <router-link class="logo font-cursive normal-case font-bold text-3xl justify-start" to="/">PalatePicks</router-link>
       <div class="nav-menu ml-6 space-x-9">
         <router-link to="/">Home</router-link>
-        <router-link :to="{ name: 'Profile'}">Explore  </router-link>
+        <router-link :to="{ name: 'Explore'}">Explore  </router-link>
       </div>
     </div>
     <NavUser></NavUser>
