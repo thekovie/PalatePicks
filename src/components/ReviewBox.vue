@@ -25,9 +25,9 @@
       {{ mainReview }}
     </div>
     <div class="review-gallery flex mt-8">
-      <div v-for="(media, index) in gallery" :key="i"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex">
-        <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
-        <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl" :src="media" alt="review video" no-controls />
+      <div v-for="(media, index) in gallery" :key="index"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex">
+        <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
+        <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
         <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
           <img class="w-full h-full" src="../assets/Video.svg" />
         </div>
