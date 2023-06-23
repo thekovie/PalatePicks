@@ -43,10 +43,18 @@
             <input type="text" v-model="school" class="border-green border rounded w-full px-2" @click="clickTextBox">
           </div>
         </div>
-        <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->
-          <img src="../../assets/images/user.jpg" alt="Avatar" class="w-36 h-36 rounded-full me-3"/>
-          <button class="bg-green text-white px-7 mx-14 mt-5 py-1 rounded-3xl">Change Avatar</button>
-        </div>
+          <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->
+            <div class="bg-green min-w-[150px] min-h-[150px] max-w-[150px] max-h-[150px] rounded-[100%] p-[3px] m-[10px] cursor-pointer">
+                <div class="bg-white w-[100%] h-[100%] rounded-[100%]">
+                  <div v-if="isImageDefault" class="upload-bg-default w-[60%] h-[60%] rounded-[100%] relative mx-auto top-[28px]"></div>
+                  <img v-else :src="ProfileImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%]">
+                </div>
+              </div>
+              <button @click="toggleUploadModal" class="mt-10 bg-green text-white px-12 py-1 rounded-3xl">Change Avatar</button>
+              <div class="absolute top-0 bottom-0 left-0 right-0" v-if="showUploadModal"> <!-- Upload Picture Modal -->
+                <UploadPicture @close="toggleUploadModal" @return="getImageSrc($event)"/>
+              </div>
+          </div>
       </div>
       <div class="mt-5"> <!--Bio-->
         <label>Bio<br></label>
@@ -108,8 +116,11 @@
 </template>
 
 <script>
-
+import UploadPicture from '../../components/UploadPicture.vue';
 export default {
+  components: {
+    UploadPicture
+  },
   methods: {
     saveChanges(){
       alert('Your changes has been successfully saved!');
@@ -125,6 +136,14 @@ export default {
     },
     handleInputChange(value) {
       this.inputValue = value;
+    },
+    toggleUploadModal(){
+      this.showUploadModal = !(this.showUploadModal);
+      console.log('Trigger')
+    },
+    getImageSrc(e){
+      this.ProfileImage = e;
+      this.isImageDefault = false;
     }
   },
   data() {
@@ -139,6 +158,9 @@ export default {
       newPassword: 'password',
       confirmNewPassword: 'password',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Ultrices mi tempus imperdiet nulla malesuada.',
+      showUploadModal: false,
+      ProfileImage: '',
+      isImageDefault: true
     };
   },
   computed: {
