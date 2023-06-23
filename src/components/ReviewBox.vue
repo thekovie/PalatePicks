@@ -25,8 +25,12 @@
       {{ mainReview }}
     </div>
     <div class="review-gallery flex mt-8">
-      <div v-for="i in 5" class="review-photo w-[150px] h-[150px] mr-6 mb-6">
-        <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
+      <div v-for="(media, index) in gallery" :key="i"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex">
+        <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
+        <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl" :src="media" alt="review video" no-controls />
+        <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
+          <img class="w-full h-full" src="../assets/Video.svg" />
+        </div>
       </div>
     </div>
     <div class="review-posted-at text-sm font-light text-grey mt-4">
@@ -41,7 +45,7 @@
         <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleFullReview">
           View Comments
         </button>
-        <button v-show="isReviewOwner" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+        <button v-show="isReviewOwner" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
           Modify Review
         </button>
         <button v-show="isRestoOwner" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
@@ -50,6 +54,14 @@
         <button v-show="!isRestoOwner && !isReviewOwner" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Mark as Helpful
         </button>
+
+        <div v-if="showModifyReview" @close="toggleModifyReview">
+          <ModifyReview @close="toggleModifyReview" :reviewSubject="reviewSubject" :reviewerPhotoSrc="reviewerPhotoSrc" :mainReview="mainReview" :rating="rating" :gallery="gallery"/>
+        </div>
+
+        <div v-if="showMediaView" @close="toggleMediaView">
+          <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
+        </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
           <FullReview @close="toggleFullReview" :reviewerPhotoSrc="reviewerPhotoSrc" :name="name" :username="username" :school="school" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
@@ -62,10 +74,12 @@
 <script>
 
 import FullReview from './FullReview.vue'
+import ModifyReview from './ModifyReview.vue'
+import ViewMedia from './ViewMedia.vue'
 
 export default {
   components: {
-    FullReview
+    FullReview, ModifyReview, ViewMedia
   },
   props: {
     isRestoOwner: {
@@ -74,7 +88,7 @@ export default {
     },
     isReviewOwner: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     reviewerPhotoSrc: {
       type: String
@@ -105,17 +119,39 @@ export default {
     },
     comments: {
       type: Array
+    },
+    gallery: {
+      type: Array
     }
   },
   data() {
     return{
-      showFullReview: false
+      showFullReview: false,
+      showModifyReview: false,
+      showMediaView: false,
+      selectedMedia: '',
+      isImage: '',
     }
   },
   methods: {
     toggleFullReview(){
       this.showFullReview = !this.showFullReview;
-    }
+    },
+    toggleModifyReview(){
+      this.showModifyReview = !this.showModifyReview;
+    },
+    toggleMediaView(media) {
+      this.showMediaView = !this.showMediaView;
+      this.selectedMedia = media;
+      if (this.reviewFileTypeChecker(media)) {
+        this.isImage = true;
+      } else {
+        this.isImage = false;
+      }
+    },
+    reviewFileTypeChecker(file) {
+      return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
+    },
   },
 }
 </script>
