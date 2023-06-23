@@ -37,7 +37,7 @@
     },
     data() {
       return {
-        isLoggedIn: true,
+        isLoggedIn: false,
       }
     },
     methods: {
