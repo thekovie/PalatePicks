@@ -42,14 +42,14 @@
             <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
           </div>
         </div>
-        <div class="reviews grid grid-cols-2">
+        <div class="reviews flex flex-row justify-between">
           <div class="left-portion">
             <div class="reviews-title text-3xl font-semibold mt-20 mb-10">
               Reviews
             </div>
             <div class="reviews-list flex flex-col gap-8">
               <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="resto"  :isVisible="isReviewBoxOpen"/>
-              <ReviewBox v-for="review in reviews" :key="review.reviewId" :reviewerPhotoSrc="review.reviewerPhotoSrc" :name="review.name" :username="review.username" :school="review.school" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments"/>
+              <ReviewBox v-for="review in reviews" :key="review.reviewId" :reviewerPhotoSrc="review.reviewerPhotoSrc" :name="review.name" :username="review.username" :school="review.school" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
             </div>
           </div>
           <div class="review-filters mt-20 flex flex-col w-auto items-end">
@@ -130,7 +130,7 @@
           reviews: [
           {
             reviewId: 1,
-            reviewerPhotoSrc: "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+            reviewerPhotoSrc: "https://netstorage-kami.akamaized.net/images/c1c9e3ca7b398212.jpg",
             name: "Juan Dela Cruz",
             username: "@juandelacruz",
             school: "De La Salle University",
@@ -139,6 +139,13 @@
             rating: 5,
             date: "06-11-2023 16:15",
             helpfulCount: 1734,
+            reviewerGallery: [
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+            ],
             comments: [
               {
                 name: "John Doe",
@@ -212,6 +219,13 @@
             rating: 4,
             date: "02-20-2023 14:13",
             helpfulCount: 215,
+            reviewerGallery: [
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+            ],
             comments: []
           },
           {
@@ -225,6 +239,13 @@
             rating: 5,
             date: "09-25-2021 19:56",
             helpfulCount: 2123,
+            reviewerGallery: [
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+            ],
             comments: []
 
           },
@@ -239,6 +260,13 @@
             rating: 3,
             date: "01-12-2020 02:26",
             helpfulCount: 59,
+            reviewerGallery: [
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+            ],
             comments: []
           },
           {
@@ -252,6 +280,13 @@
             rating: 5,
             date: "11-25-2019 12:34",
             helpfulCount: 1432,
+            reviewerGallery: [
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
+            ],
             comments: []
           },
 
