@@ -20,7 +20,7 @@
               <div class="bg-white w-[100%] h-[100%] rounded-[100%]">
 
                 <div v-if="isImageDefault" class="upload-bg-default w-[60%] h-[60%] rounded-[100%] relative top-[22px] left-[21px]"></div>
-                <img v-else :src="image" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%]">
+                <img v-else :src="image" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover object-center">
 
               </div>
             </div>
