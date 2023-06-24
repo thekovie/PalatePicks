@@ -12,7 +12,7 @@
     </div>
 
     <div class="user-reviews px-20">
-      <p class="font-bold p-3">View Kovie's Reviews</p>
+      <p class="font-bold p-3">View {{ Profile.firstName }}'s Reviews</p>
 
       <div class="reviews-list flex flex-col gap-8">
         <UserReview class="mb-6" />
