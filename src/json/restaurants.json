@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Happy N' Healthy",
+    "imageHeader": "../../../public/images/happy-n-healthy.png",
+    "description": "Food choices that harmoniously balance Happiness and Healthiness 😀💚",
+    "rating": 4,
+    "price": 3
+  },
+  {
+    "name": "GoodMunch",
+    "imageHeader": "../../../public/images/good-munch.jpg",
+    "description": "Good Munch serves SO MUNCH BETTER Asian Fusion Recipes curated with lots of love from Chef Munch!",
+    "rating": 5,
+    "price": 2
+  },
+  {
+    "name": "Ate Rica's Bacsilog",
+    "imageHeader": "../../../public/images/bacsilog.jpg",
+    "description": "We serve tasty, quality, fast, and clean superior-SILOG meals in schools,commercial spaces, & superma.",
+    "rating": 4,
+    "price": 2
+  },
+  {
+    "name": "Ichiro",
+    "imageHeader": "../../../public/images/ichiro.jpg",
+    "description": "Ichiro is a historical Japanese restaurant which has been operated about 23 years (since 2000).",
+    "rating": 4,
+    "price": 3
+  },
+  {
+    "name": "Tapa King",
+    "imageHeader": "../../../public/images/tapaking.jpg",
+    "description": "Tapa King serves classic Filipino homestyle meals you can enjoy everyday. Tara kain!",
+    "rating": 5,
+    "price": 3
+  },
+  {
+    "name": "Angrydobo",
+    "imageHeader": "../../../public/images/angrydobo2.jpg",
+    "description": "Come by AD Taft or Westgate for breakfast, we're open at 8am. #LoveEatRelationship.",
+    "rating": 4,
+    "price": 2
+  }
+]
