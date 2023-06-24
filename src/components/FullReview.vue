@@ -21,7 +21,7 @@
               <!-- User Info-->
               <div class="ml-[17px]">
                 <p class="font-bold text-[28px]"> {{ name }}</p>
-                <p class="text-grey text-[16px]"> {{ username }}</p>
+                <p class="text-grey text-[16px] hover:underline cursor-pointer"> <router-link :to="getProfileLink(username)">@{{ username }}</router-link></p>
                 <p class="text-grey text-[16px]"> {{ school }}</p>
                 <div class="flex flex-row">
                   <img v-for="i in rating" class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" :key="i" />
@@ -156,7 +156,10 @@ export default {
   methods: {
       closeFullReview(){
         this.$emit('close');
-      }
+      },
+      getProfileLink(username) {
+      return `/profile/${username}`;
+    }
     },
   components: {
     Comment
