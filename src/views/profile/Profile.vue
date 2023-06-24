@@ -6,7 +6,7 @@
       <p class="font-medium mt-1 text-xl">@{{ Profile.username }}</p>
       <p class="mt-1 text-lg">{{ Profile.school }}</p>
       <p class="max-w-3xl text-center text-base mt-1">{{ Profile.bio }}</p>
-      <button class="bg-green text-white px-12 mt-4 py-1 rounded-3xl" v-if="isUser"><router-link :to="{ name: 'ProfileSettings'}">Edit Profile</router-link></button>
+      <button v-if="Profile.username === loggedInUser" class="bg-green text-white px-12 mt-4 py-1 rounded-3xl"><router-link :to="{ name: 'ProfileSettings'}">Edit Profile</router-link></button>
     </div>
     <div class="user-reviews px-20 mt-4">
       <p class="font-bold p-3">View {{ Profile.firstName }}'s Reviews</p>
@@ -25,12 +25,13 @@ export default {
 
   props: {
     username: String,
+    loggedInUser: String,
   },
   data() {
       return {
         isUser: true,
         isUserExisting: true,
-        userProfiles: UserProfiles,
+        userProfiles: UserProfiles
       }
   },
   computed: {
@@ -40,14 +41,6 @@ export default {
   },
   components: {
     UserReview
-  },
-  methods: {
-    doesUserExist(){
-      if(this.userProfiles.filter((userProfiles) => userProfiles.username === this.username)[0] === {}){
-        this.isUserExisting = false;
-        console.log("ENTER")
-      }
-    }
   }
 }
 </script>
