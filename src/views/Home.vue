@@ -34,6 +34,7 @@
 
 <script>
   import RestoBox from '../components/RestoBox.vue'
+  import Restaurants from '../json/restaurants.json'
 
   export default {
     components: {
@@ -41,64 +42,7 @@
     },
     data() {
       return {
-        establishments: [
-          {
-            name: 'Happy N\' Healthy',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4,
-            price: 3
-          },
-          {
-            name: 'Restaurant 2',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 5,
-            price: 2
-          },
-          {
-            name: 'Restaurant 3',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 3,
-            price: 1
-          },
-          {
-            name: 'Restaurant 4',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 1,
-            price: 3
-          },
-          {
-            name: 'Restaurant 5',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4,
-            price: 2
-          },
-          {
-            name: 'Restaurant 6',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 2,
-            price: 3
-          },
-          {
-            name: 'Restaurant 7',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 1,
-            price: 2
-          },
-          {
-            name: 'Restaurant 8',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4,
-            price: 3
-          }
-        ]
+        establishments: Restaurants
       }
     }
   }

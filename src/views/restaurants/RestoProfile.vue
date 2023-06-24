@@ -1,26 +1,25 @@
 <template>
   <body class="min-h-screen pb-80">
-    <div class="cover-page h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white">
+    <div class="h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white" :style="`background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Restaurant.imageHeader}); background-size: cover; background-position: center;`">
       <div class="resto-title font-bold text-5xl">
-        {{ resto }}
+        {{ Restaurant.name }}
       </div>
       <div class="resto-ratings flex mt-3">
         <div class="resto-rating text-2xl flex pr-3">
-          <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../../assets/Star-blank.svg" alt="star" />
+          <img v-for="i in Restaurant.rating" class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" :key="i" />
+          <img v-for="i in 5 - Restaurant.rating" class="star-icon w-25 h-25" src="../../assets/Star-blank.svg" alt="star" :key="i" />
         </div>
         <div class="dot text-2xl pr-3">
           ·
         </div>
         <div class="resto-price text-2xl">
-          ₱ ₱ ₱
+          <span v-for="i in Restaurant.price" class="budget-icon text-xl text-green pr-1" :key="i">
+            ₱
+          </span>
         </div>
       </div>
       <div class="resto-description text-lg font-light mt-3">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis laboriosam magnam delectus aspernatur unde eius at, repellat numquam ratione dolor soluta cum et eveniet quasi sapiente fugiat quia! Reiciendis, beatae optio perferendis cum harum reprehenderit temporibus vitae commodi nostrum rem fugiat quidem ad. Nostrum tempore, architecto accusamus laudantium animi obcaecati, recusandae vitae nemo neque consectetur aliquam cumque perspiciatis deserunt quaerat non debitis provident deleniti aspernatur omnis ex itaque minima labore? Ullam tempora sunt praesentium velit pariatur repudiandae dignissimos iste suscipit!
+        {{ Restaurant.description }}
       </div>
     </div>
     <div class="body px-20">
@@ -103,16 +102,14 @@
 <script>
   import ReviewBox from '../../components/ReviewBox.vue'
   import InputReviewBox from '../../components/InputReviewBox.vue'
+  import Restaurants from '../../json/restaurants.json'
 
   export default {
     components: {
       ReviewBox, InputReviewBox
     },
     props: {
-      resto: {
-        type: String,
-        default: 'Resto Name',
-      },
+      restoId: String,
     },
   methods: {
     openReviewBox() {
@@ -126,181 +123,20 @@
       return {
           isReviewBoxOpen: false,
           isRestoOwner: false,
-
-          reviews: [
-          {
-            reviewId: 1,
-            reviewerPhotoSrc: "https://netstorage-kami.akamaized.net/images/c1c9e3ca7b398212.jpg",
-            name: "Juan Dela Cruz",
-            username: "@juandelacruz",
-            school: "De La Salle University",
-            reviewSubject: "Expensive, but worth it!",
-            mainReview: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa illum inventore esse et eos itaque molestias eligendi ut, exercitationem voluptas vel ex quasi dicta! Voluptate odio modi, ullam cum doloremque blanditiis! Neque ducimus in sed, dignissimos distinctio labore laboriosam soluta? Qui dolorem quae, ullam laboriosam ipsum atque dolore explicabo vitae amet sunt nulla commodi quo quasi ipsa blanditiis. Adipisci, eos. Veniam labore omnis ut, nostrum illo totam id velit asperiores exercitationem ab dignissimos rerum porro.",
-            rating: 5,
-            date: "06-11-2023 16:15",
-            helpfulCount: 1734,
-            reviewerGallery: [
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            ],
-            comments: [
-              {
-                name: "John Doe",
-                username: "@imarealperson",
-                profilePicSrc: "",
-                school: '',
-                isEstablishmentOwner: true,
-                date: "06-30-2023 09:25",
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-                commentID: 1,
-                replies: []
-              },
-              {
-                name: "Juan Perez",
-                username: "@definitelynotaplaceholder",
-                profilePicSrc: "",
-                school: "De La Salle University",
-                isEstablishmentOwner: false,
-                date: "01-23-2023 18:21",
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at lobortis leo. Nulla vel ultrices sapien. Cras tincidunt odio sit amet mattis accumsan. Quisque pulvinar justo dictum commodo rhoncus. Praesent neque nulla, venenatis eget eleifend a, vehicula nec lacus. In at luctus diam, vel varius purus. Integer condimentum purus eget.",
-                commentID: 2,
-                replies: [
-                  {
-                    name: "John Doe",
-                    username: "@imarealperson",
-                    profilePicSrc: "",
-                    school: '',
-                    isEstablishmentOwner: true,
-                    date: "06-30-2023 09:25",
-                    comment: "Nulla ut risus nibh. Aenean purus nisi, vestibulum id sem at, commodo auctor mi. Maecenas a sapien nec lacus porttitor ultricies ut at elit. Aliquam eget nulla diam."
-                  },
-                ]
-              },
-              {
-                name: "Vera Hughes",
-                username: "@hughes_vera",
-                profilePicSrc: "",
-                school: "Adamson University",
-                isEstablishmentOwner: false,
-                date: "12-25-2021 19:47",
-                comment: "Etiam ac neque quis tortor vestibulum dapibus. Sed orci nunc, pulvinar id lacus ac, viverra venenatis sem. Nullam tincidunt diam non mi pretium, vulputate blandit dui laoreet. Vestibulum nisl felis, convallis quis pharetra eget, accumsan sit amet.",
-                commentID: 3,
-                replies: [
-                {
-                    name: "Antonio López",
-                    username: "@anexistingperson",
-                    profilePicSrc: "",
-                    school: '',
-                    isEstablishmentOwner: true,
-                    date: "02-20-2022 00:12",
-                    comment: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet."
-                  }
-                ]
-
-
-
-              }
-
-
-
-            ]
-          },
-          {
-            reviewId: 2,
-            reviewerPhotoSrc: "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            name: "Juan Perez",
-            username: "@juanperez",
-            school: "De La Salle University",
-            reviewSubject: "Good food!",
-            mainReview: "Aenean aliquet libero vitae vehicula euismod. Nullam maximus dignissim sapien quis fringilla. In rhoncus vestibulum leo, vel accumsan mauris blandit vitae. Aenean vitae tortor eget ipsum feugiat posuere eget in justo. Aliquam auctor, elit eu tempor lacinia, elit tellus dictum mi, id hendrerit turpis ex.",
-            rating: 4,
-            date: "02-20-2023 14:13",
-            helpfulCount: 215,
-            reviewerGallery: [
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            ],
-            comments: []
-          },
-          {
-            reviewId: 3,
-            reviewerPhotoSrc: "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            name: "Eric Widget",
-            username: "@ericwidget",
-            school: "Adamson University",
-            reviewSubject: "Would definitely add this to my recos!",
-            mainReview: "Aliquam turpis enim, varius sed viverra vel, tristique vitae metus. Aenean vitae lectus finibus, facilisis erat ac, tempor orci. Vestibulum malesuada nec nisl quis laoreet. Proin efficitur quis augue at elementum. Sed eget massa tincidunt elit maximus mollis. Ut bibendum justo et scelerisque facilisis. Nullam sed odio bibendum magna lacinia elementum. Nulla facilisi. Fusce consequat mi at quam aliquet laoreet. Curabitur rutrum vel neque in.",
-            rating: 5,
-            date: "09-25-2021 19:56",
-            helpfulCount: 2123,
-            reviewerGallery: [
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            ],
-            comments: []
-
-          },
-          {
-            reviewId: 4,
-            reviewerPhotoSrc: "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            name: "Rita la Cantaora",
-            username: "@rita1234",
-            school: "Arellano University",
-            reviewSubject: "Kinda okay if you're looking for affordable food",
-            mainReview: "Vestibulum ac arcu condimentum, fringilla neque sed, laoreet lorem. Etiam porta massa at odio dictum, sed gravida tellus cursus. Curabitur quis imperdiet lacus. Proin ultrices, nibh at dictum consequat, erat quam accumsan risus, at dictum nulla ante ac mauris. Aenean eget magna pulvinar, ultrices nunc at, ultrices lacus. Proin fringilla, magna tincidunt tincidunt convallis, dolor ligula aliquet nibh, a iaculis dolor lacus sed felis. Duis cursus fringilla ultricies. Nulla in eleifend dolor. Proin nec orci.",
-            rating: 3,
-            date: "01-12-2020 02:26",
-            helpfulCount: 59,
-            reviewerGallery: [
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            ],
-            comments: []
-          },
-          {
-            reviewId: 5,
-            reviewerPhotoSrc: "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            name: "Chaplain Mondover",
-            username: "@church_dweller",
-            school: "De La Salle University",
-            reviewSubject: "A restaurant I'll always go back to ",
-            mainReview: "Integer mattis augue ut ex porttitor pulvinar. Suspendisse vel iaculis dui, id tristique lectus. Phasellus viverra elit id ligula rutrum vestibulum. Nunc et posuere enim, consequat pulvinar ipsum. Donec pulvinar urna in lacinia ornare. Nullam lacinia nulla at pellentesque tincidunt. Proin varius sapien eu turpis pulvinar vestibulum. In finibus justo et massa semper condimentum. In vel libero nibh. Vestibulum viverra ac justo quis commodo. Mauris.",
-            rating: 5,
-            date: "11-25-2019 12:34",
-            helpfulCount: 1432,
-            reviewerGallery: [
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-              "../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg",
-            ],
-            comments: []
-          },
-
-
-
-          ]
+          restaurant: Restaurants,
       }
-  }
+    },
+    computed: {
+      Restaurant() {
+        return this.restaurant.filter((restaurant) => restaurant.name  === this.restoId)[0]
+      }
+    }
   }
 </script>
 
 <style scoped>
   .cover-page {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg');
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     background-size: cover;
     background-position: center;
   }
