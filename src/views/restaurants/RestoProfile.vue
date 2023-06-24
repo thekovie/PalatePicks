@@ -45,7 +45,7 @@
               Reviews
             </div>
             <div class="reviews-list flex flex-col gap-8">
-              <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="resto"  :isVisible="isReviewBoxOpen"/>
+              <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen"/>
               <ReviewBox v-for="review in reviews" :key="review.reviewId" :reviewerPhotoSrc="review.reviewerPhotoSrc" :name="review.name" :username="review.username" :school="review.school" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
             </div>
           </div>
@@ -111,23 +111,12 @@
       restoId: String,
     },
   methods: {
-    openReviewBox() {
-      this.isReviewBoxOpen = true
+      openReviewBox() {
+        this.isReviewBoxOpen = true
       },
-    closeReviewBox() {
-      this.isReviewBoxOpen = false
+      closeReviewBox() {
+        this.isReviewBoxOpen = false
       },
-    },
-    data() {
-      return {
-          isReviewBoxOpen: false,
-          isRestoOwner: false,
-          restaurant: Restaurants,
-          showMediaView: false,
-          selectedMedia: '',
-      }
-    },
-    methods: {
       toggleMediaView(media) {
         this.showMediaView = !this.showMediaView;
         this.selectedMedia = media;
@@ -140,6 +129,16 @@
       reviewFileTypeChecker(file) {
         return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
       },
+    },
+    data() {
+      return {
+          isReviewBoxOpen: false,
+          isRestoOwner: false,
+          restaurant: Restaurants,
+          showMediaView: false,
+          selectedMedia: '',
+
+      }
     },
     computed: {
       Restaurant() {
