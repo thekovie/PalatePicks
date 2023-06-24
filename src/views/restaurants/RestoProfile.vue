@@ -1,26 +1,25 @@
 <template>
   <body class="min-h-screen pb-80">
-    <div class="cover-page h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white">
+    <div class="h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white" :style="`background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Restaurant.imageHeader}); background-size: cover; background-position: center;`">
       <div class="resto-title font-bold text-5xl">
-        {{ resto }}
+        {{ Restaurant.name }}
       </div>
       <div class="resto-ratings flex mt-3">
         <div class="resto-rating text-2xl flex pr-3">
-          <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" />
-          <img class="star-icon w-25 h-25" src="../../assets/Star-blank.svg" alt="star" />
+          <img v-for="i in Restaurant.rating" class="star-icon w-25 h-25" src="../../assets/Star.svg" alt="star" :key="i" />
+          <img v-for="i in 5 - Restaurant.rating" class="star-icon w-25 h-25" src="../../assets/Star-blank.svg" alt="star" :key="i" />
         </div>
         <div class="dot text-2xl pr-3">
           ·
         </div>
         <div class="resto-price text-2xl">
-          ₱ ₱ ₱
+          <span v-for="i in Restaurant.price" class="budget-icon text-xl text-green pr-1" :key="i">
+            ₱
+          </span>
         </div>
       </div>
       <div class="resto-description text-lg font-light mt-3">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis laboriosam magnam delectus aspernatur unde eius at, repellat numquam ratione dolor soluta cum et eveniet quasi sapiente fugiat quia! Reiciendis, beatae optio perferendis cum harum reprehenderit temporibus vitae commodi nostrum rem fugiat quidem ad. Nostrum tempore, architecto accusamus laudantium animi obcaecati, recusandae vitae nemo neque consectetur aliquam cumque perspiciatis deserunt quaerat non debitis provident deleniti aspernatur omnis ex itaque minima labore? Ullam tempora sunt praesentium velit pariatur repudiandae dignissimos iste suscipit!
+        {{ Restaurant.description }}
       </div>
     </div>
     <div class="body px-20">
@@ -29,17 +28,15 @@
           Gallery
         </div>
         <div class="gallery-photos flex">
-          <div class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-            <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
-          </div>
-          <div class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-            <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
-          </div>
-          <div class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-            <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
-          </div>
-          <div class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-            <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
+            <div v-for="(media, index) in Restaurant.gallery" :key="index" class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
+              <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
+              <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
+              <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
+                <img class="w-full h-full" src="../assets/Video.svg" />
+              </div>
+              <div v-if="showMediaView" @close="toggleMediaView">
+                <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
+              </div>
           </div>
         </div>
         <div class="reviews flex flex-row justify-between">
@@ -48,7 +45,7 @@
               Reviews
             </div>
             <div class="reviews-list flex flex-col gap-8">
-              <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="resto"  :isVisible="isReviewBoxOpen"/>
+              <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen"/>
               <ReviewBox v-for="review in reviews" :key="review.reviewId" :reviewerPhotoSrc="review.reviewerPhotoSrc" :name="review.name" :username="review.username" :school="review.school" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
             </div>
           </div>
@@ -103,37 +100,57 @@
 <script>
   import ReviewBox from '../../components/ReviewBox.vue'
   import InputReviewBox from '../../components/InputReviewBox.vue'
+  import Restaurants from '../../json/restaurants.json'
+  import ViewMedia from '../../components/ViewMedia.vue'
 
   export default {
     components: {
-      ReviewBox, InputReviewBox
+      ReviewBox, InputReviewBox, ViewMedia
     },
     props: {
-      resto: {
-        type: String,
-        default: 'Resto Name',
-      },
+      restoId: String,
     },
   methods: {
-    openReviewBox() {
-      this.isReviewBoxOpen = true
+      openReviewBox() {
+        this.isReviewBoxOpen = true
       },
-    closeReviewBox() {
-      this.isReviewBoxOpen = false
+      closeReviewBox() {
+        this.isReviewBoxOpen = false
+      },
+      toggleMediaView(media) {
+        this.showMediaView = !this.showMediaView;
+        this.selectedMedia = media;
+        if (this.reviewFileTypeChecker(media)) {
+          this.isImage = true;
+        } else {
+          this.isImage = false;
+        }
+      },
+      reviewFileTypeChecker(file) {
+        return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
       },
     },
     data() {
       return {
           isReviewBoxOpen: false,
           isRestoOwner: false,
+          restaurant: Restaurants,
+          showMediaView: false,
+          selectedMedia: '',
+
       }
-  }
+    },
+    computed: {
+      Restaurant() {
+        return this.restaurant.filter((restaurant) => restaurant.name  === this.restoId)[0]
+      }
+    }
   }
 </script>
 
 <style scoped>
   .cover-page {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg');
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     background-size: cover;
     background-position: center;
   }
