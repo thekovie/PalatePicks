@@ -41,7 +41,7 @@ const routes = [
     component: Explore
   },
   {
-    path: '/restaurant/:resto',
+    path: '/restaurant/:restoId',
     name: 'RestoProfile',
     component: RestoProfile,
     props: true
