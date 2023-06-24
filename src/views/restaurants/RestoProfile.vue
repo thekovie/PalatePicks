@@ -28,17 +28,15 @@
           Gallery
         </div>
         <div class="gallery-photos flex">
-          <div class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-            <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
-          </div>
-          <div class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-            <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
-          </div>
-          <div class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-            <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
-          </div>
-          <div class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-            <img class="w-full h-full rounded-3xl object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="restaurant1" />
+            <div v-for="(media, index) in Restaurant.gallery" :key="index" class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
+              <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
+              <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
+              <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
+                <img class="w-full h-full" src="../assets/Video.svg" />
+              </div>
+              <div v-if="showMediaView" @close="toggleMediaView">
+                <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
+              </div>
           </div>
         </div>
         <div class="reviews flex flex-row justify-between">
@@ -103,10 +101,11 @@
   import ReviewBox from '../../components/ReviewBox.vue'
   import InputReviewBox from '../../components/InputReviewBox.vue'
   import Restaurants from '../../json/restaurants.json'
+  import ViewMedia from '../../components/ViewMedia.vue'
 
   export default {
     components: {
-      ReviewBox, InputReviewBox
+      ReviewBox, InputReviewBox, ViewMedia
     },
     props: {
       restoId: String,
@@ -124,7 +123,23 @@
           isReviewBoxOpen: false,
           isRestoOwner: false,
           restaurant: Restaurants,
+          showMediaView: false,
+          selectedMedia: '',
       }
+    },
+    methods: {
+      toggleMediaView(media) {
+        this.showMediaView = !this.showMediaView;
+        this.selectedMedia = media;
+        if (this.reviewFileTypeChecker(media)) {
+          this.isImage = true;
+        } else {
+          this.isImage = false;
+        }
+      },
+      reviewFileTypeChecker(file) {
+        return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
+      },
     },
     computed: {
       Restaurant() {
