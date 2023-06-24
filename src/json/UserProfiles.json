@@ -12,13 +12,13 @@
     "bio": "I am a computer science student looking for good food."
   },
   {
-    "firstName": "William",
-    "lastName": "Martinez",
-    "username": "william_martinez",
-    "profileImgSrc": "",
-    "email": "william.martinez@example.com",
-    "password": "mypassword123",
-    "school": "Yale University",
+    "firstName": "Kovie",
+    "lastName": "Niño",
+    "username": "thekovie",
+    "profileImgSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
+    "email": "john_kovie_nino@dlsu.edu.ph",
+    "password": "chichicooldog",
+    "school": "De La Salle University",
     "isUserEstablishmentOwner": false,
     "restaurantName": "",
     "bio": "A tech enthusiast by day, and a culinary adventurer by night. From coding to cooking, I blend my passion for software technology with my insatiable appetite for trying new flavors. As a student, I've embarked on a mouthwatering mission to visit and review every restaurant in town."
