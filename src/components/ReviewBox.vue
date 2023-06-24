@@ -7,7 +7,7 @@
         </div>
         <div class="user-info">
           <div class="user-name text-2xl font-semibold">{{ name }}</div>
-          <div class="username text-sm font-light text-grey">{{ username }}</div>
+          <div class="username text-sm font-light text-grey hover:underline cursor-pointer"><router-link :to="getProfileLink(username)">@{{ username }}</router-link></div>
           <div class="user-school text-sm font-light text-grey">{{ school }}</div>
         </div>
       </div>
@@ -152,6 +152,9 @@ export default {
     reviewFileTypeChecker(file) {
       return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
     },
+    getProfileLink(username) {
+      return `/profile/${username}`;
+    }
   },
 }
 </script>

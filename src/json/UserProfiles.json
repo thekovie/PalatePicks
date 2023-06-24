@@ -1,0 +1,75 @@
+[
+  {
+    "firstName": "Wesly",
+    "lastName": "Samson",
+    "username": "ylsewlys",
+    "profileImgSrc": "../../../public/images/ylsewlys.jpg",
+    "email": "wesly_samson@dlsu.edu.ph",
+    "password": "averysecurepassword",
+    "school": "De La Salle University",
+    "isUserEstablishmentOwner": false,
+    "restaurantName": "",
+    "bio": "I am a computer science student looking for good food."
+  },
+  {
+    "firstName": "William",
+    "lastName": "Martinez",
+    "username": "william_martinez",
+    "profileImgSrc": "",
+    "email": "william.martinez@example.com",
+    "password": "mypassword123",
+    "school": "Yale University",
+    "isUserEstablishmentOwner": false,
+    "restaurantName": "",
+    "bio": "A tech enthusiast by day, and a culinary adventurer by night. From coding to cooking, I blend my passion for software technology with my insatiable appetite for trying new flavors. As a student, I've embarked on a mouthwatering mission to visit and review every restaurant in town."
+  },
+  {
+    "firstName": "Emma",
+    "lastName": "Johnson",
+    "username": "emma_johnson",
+    "profileImgSrc": "",
+    "email": "emma.johnson@dlsu.edu.ph",
+    "password": "strongpassword123",
+    "school": "De La Salle University",
+    "isUserEstablishmentOwner": false,
+    "restaurantName": "",
+    "bio": "CS student | Tech enthusiast | Exploring the world of coding and technology at De La Salle University, Manila | Passionate about using technology to create a positive impact | #Lasallian"
+  },
+  {
+    "firstName": "Justin",
+    "lastName": "Casw",
+    "username": "case_justin",
+    "profileImgSrc": "",
+    "email": "justin_case@dlsu.edu.ph",
+    "password": "securepass321",
+    "school": "De La Salle University",
+    "isUserEstablishmentOwner": false,
+    "restaurantName": "",
+    "bio": "Business Management student | Aspiring entrepreneur | Embracing the vibrant startup culture at De La Salle University, Manila | Striving for excellence in business innovation | #Lasallian"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Santos",
+    "username": "mark_santos",
+    "profileImgSrc": "",
+    "email": "mark.santos@arellano.edu.ph",
+    "password": "mypass4567",
+    "school": "Arellano University",
+    "isUserEstablishmentOwner": false,
+    "restaurantName": "",
+    "bio": "Criminal Justice student | Pursuing justice and equality | Enthusiastic about making a positive impact on society at Arellano University | Together, we can create a safer world | #Arellanite"
+  },
+  {
+  "firstName": "Jasmine",
+  "lastName": "Lopez",
+  "username": "jasmine_lopez",
+  "profileImgSrc": "",
+  "email": "jasmine.lopez@arellano.edu.ph",
+  "password": "mypwd987",
+  "school": "Arellano University",
+  "isUserEstablishmentOwner": false,
+  "restaurantName": "",
+  "bio": "Hospitality Management student | Passionate about creating memorable experiences | Embracing the art of hospitality at Arellano University | Let's redefine the world of service | #Arellanite"
+  }
+
+]
