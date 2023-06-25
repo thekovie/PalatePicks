@@ -1,7 +1,7 @@
 <template>
 
 <!-- Backdrop -->
-  <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex z-50" @click.self="closeFullReview">
+  <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex z-30" @click.self="closeFullReview">
 
 
     <!-- Main Review Div Container-->
@@ -44,8 +44,17 @@
         <div class="text-[20px] mt-[35px]">{{ mainReview }}</div>
 
         <!-- User Gallery Review -->
-        <div class="flex flex-row justify-evenly">
-          <div v-for="i in 5" :key="i" class="min-w-[170px] max-w-[170px] min-h-[170px] max-h-[170px] bg-[#E8EAE7] rounded-[20px] mt-[50px]"></div>
+        <div class="flex justify-evenly mt-[50px]">
+          <div v-for="(media, index) in gallery" :key="index"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex relative">
+            <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
+            <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
+            <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute inset-0 bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
+              <img class="w-full h-full" src="../assets/Video.svg" />
+            </div>
+
+
+
+          </div>
         </div>
 
         <!-- Mark as Helpful button (If user is Logged in)-->
@@ -71,6 +80,12 @@
             <img class="self-center mx-auto relative left-[-1px] top-[2px]" src="../assets/Navigation-01.svg" />
           </div>
         </div>
+
+
+        <div v-if="showMediaView" @close="toggleMediaView">
+          <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
+        </div>
+
 
         <!-- Comment Border -->
         <div class="w-[100%] min-h-[2px] max-h-[2px] bg-[#d9d9d9] mt-[20px] mb-[47.5px]"></div>
@@ -102,7 +117,6 @@
         </div>
 
 
-
     </div>
 
 
@@ -113,22 +127,14 @@
 
 <script>
 import Comment from '../components/Comment.vue'
+import ViewMedia from './ViewMedia.vue'
 
 export default {
   props: {
       userProfile: {
         type: Object
       },
-      reviewerPhotoSrc: {
-        type: String
-      },
-      name: {
-        type: String
-      },
       username: {
-        type: String
-      },
-      school: {
         type: String
       },
       reviewSubject: {
@@ -148,12 +154,18 @@ export default {
       },
       comments: {
         type: Array
+      },
+      gallery: {
+        type: Array
       }
     },
 
   data(){
     return {
       isUserLoggedIn: true,
+      showMediaView: false,
+      selectedMedia: '',
+      isImage: '',
     }
   },
 
@@ -162,11 +174,23 @@ export default {
         this.$emit('close');
       },
       getProfileLink(username) {
-      return `/profile/${username}`;
-    }
+        return `/profile/${username}`;
+      },
+      toggleMediaView(media) {
+        this.showMediaView = !this.showMediaView;
+        this.selectedMedia = media;
+        if (this.reviewFileTypeChecker(media)) {
+          this.isImage = true;
+        } else {
+          this.isImage = false;
+        }
+      },
+      reviewFileTypeChecker(file) {
+        return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
+      },
     },
   components: {
-    Comment
+    Comment, ViewMedia
   }
 }
 </script>
