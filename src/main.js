@@ -5,8 +5,5 @@ import router from './router'
 
 const app = createApp(App)
 
-app.config.globalProperties.state = {
-  loggedInUser: "ylsewlys"
-}
 
 app.use(router).mount('#app')
