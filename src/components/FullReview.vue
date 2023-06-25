@@ -1,7 +1,7 @@
 <template>
 
 <!-- Backdrop -->
-  <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex" @click.self="closeFullReview">
+  <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex z-50" @click.self="closeFullReview">
 
 
     <!-- Main Review Div Container-->
@@ -15,16 +15,17 @@
           <div class="flex">
               <!-- Profile Picture-->
               <div class="bg-green min-w-[104px] min-h-[104px] max-w-[104px] max-h-[104px] rounded-[100%] p-[2.69px]">
-                <div class="bg-white w-[100%] h-[100%] rounded-[100%]"></div>
+                <img class="w-full h-full rounded-full object-cover" :src="userProfile.profileImgSrc" alt="user" />
               </div>
 
               <!-- User Info-->
               <div class="ml-[17px]">
-                <p class="font-bold text-[28px]"> {{ name }}</p>
-                <p class="text-grey text-[16px] hover:underline cursor-pointer"> <router-link :to="getProfileLink(username)">@{{ username }}</router-link></p>
-                <p class="text-grey text-[16px]"> {{ school }}</p>
-                <div class="flex flex-row">
+                <p class="font-bold text-[28px]">{{ userProfile.firstName }} {{ userProfile.lastName }}</p>
+                <p class="text-grey text-[16px] hover:underline cursor-pointer"> <router-link :to="getProfileLink(username)">@{{ userProfile.username }}</router-link></p>
+                <p class="text-grey text-[16px]">{{ userProfile.school }}</p>
+                <div class="flex flex-row relative left-[-3px]">
                   <img v-for="i in rating" class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" :key="i" />
+                  <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="../assets/Star-blank.svg" alt="star" :key="i" />
                 </div>
 
               </div>
@@ -59,7 +60,7 @@
 
           <!-- Profile Picture-->
           <div class="bg-green min-w-[71px] min-h-[71px] max-w-[71px] max-h-[71px] rounded-[100%] p-[1.94px] mr-[21px]">
-            <div class="bg-white w-[100%] h-[100%] rounded-[100%] z-50"></div>
+            <img class="w-full h-full rounded-full object-cover" :src="userProfile.profileImgSrc" alt="user" />
           </div>
 
           <!-- Write Comment Text Area-->
@@ -115,6 +116,9 @@ import Comment from '../components/Comment.vue'
 
 export default {
   props: {
+      userProfile: {
+        type: Object
+      },
       reviewerPhotoSrc: {
         type: String
       },

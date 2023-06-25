@@ -3,10 +3,10 @@
     <div class="reviewer-info grid grid-cols-2 items-start">
       <div class="overall-userinfo flex items-center">
         <div class="reviewer-photo w-[104px] h-[104px] rounded-full mr-3 border-4 border-green">
-          <img class="w-full h-full rounded-full object-cover" :src="reviewerPhotoSrc" alt="user" />
+          <img class="w-full h-full rounded-full object-cover" :src="profileImgSrc" alt="user" />
         </div>
         <div class="user-info">
-          <div class="user-name text-2xl font-semibold">{{ name }}</div>
+          <div class="user-name text-2xl font-semibold">{{ firstName }} {{ lastName }}</div>
           <div class="username text-sm font-light text-grey hover:underline cursor-pointer"><router-link :to="getProfileLink(username)">@{{ username }}</router-link></div>
           <div class="user-school text-sm font-light text-grey">{{ school }}</div>
         </div>
@@ -64,7 +64,7 @@
         </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
-          <FullReview @close="toggleFullReview" :reviewerPhotoSrc="reviewerPhotoSrc" :name="name" :username="username" :school="school" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
+          <FullReview @close="toggleFullReview" :userProfile="userProfile" :reviewerPhotoSrc="reviewerPhotoSrc" :name="name" :username="username" :school="school" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
         </div>
       </div>
     </div>
@@ -76,6 +76,7 @@
 import FullReview from './FullReview.vue'
 import ModifyReview from './ModifyReview.vue'
 import ViewMedia from './ViewMedia.vue'
+import UserProfiles from '../json/UserProfiles.json'
 
 export default {
   components: {
@@ -90,16 +91,7 @@ export default {
       type: Boolean,
       default: true,
     },
-    reviewerPhotoSrc: {
-      type: String
-    },
-    name: {
-      type: String
-    },
     username: {
-      type: String
-    },
-    school: {
       type: String
     },
     reviewSubject: {
@@ -131,6 +123,12 @@ export default {
       showMediaView: false,
       selectedMedia: '',
       isImage: '',
+      firstName: "",
+      lastName: "",
+      profileImgSrc: "",
+      school: "",
+      userProfiles: UserProfiles,
+      userProfile: {},
     }
   },
   methods: {
@@ -156,5 +154,14 @@ export default {
       return `/profile/${username}`;
     }
   },
+  mounted(){
+
+    this.userProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.username)[0]
+    this.school = this.userProfile.school
+    this.profileImgSrc = this.userProfile.profileImgSrc
+    this.firstName = this.userProfile.firstName
+    this.lastName = this.userProfile.lastName
+
+  }
 }
 </script>
