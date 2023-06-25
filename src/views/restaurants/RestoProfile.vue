@@ -46,7 +46,7 @@
             </div>
             <div class="reviews-list flex flex-col gap-8">
               <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen"/>
-              <ReviewBox v-for="review in reviews" :key="review.reviewId" :reviewerPhotoSrc="review.reviewerPhotoSrc" :name="review.name" :username="review.username" :school="review.school" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
+              <ReviewBox v-for="review in filteredRestoReviews" :key="review.reviewId" :username="review.username" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
             </div>
           </div>
           <div class="review-filters mt-20 flex flex-col w-auto items-end">
@@ -102,6 +102,9 @@
   import InputReviewBox from '../../components/InputReviewBox.vue'
   import Restaurants from '../../json/restaurants.json'
   import ViewMedia from '../../components/ViewMedia.vue'
+  import reviews from '../../json/reviews.json'
+  import UserProfiles from '../../json/UserProfiles.json'
+
 
   export default {
     components: {
@@ -137,6 +140,9 @@
           restaurant: Restaurants,
           showMediaView: false,
           selectedMedia: '',
+          restoReviews: reviews,
+          filteredRestoReviews: {},
+          userProfiles: UserProfiles,
 
       }
     },
@@ -144,6 +150,10 @@
       Restaurant() {
         return this.restaurant.filter((restaurant) => restaurant.name  === this.restoId)[0]
       }
+    },
+    mounted(){
+      this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId)
+
     }
   }
 </script>
