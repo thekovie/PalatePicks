@@ -4,11 +4,11 @@
     <div class="Profile-Section flex flex-row items-center"> <!--Profile Section-->
 
       <div> <!--Avatar-->
-        <img src="../../assets/images/user.jpg" alt="Avatar" class="w-12 h-12 rounded-full me-3"/>
+        <img :src="ProfileImage" alt="Avatar" class="w-12 h-12 rounded-full me-3"/>
       </div>
 
       <div class="basis-3/4">  <!--User-->
-        <p class="font-bold text-xl">@{{loggedInUser}} (Kovie Niño)</p>
+        <p class="font-bold text-xl">@{{loggedInUser}} ({{ firstName }} {{ lastName }})</p>
         <p>Your Personal Account</p>
       </div>
 
