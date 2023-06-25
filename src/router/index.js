@@ -59,7 +59,9 @@ const routes = [
   {
     path: '/profile/settings',
     name: 'ProfileSettings',
-    component: ProfileSettings
+    component: ProfileSettings,
+    props: true
+
   },
   {
     path: '/explore',

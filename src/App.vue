@@ -4,14 +4,14 @@
       <router-link class="logo font-cursive normal-case font-bold text-3xl justify-start" to="/">PalatePicks</router-link>
       <div class="nav-menu ml-6 space-x-9">
         <router-link to="/">Home</router-link>
-        <router-link :to="{ name: 'Explore'}">Explore  </router-link>
+        <router-link :to="{ name: 'Explore'}">Explore </router-link>
       </div>
     </div>
     <NavUser v-if="!isLoggedIn"/>
     <NavUserProfile v-else="isLoggedIn"/>
   </div>
 
-  <router-view />
+  <router-view :loggedInUser="loggedInUser" />
 
   <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
@@ -38,6 +38,7 @@
     data() {
       return {
         isLoggedIn: false,
+        loggedInUser: "thekovie",
       }
     },
     methods: {
