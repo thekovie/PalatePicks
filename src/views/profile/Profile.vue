@@ -10,7 +10,7 @@
     </div>
     <div class="user-reviews px-20 mt-4">
       <p class="font-bold p-3">View {{ Profile.firstName }}'s Reviews</p>
-      <div class="reviews-list flex flex-col gap-8">
+      <div class="reviews-list flex flex-col gap-8 mb-24">
         <UserReview v-for="review in filteredReviews" :key="review.reviewId" :username="review.username" :loggedInUser="loggedInUser" :restoName="review.restoID" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
       </div>
     </div>
