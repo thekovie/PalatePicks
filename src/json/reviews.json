@@ -9,11 +9,11 @@
     "date": "06-11-2023 16:15",
     "helpfulCount": 1734,
     "reviewerGallery": [
-      "../../../public/reviews/tapa-king/photo-1544025162-d76694265947.jpeg",
-      "../../../public/reviews/tapa-king/photo-1545092724-ebd263517948.jpeg",
-      "../../../public/reviews/tapa-king/photo-1545093149-618ce3bcf49d.jpeg",
-      "../../../public/reviews/tapa-king/photo-1626056087728-05c3d180911a.jpeg",
-      "../../../public/reviews/tapa-king/eating-steak.mp4"
+      "/reviews/tapa-king/photo-1544025162-d76694265947.jpeg",
+      "/reviews/tapa-king/photo-1545092724-ebd263517948.jpeg",
+      "/reviews/tapa-king/photo-1545093149-618ce3bcf49d.jpeg",
+      "/reviews/tapa-king/photo-1626056087728-05c3d180911a.jpeg",
+      "/reviews/tapa-king/eating-steak.mp4"
     ],
     "comments": [
       {
@@ -97,10 +97,10 @@
     "date": "02-20-2023 14:13",
     "helpfulCount": 215,
     "reviewerGallery": [
-      "../../../public/reviews/ichiro/ichiro-1.jpg",
-      "../../../public/reviews/ichiro/ichiro-2.jpg",
-      "../../../public/reviews/ichiro/ichiro-3.jpg",
-      "../../../public/reviews/ichiro/katsu.jpg"
+      "/reviews/ichiro/ichiro-1.jpg",
+      "/reviews/ichiro/ichiro-2.jpg",
+      "/reviews/ichiro/ichiro-3.jpg",
+      "/reviews/ichiro/katsu.jpg"
     ],
     "comments": [
       {
@@ -125,10 +125,10 @@
     "date": "09-25-2021 19:56",
     "helpfulCount": 1,
     "reviewerGallery": [
-      "../../../public/reviews/goodmunch/photo-1551504734-5ee1c4a1479b.jpeg",
-      "../../../public/reviews/goodmunch/photo-1552332386-f8dd00dc2f85.jpeg",
-      "../../../public/reviews/goodmunch/photo-1508737804141-4c3b688e2546.jpeg",
-      "../../../public/reviews/goodmunch/taco.mp4"
+      "/reviews/goodmunch/photo-1551504734-5ee1c4a1479b.jpeg",
+      "/reviews/goodmunch/photo-1552332386-f8dd00dc2f85.jpeg",
+      "/reviews/goodmunch/photo-1508737804141-4c3b688e2546.jpeg",
+      "/reviews/goodmunch/taco.mp4"
     ],
     "comments": [
       {
@@ -152,10 +152,12 @@
     "rating": 3,
     "date": "01-12-2020 02:26",
     "helpfulCount": 59,
-    "reviewerGallery": [
-      "../../../public/reviews/goodmunch/goodmunch-2.jpg",
-      "../../../public/reviews/goodmunch/goodmunch-3.jpg",
-      "../../../public/reviews/goodmunch/beef-salpicao.jpg"
+    "reviewerGallery:":
+    [
+      "/reviews/goodmunch/goodmunch-1.jpg",
+      "/reviews/goodmunch/goodmunch-2.jpg",
+      "/reviews/goodmunch/goodmunch-3.jpg",
+      "/reviews/goodmunch/beef-salpicao.jpg"
     ],
     "comments": [
       {
@@ -208,11 +210,11 @@
     "date": "11-17-2015 13:21",
     "helpfulCount": 243,
     "reviewerGallery": [
-      "../../../public/reviews/happy-n-healthy/photo-1593560708920-61dd98c46a4e.jpeg",
-      "../../../public/reviews/happy-n-healthy/photo-1606131731446-5568d87113aa.jpeg",
-      "../../../public/reviews/happy-n-healthy/photo-1610440042657-612c34d95e9f.jpeg",
-      "../../../public/reviews/happy-n-healthy/premium_photo-1671580682559-f2815195132a.jpeg",
-      "../../../public/reviews/happy-n-healthy/eating-burger.mp4"
+      "/reviews/happy-n-healthy/photo-1593560708920-61dd98c46a4e.jpeg",
+      "/reviews/happy-n-healthy/photo-1606131731446-5568d87113aa.jpeg",
+      "/reviews/happy-n-healthy/photo-1610440042657-612c34d95e9f.jpeg",
+      "/reviews/happy-n-healthy/premium_photo-1671580682559-f2815195132a.jpeg",
+      "/reviews/happy-n-healthy/eating-burger.mp4"
     ],
     "comments": [
       {
@@ -237,11 +239,11 @@
     "date": "09-26-2018 07:45",
     "helpfulCount": 67,
     "reviewerGallery": [
-      "../../../public/reviews/ichiro/photo-1579871494447-9811cf80d66c.jpeg",
-      "../../../public/reviews/ichiro/photo-1580822184713-fc5400e7fe10.jpeg",
-      "../../../public/reviews/ichiro/photo-1585730315692-5252e57d4b40.jpeg",
-      "../../../public/reviews/ichiro/photo-1586190848861-99aa4a171e90.jpeg",
-      "../../../public/reviews/ichiro/eating-sushi.mp4"
+      "/reviews/ichiro/photo-1579871494447-9811cf80d66c.jpeg",
+      "/reviews/ichiro/photo-1580822184713-fc5400e7fe10.jpeg",
+      "/reviews/ichiro/photo-1585730315692-5252e57d4b40.jpeg",
+      "/reviews/ichiro/photo-1586190848861-99aa4a171e90.jpeg",
+      "/reviews/ichiro/eating-sushi.mp4"
     ],
     "comments": []
   },
@@ -255,11 +257,11 @@
     "date": "02-20-2020 11:34",
     "helpfulCount": 211,
     "reviewerGallery": [
-      "../../../public/reviews/ate-rica/bacsilog.jpg",
-      "../../../public/reviews/ate-rica/bacsilog-2.jpg",
-      "../../../public/reviews/ate-rica/bacsilog-3.jpg",
-      "../../../public/reviews/ate-rica/bacsilog-4.jpg",
-      "../../../public/reviews/ate-rica/cutting-pizza.mp4"
+      "/reviews/ate-rica/bacsilog.jpg",
+      "/reviews/ate-rica/bacsilog-2.jpg",
+      "/reviews/ate-rica/bacsilog-3.jpg",
+      "/reviews/ate-rica/bacsilog-4.jpg",
+      "/reviews/ate-rica/cutting-pizza.mp4"
     ],
     "comments": [
       {
@@ -284,11 +286,11 @@
     "date": "04-29-2022 14:27",
     "helpfulCount": 211,
     "reviewerGallery": [
-      "../../../public/reviews/angrydobo/photo-1541599188778-cdc73298e8fd.jpeg",
-      "../../../public/reviews/angrydobo/photo-1582450871972-ab5ca641643d.jpeg",
-      "../../../public/reviews/angrydobo/photo-1621955511667-e2c316e4575d.jpeg",
-      "../../../public/reviews/angrydobo/premium_photo-1667545168921-34f756495d7b.jpeg",
-      "../../../public/reviews/angrydobo/eating-dessert.mp4"
+      "/reviews/angrydobo/photo-1541599188778-cdc73298e8fd.jpeg",
+      "/reviews/angrydobo/photo-1582450871972-ab5ca641643d.jpeg",
+      "/reviews/angrydobo/photo-1621955511667-e2c316e4575d.jpeg",
+      "/reviews/angrydobo/premium_photo-1667545168921-34f756495d7b.jpeg",
+      "/reviews/angrydobo/eating-dessert.mp4"
     ],
     "comments": [
       {
@@ -313,9 +315,9 @@
     "date": "12-03-2016 10:00",
     "helpfulCount": 17043,
     "reviewerGallery": [
-    "../../../public/reviews/happy-n-healthy/photo-1606131731446-5568d87113aa.jpeg",
-    "../../../public/reviews/happy-n-healthy/photo-1610440042657-612c34d95e9f.jpeg",
-    "../../../public/reviews/happy-n-healthy/eating-burger.mp4"
+    "/reviews/happy-n-healthy/photo-1606131731446-5568d87113aa.jpeg",
+    "/reviews/happy-n-healthy/photo-1610440042657-612c34d95e9f.jpeg",
+    "/reviews/happy-n-healthy/eating-burger.mp4"
     ],
     "comments": []
  },
@@ -329,8 +331,8 @@
     "date": "03-24-2017 15:05",
     "helpfulCount": 402,
     "reviewerGallery": [
-       "../../../public/reviews/happy-n-healthy/photo-1593560708920-61dd98c46a4e.jpeg",
-       "../../../public/reviews/happy-n-healthy/photo-1606131731446-5568d87113aa.jpeg"
+       "/reviews/happy-n-healthy/photo-1593560708920-61dd98c46a4e.jpeg",
+       "/reviews/happy-n-healthy/photo-1606131731446-5568d87113aa.jpeg"
     ],
     "comments": [
       {
@@ -365,11 +367,11 @@
   "date": "06-16-2020 09:00",
   "helpfulCount": 1414,
   "reviewerGallery": [
-    "../../../public/reviews/ate-rica/bacsilog.jpg",
-    "../../../public/reviews/ate-rica/bacsilog-2.jpg",
-    "../../../public/reviews/ate-rica/bacsilog-3.jpg",
-    "../../../public/reviews/ate-rica/bacsilog-4.jpg",
-    "../../../public/reviews/ate-rica/cutting-pizza.mp4"
+    "/reviews/ate-rica/bacsilog.jpg",
+    "/reviews/ate-rica/bacsilog-2.jpg",
+    "/reviews/ate-rica/bacsilog-3.jpg",
+    "/reviews/ate-rica/bacsilog-4.jpg",
+    "/reviews/ate-rica/cutting-pizza.mp4"
   ],
   "comments": [
     {
@@ -404,9 +406,9 @@
   "date": "06-29-2021 12:43",
   "helpfulCount": 4301,
   "reviewerGallery": [
-    "../../../public/reviews/ate-rica/bacsilog.jpg",
-    "../../../public/reviews/ate-rica/bacsilog-4.jpg",
-    "../../../public/reviews/ate-rica/cutting-pizza.mp4"
+    "/reviews/ate-rica/bacsilog.jpg",
+    "/reviews/ate-rica/bacsilog-4.jpg",
+    "/reviews/ate-rica/cutting-pizza.mp4"
   ],
   "comments": [
     {
@@ -441,10 +443,10 @@
   "date": "02-12-2023 17:07",
   "helpfulCount": 20141,
   "reviewerGallery": [
-    "../../../public/reviews/angrydobo/photo-1541599188778-cdc73298e8fd.jpeg",
-    "../../../public/reviews/angrydobo/photo-1582450871972-ab5ca641643d.jpeg",
-    "../../../public/reviews/angrydobo/photo-1621955511667-e2c316e4575d.jpeg",
-    "../../../public/reviews/angrydobo/eating-dessert.mp4"
+    "/reviews/angrydobo/photo-1541599188778-cdc73298e8fd.jpeg",
+    "/reviews/angrydobo/photo-1582450871972-ab5ca641643d.jpeg",
+    "/reviews/angrydobo/photo-1621955511667-e2c316e4575d.jpeg",
+    "/reviews/angrydobo/eating-dessert.mp4"
   ],
   "comments": []
 }

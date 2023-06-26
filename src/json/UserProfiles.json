@@ -3,7 +3,7 @@
     "firstName": "Wesly",
     "lastName": "Samson",
     "username": "ylsewlys",
-    "profileImgSrc": "../../../public/images/ylsewlys.jpg",
+    "profileImgSrc": "/images/ylsewlys.jpg",
     "email": "wesly_samson@dlsu.edu.ph",
     "password": "123",
     "school": "De La Salle University",

@@ -1,80 +1,80 @@
 [
   {
     "name": "Happy N' Healthy",
-    "imageHeader": "../../../public/images/hnh-header.png",
+    "imageHeader": "/images/hnh-header.png",
     "description": "Food choices that harmoniously balance Happiness and Healthiness 😀💚",
     "rating": 4,
     "price": 3,
     "gallery": [
-      "../../../public/images/Happy N' Healthy/happynhealthy1.jpg",
-      "../../../public/images/Happy N' Healthy/happynhealthy2.jpg",
-      "../../../public/images/Happy N' Healthy/happynhealthy3.jpg",
-      "../../../public/images/Happy N' Healthy/happynhealthy4.jpg"
+      "/images/Happy N' Healthy/happynhealthy1.jpg",
+      "/images/Happy N' Healthy/happynhealthy2.jpg",
+      "/images/Happy N' Healthy/happynhealthy3.jpg",
+      "/images/Happy N' Healthy/happynhealthy4.jpg"
     ]
   },
   {
     "name": "GoodMunch",
-    "imageHeader": "../../../public/images/goodmunch-header.jpg",
+    "imageHeader": "/images/goodmunch-header.jpg",
     "description": "Good Munch serves SO MUNCH BETTER Asian Fusion Recipes curated with lots of love from Chef Munch!",
     "rating": 5,
     "price": 2,
     "gallery": [
-      "../../../public/images/GoodMunch/1.jpg",
-      "../../../public/images/GoodMunch/2.jpg",
-      "../../../public/images/GoodMunch/3.jpg",
-      "../../../public/images/GoodMunch/4.jpg"
+      "/images/GoodMunch/1.jpg",
+      "/images/GoodMunch/2.jpg",
+      "/images/GoodMunch/3.jpg",
+      "/images/GoodMunch/4.jpg"
     ]
   },
   {
     "name": "Ate Rica's Bacsilog",
-    "imageHeader": "../../../public/images/bacsilog-header.jpg",
+    "imageHeader": "/images/bacsilog-header.jpg",
     "description": "We serve tasty, quality, fast, and clean superior-SILOG meals in schools,commercial spaces, & superma.",
     "rating": 4,
     "price": 2,
     "gallery": [
-      "../../../public/images/Ate Rica's Bacsilog/1.jpg",
-      "../../../public/images/Ate Rica's Bacsilog/2.jpg",
-      "../../../public/images/Ate Rica's Bacsilog/3.jpg",
-      "../../../public/images/Ate Rica's Bacsilog/4.jpg"
+      "/images/Ate Rica's Bacsilog/1.jpg",
+      "/images/Ate Rica's Bacsilog/2.jpg",
+      "/images/Ate Rica's Bacsilog/3.jpg",
+      "/images/Ate Rica's Bacsilog/4.jpg"
     ]
   },
   {
     "name": "Ichiro",
-    "imageHeader": "../../../public/images/ichiro-header.jpg",
+    "imageHeader": "/images/ichiro-header.jpg",
     "description": "Ichiro is a historical Japanese restaurant which has been operated about 23 years (since 2000).",
     "rating": 4,
     "price": 3,
     "gallery": [
-      "../../../public/images/Ichiro/ichiro1.jpg",
-      "../../../public/images/Ichiro/ichiro2.jpg",
-      "../../../public/images/Ichiro/ichiro3.jpg",
-      "../../../public/images/Ichiro/ichiro4.jpg"
+      "/images/Ichiro/ichiro1.jpg",
+      "/images/Ichiro/ichiro2.jpg",
+      "/images/Ichiro/ichiro3.jpg",
+      "/images/Ichiro/ichiro4.jpg"
     ]
   },
   {
     "name": "Tapa King",
-    "imageHeader": "../../../public/images/tapaking-header.jpg",
+    "imageHeader": "/images/tapaking-header.jpg",
     "description": "Tapa King serves classic Filipino homestyle meals you can enjoy everyday. Tara kain!",
     "rating": 5,
     "price": 3,
     "gallery": [
-      "../../../public/images/Tapa King/1.jpg",
-      "../../../public/images/Tapa King/2.jpg",
-      "../../../public/images/Tapa King/3.jpg",
-      "../../../public/images/Tapa King/4.jpg"
+      "/images/Tapa King/1.jpg",
+      "/images/Tapa King/2.jpg",
+      "/images/Tapa King/3.jpg",
+      "/images/Tapa King/4.jpg"
     ]
   },
   {
     "name": "Angrydobo",
-    "imageHeader": "../../../public/images/angrydobo-header.jpg",
+    "imageHeader": "/images/angrydobo-header.jpg",
     "description": "Come by AD Taft or Westgate for breakfast, we're open at 8am. #LoveEatRelationship.",
     "rating": 4,
     "price": 2,
     "gallery": [
-      "../../../public/images/Angrydobo/1.jpg",
-      "../../../public/images/Angrydobo/2.jpg",
-      "../../../public/images/Angrydobo/3.jpg",
-      "../../../public/images/Angrydobo/4.jpg"
+      "/images/Angrydobo/1.jpg",
+      "/images/Angrydobo/2.jpg",
+      "/images/Angrydobo/3.jpg",
+      "/images/Angrydobo/4.jpg"
     ]
   }
 ]
