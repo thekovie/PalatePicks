@@ -27,10 +27,10 @@
         <div class="gallery-title text-3xl font-semibold mt-20 mb-10">
           Gallery
         </div>
-        <div class="gallery-photos flex">
+        <div class="gallery-photos flex overflow-x-auto">
             <div v-for="(media, index) in Restaurant.gallery" :key="index" class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
-              <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
-              <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
+              <img v-if="reviewFileTypeChecker(media)" class="min-w-[500px] h-full object-cover mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
+              <video v-else class="min-w-[500px] h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
               <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
                 <img class="w-full h-full" src="../assets/Video.svg" />
               </div>
