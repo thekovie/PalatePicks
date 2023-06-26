@@ -19,8 +19,8 @@
     "email": "john_kovie_nino@dlsu.edu.ph",
     "password": "chichicooldog",
     "school": "De La Salle University",
-    "isUserEstablishmentOwner": false,
-    "restaurantName": "",
+    "isUserEstablishmentOwner": true,
+    "restaurantName": "Tapa King",
     "bio": "A tech enthusiast by day, and a culinary adventurer by night. From coding to cooking, I blend my passion for software technology with my insatiable appetite for trying new flavors. As a student, I've embarked on a mouthwatering mission to visit and review every restaurant in town."
   },
   {
@@ -31,8 +31,8 @@
     "email": "reign_larraquel@dlsu.edu.ph",
     "password": "strongpassword123",
     "school": "De La Salle University",
-    "isUserEstablishmentOwner": false,
-    "restaurantName": "",
+    "isUserEstablishmentOwner": true,
+    "restaurantName": "Ate Rica's Bacsilog",
     "bio": "CS student | Tech enthusiast | Exploring the world of coding and technology at De La Salle University, Manila | Passionate about using technology to create a positive impact | #Lasallian"
   },
   {
