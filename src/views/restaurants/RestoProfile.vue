@@ -32,7 +32,7 @@
               <img v-if="reviewFileTypeChecker(media)" class="min-w-[500px] h-full object-cover mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
               <video v-else class="min-w-[500px] h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
               <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
-                <img class="w-full h-full" src="../assets/Video.svg" />
+                <img class="w-full h-full" src="../../assets/Video.svg" />
               </div>
               <div v-if="showMediaView" @close="toggleMediaView">
                 <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
