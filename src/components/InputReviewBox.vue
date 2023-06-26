@@ -16,7 +16,7 @@
       </div>
       <div class="review-part flex pt-8">
         <div class="reviewer-photo w-20 h-20 rounded-full mr-3 border-4 border-green">
-            <img class="w-full h-full rounded-full object-cover" src="../../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg" alt="user" />
+            <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile.profileImgSrc" alt="user" />
         </div>
         <div class="review-content flex flex-col gap-5 mt-1">
           <div class="review-title">
@@ -69,6 +69,9 @@ export default {
     isVisible: {
       type: Boolean,
       required: true,
+    },
+    loggedUserProfile: {
+      type: Object,
     },
   },
   data() {
