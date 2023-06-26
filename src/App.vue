@@ -1,17 +1,17 @@
 <template>
-  <div class="header sticky top-0 flex flex-wrap justify-between items-center bg-white text-green flex-row p-5 border-b min-w-screen border-solid">
+  <div class="header sticky top-0 flex flex-wrap justify-between items-center bg-white text-green flex-row p-5 border-b min-w-screen border-solid z-10">
     <div class="left flex flex-row items-center">
       <router-link class="logo font-cursive normal-case font-bold text-3xl justify-start" to="/">PalatePicks</router-link>
       <div class="nav-menu ml-6 space-x-9">
         <router-link to="/">Home</router-link>
-        <router-link :to="{ name: 'Explore'}">Explore  </router-link>
+        <router-link :to="{ name: 'Explore'}">Explore </router-link>
       </div>
     </div>
-    <NavUser v-if="!isLoggedIn"/>
-    <NavUserProfile v-else="isLoggedIn"/>
+    <NavUser v-if="(loggedInUser === '')"/>
+    <NavUserProfile v-else :loggedUserProfile="loggedUserProfile" @logout="logout"/>
   </div>
 
-  <router-view />
+  <router-view :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :userProfiles="userProfiles" @login="login" />
 
   <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
@@ -30,6 +30,7 @@
 <script>
  import NavUser from './components/NavUser.vue'
  import NavUserProfile from './components/NavUserProfile.vue'
+ import UserProfiles from '../src/json/UserProfiles.json'
 
   export default {
     components: {
@@ -38,12 +39,25 @@
     data() {
       return {
         isLoggedIn: false,
+        loggedInUser: "",
+        userProfiles: UserProfiles,
+        loggedUserProfile: {},
       }
     },
     methods: {
       logout() {
-        this.isLoggedIn = false
+        this.loggedInUser = '';
+        this.loggedUserProfile = {};
+      },
+      login(username){
+        this.loggedInUser = username;
+        this.loggedUserProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.loggedInUser)[0]
       }
+    },
+    mounted(){
+
+      // Get Profile of Logged in user
+      this.loggedUserProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.loggedInUser)[0]
     }
   }
 </script>

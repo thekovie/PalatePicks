@@ -3,11 +3,11 @@
     <div class="reviewer-info grid grid-cols-2 items-start">
       <div class="overall-userinfo flex items-center">
         <div class="reviewer-photo w-[104px] h-[104px] rounded-full mr-3 border-4 border-green">
-          <img class="w-full h-full rounded-full object-cover" :src="reviewerPhotoSrc" alt="user" />
+          <img class="w-full h-full rounded-full object-cover" :src="profileImgSrc" alt="user" />
         </div>
         <div class="user-info">
-          <div class="user-name text-2xl font-semibold">{{ name }}</div>
-          <div class="username text-sm font-light text-grey">{{ username }}</div>
+          <div class="user-name text-2xl font-semibold">{{ firstName }} {{ lastName }}</div>
+          <div class="username text-sm font-light text-grey hover:underline cursor-pointer"><router-link :to="getProfileLink(username)">@{{ username }}</router-link></div>
           <div class="user-school text-sm font-light text-grey">{{ school }}</div>
         </div>
       </div>
@@ -45,18 +45,24 @@
         <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleFullReview">
           View Comments
         </button>
-        <button v-show="isReviewOwner" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
+
+        <button v-show="username === loggedInUser" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
           Modify Review
         </button>
-        <button v-show="isRestoOwner" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+
+
+        <button v-if="isRestoOwner" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Delete Review
         </button>
-        <button v-show="!isRestoOwner && !isReviewOwner" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+
+
+
+        <button v-show="!isRestoOwner && !(username === loggedInUser) && !(loggedInUser === '')" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Mark as Helpful
         </button>
 
         <div v-if="showModifyReview" @close="toggleModifyReview">
-          <ModifyReview @close="toggleModifyReview" :reviewSubject="reviewSubject" :reviewerPhotoSrc="reviewerPhotoSrc" :mainReview="mainReview" :rating="rating" :gallery="gallery"/>
+          <ModifyReview @close="toggleModifyReview" :reviewSubject="reviewSubject" :reviewerPhotoSrc="reviewerPhotoSrc" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile"/>
         </div>
 
         <div v-if="showMediaView" @close="toggleMediaView">
@@ -64,7 +70,7 @@
         </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
-          <FullReview @close="toggleFullReview" :reviewerPhotoSrc="reviewerPhotoSrc" :name="name" :username="username" :school="school" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
+          <FullReview @close="toggleFullReview" :userProfile="userProfile" :username="username" :loggedInUser="loggedInUser" :isRestoOwner="isRestoOwner" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
         </div>
       </div>
     </div>
@@ -76,6 +82,7 @@
 import FullReview from './FullReview.vue'
 import ModifyReview from './ModifyReview.vue'
 import ViewMedia from './ViewMedia.vue'
+import UserProfiles from '../json/UserProfiles.json'
 
 export default {
   components: {
@@ -84,22 +91,8 @@ export default {
   props: {
     isRestoOwner: {
       type: Boolean,
-      default: false,
-    },
-    isReviewOwner: {
-      type: Boolean,
-      default: true,
-    },
-    reviewerPhotoSrc: {
-      type: String
-    },
-    name: {
-      type: String
     },
     username: {
-      type: String
-    },
-    school: {
       type: String
     },
     reviewSubject: {
@@ -122,6 +115,15 @@ export default {
     },
     gallery: {
       type: Array
+    },
+    loggedInUser: {
+      type: String
+    },
+    loggedUserProfile: {
+      type: Object
+    },
+    restoId: {
+      type: String
     }
   },
   data() {
@@ -131,6 +133,12 @@ export default {
       showMediaView: false,
       selectedMedia: '',
       isImage: '',
+      firstName: "",
+      lastName: "",
+      profileImgSrc: "",
+      school: "",
+      userProfiles: UserProfiles,
+      userProfile: {},
     }
   },
   methods: {
@@ -152,6 +160,18 @@ export default {
     reviewFileTypeChecker(file) {
       return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
     },
+    getProfileLink(username) {
+      return `/profile/${username}`;
+    }
   },
+  mounted() {
+    this.userProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.username)[0]
+    this.school = this.userProfile.school
+    this.profileImgSrc = this.userProfile.profileImgSrc
+    this.firstName = this.userProfile.firstName
+    this.lastName = this.userProfile.lastName
+
+
+  }
 }
 </script>

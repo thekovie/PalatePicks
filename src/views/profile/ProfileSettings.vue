@@ -4,16 +4,16 @@
     <div class="Profile-Section flex flex-row items-center"> <!--Profile Section-->
 
       <div> <!--Avatar-->
-        <img src="../../assets/images/user.jpg" alt="Avatar" class="w-12 h-12 rounded-full me-3"/>
+        <img :src="ProfileImage" alt="Avatar" class="w-12 h-12 rounded-full object-center object-cover me-3"/>
       </div>
 
       <div class="basis-3/4">  <!--User-->
-        <p class="font-bold text-xl">@Tofudubu (Kovie Niño)</p>
+        <p class="font-bold text-xl">@{{loggedInUser}} ({{ firstName }} {{ lastName }})</p>
         <p>Your Personal Account</p>
       </div>
 
       <div class="basis-1/4 text-right pe-20"> <!--Go back to personal profile-->
-        <p class="underline">Go Back to Personal Profile</p>
+        <router-link class="hover:underline cursor-pointer" :to="getProfileLink(username)">Go Back to Personal Profile</router-link>
       </div>
 
     </div>
@@ -47,7 +47,7 @@
             <div class="bg-green min-w-[150px] min-h-[150px] max-w-[150px] max-h-[150px] rounded-[100%] p-[3px] m-[10px] cursor-pointer">
                 <div class="bg-white w-[100%] h-[100%] rounded-[100%]">
                   <div v-if="isImageDefault" class="upload-bg-default w-[60%] h-[60%] rounded-[100%] relative mx-auto top-[28px]"></div>
-                  <img v-else :src="ProfileImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%]">
+                  <img v-else :src="ProfileImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover object-center">
                 </div>
               </div>
               <button @click="toggleUploadModal" class="mt-10 bg-green text-white px-12 py-1 rounded-3xl">Change Avatar</button>
@@ -116,14 +116,19 @@
 </template>
 
 <script>
-import UploadPicture from '../../components/UploadPicture.vue';
+import UploadPicture from '../../components/UploadPicture.vue'
+import UserProfiles from '../../json/UserProfiles.json'
+
 export default {
+  props: {
+    loggedInUser: String
+  },
   components: {
     UploadPicture
   },
   methods: {
     saveChanges(){
-      alert('Your changes has been successfully saved!');
+      alert('Your changes have been successfully saved!');
     },
     codeSent(){
       alert('Code has been sent to your email!');
@@ -144,29 +149,48 @@ export default {
     getImageSrc(e){
       this.ProfileImage = e;
       this.isImageDefault = false;
+    },
+    getProfileLink(username) {
+      return `/profile/${this.loggedInUser}`;
     }
   },
   data() {
     return {
       inputValue: " ",
-      firstName: 'Kovie',
-      lastName: 'Niño',
-      username: '@Tofudubu',
-      school: 'De La Salle University',
-      email: 'thegamingkovie@gmail.com',
-      password: 'password',
-      newPassword: 'password',
-      confirmNewPassword: 'password',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Ultrices mi tempus imperdiet nulla malesuada.',
+      firstName: "",
+      lastName: "",
+      username: "",
+      school: "",
+      email: "",
+      password: "",
+      newPassword: "",
+      confirmNewPassword: "",
+      bio: "",
       showUploadModal: false,
       ProfileImage: '',
-      isImageDefault: true
+      isImageDefault: false,
+      userProfiles: UserProfiles,
+      userProfile: {}
     };
   },
   computed: {
     isButtonDisabled() {
       return !this.firstName || !this.lastName || !this.username || !this.school || !this.bio || !this.email || !this.password;
     },
+  },
+  mounted(){
+
+      this.userProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.loggedInUser)[0]
+
+      this.firstName = this.userProfile.firstName;
+      this.lastName = this.userProfile.lastName;
+      this.username = this.userProfile.username;
+      this.school = this.userProfile.school;
+      this.bio = this.userProfile.bio;
+      this.email = this.userProfile.email;
+      this.ProfileImage = this.userProfile.profileImgSrc;
+
+
   }
 }
 </script>

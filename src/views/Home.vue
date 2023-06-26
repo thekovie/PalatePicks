@@ -2,7 +2,7 @@
   <div class="min-h-screen">
     <div class="upper-part h-[586px] min-w-screen gradient-bg flex flex-col justify-center items-center">
       <div class="text-center text-3xl font-bold text-white">
-          Hi, Juan! What are you craving lately?
+          <span v-show="!(loggedInUser === '')">Hi, {{ firstName }}!</span> What are you craving lately?
       </div>
       <div class="search-center-box mt-4 flex">
         <input type="text" class="search-bar w-[600px] bg-white h-14 rounded-s-3xl pl-4 pr-4 focus:outline-none" placeholder="Search restaurant here" />
@@ -34,71 +34,26 @@
 
 <script>
   import RestoBox from '../components/RestoBox.vue'
+  import Restaurants from '../json/restaurants.json'
 
   export default {
     components: {
       RestoBox
     },
+    mounted() {
+      if (this.loggedInUser !== '') {
+        this.firstName = this.loggedUserProfile.firstName
+      }
+    },
+    props: {
+      loggedInUser: String,
+      loggedUserProfile: Object
+    },
+
     data() {
       return {
-        establishments: [
-          {
-            name: 'Happy N\' Healthy',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4,
-            price: 3
-          },
-          {
-            name: 'Restaurant 2',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 5,
-            price: 2
-          },
-          {
-            name: 'Restaurant 3',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 3,
-            price: 1
-          },
-          {
-            name: 'Restaurant 4',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 1,
-            price: 3
-          },
-          {
-            name: 'Restaurant 5',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4,
-            price: 2
-          },
-          {
-            name: 'Restaurant 6',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 2,
-            price: 3
-          },
-          {
-            name: 'Restaurant 7',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 1,
-            price: 2
-          },
-          {
-            name: 'Restaurant 8',
-            imageHeader: '../../public/images/janice-lin-yUIN4QWKCTw-unsplash.jpg',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla non.',
-            rating: 4,
-            price: 3
-          }
-        ]
+        establishments: Restaurants,
+        firstName: '',
       }
     }
   }

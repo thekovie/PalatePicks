@@ -7,3 +7,14 @@
     font-family: 'Wix Madefor Text', sans-serif;
   }
 }
+
+::-webkit-scrollbar {
+  width: 7px;
+  background: transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 20px;
+}

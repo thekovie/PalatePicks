@@ -1,7 +1,7 @@
 <template>
 
 <!-- Backdrop -->
-  <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex" @click.self="closeFullReview">
+  <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex z-30" @click.self="closeFullReview">
 
 
     <!-- Main Review Div Container-->
@@ -15,16 +15,17 @@
           <div class="flex">
               <!-- Profile Picture-->
               <div class="bg-green min-w-[104px] min-h-[104px] max-w-[104px] max-h-[104px] rounded-[100%] p-[2.69px]">
-                <div class="bg-white w-[100%] h-[100%] rounded-[100%]"></div>
+                <img class="w-full h-full rounded-full object-cover" :src="userProfile.profileImgSrc" alt="user" />
               </div>
 
               <!-- User Info-->
               <div class="ml-[17px]">
-                <p class="font-bold text-[28px]"> {{ name }}</p>
-                <p class="text-grey text-[16px]"> {{ username }}</p>
-                <p class="text-grey text-[16px]"> {{ school }}</p>
-                <div class="flex flex-row">
+                <p class="font-bold text-[28px]">{{ userProfile.firstName }} {{ userProfile.lastName }}</p>
+                <p class="text-grey text-[16px] hover:underline cursor-pointer"> <router-link :to="getProfileLink(username)">@{{ userProfile.username }}</router-link></p>
+                <p class="text-grey text-[16px]">{{ userProfile.school }}</p>
+                <div class="flex flex-row relative left-[-3px]">
                   <img v-for="i in rating" class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" :key="i" />
+                  <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="../assets/Star-blank.svg" alt="star" :key="i" />
                 </div>
 
               </div>
@@ -43,23 +44,32 @@
         <div class="text-[20px] mt-[35px]">{{ mainReview }}</div>
 
         <!-- User Gallery Review -->
-        <div class="flex flex-row justify-evenly">
-          <div v-for="i in 5" :key="i" class="min-w-[170px] max-w-[170px] min-h-[170px] max-h-[170px] bg-[#E8EAE7] rounded-[20px] mt-[50px]"></div>
+        <div class="flex mt-[50px]">
+          <div v-for="(media, index) in gallery" :key="index"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex relative">
+            <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
+            <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
+            <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute inset-0 bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
+              <img class="w-full h-full" src="../assets/Video.svg" />
+            </div>
+
+
+
+          </div>
         </div>
 
         <!-- Mark as Helpful button (If user is Logged in)-->
-        <button v-if="isUserLoggedIn" class="min-w-[205px] min-h-[50px] rounded-[41px] bg-green text-white relative top-[66px] self-end">Mark as Helpful</button>
+        <button v-if="!(loggedInUser === '') && !(loggedInUser === username) && !isRestoOwner" class="min-w-[205px] min-h-[50px] rounded-[41px] bg-green text-white relative top-[66px] self-end">Mark as Helpful</button>
 
         <!-- Comment Section Header -->
         <div class="font-bold text-[33px] mt-[70px]">Comments</div>
 
 
         <!-- Write Comment Section -->
-        <div v-if="isUserLoggedIn" class="flex flex-row mt-[16px]">
+        <div v-if="!(loggedInUser === '')" class="flex flex-row mt-[16px]">
 
           <!-- Profile Picture-->
           <div class="bg-green min-w-[71px] min-h-[71px] max-w-[71px] max-h-[71px] rounded-[100%] p-[1.94px] mr-[21px]">
-            <div class="bg-white w-[100%] h-[100%] rounded-[100%] z-50"></div>
+            <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile.profileImgSrc" alt="user" />
           </div>
 
           <!-- Write Comment Text Area-->
@@ -70,6 +80,12 @@
             <img class="self-center mx-auto relative left-[-1px] top-[2px]" src="../assets/Navigation-01.svg" />
           </div>
         </div>
+
+
+        <div v-if="showMediaView" @close="toggleMediaView">
+          <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
+        </div>
+
 
         <!-- Comment Border -->
         <div class="w-[100%] min-h-[2px] max-h-[2px] bg-[#d9d9d9] mt-[20px] mb-[47.5px]"></div>
@@ -101,7 +117,6 @@
         </div>
 
 
-
     </div>
 
 
@@ -112,19 +127,14 @@
 
 <script>
 import Comment from '../components/Comment.vue'
+import ViewMedia from './ViewMedia.vue'
 
 export default {
   props: {
-      reviewerPhotoSrc: {
-        type: String
-      },
-      name: {
-        type: String
+      userProfile: {
+        type: Object
       },
       username: {
-        type: String
-      },
-      school: {
         type: String
       },
       reviewSubject: {
@@ -144,22 +154,52 @@ export default {
       },
       comments: {
         type: Array
+      },
+      gallery: {
+        type: Array
+      },
+      loggedInUser: {
+        type: String
+      },
+      loggedUserProfile: {
+        type: Object
+      },
+      isRestoOwner: {
+        type: Boolean
       }
     },
 
   data(){
     return {
       isUserLoggedIn: true,
+      showMediaView: false,
+      selectedMedia: '',
+      isImage: '',
     }
   },
 
   methods: {
       closeFullReview(){
         this.$emit('close');
-      }
+      },
+      getProfileLink(username) {
+        return `/profile/${username}`;
+      },
+      toggleMediaView(media) {
+        this.showMediaView = !this.showMediaView;
+        this.selectedMedia = media;
+        if (this.reviewFileTypeChecker(media)) {
+          this.isImage = true;
+        } else {
+          this.isImage = false;
+        }
+      },
+      reviewFileTypeChecker(file) {
+        return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
+      },
     },
   components: {
-    Comment
+    Comment, ViewMedia
   }
 }
 </script>
