@@ -9,7 +9,6 @@ import ProfileSettings from '../views/profile/ProfileSettings.vue'
 import Error404 from '../views/Error404.vue'
 import UserProfiles from '../json/UserProfiles.json'
 import NotFound from '../views/NotFound.vue';
-//import NotFound from '@/views/NotFound.vue';
 
 const routes = [
   {
@@ -78,7 +77,21 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory('/'),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    if (to.hash) {
+      return {
+        el: to.hash,
+      };
+    }
+    return {
+      left: 0,
+      top: 0,
+    };
+  }
 })
 
 export default router
