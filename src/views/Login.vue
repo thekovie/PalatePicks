@@ -34,7 +34,7 @@
           </div>
 
           <!-- Login Button -->
-          <button class="login-button bg-green rounded-[34.5px] h-[69px] text-white text-[24px] my-[32px]" >Login</button>
+          <button class="login-button bg-green rounded-[34.5px] h-[69px] text-white text-[24px] my-[32px]" @click="login" >Login</button>
 
           <div class="text-grey text-[20px] mb-[180px]">New to PalatePicks? <router-link class="font-bold" :to="{ name: 'Register'}">Sign up here!</router-link></div>
 
@@ -49,18 +49,47 @@
 
 <script>
 export default {
+  props:{
+    userProfiles: Object,
+    loggedInUser: String,
+    loggedUserProfile: Object
+  },
   data(){
     return {
       userName: '',
       password: '',
-      rememberMe: false
+      rememberMe: false,
+      userProfile: {}
     }
   },
   methods: {
     handleSubmit(){
       console.log('Login Initiated');
+
+    },
+    login(){
+      console.log(this.userName)
+      this.userProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.userName)[0]
+
+      if(typeof this.userProfile === 'undefined'){
+        alert('The account you have entered does not exist. Please ensure that the information you have entered are correct or make a new account at PalatePicks!');
+      }else{
+        if ((this.userName === this.userProfile.username) && (this.password === this.userProfile.password)){
+          console.log('Successfully logged in!');
+          this.$emit('login', this.userName)
+          this.$router.push({path: '/'})
+          alert('Successfully logged in!')
+        }else{
+          alert('The password you have entered is incorrect. Please check the required fields again.')
+        }
+      }
+
+
+
+
     }
-  }
+  },
+
 }
 </script>
 
