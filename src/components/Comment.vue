@@ -6,7 +6,9 @@
   <div class="flex flex-row">
     <!-- Profile Picture -->
     <div class="bg-green min-w-[75px] min-h-[75px] max-w-[75px] max-h-[75px] rounded-[100%] p-[1.94px]">
-        <div class="bg-white w-[100%] h-[100%] rounded-[100%]"></div>
+        <div class="bg-white w-[100%] h-[100%] rounded-[100%]">
+          <img class="w-full h-full rounded-full object-cover" :src="comment.profilePicSrc" alt="user" />
+        </div>
     </div>
 
     <!-- User Info -->

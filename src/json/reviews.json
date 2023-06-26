@@ -2,7 +2,7 @@
   {
     "reviewId": 1,
     "restoID": "Tapa King",
-    "username": "thekovie",
+    "username": "Reddzen",
     "reviewSubject": "Affordable Tacos and Flavorful Steaks at Tapa King",
     "mainReview": "Tapa King is a hidden gem that offers a delectable combination of affordable tacos and flavorful steaks. Their tacos are packed with savory fillings and served with a variety of tasty toppings, all at a wallet-friendly price. The steaks are cooked to perfection, with a juicy and tender texture that will satisfy any meat lover. The restaurant provides a laid-back and casual setting, making it a great place to enjoy affordable and flavorful tacos and steaks. Tapa King is definitely worth a visit for those seeking a satisfying meal on a budget.",
     "rating": 4,
@@ -17,55 +17,71 @@
     ],
     "comments": [
       {
-        "name": "John Doe",
-        "username": "imarealperson",
-        "profilePicSrc": "",
-        "school": "",
-        "isEstablishmentOwner": true,
-        "date": "06-30-2023 09:25",
-        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        "commentID": 1,
-        "replies": []
-      },
-      {
-        "name": "Juan Perez",
-        "username": "definitelynotaplaceholder",
-        "profilePicSrc": "",
-        "school": "De La Salle University",
+        "name": "Jasmine Lopez",
+        "username": "jasmine_lopez",
+        "profilePicSrc": "https://images.unsplash.com/photo-1602233158242-3ba0ac4d2167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80",
+        "school": "Arellano University",
         "isEstablishmentOwner": false,
-        "date": "01-23-2023 18:21",
-        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at lobortis leo. Nulla vel ultrices sapien. Cras tincidunt odio sit amet mattis accumsan. Quisque pulvinar justo dictum commodo rhoncus. Praesent neque nulla, venenatis eget eleifend a, vehicula nec lacus. In at luctus diam, vel varius purus. Integer condimentum purus eget.",
-        "commentID": 2,
+        "date": "06-30-2023 09:25",
+        "comment": "I couldn't agree more! Tapa King is indeed a hidden gem. Their tacos are incredibly delicious, and I love how they offer such great value for the price. The steaks are always cooked to perfection, and the overall casual ambiance adds to the enjoyable dining experience. It's one of my go-to places for affordable and tasty meals.",
         "replies": [
           {
-            "name": "John Doe",
-            "username": "imarealperson",
-            "profilePicSrc": "",
-            "school": "",
+            "name": "Kovie Niño",
+            "username": "thekovie",
+            "profilePicSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
+            "school": "De La Salle University",
             "isEstablishmentOwner": true,
             "date": "06-30-2023 09:25",
-            "comment": "Nulla ut risus nibh. Aenean purus nisi, vestibulum id sem at, commodo auctor mi. Maecenas a sapien nec lacus porttitor ultricies ut at elit. Aliquam eget nulla diam."
+            "comment": "Thank you so much, Jasmine! I'm glad you enjoyed your experience at Tapa King. We strive to provide our customers with the best possible service and food quality. We hope to see you again soon!"
           }
         ]
       },
       {
-        "name": "Vera Hughes",
-        "username": "hughes_vera",
-        "profilePicSrc": "",
+        "name": "Mark Santos",
+        "username": "mark_santos",
+        "profilePicSrc": "https://images.unsplash.com/photo-1642060603505-e716140d45d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+        "school": "Arellano University",
+        "isEstablishmentOwner": false,
+        "date": "01-23-2023 18:21",
+        "comment": "I'm so glad you enjoyed Tapa King as much as I did! Their tacos are absolutely mouthwatering, and the flavors are out of this world. And let's not forget about those steaks – they're truly top-notch. The fact that it's budget-friendly makes it even better. I highly recommend Tapa King to anyone looking for a satisfying meal without breaking the bank.",
+        "replies": [
+          {
+            "name": "Kovie Niño",
+            "username": "thekovie",
+            "profilePicSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
+            "school": "De La Salle University",
+            "isEstablishmentOwner": true,
+            "date": "06-30-2023 09:25",
+            "comment": "Thank you so much, Mark! I'm glad you enjoyed your experience at Tapa King. We strive to provide our customers with the best possible service and food quality. We hope to see you again soon!"
+          }
+        ]
+      },
+      {
+        "name": "Antonio Agapito",
+        "username": "agapito_antonio_21",
+        "profilePicSrc": "https://images.unsplash.com/photo-1632681638586-8c3b40d8a6cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
         "school": "Adamson University",
         "isEstablishmentOwner": false,
         "date": "12-25-2021 19:47",
-        "comment": "Etiam ac neque quis tortor vestibulum dapibus. Sed orci nunc, pulvinar id lacus ac, viverra venenatis sem. Nullam tincidunt diam non mi pretium, vulputate blandit dui laoreet. Vestibulum nisl felis, convallis quis pharetra eget, accumsan sit amet.",
-        "commentID": 3,
+        "comment": "While I appreciate the positive aspects of Tapa King, my experience was slightly different. The tacos were indeed flavorful, and the affordability was a plus. However, I found the steaks to be a bit overcooked for my liking. Despite that, the overall dining experience was still pleasant, and the service was attentive. It just goes to show that taste preferences can vary, but Tapa King remains a good choice for those seeking a budget-friendly meal.",
         "replies": [
           {
-            "name": "Antonio López",
-            "username": "anexistingperson",
-            "profilePicSrc": "",
-            "school": "",
+            "name": "Kovie Niño",
+            "username": "thekovie",
+            "profilePicSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
+            "school": "De La Salle University",
             "isEstablishmentOwner": true,
+            "date": "06-30-2023 09:25",
+            "comment": "okay."
+          },
+          {
+            "name": "Fisher Pratt",
+            "username": "fisher_pratt",
+            "profilePicSrc": "https://images.unsplash.com/photo-1662313687638-0b0842c29d29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+            "school": "De La Salle University",
+            "isEstablishmentOwner": false,
             "date": "02-20-2022 00:12",
-            "comment": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet."
+            "comment": "Hey there! I understand where you're coming from with your experience at Tapa King. While the tacos were indeed flavorful and budget-friendly, I can see how the steaks may not have met your personal preference. Taste preferences can vary, and it's important to find what suits us best. Nonetheless, I'm glad to hear that you still had a pleasant overall dining experience and received attentive service. Tapa King offers a range of options to cater to different tastes, and I hope you find other dishes that capture your palate perfectly. Happy dining!"
           }
         ]
       }
@@ -86,7 +102,18 @@
       "../../../public/reviews/ichiro/ichiro-3.jpg",
       "../../../public/reviews/ichiro/katsu.jpg"
     ],
-    "comments": []
+    "comments": [
+      {
+        "name": "Reign Larraquel",
+        "username": "Kofrei",
+        "profilePicSrc": "https://avatars.githubusercontent.com/u/62375146?v=4",
+        "school": "De La Salle University",
+        "isEstablishmentOwner": false,
+        "date": "03-19-2023 09:25",
+        "comment": "I agree, Ichiro is a great place to dine!",
+        "replies": []
+      }
+    ]
   },
   {
     "reviewId": 3,
@@ -96,14 +123,25 @@
     "mainReview": "GoodMunch offers an interesting mix of tacos and upscale desserts. The tacos are a hit, with a variety of fillings and vibrant flavors that transport you to a culinary journey. However, the desserts, despite their elegant presentation, failed to meet expectations in terms of taste and were overly sweet. The restaurant's atmosphere is trendy and modern, but the pricing can be on the higher side. GoodMunch is a decent choice for taco enthusiasts, but the desserts may leave you wanting more.",
     "rating": 2,
     "date": "09-25-2021 19:56",
-    "helpfulCount": 2123,
+    "helpfulCount": 1,
     "reviewerGallery": [
       "../../../public/reviews/goodmunch/photo-1551504734-5ee1c4a1479b.jpeg",
       "../../../public/reviews/goodmunch/photo-1552332386-f8dd00dc2f85.jpeg",
       "../../../public/reviews/goodmunch/photo-1508737804141-4c3b688e2546.jpeg",
       "../../../public/reviews/goodmunch/taco.mp4"
     ],
-    "comments": []
+    "comments": [
+      {
+        "name": "Reign Larraquel",
+        "username": "Kofrei",
+        "profilePicSrc": "https://avatars.githubusercontent.com/u/62375146?v=4",
+        "school": "De La Salle University",
+        "isEstablishmentOwner": false,
+        "date": "12-02-2021 09:25",
+        "comment": "Your review is very contradicting with the rating you gave.",
+        "replies": []
+      }
+    ]
   },
   {
     "reviewId": 4,
@@ -119,7 +157,18 @@
       "../../../public/reviews/goodmunch/goodmunch-3.jpg",
       "../../../public/reviews/goodmunch/beef-salpicao.jpg"
     ],
-    "comments": []
+    "comments": [
+      {
+        "name": "Fisher Pratt",
+        "username": "fisher_pratt",
+        "profilePicSrc": "https://images.unsplash.com/photo-1662313687638-0b0842c29d29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        "school": "De La Salle University",
+        "isEstablishmentOwner": false,
+        "date": "02-20-2021 09:25",
+        "comment": "GoodMunch has great food and service, I was completely satisfied with my experience.",
+        "replies": []
+      }
+    ]
   },
   {
     "reviewId": 5,
@@ -134,10 +183,20 @@
       "https://cdn.pixabay.com/photo/2023/06/10/10/55/pinoy-dish-8053795_1280.png",
       "https://media.istockphoto.com/id/1485344633/photo/a-serving-of-tapsilog-served-with-garlic-rice-scrambled-egg-and-ketchup-a-filipino-breakfast.jpg?s=2048x2048&w=is&k=20&c=3P8V1TGrcanCKb-emPZnbudbboFnHFRkwntAEGoLyv8=",
       "https://i.pinimg.com/564x/00/bb/89/00bb892d7033219adfcc965ceae98575.jpg",
-      "https://i.pinimg.com/564x/36/08/fa/3608fa48b91eaf7cbd4fd7fc4a96ae33.jpg",
-      "https://i.pinimg.com/564x/94/64/b3/9464b3ca622d4f782ea31669190825be.jpg"
+      "https://i.pinimg.com/564x/36/08/fa/3608fa48b91eaf7cbd4fd7fc4a96ae33.jpg"
     ],
-    "comments": []
+    "comments": [
+      {
+        "name": "Kovie Niño",
+        "username": "thekovie",
+        "profilePicSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
+        "school": "De La Salle University",
+        "isEstablishmentOwner": true,
+        "date": "02-20-2021 09:25",
+        "comment": "My favorite food is the tapsilog too! I'm so glad you enjoyed",
+        "replies": []
+      }
+    ]
   },
   {
     "reviewId": 6,
@@ -155,7 +214,18 @@
       "../../../public/reviews/happy-n-healthy/premium_photo-1671580682559-f2815195132a.jpeg",
       "../../../public/reviews/happy-n-healthy/eating-burger.mp4"
     ],
-    "comments": []
+    "comments": [
+      {
+        "name": "Cindy Luna",
+        "username": "cindy_luna",
+        "profilePicSrc": "https://images.unsplash.com/photo-1578050665224-3a636f2b20b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        "school": "Arellano University",
+        "isEstablishmentOwner": true,
+        "date": "02-20-2021 09:25",
+        "comment": "Thank you for your comment, Fisher. We will take note of your suggestions and improve our service. We hope to see you again soon!",
+        "replies": []
+      }
+    ]
   },
   {
     "reviewId": 7,
@@ -191,7 +261,18 @@
       "../../../public/reviews/ate-rica/bacsilog-4.jpg",
       "../../../public/reviews/ate-rica/cutting-pizza.mp4"
     ],
-    "comments": []
+    "comments": [
+      {
+        "name": "Reign Larraquel",
+        "username": "Kofrei",
+        "profilePicSrc": "https://avatars.githubusercontent.com/u/62375146?v=4",
+        "school": "De La Salle University",
+        "isEstablishmentOwner": true,
+        "date": "02-21-2020 09:25",
+        "comment": "Thank you for your comment, Cindy. We are glad you enjoyed our Bacsilog. We hope to see you again soon!",
+        "replies": []
+      }
+    ]
   },
   {
     "reviewId": 9,
@@ -209,6 +290,162 @@
       "../../../public/reviews/angrydobo/premium_photo-1667545168921-34f756495d7b.jpeg",
       "../../../public/reviews/angrydobo/eating-dessert.mp4"
     ],
+    "comments": [
+      {
+        "name": "Antonio Agapito",
+        "username": "agapito_antonio_21",
+        "profilePicSrc": "https://images.unsplash.com/photo-1632681638586-8c3b40d8a6cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        "school": "University of Santo Tomas",
+        "isEstablishmentOwner": false,
+        "date": "06-30-2022 09:25",
+        "comment": "hahaha nice review, iAgree",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "reviewId": 10,
+    "restoID": "Happy N' Healthy",
+    "username": "Kofrei",
+    "reviewSubject": "Im lovin it",
+    "mainReview": "The food is great. The staff is friendly. The place is clean. What more can you ask for? I love this place. I've been a regular customer for a year now and I'm still lovin it. I highly recommend this place to anyone who wants to eat healthier.",
+    "rating": 4,
+    "date": "12-03-2016 10:00",
+    "helpfulCount": 17043,
+    "reviewerGallery": [
+    "../../../public/reviews/happy-n-healthy/photo-1606131731446-5568d87113aa.jpeg",
+    "../../../public/reviews/happy-n-healthy/photo-1610440042657-612c34d95e9f.jpeg",
+    "../../../public/reviews/happy-n-healthy/eating-burger.mp4"
+    ],
     "comments": []
-  }
+ },
+ {
+    "reviewId": 11,
+    "restoID": "Happy N' Healthy",
+    "username": "Reddzen",
+    "reviewSubject": "Healthier than ever",
+    "mainReview": "I've been a regular customer of Happy N' Healthy for a year now. I've been trying to eat healthier and this place has been a great help. I love their salads and their smoothies. I also love their staff. They're very friendly and accommodating. I highly recommend this place to anyone who wants to eat healthier.",
+    "rating": 5,
+    "date": "03-24-2017 15:05",
+    "helpfulCount": 402,
+    "reviewerGallery": [
+       "../../../public/reviews/happy-n-healthy/photo-1593560708920-61dd98c46a4e.jpeg",
+       "../../../public/reviews/happy-n-healthy/photo-1606131731446-5568d87113aa.jpeg"
+    ],
+    "comments": [
+      {
+        "name": "Wesly Samson",
+        "username": "ylsewlys",
+        "profilePicSrc": "../../../public/images/ylsewlys.jpg",
+        "school": "De La Salle University",
+        "isEstablishmentOwner": false,
+        "date": "06-29-2019 15:23",
+        "comment": "same",
+        "replies": []
+      },
+      {
+        "name": "Antonio Agapito",
+        "username": "agapito_antonio_21",
+        "profilePicSrc": "https://images.unsplash.com/photo-1632681638586-8c3b40d8a6cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        "school": "De La Salle University",
+        "isEstablishmentOwner": false,
+        "date": "07-19-2020 12:45",
+        "comment": "Thank you for your comment, I felt your sincerity and I completely agree with you.",
+        "replies": []
+      }
+    ]
+ },
+ {
+  "reviewId": 12,
+  "restoID": "Ate Rica's Bacsilog",
+  "username": "ylsewlys",
+  "reviewSubject": "NOTHING BEATS ATE RICA'S BACSILOG",
+  "mainReview": "I am a certified big fan of Ate Rica's bacsilog, I eat their bacsilog for breakfast, lunch, dinner, and anytime snack. I love their bacsilog, the only bacsilog for me. I will never eat anything other than their bacsilog.",
+  "rating": 5,
+  "date": "06-16-2020 09:00",
+  "helpfulCount": 1414,
+  "reviewerGallery": [
+    "../../../public/reviews/ate-rica/bacsilog.jpg",
+    "../../../public/reviews/ate-rica/bacsilog-2.jpg",
+    "../../../public/reviews/ate-rica/bacsilog-3.jpg",
+    "../../../public/reviews/ate-rica/bacsilog-4.jpg",
+    "../../../public/reviews/ate-rica/cutting-pizza.mp4"
+  ],
+  "comments": [
+    {
+      "name": "Reign Larraquel",
+      "username": "Kofrei",
+      "profilePicSrc": "https://avatars.githubusercontent.com/u/62375146?v=4",
+      "school": "De La Salle University",
+      "isEstablishmentOwner": true,
+      "date": "06-17-2020 09:25",
+      "comment": "We're glad you love our bacsilog! Thank you for your review!",
+      "replies": [
+        {
+          "name": "Wesly Samson",
+          "username": "ylsewlys",
+          "profilePicSrc": "../../../public/images/ylsewlys.jpg",
+          "school": "De La Salle University",
+          "isEstablishmentOwner": false,
+          "date": "07-12-2021 09:25",
+          "comment": "Anything for Ate Rica's Bacsilog! I love your bacsilog!"
+        }
+      ]
+    }
+  ]
+},
+{
+  "reviewId": 13,
+  "restoID": "Ate Rica's Bacsilog",
+  "username": "fisher_pratt",
+  "reviewSubject": "Bland sauce",
+  "mainReview": "The food is great but their sauce is starting to taste bland. I hope they improve their sauce.",
+  "rating": 2,
+  "date": "06-29-2021 12:43",
+  "helpfulCount": 4301,
+  "reviewerGallery": [
+    "../../../public/reviews/ate-rica/bacsilog.jpg",
+    "../../../public/reviews/ate-rica/bacsilog-4.jpg",
+    "../../../public/reviews/ate-rica/cutting-pizza.mp4"
+  ],
+  "comments": [
+    {
+      "name": "Wesly Samson",
+      "username": "ylsewlys",
+      "profilePicSrc": "../../../public/images/ylsewlys.jpg",
+      "school": "De La Salle University",
+      "isEstablishmentOwner": false,
+      "date": "06-29-2021 12:45",
+      "comment": "I DISAGREE, I think their sauce is exeptionally great and you are simply lacking in taste buds.",
+      "replies": [
+        {
+          "name": "Fisher Pratt",
+          "username": "fisher_pratt",
+          "profilePicSrc": "https://images.unsplash.com/photo-1662313687638-0b0842c29d29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+          "school": "De La Salle University",
+          "isEstablishmentOwner": false,
+          "date": "07-12-2021 09:25",
+          "comment": "I'm only giving my honest opinion."
+        }
+      ]
+    }
+  ]
+},
+{
+  "reviewId": 14,
+  "restoID": "Angrydobo",
+  "username": "mark_santos",
+  "reviewSubject": "Must-visit place",
+  "mainReview": "If you're a food lover, this restaurant is a must-visit. The quality of ingredients used in this restaurant is outstanding. You can taste the freshness in every bite. A true testament to their commitment to providing the best dining experience.",
+  "rating": 4,
+  "date": "02-12-2023 17:07",
+  "helpfulCount": 20141,
+  "reviewerGallery": [
+    "../../../public/reviews/angrydobo/photo-1541599188778-cdc73298e8fd.jpeg",
+    "../../../public/reviews/angrydobo/photo-1582450871972-ab5ca641643d.jpeg",
+    "../../../public/reviews/angrydobo/photo-1621955511667-e2c316e4575d.jpeg",
+    "../../../public/reviews/angrydobo/eating-dessert.mp4"
+  ],
+  "comments": []
+}
 ]
