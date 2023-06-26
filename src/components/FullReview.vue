@@ -44,7 +44,7 @@
         <div class="text-[20px] mt-[35px]">{{ mainReview }}</div>
 
         <!-- User Gallery Review -->
-        <div class="flex justify-evenly mt-[50px]">
+        <div class="flex mt-[50px]">
           <div v-for="(media, index) in gallery" :key="index"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex relative">
             <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
             <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
@@ -58,7 +58,7 @@
         </div>
 
         <!-- Mark as Helpful button (If user is Logged in)-->
-        <button v-if="isUserLoggedIn" class="min-w-[205px] min-h-[50px] rounded-[41px] bg-green text-white relative top-[66px] self-end">Mark as Helpful</button>
+        <button v-if="!(loggedInUser === '')" class="min-w-[205px] min-h-[50px] rounded-[41px] bg-green text-white relative top-[66px] self-end">Mark as Helpful</button>
 
         <!-- Comment Section Header -->
         <div class="font-bold text-[33px] mt-[70px]">Comments</div>

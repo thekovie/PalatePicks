@@ -2,7 +2,7 @@
   <div class="min-h-screen">
     <div class="upper-part h-[586px] min-w-screen gradient-bg flex flex-col justify-center items-center">
       <div class="text-center text-3xl font-bold text-white">
-          Hi, Juan! What are you craving lately?
+          <span v-show="!(loggedInUser === '')">Hi, {{ firstName }}!</span> What are you craving lately?
       </div>
       <div class="search-center-box mt-4 flex">
         <input type="text" class="search-bar w-[600px] bg-white h-14 rounded-s-3xl pl-4 pr-4 focus:outline-none" placeholder="Search restaurant here" />
@@ -40,9 +40,20 @@
     components: {
       RestoBox
     },
+    mounted() {
+      if (this.loggedInUser !== '') {
+        this.firstName = this.loggedUserProfile.firstName
+      }
+    },
+    props: {
+      loggedInUser: String,
+      loggedUserProfile: Object
+    },
+
     data() {
       return {
-        establishments: Restaurants
+        establishments: Restaurants,
+        firstName: '',
       }
     }
   }
