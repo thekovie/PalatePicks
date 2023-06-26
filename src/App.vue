@@ -11,7 +11,7 @@
     <NavUserProfile v-else :loggedUserProfile="loggedUserProfile" @logout="logout"/>
   </div>
 
-  <router-view :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" />
+  <router-view :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :userProfiles="userProfiles" @login="login" />
 
   <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
@@ -48,6 +48,10 @@
       logout() {
         this.loggedInUser = '';
         this.loggedUserProfile = {};
+      },
+      login(username){
+        this.loggedInUser = username;
+        this.loggedUserProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.loggedInUser)[0]
       }
     },
     mounted(){
