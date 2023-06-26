@@ -7,8 +7,8 @@
         <router-link :to="{ name: 'Explore'}">Explore </router-link>
       </div>
     </div>
-    <NavUser v-if="!isLoggedIn"/>
-    <NavUserProfile v-else="isLoggedIn"/>
+    <NavUser v-if="(loggedInUser === '')"/>
+    <NavUserProfile v-else :loggedUserProfile="loggedUserProfile" @logout="logout"/>
   </div>
 
   <router-view :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" />
@@ -39,14 +39,15 @@
     data() {
       return {
         isLoggedIn: false,
-        loggedInUser: "Reddzen",
+        loggedInUser: "ylsewlys",
         userProfiles: UserProfiles,
         loggedUserProfile: {},
       }
     },
     methods: {
       logout() {
-        this.isLoggedIn = false
+        this.loggedInUser = '';
+        this.loggedUserProfile = {};
       }
     },
     mounted(){
