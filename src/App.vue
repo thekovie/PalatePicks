@@ -39,7 +39,7 @@
     data() {
       return {
         isLoggedIn: false,
-        loggedInUser: "Reddzen",
+        loggedInUser: "",
         userProfiles: UserProfiles,
         loggedUserProfile: {},
       }
