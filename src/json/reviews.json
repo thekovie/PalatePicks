@@ -336,7 +336,7 @@
       {
         "name": "Wesly Samson",
         "username": "ylsewlys",
-        "profilePicSrc": "",
+        "profilePicSrc": "../../../public/images/ylsewlys.jpg",
         "school": "De La Salle University",
         "isEstablishmentOwner": false,
         "date": "06-29-2019 15:23",
@@ -346,7 +346,7 @@
       {
         "name": "Antonio Agapito",
         "username": "agapito_antonio_21",
-        "profilePicSrc": "",
+        "profilePicSrc": "https://images.unsplash.com/photo-1632681638586-8c3b40d8a6cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
         "school": "De La Salle University",
         "isEstablishmentOwner": false,
         "date": "07-19-2020 12:45",
