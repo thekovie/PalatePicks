@@ -65,11 +65,11 @@
 
 
         <!-- Write Comment Section -->
-        <div v-if="isUserLoggedIn" class="flex flex-row mt-[16px]">
+        <div v-if="!(loggedInUser === '')" class="flex flex-row mt-[16px]">
 
           <!-- Profile Picture-->
           <div class="bg-green min-w-[71px] min-h-[71px] max-w-[71px] max-h-[71px] rounded-[100%] p-[1.94px] mr-[21px]">
-            <img class="w-full h-full rounded-full object-cover" :src="userProfile.profileImgSrc" alt="user" />
+            <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile.profileImgSrc" alt="user" />
           </div>
 
           <!-- Write Comment Text Area-->
@@ -157,6 +157,12 @@ export default {
       },
       gallery: {
         type: Array
+      },
+      loggedInUser: {
+        type: String
+      },
+      loggedUserProfile: {
+        type: Object
       }
     },
 

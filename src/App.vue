@@ -11,7 +11,7 @@
     <NavUserProfile v-else="isLoggedIn"/>
   </div>
 
-  <router-view :loggedInUser="loggedInUser" />
+  <router-view :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" />
 
   <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
@@ -30,6 +30,7 @@
 <script>
  import NavUser from './components/NavUser.vue'
  import NavUserProfile from './components/NavUserProfile.vue'
+ import UserProfiles from '../src/json/UserProfiles.json'
 
   export default {
     components: {
@@ -38,13 +39,20 @@
     data() {
       return {
         isLoggedIn: false,
-        loggedInUser: "thekovie",
+        loggedInUser: "Reddzen",
+        userProfiles: UserProfiles,
+        loggedUserProfile: {},
       }
     },
     methods: {
       logout() {
         this.isLoggedIn = false
       }
+    },
+    mounted(){
+
+      // Get Profile of Logged in user
+      this.loggedUserProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.loggedInUser)[0]
     }
   }
 </script>

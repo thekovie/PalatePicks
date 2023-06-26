@@ -46,7 +46,7 @@
             </div>
             <div class="reviews-list flex flex-col gap-8">
               <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen"/>
-              <ReviewBox v-for="review in filteredRestoReviews" :key="review.reviewId" :username="review.username" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
+              <ReviewBox v-for="review in filteredRestoReviews" :key="review.reviewId" :username="review.username" :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
             </div>
           </div>
           <div class="review-filters mt-20 flex flex-col w-auto items-end">
@@ -112,6 +112,8 @@
     },
     props: {
       restoId: String,
+      loggedInUser: String,
+      loggedUserProfile: Object,
     },
   methods: {
       openReviewBox() {
