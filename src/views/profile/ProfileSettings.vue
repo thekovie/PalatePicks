@@ -188,7 +188,6 @@ export default {
       this.school = this.userProfile.school;
       this.bio = this.userProfile.bio;
       this.email = this.userProfile.email;
-      this.password = this.userProfile.password;
       this.ProfileImage = this.userProfile.profileImgSrc;
 
 
