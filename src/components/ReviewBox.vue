@@ -48,7 +48,7 @@
         <button v-show="username === loggedInUser" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
           Modify Review
         </button>
-        <button v-show="isRestoOwner" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+        <button v-show="isRestoOwner || (username === loggedInUser)" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Delete Review
         </button>
         <button v-show="!isRestoOwner && !(username === loggedInUser) && !(loggedInUser === '')" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
@@ -156,14 +156,12 @@ export default {
       return `/profile/${username}`;
     }
   },
-  mounted(){
-
+  mounted() {
     this.userProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.username)[0]
     this.school = this.userProfile.school
     this.profileImgSrc = this.userProfile.profileImgSrc
     this.firstName = this.userProfile.firstName
     this.lastName = this.userProfile.lastName
-
   }
 }
 </script>

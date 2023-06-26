@@ -11,7 +11,7 @@
     <div class="user-reviews px-20 mt-4">
       <p class="font-bold p-3">View {{ Profile.firstName }}'s Reviews</p>
       <div class="reviews-list flex flex-col gap-8">
-        <UserReview class="mb-6" />
+        <UserReview v-for="review in filteredReviews" :key="review.reviewId" :username="review.username" :loggedInUser="loggedInUser" :restoName="review.restoID" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
       </div>
     </div>
   </div>
@@ -20,6 +20,7 @@
 <script>
 import UserReview from '../../components/UserReview.vue'
 import UserProfiles from '../../json/UserProfiles.json'
+import ReviewList from '../../json/reviews.json'
 
 export default {
 
@@ -31,13 +32,19 @@ export default {
       return {
         isUser: true,
         isUserExisting: true,
-        userProfiles: UserProfiles
+        userProfiles: UserProfiles,
+        reviews: ReviewList,
+
+        filteredReviews: {},
       }
   },
   computed: {
-    Profile(){
+    Profile() {
       return this.userProfiles.filter((userProfiles) => userProfiles.username === this.username)[0]
-    }
+    },
+  },
+  mounted() {
+    this.filteredReviews = this.reviews.filter((reviews) => reviews.username === this.username)
   },
   components: {
     UserReview
