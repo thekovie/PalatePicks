@@ -2,7 +2,7 @@
   {
     "reviewId": 1,
     "restoID": "Tapa King",
-    "username": "thekovie",
+    "username": "Reddzen",
     "reviewSubject": "Affordable Tacos and Flavorful Steaks at Tapa King",
     "mainReview": "Tapa King is a hidden gem that offers a delectable combination of affordable tacos and flavorful steaks. Their tacos are packed with savory fillings and served with a variety of tasty toppings, all at a wallet-friendly price. The steaks are cooked to perfection, with a juicy and tender texture that will satisfy any meat lover. The restaurant provides a laid-back and casual setting, making it a great place to enjoy affordable and flavorful tacos and steaks. Tapa King is definitely worth a visit for those seeking a satisfying meal on a budget.",
     "rating": 4,
@@ -24,7 +24,17 @@
         "isEstablishmentOwner": false,
         "date": "06-30-2023 09:25",
         "comment": "I couldn't agree more! Tapa King is indeed a hidden gem. Their tacos are incredibly delicious, and I love how they offer such great value for the price. The steaks are always cooked to perfection, and the overall casual ambiance adds to the enjoyable dining experience. It's one of my go-to places for affordable and tasty meals.",
-        "replies": []
+        "replies": [
+          {
+            "name": "Kovie Niño",
+            "username": "thekovie",
+            "profilePicSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
+            "school": "De La Salle University",
+            "isEstablishmentOwner": true,
+            "date": "06-30-2023 09:25",
+            "comment": "Thank you so much, Jasmine! I'm glad you enjoyed your experience at Tapa King. We strive to provide our customers with the best possible service and food quality. We hope to see you again soon!"
+          }
+        ]
       },
       {
         "name": "Mark Santos",
@@ -36,13 +46,13 @@
         "comment": "I'm so glad you enjoyed Tapa King as much as I did! Their tacos are absolutely mouthwatering, and the flavors are out of this world. And let's not forget about those steaks – they're truly top-notch. The fact that it's budget-friendly makes it even better. I highly recommend Tapa King to anyone looking for a satisfying meal without breaking the bank.",
         "replies": [
           {
-            "name": "Jasmine Lopez",
-            "username": "jasmine_lopez",
-            "profilePicSrc": "https://images.unsplash.com/photo-1602233158242-3ba0ac4d2167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80",
-            "school": "Arellano University",
-            "isEstablishmentOwner": false,
+            "name": "Kovie Niño",
+            "username": "thekovie",
+            "profilePicSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
+            "school": "De La Salle University",
+            "isEstablishmentOwner": true,
             "date": "06-30-2023 09:25",
-            "comment": "I couldn't agree more! Tapa King never fails to impress with their mouthwatering tacos and top-notch steaks. The flavors they infuse into their dishes are truly extraordinary, and it's hard to resist going back for more. And you're absolutely right, the affordability factor adds to the overall appeal. Thanks for sharing your positive experience, and I hope you have many more delightful meals at Tapa King!"
+            "comment": "Thank you so much, Mark! I'm glad you enjoyed your experience at Tapa King. We strive to provide our customers with the best possible service and food quality. We hope to see you again soon!"
           }
         ]
       },
@@ -55,6 +65,15 @@
         "date": "12-25-2021 19:47",
         "comment": "While I appreciate the positive aspects of Tapa King, my experience was slightly different. The tacos were indeed flavorful, and the affordability was a plus. However, I found the steaks to be a bit overcooked for my liking. Despite that, the overall dining experience was still pleasant, and the service was attentive. It just goes to show that taste preferences can vary, but Tapa King remains a good choice for those seeking a budget-friendly meal.",
         "replies": [
+          {
+            "name": "Kovie Niño",
+            "username": "thekovie",
+            "profilePicSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
+            "school": "De La Salle University",
+            "isEstablishmentOwner": true,
+            "date": "06-30-2023 09:25",
+            "comment": "okay."
+          },
           {
             "name": "Fisher Pratt",
             "username": "fisher_pratt",
@@ -172,9 +191,9 @@
         "username": "thekovie",
         "profilePicSrc": "https://pbs.twimg.com/profile_images/1622774458200236033/qafbmYc__400x400.jpg",
         "school": "De La Salle University",
-        "isEstablishmentOwner": false,
+        "isEstablishmentOwner": true,
         "date": "02-20-2021 09:25",
-        "comment": "My favorite food from Tapa King is their classic too!",
+        "comment": "My favorite food is the tapsilog too! I'm so glad you enjoyed",
         "replies": []
       }
     ]
@@ -195,7 +214,18 @@
       "../../../public/reviews/happy-n-healthy/premium_photo-1671580682559-f2815195132a.jpeg",
       "../../../public/reviews/happy-n-healthy/eating-burger.mp4"
     ],
-    "comments": []
+    "comments": [
+      {
+        "name": "Cindy Luna",
+        "username": "cindy_luna",
+        "profilePicSrc": "https://images.unsplash.com/photo-1578050665224-3a636f2b20b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        "school": "Arellano University",
+        "isEstablishmentOwner": true,
+        "date": "02-20-2021 09:25",
+        "comment": "Thank you for your comment, Fisher. We will take note of your suggestions and improve our service. We hope to see you again soon!",
+        "replies": []
+      }
+    ]
   },
   {
     "reviewId": 7,
@@ -231,7 +261,18 @@
       "../../../public/reviews/ate-rica/bacsilog-4.jpg",
       "../../../public/reviews/ate-rica/cutting-pizza.mp4"
     ],
-    "comments": []
+    "comments": [
+      {
+        "name": "Reign Larraquel",
+        "username": "Kofrei",
+        "profilePicSrc": "https://avatars.githubusercontent.com/u/62375146?v=4",
+        "school": "De La Salle University",
+        "isEstablishmentOwner": true,
+        "date": "02-21-2020 09:25",
+        "comment": "Thank you for your comment, Cindy. We are glad you enjoyed our Bacsilog. We hope to see you again soon!",
+        "replies": []
+      }
+    ]
   },
   {
     "reviewId": 9,
@@ -330,7 +371,28 @@
     "../../../public/reviews/ate-rica/bacsilog-4.jpg",
     "../../../public/reviews/ate-rica/cutting-pizza.mp4"
   ],
-  "comments": []
+  "comments": [
+    {
+      "name": "Reign Larraquel",
+      "username": "Kofrei",
+      "profilePicSrc": "https://avatars.githubusercontent.com/u/62375146?v=4",
+      "school": "De La Salle University",
+      "isEstablishmentOwner": true,
+      "date": "06-17-2020 09:25",
+      "comment": "We're glad you love our bacsilog! Thank you for your review!",
+      "replies": [
+        {
+          "name": "Wesly Samson",
+          "username": "ylsewlys",
+          "profilePicSrc": "https://avatars.githubusercontent.com/u/62375146?v=4",
+          "school": "De La Salle University",
+          "isEstablishmentOwner": false,
+          "date": "07-12-2021 09:25",
+          "comment": "Anything for Ate Rica's Bacsilog! I love your bacsilog!"
+        }
+      ]
+    }
+  ]
 },
 {
   "reviewId": 13,
@@ -354,7 +416,7 @@
       "school": "De La Salle University",
       "isEstablishmentOwner": false,
       "date": "06-29-2021 12:45",
-      "comment": "I disagree, I think their sauce is exeptionally great and you are simply lacking in taste buds.",
+      "comment": "I DISAGREE, I think their sauce is exeptionally great and you are simply lacking in taste buds.",
       "replies": [
         {
           "name": "Fisher Pratt",
