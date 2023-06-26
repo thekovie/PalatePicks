@@ -338,7 +338,7 @@
       {
         "name": "Wesly Samson",
         "username": "ylsewlys",
-        "profilePicSrc": "../../../public/images/ylsewlys.jpg",
+        "profilePicSrc": "/images/ylsewlys.jpg",
         "school": "De La Salle University",
         "isEstablishmentOwner": false,
         "date": "06-29-2019 15:23",
@@ -386,7 +386,7 @@
         {
           "name": "Wesly Samson",
           "username": "ylsewlys",
-          "profilePicSrc": "../../../public/images/ylsewlys.jpg",
+          "profilePicSrc": "/images/ylsewlys.jpg",
           "school": "De La Salle University",
           "isEstablishmentOwner": false,
           "date": "07-12-2021 09:25",
@@ -414,7 +414,7 @@
     {
       "name": "Wesly Samson",
       "username": "ylsewlys",
-      "profilePicSrc": "../../../public/images/ylsewlys.jpg",
+      "profilePicSrc": "/images/ylsewlys.jpg",
       "school": "De La Salle University",
       "isEstablishmentOwner": false,
       "date": "06-29-2021 12:45",
