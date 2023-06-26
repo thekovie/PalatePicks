@@ -46,15 +46,18 @@
             </div>
             <div class="reviews-list flex flex-col gap-8">
               <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
-              <ReviewBox v-for="review in filteredRestoReviews" :key="review.reviewId" :username="review.username" :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
+              <ReviewBox v-for="review in filteredRestoReviews" :key="review.reviewId" :username="review.username" :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :isRestoOwner="isRestoOwner" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
             </div>
           </div>
           <div class="review-filters mt-20 flex flex-col w-auto items-end">
             <div class="create-review">
-              <button v-show="!isRestoOwner && !(loggedInUser === '')" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+              <div v-show="!(loggedInUser === '')">
+                <button v-show="!isRestoOwner" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
                 <span class="text-white text-base uppercase mr-6">Make a review</span>
                 <img src="../../assets/Plus.svg" />
               </button>
+              </div>
+
             </div>
             <div class="filter-area mt-20">
               <div class="filter-title text-3xl font-semibold font mb-6">
@@ -155,6 +158,13 @@
     },
     mounted(){
       this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId)
+
+      if(!(this.loggedInUser === '')){
+
+        if(this.loggedUserProfile.restaurantName === this.restoId){
+          this.isRestoOwner = true
+        }
+    }
 
     }
   }

@@ -45,12 +45,18 @@
         <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleFullReview">
           View Comments
         </button>
+
         <button v-show="username === loggedInUser" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
           Modify Review
         </button>
-        <button v-show="isRestoOwner || (username === loggedInUser)" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+
+
+        <button v-if="isRestoOwner" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Delete Review
         </button>
+
+
+
         <button v-show="!isRestoOwner && !(username === loggedInUser) && !(loggedInUser === '')" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Mark as Helpful
         </button>
@@ -64,7 +70,7 @@
         </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
-          <FullReview @close="toggleFullReview" :userProfile="userProfile" :username="username" :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
+          <FullReview @close="toggleFullReview" :userProfile="userProfile" :username="username" :loggedInUser="loggedInUser" :isRestoOwner="isRestoOwner" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
         </div>
       </div>
     </div>
@@ -85,7 +91,6 @@ export default {
   props: {
     isRestoOwner: {
       type: Boolean,
-      default: false,
     },
     username: {
       type: String
@@ -116,6 +121,9 @@ export default {
     },
     loggedUserProfile: {
       type: Object
+    },
+    restoId: {
+      type: String
     }
   },
   data() {
@@ -162,6 +170,8 @@ export default {
     this.profileImgSrc = this.userProfile.profileImgSrc
     this.firstName = this.userProfile.firstName
     this.lastName = this.userProfile.lastName
+
+
   }
 }
 </script>
