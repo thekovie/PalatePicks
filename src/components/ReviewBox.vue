@@ -64,7 +64,7 @@
         </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
-          <FullReview @close="toggleFullReview" :userProfile="userProfile" :reviewerPhotoSrc="reviewerPhotoSrc" :name="name" :username="username" :school="school" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
+          <FullReview @close="toggleFullReview" :userProfile="userProfile" :username="username" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
         </div>
       </div>
     </div>
