@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-
-const plugin = require('tailwindcss/plugin')
-
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./nuxt.config.{js,ts}",
+    "./app.vue",
   ],
   theme: {
     colors: {
@@ -35,3 +36,4 @@ export default {
   },
   plugins: [],
 }
+
