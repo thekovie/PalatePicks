@@ -30,14 +30,14 @@
               <img v-if="media.isImage" class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" />
               <video v-else class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" no-controls />
               <div v-if="media.isVideo && !media.hovered" class="video-icon absolute bg-black bg-opacity-30 w-[90px] h-[90px] p-8 rounded-3xl">
-                <img class="w-full h-full" src="../assets/Video.svg" />
+                <img class="w-full h-full" src="~/assets/icons/Video.svg" />
               </div>
               <div v-if="media.hovered" class="absolute bg-black bg-opacity-30 w-[90px] h-[90px] p-8 rounded-3xl" @click="removeMedia(index)">
-                <img class="w-full h-full" src="../assets/Trash.svg" />
+                <img class="w-full h-full" src="~/assets/icons/Trash.svg" />
               </div>
             </div>
             <div class="add-media flex flex-col items-center justify-center w-[90px] h-[90px] p-4 mr-6 mb-6 rounded-3xl border-2 border-grey cursor-pointer">
-              <img v-if="mediaItems.length < 5" src="../assets/images/camera-icon.png" alt="camera icon" @click="openFileInput"/>
+              <img v-if="mediaItems.length < 5" src="~/assets/images/camera-icon.png" alt="camera icon" @click="openFileInput"/>
               <div class=" text-xs"> {{ mediaItems.length }} / 5</div>
               <input ref="fileInput" type="file" accept="image/*, video/*" class="block" @change="handleFileUpload" />
             </div>
