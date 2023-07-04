@@ -40,7 +40,7 @@
 
 <style scoped>
   .gradient-bg {
-    background: url("../../assets/images/wp10322952-restaurant-food-wallpapers.jpg");
+    background: url("~/assets/images/wp10322952-restaurant-food-wallpapers.jpg");
     position: relative;
     background-size: cover;
     background-position: center;
