@@ -24,8 +24,8 @@
                 <p class="text-grey text-[16px] hover:underline cursor-pointer"> <router-link :to="getProfileLink(username)">@{{ userProfile.username }}</router-link></p>
                 <p class="text-grey text-[16px]">{{ userProfile.school }}</p>
                 <div class="flex flex-row relative left-[-3px]">
-                  <img v-for="i in rating" class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" :key="i" />
-                  <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="../assets/Star-blank.svg" alt="star" :key="i" />
+                  <img v-for="i in rating" class="star-icon w-25 h-25" src="~/assets/icons/Star.svg" alt="star" :key="i" />
+                  <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
                 </div>
 
               </div>
@@ -49,7 +49,7 @@
             <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
             <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
             <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute inset-0 bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
-              <img class="w-full h-full" src="../assets/Video.svg" />
+              <img class="w-full h-full" src="~/assets/icons/Video.svg" />
             </div>
 
 
@@ -65,7 +65,7 @@
 
 
         <!-- Write Comment Section -->
-        <div v-if="!(loggedInUser === '')" class="flex flex-row mt-[16px]">
+        <div v-if="(loggedInUser !== '')" class="flex flex-row mt-[16px]">
 
           <!-- Profile Picture-->
           <div class="bg-green min-w-[71px] min-h-[71px] max-w-[71px] max-h-[71px] rounded-[100%] p-[1.94px] mr-[21px]">
@@ -77,7 +77,7 @@
 
           <!-- Send button -->
           <div class="bg-green min-h-[48px] min-w-[48px] max-h-[48px] max-w-[48px] rounded-full justify-self-end mt-[15px] flex cursor-pointer">
-            <img class="self-center mx-auto relative left-[-1px] top-[2px]" src="../assets/Navigation-01.svg" />
+            <img class="self-center mx-auto relative left-[-1px] top-[2px]" src="~/assets/icons/Navigation-01.svg" />
           </div>
         </div>
 

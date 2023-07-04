@@ -68,7 +68,7 @@
 
 
           <!-- Redirect to login page -->
-          <div class="text-grey">Already a member? <router-link class="font-bold" :to="{ name: 'Login'}">Login here!</router-link> </div>
+          <div class="text-grey">Already a member? <router-link class="font-bold" to="/login">Login here!</router-link> </div>
 
         </div>
       </form>
@@ -77,7 +77,7 @@
       <!-- Register Picture -->
 
 
-      <div class="register-bg w-[1100px] min-h-[874px]">ASD</div>
+      <div class="register-bg w-[1100px] min-h-[874px]"></div>
 
 
 

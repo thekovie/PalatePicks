@@ -13,8 +13,8 @@
       :class="{ 'show': isDropdownOpen }"
       ref="dropdownMenu"
     >
-      <router-link class="block text-sm px-2 py-2" :to="getProfileLink(loggedUserProfile.username)" @click="closeDropdown('click')">View Profile</router-link>
-      <router-link class="block text-sm px-2 py-2" :to="{ name:'ProfileSettings'}" @click="closeDropdown('click')">Edit Profile</router-link>
+      <router-link class="block text-sm px-2 py-2" :to="`/profile/${loggedUserProfile.username}`" @click="closeDropdown('click')">View Profile</router-link>
+      <router-link class="block text-sm px-2 py-2" to="/profile/settings" @click="closeDropdown('click')">Edit Profile</router-link>
       <router-link class="block text-sm px-2 py-2 text-red" to="/" @click="closeDropdownAndLogout('click')">Logout</router-link>
     </div>
   </div>

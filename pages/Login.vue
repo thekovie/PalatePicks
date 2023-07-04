@@ -36,7 +36,7 @@
           <!-- Login Button -->
           <button class="login-button bg-green rounded-[34.5px] h-[69px] text-white text-[24px] my-[32px]" @click="login" >Login</button>
 
-          <div class="text-grey text-[20px] mb-[180px]">New to PalatePicks? <router-link class="font-bold" :to="{ name: 'Register'}">Sign up here!</router-link></div>
+          <div class="text-grey text-[20px] mb-[180px]">New to PalatePicks? <router-link class="font-bold" to="/register">Sign up here!</router-link></div>
 
         </form>
 
@@ -70,6 +70,7 @@ export default {
     login(){
       console.log(this.userName)
       this.userProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.userName)[0]
+      console.log(this.userProfile)
 
       if(typeof this.userProfile === 'undefined'){
         alert('The account you have entered does not exist. Please ensure that the information you have entered are correct or make a new account at PalatePicks!');

@@ -1,5 +1,5 @@
 <template>
-  <body class="min-h-screen pb-80">
+  <div class="min-h-screen pb-80">
     <div class="h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white" :style="`background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Restaurant.imageHeader}); background-size: cover; background-position: center;`">
       <div class="resto-title font-bold text-5xl">
         {{ Restaurant.name }}
@@ -51,7 +51,7 @@
           </div>
           <div class="review-filters mt-20 flex flex-col w-auto items-end">
             <div class="create-review">
-              <div v-show="!(loggedInUser === '')">
+              <div v-show="(loggedInUser !== '')">
                 <button v-show="!isRestoOwner" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
                 <span class="text-white text-base uppercase mr-6">Make a review</span>
                 <img src="~/assets/icons/Plus.svg" />
@@ -97,7 +97,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>

@@ -13,7 +13,7 @@
       </div>
 
       <div class="basis-1/4 text-right pe-20"> <!--Go back to personal profile-->
-        <router-link class="hover:underline cursor-pointer" :to="getProfileLink(username)">Go Back to Personal Profile</router-link>
+        <NuxtLink class="hover:underline cursor-pointer" :to="`/profile/${username}`">Go Back to Personal Profile</NuxtLink>
       </div>
 
     </div>
@@ -116,6 +116,7 @@
 </template>
 
 <script>
+import UserProfiles from '~/assets/json/UserProfiles.json';
 
 export default {
   props: {

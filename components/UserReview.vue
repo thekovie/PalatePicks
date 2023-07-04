@@ -2,11 +2,11 @@
 <div class="review-box flex flex-col bg-green_lightbg p-10 w-[1000px] rounded-3xl">
     <div class="review-info flex flex-col items-start">
       <div class="restaurant name text-3xl font-bold hover:underline cursor-pointer">
-        <router-link :to="{ name: 'RestoProfile', params: { restoId: restoName } }">{{ restoName }}</router-link>
+        <router-link :to="`/restaurant/${restoName}`">{{ restoName }}</router-link>
       </div>
       <div class="reviewer-rating text-xl flex pr-3 mt-2 mb-4">
-          <img v-for="i in rating" class="star-icon w-25 h-25" src="../assets/Star.svg" alt="star" :key="i" />
-          <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="../assets/Star-blank.svg" alt="star" :key="i" />
+          <img v-for="i in rating" class="star-icon w-25 h-25" src="~/assets/icons/Star.svg" alt="star" :key="i" />
+          <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
       </div>
     </div>
     <div class="review-title text-2xl font-semibold my-3">
@@ -20,7 +20,7 @@
         <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
         <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
         <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
-          <img class="w-full h-full" src="../assets/Video.svg" />
+          <img class="w-full h-full" src="~/assets/icons/Video.svg" />
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
         <button v-if="isRestoOwner || (username === loggedInUser)" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Delete Review
         </button>
-        <button v-if="!isRestoOwner && !(username === loggedInUser) && !(loggedInUser === '')" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+        <button v-if="!isRestoOwner && (username !== loggedInUser) && (!loggedInUser === '')" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
           Mark as Helpful
         </button>
 

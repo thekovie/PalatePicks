@@ -6,7 +6,7 @@
       <p class="font-medium mt-1 text-xl">@{{ Profile.username }}</p>
       <p class="mt-1 text-lg">{{ Profile.school }}</p>
       <p class="max-w-3xl text-center text-base mt-1">{{ Profile.bio }}</p>
-      <button v-if="Profile.username === loggedInUser" class="bg-green text-white px-12 mt-4 py-1 rounded-3xl"><router-link :to="{ name: 'ProfileSettings'}">Edit Profile</router-link></button>
+      <button v-if="Profile.username === loggedInUser" class="bg-green text-white px-12 mt-4 py-1 rounded-3xl"><router-link to="/profile/settings">Edit Profile</router-link></button>
     </div>
     <div class="user-reviews px-20 mt-4">
       <p class="font-bold p-3">View {{ Profile.firstName }}'s Reviews</p>
@@ -24,11 +24,12 @@ import ReviewList from '~/assets/json/reviews.json'
 export default {
 
   props: {
-    username: String,
+    // username: String,
     loggedInUser: String,
   },
   data() {
       return {
+        username: useRoute().params.id,
         isUser: true,
         isUserExisting: true,
         userProfiles: UserProfiles,
@@ -45,8 +46,5 @@ export default {
   mounted() {
     this.filteredReviews = this.reviews.filter((reviews) => reviews.username === this.username)
   },
-  components: {
-    UserReview
-  }
 }
 </script>
