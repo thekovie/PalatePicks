@@ -16,7 +16,7 @@ module.exports = {
       black : '#000000',
       green: '#4BAD70',
       green_light: '#E8F2E7', // All Reviews Button
-      green_dark: '4B8D59',
+      green_dark: '#4B8D59',
       green_lightbg: '#EDFCF4', // Per Restaurant box in home/explore page and modals
       yellow: '#FFE500',
       red: '#FF3232',
