@@ -17,7 +17,7 @@
           Top Restaurants
         </div>
         <div class="top-restaurants-list flex flex-wrap">
-          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
+          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" :restaurant="establishments" />
         </div>
       </div>
       <div class="budget-restaurants">
@@ -33,9 +33,33 @@
 </template>
 
 <script>
-  import Restaurants from '~/assets/json/restaurants.json'
+  // import Restaurants from '~/assets/json/restaurants.json'
 
   export default {
+    setup() {
+      const supabase = useSupabaseClient();
+      const establishments = ref([])
+
+      async function fetchRestaurants() {
+        const { data, error } = await supabase
+          .from('restaurants')
+          .select()
+        if (error) {
+          console.log(error)
+        } else {
+          establishments.value = data
+          console.log(data)
+        }
+      }
+
+      onMounted(() => {
+        fetchRestaurants()
+      })
+
+      return {
+        establishments
+      }
+    },
     mounted() {
       if (this.loggedInUser !== '') {
         this.firstName = this.loggedUserProfile.firstName
@@ -48,10 +72,9 @@
 
     data() {
       return {
-        establishments: Restaurants,
         firstName: '',
       }
-    }
+    },
   }
 </script>
 

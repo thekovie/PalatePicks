@@ -7,7 +7,7 @@
       <div class="resto-ratings flex mt-3">
         <div class="resto-rating text-2xl flex pr-3">
           <img v-for="i in Restaurant.rating" class="star-icon w-25 h-25" src="~/assets/icons/Star.svg" alt="star" :key="i" />
-          <img v-for="i in 5 - Restaurant.rating" class="star-icon w-25 h-25" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
+          <!-- <img v-for="i in 5 - Restaurant.rating" class="star-icon w-25 h-25" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" /> -->
         </div>
         <div class="dot text-2xl pr-3">
           ·
@@ -103,15 +103,39 @@
 <script>
   import reviews from '~/assets/json/reviews.json'
   import UserProfiles from '~/assets/json/UserProfiles.json'
-  import Restaurants from '~/assets/json/restaurants.json'
-
 
   export default {
+    setup() {
+      const supabase = useSupabaseClient();
+      const Restaurant = ref([]);
+
+      async function getRestaurant() {
+        const { data, error } = await supabase
+          .from('restaurants')
+          .select()
+          .eq('name', useRoute().params.id)
+          .single();
+        if (error) {
+          console.log(error);
+        } else {
+          Restaurant.value = data;
+          console.log(data);
+        }
+      }
+
+      onMounted(() => {
+        getRestaurant();
+      });
+
+      return {
+        Restaurant
+      };
+    },
     props: {
       loggedInUser: String,
       loggedUserProfile: Object,
     },
-  methods: {
+    methods: {
       openReviewBox() {
         this.isReviewBoxOpen = true
       },
@@ -127,6 +151,7 @@
           this.isImage = false;
         }
       },
+
       reviewFileTypeChecker(file) {
         return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
       },
@@ -136,30 +161,24 @@
           restoId: useRoute().params.id,
           isReviewBoxOpen: false,
           isRestoOwner: false,
-          restaurant: Restaurants,
           showMediaView: false,
           selectedMedia: '',
           restoReviews: reviews,
           filteredRestoReviews: {},
           userProfiles: UserProfiles,
-
       }
     },
     computed: {
-      Restaurant() {
-        return this.restaurant.filter((restaurant) => restaurant.name  === this.restoId)[0]
-      }
+
     },
     mounted(){
-      this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId)
+      this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId);
 
-    //   if(!(this.loggedInUser === '')){
-
-    //     if(this.loggedUserProfile.restaurantName === this.restoId){
-    //       this.isRestoOwner = true
-    //     }
-    // }
-
+      if(!(this.loggedInUser === '')){
+        if(this.loggedUserProfile.restaurantName === this.restoId){
+          this.isRestoOwner = true
+        }
+      }
     }
   }
 </script>
