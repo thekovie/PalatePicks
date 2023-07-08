@@ -7,7 +7,8 @@
       <div class="resto-ratings flex mt-3">
         <div class="resto-rating text-2xl flex pr-3">
           <img v-for="i in Restaurant.rating" class="star-icon w-25 h-25" src="~/assets/icons/Star.svg" alt="star" :key="i" />
-          <!-- <img v-for="i in 5 - Restaurant.rating" class="star-icon w-25 h-25" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" /> -->
+         <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
+
         </div>
         <div class="dot text-2xl pr-3">
           ·
@@ -105,32 +106,6 @@
   import UserProfiles from '~/assets/json/UserProfiles.json'
 
   export default {
-    setup() {
-      const supabase = useSupabaseClient();
-      const Restaurant = ref([]);
-
-      async function getRestaurant() {
-        const { data, error } = await supabase
-          .from('restaurants')
-          .select()
-          .eq('name', useRoute().params.id)
-          .single();
-        if (error) {
-          console.log(error);
-        } else {
-          Restaurant.value = data;
-          console.log(data);
-        }
-      }
-
-      onMounted(() => {
-        getRestaurant();
-      });
-
-      return {
-        Restaurant
-      };
-    },
     props: {
       loggedInUser: String,
       loggedUserProfile: Object,
@@ -151,6 +126,22 @@
           this.isImage = false;
         }
       },
+      async getRestaurant(){
+
+        this.Restaurant = ref([]);
+        const { data, error } = await this.supabase
+          .from('restaurants')
+          .select()
+          .eq('name', useRoute().params.id)
+          .single();
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(data);
+          this.Restaurant = data;
+          this.rating = data.rating
+        }
+      },
 
       reviewFileTypeChecker(file) {
         return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
@@ -158,6 +149,7 @@
     },
     data() {
       return {
+          supabase: useSupabaseClient(),
           restoId: useRoute().params.id,
           isReviewBoxOpen: false,
           isRestoOwner: false,
@@ -166,6 +158,8 @@
           restoReviews: reviews,
           filteredRestoReviews: {},
           userProfiles: UserProfiles,
+          Restaurant: {},
+          rating: 0
       }
     },
     computed: {
@@ -179,6 +173,8 @@
           this.isRestoOwner = true
         }
       }
+
+      this.getRestaurant()
     }
   }
 </script>
