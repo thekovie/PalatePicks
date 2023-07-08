@@ -129,18 +129,27 @@
       async getRestaurant(){
 
         this.Restaurant = ref([]);
-        const { data, error } = await this.supabase
+
+
+
+          const { data, error } = await this.supabase
           .from('restaurants')
           .select()
           .eq('name', useRoute().params.id)
-          .single();
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(data);
-          this.Restaurant = data;
-          this.rating = data.rating
-        }
+          .maybeSingle();
+
+
+          if (error) {
+            console.log(error)
+          }
+          if(data){
+            console.log(data);
+            this.Restaurant = data;
+            this.rating = data.rating
+            console.log('AAAAA')
+          }
+
+
       },
 
       reviewFileTypeChecker(file) {
@@ -165,16 +174,30 @@
     computed: {
 
     },
-    mounted(){
-      this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId);
+    async mounted(){
+      await this.getRestaurant()
 
-      if(!(this.loggedInUser === '')){
-        if(this.loggedUserProfile.restaurantName === this.restoId){
-          this.isRestoOwner = true
-        }
+      console.log(this.Restaurant)
+
+
+      // If no restaurant object is found (no keys)
+      if(Object.keys(this.Restaurant).length === 0){
+        throw createError({ statusCode: 404, statusMessage: 'Restaurant not found...', fatal: true})
+      }else{
+
+        this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId);
+
+        if(!(this.loggedInUser === '')){
+          if(this.loggedUserProfile.restaurantName === this.restoId){
+            this.isRestoOwner = true
+          }
+}
       }
 
-      this.getRestaurant()
+
+
+
+
     }
   }
 </script>

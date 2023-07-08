@@ -7,18 +7,26 @@
        {{ error.message }}
     </div>
     <div class="error-btn mt-10">
-      <router-link to="/">
         <button class="error-404-btn bg-green rounded-3xl flex items-center font-light px-8 py-4">
-          <span class="text-white text-base uppercase mr-6">Go back to home</span>
+          <span class="text-white text-base uppercase mr-6" @click="handleClearError(error.message)">Go back to home</span>
           <img src="~/assets/icons/Arrow-left.svg" />
         </button>
-      </router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['error']
+  props: ['error'],
+  methods: {
+    handleClearError(errorMessage){
+    if(errorMessage === "Restaurant not found..." || errorMessage === "User not found"){
+      console.log(errorMessage)
+      clearError({redirect: '/'})
+    }else{
+      this.$router.push('/')
+    }
+  }
+}
 }
 </script>
