@@ -9,17 +9,6 @@
           <div class="text-left text-[24px] text-grey mb-[34px]">Join now for free to start making reviews and recommendations!</div>
           <!-- Division for picture, first and last name, and username -->
           <div class="flex flex-row">
-            <!-- Profile Picture -->
-            <div @click="toggleUploadModal" class="bg-green min-w-[104px] min-h-[104px] max-w-[104px] max-h-[104px] rounded-[100%] p-[2.69px] mr-[22px] cursor-pointer">
-              <div class="bg-white w-[100%] h-[100%] rounded-[100%]">
-                <div v-if="isImageDefault" class="upload-bg-default w-[60%] h-[60%] rounded-[100%] relative top-[22px] left-[21px]"></div>
-                <img v-else :src="image" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover object-center">
-              </div>
-            </div>
-            <!-- Upload Picture Modal -->
-            <div class="absolute top-0 bottom-0 left-0 right-0" v-if="showUploadModal">
-              <UploadPicture @close="toggleUploadModal" @return="getImageSrc($event)"/>
-            </div>
             <!-- Container for first name, last name, and username -->
             <div class="flex flex-col w-[100%] justify-between">
               <!-- First and Last Name-->
@@ -28,7 +17,7 @@
                 <input type="text" placeholder="Last Name" class="w-[49%]" v-model="lastName" required>
               </div>
               <!-- Username -->
-              <div class="justify-self-stretch">
+              <div class="justify-self-stretch mt-[22px]">
                 <input type="text" placeholder="Username" class="w-[100%]" v-model="userName" required>
               </div>
             </div>
