@@ -97,9 +97,8 @@ export default {
               username: this.userName,
               school: this.school,
               bio: this.bio,
-              // profilePicture: this.image,
             },
-            // emailRedirectTo: "/login"
+            emailRedirectTo: "/login"
           }
         });
         if (error) throw error;
