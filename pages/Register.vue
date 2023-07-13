@@ -92,14 +92,14 @@ export default {
           password: this.password,
           options: {
             data: {
-              firstName: this.firstName,
-              lastName: this.lastName,
-              userName: this.userName,
+              first_name: this.firstName,
+              last_name: this.lastName,
+              username: this.userName,
               school: this.school,
               bio: this.bio,
               // profilePicture: this.image,
             },
-            emailRedirectTo: "/login"
+            // emailRedirectTo: "/login"
           }
         });
         if (error) throw error;
