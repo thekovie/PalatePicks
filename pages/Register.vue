@@ -98,7 +98,7 @@ export default {
               school: this.school,
               bio: this.bio,
             },
-            emailRedirectTo: "/login"
+            emailRedirectTo: '/'
           }
         });
         if (error) throw error;
