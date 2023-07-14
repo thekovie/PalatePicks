@@ -1,34 +1,3 @@
-<script>
-import UserProfiles from '~/assets/json/UserProfiles.json'
-
-export default {
-  data() {
-      return {
-        isLoggedIn: false,
-        loggedInUser: "",
-        userProfiles: UserProfiles,
-        loggedUserProfile: {},
-      }
-    },
-    methods: {
-      logout() {
-        this.loggedInUser = '';
-        this.loggedUserProfile = {};
-      },
-      login(username){
-        this.loggedInUser = username;
-        this.loggedUserProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.loggedInUser)[0]
-      }
-    },
-    mounted(){
-      // Get Profile of Logged in user
-      this.loggedUserProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.loggedInUser)[0]
-    }
-}
-
-
-</script>
-
 <template>
   <div class="header sticky top-0 flex flex-wrap justify-between items-center bg-white text-green flex-row p-5 border-b min-w-screen border-solid z-10">
     <div class="left flex flex-row items-center">
@@ -38,11 +7,12 @@ export default {
         <NuxtLink to="/explore">Explore </NuxtLink>
       </div>
     </div>
-    <NavUser v-if="(loggedInUser === '')" />
-    <NavUserProfile v-else :loggedUserProfile="loggedUserProfile" @logout="logout"/>
+    <NavUserProfile v-if="dataSession.session" :session="dataSession" @logout="logout"/>
+    <NavUser v-else />
+
   </div>
 
-  <NuxtPage :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :userProfiles="userProfiles" @login="login" />
+  <NuxtPage :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :userProfiles="userProfiles" @retrieveSession="retrieveSession" :session="dataSession" />
 
   <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
@@ -57,3 +27,67 @@ export default {
     </div>
   </div>
 </template>
+
+<script>
+import UserProfiles from '~/assets/json/UserProfiles.json'
+
+
+
+export default {
+   data() {
+      return {
+        isLoggedIn: false,
+        loggedInUser: "",
+        userProfiles: UserProfiles,
+        loggedUserProfile: {},
+        dataSession: {}
+      }
+    },
+    computed: {
+
+    },
+    methods: {
+      async logout() {
+        const supabase = useSupabaseClient();
+        const { error } = await supabase.auth.signOut()
+
+        this.dataSession = {};
+
+      },
+      login(username){
+
+      },
+      async retrieveSession(){
+        const supabase = useSupabaseClient();
+
+        try{
+          const { data, error } = await supabase.auth.getSession();
+
+          console.log('RETRIEVED DATA SESSION')
+          console.log(data)
+
+          if(data.session !== null){
+            this.isLoggedIn = true;
+            this.dataSession = data;
+            console.log(this.dataSession);
+
+          }else{
+            this.isLoggedIn = false;
+          }
+
+
+        }catch(error){
+          alert(error.message)
+        }
+
+      }
+    },
+    async mounted(){
+      // Get Profile of Logged in user
+      this.retrieveSession();
+
+    }
+}
+
+
+</script>
