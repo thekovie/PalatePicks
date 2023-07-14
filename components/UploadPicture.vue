@@ -22,7 +22,7 @@
       <label for="image-upload" class="cursor-pointer font-bold text-black mb-[15px] w-[100px] border-[#c0c0c0] border-[1px] text-center rounded-[5px] p-1">
         Choose file
       </label>
-      <input id="image-upload" type="file" accept="image/png, image/jpeg, image/jpg" @change="fileChange">
+      <input id="image-upload" type="file" accept="image/png, image/jpeg, image/jpg" @change="uploadImage">
 
       <!-- Finish avatar creation -->
       <button class="bg-green rounded-[34.5px] h-[40px] text-white text-[16px] mb-[34px] text-center py-[10px] cursor-pointer" @click="submitAvatar"> Submit </button>
@@ -36,21 +36,23 @@ export default {
     data(){
       return {
         isImageDefault: true,
-        image: ""
+        image: "",
+        supabase: useSupabaseClient(),
+        uploading: false,
       }
     },
     methods: {
       closeModal(){
         this.$emit('close');
       },
-      fileChange(e){
-        const file = e.target.files[0];
-        this.image = URL.createObjectURL(file);
-        this.isImageDefault = false;
-        console.log(this.image);
-      },
-      submitAvatar(){
+      // fileChange(e){
+      //   files = e.target.files[0];
+      //   this.image = URL.createObjectURL(files);
+      //   this.isImageDefault = false;
+      //   console.log(this.image);
+      // },
 
+      submitAvatar(){
         if(this.isImageDefault){
           alert('Please upload an avatar before submitting.');
         } else{
@@ -58,9 +60,51 @@ export default {
           this.$emit('return', this.image)
           this.isImageDefault = true;
         }
+      },
 
 
-      }
+      async uploadImage(e) {
+        const file = e.target.files[0];
+        try {
+          this.uploading = true;
+
+          if (!file) {
+            throw new Error('You must select an image to upload.')
+          }
+          const fileExt = file.name.split('.').pop()
+          const fileName = `${Math.random()}.${fileExt}`
+          const filePath = `${fileName}`
+
+          const {error: uploadError} = await this.supabase.storage
+            .from('profile-pictures')
+            .upload(filePath, file)
+
+          if (uploadError) {
+            throw uploadError
+          }
+
+        } catch {
+          alert(error.message)
+        } finally {
+          this.uploading = false
+        }
+
+        try {
+          const {data, error} = await this.supabase.storage
+            .from('profile-pictures')
+            .download(`public/${filePath}`)
+
+          if (error) {
+            throw error
+          }
+
+          const url = URL.createObjectURL(data)
+          this.image = url;
+          this.isImageDefault = false;
+        } catch (error) {
+          console.error('Error downloading image: ', error.message)
+        }
+      },
     }
 }
 </script>
