@@ -7,12 +7,17 @@
         <NuxtLink to="/explore">Explore </NuxtLink>
       </div>
     </div>
-    <NavUserProfile v-if="dataSession.session" :session="dataSession" @logout="logout"/>
-    <NavUser v-else />
+    <div v-if="loggedUserProfile.length">
+      <NavUserProfile  :session="dataSession" :loggedUserProfile="loggedUserProfile" @logout="logout"/>
+    </div>
+    <div v-else>
+      <NavUser />
+    </div>
+
 
   </div>
 
-  <NuxtPage :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :userProfiles="userProfiles" @retrieveSession="retrieveSession" :session="dataSession" />
+  <NuxtPage :loggedInUser="loggedInUser" :session="dataSession" :loggedUserProfile="loggedUserProfile" :userProfiles="userProfiles" @retrieveSession="retrieveSession" />
 
   <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
@@ -31,15 +36,13 @@
 <script>
 import UserProfiles from '~/assets/json/UserProfiles.json'
 
-
-
 export default {
    data() {
       return {
         isLoggedIn: false,
         loggedInUser: "",
         userProfiles: UserProfiles,
-        loggedUserProfile: {},
+        loggedUserProfile: [],
         dataSession: {}
       }
     },
@@ -52,6 +55,7 @@ export default {
         const { error } = await supabase.auth.signOut()
 
         this.dataSession = {};
+        this.loggedUserProfile = []
 
       },
       login(username){
@@ -71,9 +75,30 @@ export default {
             this.dataSession = data;
             console.log(this.dataSession);
 
+            this.getProfile(this.dataSession)
+
           }else{
+            this.dataSession = {};
             this.isLoggedIn = false;
+            this.loggedUserProfile = [];
           }
+
+
+        }catch(error){
+          alert(error.message)
+        }
+
+      },
+      async getProfile(session){
+        const supabase = useSupabaseClient();
+
+
+        try{
+          const { data, error } = await supabase.from('profiles').select().eq('username', '' + session.session.user.user_metadata.username)
+
+          console.log('PROFILE')
+          console.log(data)
+          this.loggedUserProfile = data;
 
 
         }catch(error){
@@ -85,6 +110,9 @@ export default {
     async mounted(){
       // Get Profile of Logged in user
       this.retrieveSession();
+
+    },
+    async setup(){
 
     }
 }

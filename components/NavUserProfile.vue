@@ -6,7 +6,7 @@
       ref="dropdownButton"
     >
       <img src="nah" alt="Avatar" class="center w-6 h-6 rounded-full mr-3 object-center object-cover"/>
-      <span> Hi, {{ session.session.user.user_metadata.first_name}}!</span>
+      <span>Hi, {{ loggedUserProfile[0].first_name }}!</span>
     </button>
     <div
       class="bg-green_light px-3 rounded-b-2xl text-black dropdown-menu"
@@ -23,9 +23,8 @@
 <script>
 export default {
   props: {
-    session: {
-      type: Object
-    }
+    session: Object,
+    loggedUserProfile: Array,
   },
   data() {
     return {
@@ -64,7 +63,10 @@ export default {
       return `/profile/${username}`
     }
   },
-  mounted() {
+  async beforeMount(){
+
+  },
+  async mounted() {
     document.addEventListener('click', this.closeDropdown);
   },
   beforeUnmount() {
