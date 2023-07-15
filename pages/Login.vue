@@ -19,7 +19,7 @@
 
         <!-- Login Form -->
         <form @submit.prevent="handleSubmit" class="flex flex-col">
-          <input type="text" placeholder="Username" class="py-[10px] px-[32px] rounded-[34.5px] h-[69px] border-[1px] border-solid border-green mt-[22px]" v-model="userName" required>
+          <input type="text" placeholder="Email" class="py-[10px] px-[32px] rounded-[34.5px] h-[69px] border-[1px] border-solid border-green mt-[22px]" v-model="email" required>
           <input type="password" placeholder="Password" class="py-[10px] px-[32px] rounded-[34.5px] h-[69px] border-[1px] border-solid border-green mt-[22px]" v-model="password" required>
 
           <!-- Remember me and forgot password option -->
@@ -58,6 +58,7 @@ export default {
     return {
       userName: '',
       password: '',
+      email: '',
       rememberMe: false,
       userProfile: {}
     }
@@ -67,28 +68,25 @@ export default {
       console.log('Login Initiated');
 
     },
-    login(){
-      console.log(this.userName)
-      this.userProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.userName)[0]
-      console.log(this.userProfile)
+    async login(){
+      const supabase = useSupabaseClient();
 
-      if(typeof this.userProfile === 'undefined'){
-        alert('The account you have entered does not exist. Please ensure that the information you have entered are correct or make a new account at PalatePicks!');
-      }else{
-        if ((this.userName === this.userProfile.username) && (this.password === this.userProfile.password)){
-          console.log('Successfully logged in!');
-          this.$emit('login', this.userName)
-          this.$router.push({path: '/'})
-          alert('Successfully logged in!')
-        }else{
-          alert('The password you have entered is incorrect. Please check the required fields again.')
-        }
+      try{
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: this.email,
+          password: this.password,
+        });
+
+        if (error) throw error;
+
+        alert("You have successfully signed in! Redirecting you to the homepage...");
+        this.$router.push('/')
+
+      }catch(error){
+        alert(error.message);
       }
 
-
-
-
-    }
+    },
   },
 
 }
