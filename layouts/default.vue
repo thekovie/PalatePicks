@@ -17,7 +17,7 @@
 
   </div>
 
-  <NuxtPage :loggedInUser="loggedInUser" :session="dataSession" :loggedUserProfile="loggedUserProfile" :userProfiles="userProfiles" @retrieveSession="retrieveSession" />
+  <NuxtPage :loggedInUser="loggedInUser" :session="dataSession" :loggedUserProfile="loggedUserProfile" @retrieveSession="retrieveSession" />
 
   <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
@@ -34,14 +34,12 @@
 </template>
 
 <script>
-import UserProfiles from '~/assets/json/UserProfiles.json'
 
 export default {
    data() {
       return {
         isLoggedIn: false,
         loggedInUser: "",
-        userProfiles: UserProfiles,
         loggedUserProfile: [],
         dataSession: {}
       }
