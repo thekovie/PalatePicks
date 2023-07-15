@@ -5,7 +5,7 @@
       v-on:click="toggleDropdown"
       ref="dropdownButton"
     >
-      <img src="nah" alt="Avatar" class="center w-6 h-6 rounded-full mr-3 object-center object-cover"/>
+      <img src="#" alt="Avatar" class="center w-6 h-6 rounded-full mr-3 object-center object-cover"/>
       <span>Hi, {{ loggedUserProfile[0].first_name }}!</span>
     </button>
     <div
