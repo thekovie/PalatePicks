@@ -7,7 +7,7 @@
       <p class="mt-1 text-lg">{{ Profile.school }}</p>
       <p class="max-w-3xl text-center text-base mt-1">{{ Profile.bio }}</p>
       <!-- Add if condition that checks if logged in user is the same as the user in the page -->
-      <button class="bg-green text-white px-12 mt-4 py-1 rounded-3xl"><router-link to="/profile/settings">Edit Profile</router-link></button>
+      <button v-if="isUserOwnerOfProfile" class="bg-green text-white px-12 mt-4 py-1 rounded-3xl"><router-link to="/profile/settings">Edit Profile</router-link></button>
     </div>
     <div class="user-reviews px-20 mt-4">
       <p class="font-bold p-3">View {{ Profile.first_name }}'s Reviews</p>
@@ -26,13 +26,13 @@ export default {
   props: {
     // username: String,
     loggedInUser: String,
+    loggedUserProfile: Array,
   },
   data() {
       return {
         supabase: useSupabaseClient(),
         username: useRoute().params.id,
-        isUser: true,
-        isUserExisting: true,
+        isUserOwnerOfProfile: false,
         reviews: ReviewList,
         Profile: {},
         filteredReviews: {},
@@ -57,11 +57,9 @@ export default {
           this.Profile = data;
           console.log('Profile Loaded')
         }
+
     }
 
-
-  },
-  computed: {
 
   },
   async mounted() {
@@ -71,10 +69,18 @@ export default {
     if(Object.keys(this.Profile).length === 0){
       throw createError({ statusCode: 404, statusMessage: 'User not found...', fatal: true})
     }else{
+      this.filteredReviews = this.reviews.filter((reviews) => reviews.username === this.username)
+    }
+  },
+  beforeUpdate(){
+    if(this.loggedUserProfile.length){
+        if(this.loggedUserProfile[0].username === this.username){
+          this.isUserOwnerOfProfile = true;
+        }else{
+          this.isUserOwnerOfProfile = false;
+        }
 
-
-    this.filteredReviews = this.reviews.filter((reviews) => reviews.username === this.username)
+      }
   }
-}
 }
 </script>
