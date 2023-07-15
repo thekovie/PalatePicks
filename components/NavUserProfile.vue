@@ -5,15 +5,15 @@
       v-on:click="toggleDropdown"
       ref="dropdownButton"
     >
-      <img :src="loggedUserProfile.profileImgSrc" alt="Avatar" class="center w-6 h-6 rounded-full mr-3 object-center object-cover"/>
-      <span> Hi, {{ loggedUserProfile.firstName }}!</span>
+      <img src="#" alt="Avatar" class="center w-6 h-6 rounded-full mr-3 object-center object-cover"/>
+      <span>Hi, {{ loggedUserProfile[0].first_name }}!</span>
     </button>
     <div
       class="bg-green_light px-3 rounded-b-2xl text-black dropdown-menu"
       :class="{ 'show': isDropdownOpen }"
       ref="dropdownMenu"
     >
-      <router-link class="block text-sm px-2 py-2" :to="`/profile/${loggedUserProfile.username}`" @click="closeDropdown('click')">View Profile</router-link>
+      <router-link class="block text-sm px-2 py-2" :to="`/profile/}`" @click="closeDropdown('click')">View Profile</router-link>
       <router-link class="block text-sm px-2 py-2" to="/profile/settings" @click="closeDropdown('click')">Edit Profile</router-link>
       <router-link class="block text-sm px-2 py-2 text-red" to="/" @click="closeDropdownAndLogout('click')">Logout</router-link>
     </div>
@@ -23,9 +23,8 @@
 <script>
 export default {
   props: {
-    loggedUserProfile: {
-      type: Object
-    }
+    session: Object,
+    loggedUserProfile: Array,
   },
   data() {
     return {
@@ -64,7 +63,10 @@ export default {
       return `/profile/${username}`
     }
   },
-  mounted() {
+  async beforeMount(){
+
+  },
+  async mounted() {
     document.addEventListener('click', this.closeDropdown);
   },
   beforeUnmount() {
