@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loggedUserProfile.length">
+  <div v-if="checkLoggedUserInfo">
     <div class="Content-Section my-10 mx-40"> <!--Content Section-->
 
         <div class="Profile-Section flex flex-row items-center"> <!--Profile Section-->
@@ -61,7 +61,7 @@
             <label>Bio<br></label>
             <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2" @click="clickTextBox"></textarea>
           </div>
-          <button class="bg-green text-white px-12 mt-5 py-1 rounded-3xl" :disabled="isButtonDisabled" @click="saveGeneralInfo">Save Changes</button>
+          <button class="bg-green text-white px-12 mt-5 py-1 rounded-3xl" @click="saveGeneralInfo">Save Changes</button>
         </div>
 
         <!--Email-->
@@ -82,7 +82,7 @@
         <div>
           <div class="mr-20 mt-5">
             <label>Code<br></label>
-            <input :disabled="isDisabled" type="text" value="000 - 000" class="border-green border rounded w-full px-2" @click="clickTextBox"  @input="handleInputChange" >
+            <input type="text" value="000 - 000" class="border-green border rounded w-full px-2" @click="clickTextBox"  @input="handleInputChange" >
             <p class="opacity-60 text-xs my-2">Insert the 6 digit code sent to your email to confirm the change of email</p>
           </div>
 
@@ -179,12 +179,25 @@ export default {
     };
   },
   computed: {
-    isButtonDisabled() {
-      return !this.firstName || !this.lastName || !this.username || !this.school || !this.bio || !this.email || !this.password;
-    },
+    checkLoggedUserInfo(){
+      // General Information
+      if(this.loggedUserProfile.length){
+        this.username = this.loggedUserProfile[0].username
+        this.firstName = this.loggedUserProfile[0].first_name
+        this.lastName = this.loggedUserProfile[0].last_name
+        this.school = this.loggedUserProfile[0].school
+        this.bio = this.loggedUserProfile[0].bio
+        this.email = this.loggedUserProfile[0].email
+
+        return true
+      }else{
+        return false
+      }
+
+
+    }
   },
-  mounted(){
-    // General Information
+  beforeMount(){
 
 
 
@@ -192,14 +205,7 @@ export default {
   beforeUpdate(){
 
 
-    if(this.loggedUserProfile.length){
-      this.username = this.loggedUserProfile[0].username
-      this.firstName = this.loggedUserProfile[0].first_name
-      this.lastName = this.loggedUserProfile[0].last_name
-      this.school = this.loggedUserProfile[0].school
-      this.bio = this.loggedUserProfile[0].bio
-      this.email = this.loggedUserProfile[0].email
-    }
+
 
 
   }

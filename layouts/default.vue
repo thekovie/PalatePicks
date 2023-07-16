@@ -21,7 +21,7 @@
 
   <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
     <div class="left justify-start">
-      <div class="logo font-cursive normal-case font-bold text-3xl">PalatePicks</div>
+      <div class="logo font-cursive normal-case font-bold text-3xl" @click="logout">PalatePicks</div>
       <div class="font-light">Fueling Student Appetites, One Bite at a Time</div>
     </div>
     <div class="right text-right text-xs justify-end">
@@ -56,9 +56,6 @@ export default {
         this.loggedUserProfile = []
 
       },
-      login(username){
-
-      },
       async retrieveSession(){
         const supabase = useSupabaseClient();
 
@@ -71,6 +68,7 @@ export default {
           if(data.session !== null){
             this.isLoggedIn = true;
             this.dataSession = data;
+            console.log("IN")
             console.log(this.dataSession);
 
             this.getProfile(this.dataSession)
@@ -95,6 +93,7 @@ export default {
           const { data, error } = await supabase.from('profiles').select().eq('username', '' + session.session.user.user_metadata.username)
 
           console.log('PROFILE')
+          console.log(session.session.user.user_metadata.username)
           console.log(data)
           this.loggedUserProfile = data;
 
@@ -108,6 +107,10 @@ export default {
     async mounted(){
       // Get Profile of Logged in user
       this.retrieveSession();
+      console.log("MOUNTED")
+      console.log(this.loggedUserProfile)
+
+
 
     },
     async setup(){
