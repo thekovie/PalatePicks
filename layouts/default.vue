@@ -90,7 +90,7 @@ export default {
 
 
         try{
-          const { data, error } = await supabase.from('profiles').select().eq('username', '' + session.session.user.user_metadata.username)
+          const { data, error } = await supabase.from('profiles').select().eq('id', '' + session.session.user.id)
 
           console.log('PROFILE')
           console.log(session.session.user.user_metadata.username)

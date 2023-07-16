@@ -61,7 +61,7 @@
             <label>Bio<br></label>
             <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2" @click="clickTextBox"></textarea>
           </div>
-          <button class="bg-green text-white px-12 mt-5 py-1 rounded-3xl" @click="saveGeneralInfo">Save Changes</button>
+          <button class="bg-green text-white px-12 mt-5 py-1 rounded-3xl" @click="updateGeneralInfo">Save Changes</button>
         </div>
 
         <!--Email-->
@@ -157,6 +157,25 @@ export default {
     },
     getProfileLink(username) {
       return `/profile/${this.loggedInUser}`;
+    },
+    async updateGeneralInfo(){
+      const supabase = useSupabaseClient();
+
+      const { data, error } = await supabase.auth.updateUser({
+        data: {
+          bio: this.bio,
+          first_name: this.firstName,
+          last_name: this.lastName,
+          school: this.school,
+          username: this.username,
+        }
+      })
+      if (error) throw error;
+      alert('Your changes have been successfully saved!')
+      this.$emit('retrieveSession')
+      this.$router.push('/profile/settings')
+
+
     }
   },
   data() {
@@ -197,7 +216,7 @@ export default {
 
     }
   },
-  beforeMount(){
+  async mounted(){
 
 
 
