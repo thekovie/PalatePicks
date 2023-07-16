@@ -1,6 +1,6 @@
 <template>
 <NuxtLink :to="`/restaurant/${name}`">
-  <div class=" h-[471px] w-[500px] bg-green_lightbg rounded-3xl m-3">
+  <div class=" h-96 w-auto sm:h-[471px] sm:w-[500px] bg-green_lightbg rounded-3xl m-3">
     <div class="cover-area w-full h-[177px] bg-green rounded-t-3xl">
       <img class="cover-photo w-full h-full rounded-t-3xl center object-cover object-center" :src="imageHeader" alt="restaurant1" />
     </div>

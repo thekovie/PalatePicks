@@ -1,20 +1,20 @@
 <template>
     <!-- Whole Register Division Container -->
-    <div class="flex flex-row bg-green_lightbg min-w-screen min-h-screen">
+    <div class="flex flex-col-reverse sm:flex-row bg-green_lightbg min-w-screen min-h-screen">
       <!-- Register Division -->
       <form class="flex flex-grow justify-center align-middle" @submit.prevent="userRegister">
-        <div class="mt-[50px] mx-[150px] p-0 flex flex-col mb-[40px]">
+        <div class="mt-[50px] mx-8 sm:mx-40 p-0 flex flex-col mb-[40px]">
           <!-- Registration Introduction -->
-          <div class="font-bold text-[64px] text-left">Create a new account</div>
-          <div class="text-left text-[24px] text-grey mb-[34px]">Join now for free to start making reviews and recommendations!</div>
+          <div class="font-bold text-3xl sm:text-4xl text-left">Create a new account</div>
+          <div class="text-left sm:text-md text-grey mt-2 mb-4 sm:mb-10">Join now for free to start making reviews and recommendations!</div>
           <!-- Division for picture, first and last name, and username -->
           <div class="flex flex-row">
             <!-- Container for first name, last name, and username -->
             <div class="flex flex-col w-[100%] justify-between">
               <!-- First and Last Name-->
-              <div class="flex flex-row justify-between">
-                <input type="text" placeholder="First Name" class="w-[49%]" v-model="firstName" required>
-                <input type="text" placeholder="Last Name" class="w-[49%]" v-model="lastName" required>
+              <div class="flex flex-col sm:flex-row sm:justify-between">
+                <input type="text" placeholder="First Name" class="w-full mt-[22px]" v-model="firstName" required>
+                <input type="text" placeholder="Last Name" class="w-full mt-[22px]" v-model="lastName" required>
               </div>
               <!-- Username -->
               <div class="justify-self-stretch mt-[22px]">
@@ -39,7 +39,7 @@
         </div>
       </form>
       <!-- Register Picture -->
-      <div class="register-bg w-[1100px] min-h-[874px]"></div>
+      <div class="register-bg lg:w-6/12 min-h-fit"></div>
     </div>
 </template>
 
