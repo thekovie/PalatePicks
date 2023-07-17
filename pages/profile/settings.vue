@@ -51,7 +51,7 @@
                       <img v-else :src="ProfileImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover object-center">
                     </div>
                   </div>
-                  <button @click="toggleUploadModal" class="mt-10 bg-green text-white px-12 py-1 rounded-3xl">Change Avatar</button>
+                  <button @click="toggleUploadModal" class="mt-3 bg-green text-white px-12 py-1 rounded-3xl">Change Avatar</button>
                   <div class="absolute top-0 bottom-0 left-0 right-0" v-if="showUploadModal"> <!-- Upload Picture Modal -->
                     <UploadPicture @close="toggleUploadModal" @return="getImageSrc($event)"/>
                   </div>
@@ -73,23 +73,11 @@
             <input type="email" v-model="email" class="border-green border rounded w-full px-2" required >
           </div>
 
-          <!--
-
-            <div class="mt-10 ms-10 bg-green text-white px-12 rounded-3xl">
-              <button class="py-1 sendCode" :disabled="isButtonDisabled" v-on:click="codeSent"> Send Code</button>
-            </div>
-          -->
-
         </div>
 
 
         <div>
-          <!--
-            <div class="mr-20 mt-5">
-              <label>Code<br></label>
-              <input type="text" value="000 - 000" class="border-green border rounded w-full px-2" @click="clickTextBox"  @input="handleInputChange" >
-            </div>
-          -->
+
 
           <p class="opacity-60 text-xs my-2">A confirmation link will be sent to both your old and new email addresses to confirm your email update.</p>
           <button v-if="email.length" class="bg-green text-white px-12  mt-5 py-1 rounded-3xl" @click="updateEmail">Update Email</button>
@@ -102,7 +90,8 @@
         <div>
           <div class="mr-20 mt-5">
             <label>Current Password<br></label>
-            <input type="password" v-model="password" class="border-green border rounded w-full px-2" required>
+            <input type="password" v-model="currentPassword" class="border-green border rounded w-full px-2" required>
+
           </div>
 
           <div class="mr-20 mt-4 flex">
@@ -120,7 +109,9 @@
 
           <p v-if="newPassword !== confirmNewPassword" class="text-xs my-2 text-red">New and confirm password fields do not match! Please ensure that you have entered them correctly.</p>
 
-          <button class="bg-green text-white px-8 py-1 mt-5 rounded-3xl" @click="saveChanges">Update Password</button>
+
+          <button v-if="newPassword === confirmNewPassword" class="bg-green text-white px-8 py-1 mt-5 rounded-3xl" @click="updatePassword">Update Password</button>
+          <button v-else class="bg-[#93cfa9] text-white px-8 py-1 mt-5 rounded-3xl" disabled>Update Password</button>
         </div>
       </div>
   </div>
@@ -192,6 +183,28 @@ export default {
       const { data, error } = await supabase.auth.updateUser({email: this.email})
       if (error) throw error;
       alert('A confirmation link has been sent to both your old and new email addresses. Please confirm to update your email.')
+    },
+    async updatePassword(){
+      const supabase = useSupabaseClient();
+
+      const { data, error } = await supabase.rpc('verify_user_password', {password: this.currentPassword })
+
+      if (error) throw error;
+
+      if(data){
+        await this.changePassword()
+      }else{
+        alert('The current password you have entered is incorrect/invalid. Please ensure that the current password you entered is correct.')
+      }
+
+    },
+    async changePassword(){
+      const supabase = useSupabaseClient();
+
+      const { data, error } = await supabase.auth.updateUser({password: this.newPassword})
+      if (error) throw error;
+      alert('Your password has been successfully changed!')
+
     }
   },
   data() {
@@ -203,6 +216,7 @@ export default {
       school: "",
       email: "",
       password: "",
+      currentPassword: "",
       newPassword: "",
       confirmNewPassword: "",
       bio: "",
@@ -210,7 +224,7 @@ export default {
       ProfileImage: '',
       isImageDefault: false,
       userProfiles: UserProfiles,
-      userProfile: {}
+      userProfile: {},
     };
   },
   computed: {
