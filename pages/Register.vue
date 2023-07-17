@@ -56,22 +56,12 @@ export default {
       school: '',
       bio: '',
       showUploadModal: false,
-      image: "",
+      image: "https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg",
       isImageDefault: true,
       errorMsg: '',
     }
   },
   methods: {
-    handleSubmit(){
-      alert('Your account has been successfully registered!');
-    },
-    toggleUploadModal(){
-      this.showUploadModal = !(this.showUploadModal);
-    },
-    getImageSrc(e){
-      this.image = e;
-      this.isImageDefault = false;
-    },
     async userRegister() {
       const supabase = useSupabaseClient();
 
@@ -97,8 +87,9 @@ export default {
               username: this.userName,
               school: this.school,
               bio: this.bio,
+              profile_img_src: this.image,
             },
-            emailRedirectTo: '/'
+            emailRedirectTo: '/login'
           }
         });
         if (error) throw error;
