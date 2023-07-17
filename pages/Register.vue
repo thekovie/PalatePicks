@@ -14,7 +14,7 @@
               <!-- First and Last Name-->
               <div class="flex flex-col sm:flex-row sm:justify-between">
                 <input type="text" placeholder="First Name" class="w-full mt-[22px]" v-model="firstName" required>
-                <input type="text" placeholder="Last Name" class="w-full mt-[22px]" v-model="lastName" required>
+                <input type="text" placeholder="Last Name" class="w-full sm:ml-2 mt-[22px]" v-model="lastName" required>
               </div>
               <!-- Username -->
               <div class="justify-self-stretch mt-[22px]">

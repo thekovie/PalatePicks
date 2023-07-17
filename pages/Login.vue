@@ -8,7 +8,7 @@
 
     <!-- Login Information Side -->
 
-    <div class="bg-green_light w-screen px-4 lg:px-32">
+    <div class="bg-green_light min-h-screen w-screen px-4 lg:px-32">
 
       <!-- Login Division Container -->
       <div class="flex flex-col mx-auto max-w-fill">
