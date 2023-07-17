@@ -1,5 +1,5 @@
 <template>
-  <div class="error flex flex-col h-screen mt-80 mx-52">
+  <div class="error flex flex-col h-screen mt-40 ml-4 sm:mt-80 sm:mx-52">
     <div class="error-404-title text-6xl font-semibold">
       {{ error.statusCode }}
     </div>

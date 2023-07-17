@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen pb-80">
-    <div class="h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white" :style="`background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Restaurant.imageHeader}); background-size: cover; background-position: center;`">
-      <div class="resto-title font-bold text-5xl">
+    <div class="h-[250px] md:h-[586px] min-w-screen flex flex-col pl-4 md:pl-56 md:pr-64 justify-center text-white" :style="`background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Restaurant.imageHeader}); background-size: cover; background-position: center;`">
+      <div class="resto-title font-bold text-3xl md:text-5xl">
         {{ Restaurant.name }}
       </div>
       <div class="resto-ratings flex mt-3">
@@ -19,17 +19,17 @@
           </span>
         </div>
       </div>
-      <div class="resto-description text-lg font-light mt-3">
+      <div class="resto-description md:text-lg font-light mt-3">
         {{ Restaurant.description }}
       </div>
     </div>
-    <div class="body px-20">
+    <div class="body px-4 md:px-20">
       <div class="gallery">
         <div class="gallery-title text-3xl font-semibold mt-20 mb-10">
           Gallery
         </div>
         <div class="gallery-photos flex overflow-x-auto">
-            <div v-for="(media, index) in Restaurant.gallery" :key="index" class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
+            <div v-for="(media, index) in Restaurant.gallery" :key="index" class="gallery-photo w-80 h-80 md:w-[500px] md:h-[500px] mr-10 mb-10">
               <img v-if="reviewFileTypeChecker(media)" class="min-w-[500px] h-full object-cover mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
               <video v-else class="min-w-[500px] h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
               <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
@@ -40,7 +40,7 @@
               </div>
           </div>
         </div>
-        <div class="reviews flex flex-row justify-between">
+        <div class="reviews flex flex-col-reverse md:flex-row justify-between">
           <div class="left-portion">
             <div class="reviews-title text-3xl font-semibold mt-20 mb-10">
               Reviews

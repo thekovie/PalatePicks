@@ -7,7 +7,7 @@
         <NuxtLink to="/explore">Explore </NuxtLink>
       </div>
     </div>
-    <div v-if="loggedUserProfile.length">
+    <div v-if="isLoggedIn">
       <NavUserProfile  :session="dataSession" :loggedUserProfile="loggedUserProfile" @logout="logout"/>
     </div>
     <div v-else>
@@ -19,12 +19,12 @@
 
   <NuxtPage :loggedInUser="loggedInUser" :session="dataSession" :loggedUserProfile="loggedUserProfile" @retrieveSession="retrieveSession" />
 
-  <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
+  <div class="footer min-w-screen flex flex-col sm:flex-row sm:justify-between bg-green h-full sm:h-32 bottom-0 sm:items-center p-8 sm:px-20 text-white">
     <div class="left justify-start">
       <div class="logo font-cursive normal-case font-bold text-3xl" @click="logout">PalatePicks</div>
       <div class="font-light">Fueling Student Appetites, One Bite at a Time</div>
     </div>
-    <div class="right text-right text-xs justify-end">
+    <div class="right mt-10 sm:mt-0 sm:text-right text-xs sm:justify-end">
       <p>© CCAPDEV - S13 Group 3</p>
       <p>2401 Taft Ave, Malate, Manila,</p>
       <p>1004 Metro Manila,</p>
@@ -43,9 +43,6 @@ export default {
         loggedUserProfile: [],
         dataSession: {}
       }
-    },
-    computed: {
-
     },
     methods: {
       async logout() {
@@ -70,6 +67,8 @@ export default {
             this.dataSession = data;
             console.log("IN")
             console.log(this.dataSession);
+            console.log("IS LOGGED IN")
+            console.log(this.isLoggedIn)
 
             this.getProfile(this.dataSession)
 
@@ -88,7 +87,6 @@ export default {
       async getProfile(session){
         const supabase = useSupabaseClient();
 
-
         try{
           const { data, error } = await supabase.from('profiles').select().eq('id', '' + session.session.user.id)
 
@@ -97,7 +95,6 @@ export default {
           console.log(data)
           this.loggedUserProfile = data;
 
-
         }catch(error){
           alert(error.message)
         }
@@ -105,15 +102,15 @@ export default {
       }
     },
     async mounted(){
-      // Get Profile of Logged in user
+      // Retrieve User Session if it still exists
       this.retrieveSession();
-      console.log("MOUNTED")
-      console.log(this.loggedUserProfile)
-
-
-
     },
-    async setup(){
+    beforeUpdate(){
+      if(this.loggedUserProfile.length){
+        this.isLoggedIn = true
+      }else{
+        this.isLoggedIn = false
+      }
 
     }
 }

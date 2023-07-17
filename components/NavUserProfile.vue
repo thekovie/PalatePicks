@@ -5,7 +5,7 @@
       v-on:click="toggleDropdown"
       ref="dropdownButton"
     >
-      <img src="#" alt="Avatar" class="center w-6 h-6 rounded-full mr-3 object-center object-cover"/>
+      <img :src="loggedUserProfile[0].profile_img_src" alt="Avatar" class="center w-6 h-6 rounded-full mr-3 object-center object-cover"/>
       <span>Hi, {{ loggedUserProfile[0].first_name }}!</span>
     </button>
     <div
@@ -13,7 +13,7 @@
       :class="{ 'show': isDropdownOpen }"
       ref="dropdownMenu"
     >
-      <router-link class="block text-sm px-2 py-2" :to="`/profile/}`" @click="closeDropdown('click')">View Profile</router-link>
+      <router-link class="block text-sm px-2 py-2" :to="`/profile/${loggedUserProfile[0].username}`" @click="closeDropdown('click')">View Profile</router-link>
       <router-link class="block text-sm px-2 py-2" to="/profile/settings" @click="closeDropdown('click')">Edit Profile</router-link>
       <router-link class="block text-sm px-2 py-2 text-red" to="/" @click="closeDropdownAndLogout('click')">Logout</router-link>
     </div>
@@ -63,7 +63,7 @@ export default {
       return `/profile/${username}`
     }
   },
-  async beforeMount(){
+  async beforeUpdate(){
 
   },
   async mounted() {
