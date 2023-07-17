@@ -21,7 +21,7 @@
 
   <div class="footer min-w-screen flex flex-col sm:flex-row sm:justify-between bg-green h-full sm:h-32 bottom-0 sm:items-center p-8 sm:px-20 text-white">
     <div class="left justify-start">
-      <div class="logo font-cursive normal-case font-bold text-3xl">PalatePicks</div>
+      <div class="logo font-cursive normal-case font-bold text-3xl" @click="logout">PalatePicks</div>
       <div class="font-light">Fueling Student Appetites, One Bite at a Time</div>
     </div>
     <div class="right mt-10 sm:mt-0 sm:text-right text-xs sm:justify-end">
@@ -65,6 +65,7 @@ export default {
           if(data.session !== null){
             this.isLoggedIn = true;
             this.dataSession = data;
+            console.log("IN")
             console.log(this.dataSession);
             console.log("IS LOGGED IN")
             console.log(this.isLoggedIn)
@@ -87,9 +88,10 @@ export default {
         const supabase = useSupabaseClient();
 
         try{
-          const { data, error } = await supabase.from('profiles').select().eq('username', '' + session.session.user.user_metadata.username)
+          const { data, error } = await supabase.from('profiles').select().eq('id', '' + session.session.user.id)
 
           console.log('PROFILE')
+          console.log(session.session.user.user_metadata.username)
           console.log(data)
           this.loggedUserProfile = data;
 
