@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen mt-24">
     <div class="profile justify-center flex flex-col items-center"> <!--Profile-->
-      <img src="#" alt="Avatar" class=" w-48 h-48 rounded-full mt-5 object-center object-cover border-green border-[3px]"/>
+      <img :src="Profile.profile_img_src" alt="Avatar" class=" w-48 h-48 rounded-full mt-5 object-center object-cover border-green border-[3px]"/>
       <p class="text-green text-3xl font-bold mt-5">{{ Profile.first_name }} {{ Profile.last_name }}</p>
       <p class="font-medium mt-1 text-xl">@{{ Profile.username }}</p>
       <p class="mt-1 text-lg">{{ Profile.school }}</p>

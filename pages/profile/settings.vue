@@ -5,7 +5,7 @@
         <div class="Profile-Section flex flex-row items-center"> <!--Profile Section-->
 
           <div> <!--Avatar-->
-            <img src="#" alt="Avatar" class="w-12 h-12 rounded-full object-center object-cover me-3"/>
+            <img :src="loggedUserProfile[0].profile_img_src" alt="Avatar" class="w-12 h-12 rounded-full object-center object-cover me-3"/>
           </div>
 
           <div class="basis-3/4">  <!--User-->
@@ -47,8 +47,7 @@
               <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->
                 <div class="bg-green min-w-[150px] min-h-[150px] max-w-[150px] max-h-[150px] rounded-[100%] p-[3px] m-[10px] cursor-pointer">
                     <div class="bg-white w-[100%] h-[100%] rounded-[100%]">
-                      <div v-if="isImageDefault" class="upload-bg-default w-[60%] h-[60%] rounded-[100%] relative mx-auto top-[28px]"></div>
-                      <img v-else :src="ProfileImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover object-center">
+                      <img :src="ProfileImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover object-center">
                     </div>
                   </div>
                   <button @click="toggleUploadModal" class="mt-3 bg-green text-white px-12 py-1 rounded-3xl">Change Avatar</button>
@@ -237,6 +236,7 @@ export default {
         this.school = this.loggedUserProfile[0].school
         this.bio = this.loggedUserProfile[0].bio
         this.email = this.loggedUserProfile[0].email
+        this.ProfileImage = this.loggedUserProfile[0].profile_img_src
 
         return true
       }else{
