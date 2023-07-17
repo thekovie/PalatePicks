@@ -7,7 +7,7 @@
         <NuxtLink to="/explore">Explore </NuxtLink>
       </div>
     </div>
-    <div v-if="loggedUserProfile.length">
+    <div v-if="isLoggedIn">
       <NavUserProfile  :session="dataSession" :loggedUserProfile="loggedUserProfile" @logout="logout"/>
     </div>
     <div v-else>
@@ -44,9 +44,6 @@ export default {
         dataSession: {}
       }
     },
-    computed: {
-
-    },
     methods: {
       async logout() {
         const supabase = useSupabaseClient();
@@ -54,9 +51,6 @@ export default {
 
         this.dataSession = {};
         this.loggedUserProfile = []
-
-      },
-      login(username){
 
       },
       async retrieveSession(){
@@ -72,6 +66,8 @@ export default {
             this.isLoggedIn = true;
             this.dataSession = data;
             console.log(this.dataSession);
+            console.log("IS LOGGED IN")
+            console.log(this.isLoggedIn)
 
             this.getProfile(this.dataSession)
 
@@ -90,14 +86,12 @@ export default {
       async getProfile(session){
         const supabase = useSupabaseClient();
 
-
         try{
           const { data, error } = await supabase.from('profiles').select().eq('username', '' + session.session.user.user_metadata.username)
 
           console.log('PROFILE')
           console.log(data)
           this.loggedUserProfile = data;
-
 
         }catch(error){
           alert(error.message)
@@ -106,11 +100,15 @@ export default {
       }
     },
     async mounted(){
-      // Get Profile of Logged in user
+      // Retrieve User Session if it still exists
       this.retrieveSession();
-
     },
-    async setup(){
+    beforeUpdate(){
+      if(this.loggedUserProfile.length){
+        this.isLoggedIn = true
+      }else{
+        this.isLoggedIn = false
+      }
 
     }
 }
