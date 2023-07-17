@@ -34,7 +34,6 @@ export default {
         isUserExisting: true,
         userProfiles: UserProfiles,
         reviews: ReviewList,
-
         filteredReviews: {},
       }
   },

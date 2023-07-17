@@ -28,20 +28,20 @@
               <div class="flex"> <!--Name-->
                 <div class="basis-1/2 mt-5 me-10">
                   <label>First Name<br></label>
-                  <input type="text" v-model="firstName" class="border-green border rounded w-full px-2" @click="clickTextBox">
+                  <input type="text" v-model="firstName" class="border-green border rounded w-full px-2">
                 </div>
                 <div class="basis-1/2 mt-5">
                   <label>Last Name<br></label>
-                  <input type="text" v-model="lastName" class="border-green border rounded w-full px-2" @click="clickTextBox">
+                  <input type="text" v-model="lastName" class="border-green border rounded w-full px-2">
                 </div>
               </div>
               <div class="mt-5"> <!--Username-->
                 <label>Username<br></label>
-                <input type="text" v-model="username" class="border-green border rounded w-full px-2" @click="clickTextBox">
+                <input type="text" v-model="username" class="border-green border rounded w-full px-2">
               </div>
               <div class="mt-5"> <!--School-->
                 <label>School/University<br></label>
-                <input type="text" v-model="school" class="border-green border rounded w-full px-2" @click="clickTextBox">
+                <input type="text" v-model="school" class="border-green border rounded w-full px-2">
               </div>
             </div>
               <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->
@@ -59,7 +59,7 @@
           </div>
           <div class="mt-5"> <!--Bio-->
             <label>Bio<br></label>
-            <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2" @click="clickTextBox"></textarea>
+            <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2"></textarea>
           </div>
           <button class="bg-green text-white px-12 mt-5 py-1 rounded-3xl" @click="updateGeneralInfo">Save Changes</button>
         </div>
@@ -70,23 +70,30 @@
         <div class="flex">
           <div class="basis-4/5 mt-5">
             <label>Email<br></label>
-            <input type="text" v-model="email" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
+            <input type="email" v-model="email" class="border-green border rounded w-full px-2" required >
           </div>
 
-          <div class="mt-10 ms-10 bg-green text-white px-12 rounded-3xl">
-            <button class="py-1 sendCode" :disabled="isButtonDisabled" v-on:click="codeSent"> Send Code</button>
-          </div>
+          <!--
+
+            <div class="mt-10 ms-10 bg-green text-white px-12 rounded-3xl">
+              <button class="py-1 sendCode" :disabled="isButtonDisabled" v-on:click="codeSent"> Send Code</button>
+            </div>
+          -->
+
         </div>
 
 
         <div>
-          <div class="mr-20 mt-5">
-            <label>Code<br></label>
-            <input type="text" value="000 - 000" class="border-green border rounded w-full px-2" @click="clickTextBox"  @input="handleInputChange" >
-            <p class="opacity-60 text-xs my-2">Insert the 6 digit code sent to your email to confirm the change of email</p>
-          </div>
+          <!--
+            <div class="mr-20 mt-5">
+              <label>Code<br></label>
+              <input type="text" value="000 - 000" class="border-green border rounded w-full px-2" @click="clickTextBox"  @input="handleInputChange" >
+            </div>
+          -->
 
-          <button class="bg-green text-white px-12  mt-5 py-1 rounded-3xl" :disabled="isButtonDisabled" @click="updateEmail">Update Email</button>
+          <p class="opacity-60 text-xs my-2">A confirmation link will be sent to both your old and new email addresses to confirm your email update.</p>
+          <button v-if="email.length" class="bg-green text-white px-12  mt-5 py-1 rounded-3xl" @click="updateEmail">Update Email</button>
+          <button v-else class="bg-[#93cfa9] text-white px-12  mt-5 py-1 rounded-3xl" disabled>Update Email</button>
         </div>
 
         <!--Password-->
@@ -95,23 +102,25 @@
         <div>
           <div class="mr-20 mt-5">
             <label>Current Password<br></label>
-            <input type="password" v-model="password" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
+            <input type="password" v-model="password" class="border-green border rounded w-full px-2" required>
           </div>
 
-          <div class="mr-20 mt-5 flex">
-            <div class="basis-1/2 mt-5 me-10">
+          <div class="mr-20 mt-4 flex">
+            <div class="basis-1/2 me-10">
               <label>New Password<br></label>
-              <input type="password" v-model="newPassword" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
+              <input type="password" id="newpassword" v-model="newPassword" class="border-green border rounded w-full px-2" required>
             </div>
 
-            <div class="basis-1/2 mt-5">
+            <div class="basis-1/2">
               <label>Confirm New Password<br></label>
-              <input type="password" v-model="confirmNewPassword" class="border-green border rounded w-full px-2" required @click="clickTextBox"  @input="handleInputChange" >
+              <input type="password" v-model="confirmNewPassword" class="border-green border rounded w-full px-2" required>
             </div>
 
           </div>
 
-          <button class="bg-green text-white px-8 py-1 mt-5 rounded-3xl" :disabled="isButtonDisabled" @click="saveChanges">Update Password</button>
+          <p v-if="newPassword !== confirmNewPassword" class="text-xs my-2 text-red">New and confirm password fields do not match! Please ensure that you have entered them correctly.</p>
+
+          <button class="bg-green text-white px-8 py-1 mt-5 rounded-3xl" @click="saveChanges">Update Password</button>
         </div>
       </div>
   </div>
@@ -176,6 +185,13 @@ export default {
       this.$router.push('/profile/settings')
 
 
+    },
+    async updateEmail(){
+      const supabase = useSupabaseClient();
+
+      const { data, error } = await supabase.auth.updateUser({email: this.email})
+      if (error) throw error;
+      alert('A confirmation link has been sent to both your old and new email addresses. Please confirm to update your email.')
     }
   },
   data() {
