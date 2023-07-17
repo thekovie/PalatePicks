@@ -19,12 +19,12 @@
 
   <NuxtPage :loggedInUser="loggedInUser" :session="dataSession" :loggedUserProfile="loggedUserProfile" @retrieveSession="retrieveSession" />
 
-  <div class="footer min-w-screen flex justify-between bg-green h-32 bottom-0 items-center p-8 pr-20 pl-20 text-white">
+  <div class="footer min-w-screen flex flex-col sm:flex-row sm:justify-between bg-green h-full sm:h-32 bottom-0 sm:items-center p-8 sm:px-20 text-white">
     <div class="left justify-start">
       <div class="logo font-cursive normal-case font-bold text-3xl">PalatePicks</div>
       <div class="font-light">Fueling Student Appetites, One Bite at a Time</div>
     </div>
-    <div class="right text-right text-xs justify-end">
+    <div class="right mt-10 sm:mt-0 sm:text-right text-xs sm:justify-end">
       <p>© CCAPDEV - S13 Group 3</p>
       <p>2401 Taft Ave, Malate, Manila,</p>
       <p>1004 Metro Manila,</p>
