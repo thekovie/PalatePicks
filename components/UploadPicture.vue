@@ -59,11 +59,36 @@ export default {
           this.isImageDefault = true;
         }
       },
+      async deleteImage(profileFileName){
 
 
+
+        try{
+          const { data, error } = await this.supabase
+          .storage
+          .from('profile-pictures')
+          .remove([profileFileName])
+
+        }catch(error){
+          alert(error.message)
+        }
+      },
       async uploadImage(e) {
         const file = e.target.files[0];
         let getFile = '';
+
+
+          if(this.loggedUserProfile[0].profile_img_src !== 'https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg'){
+            console.log("EXECUTED")
+            let profileFileName = this.loggedUserProfile[0].profile_img_src
+            let result = profileFileName.substring(83)
+            console.log("IMAGE TO BE DELETED" + result)
+            await this.deleteImage(result)
+        }
+
+
+
+
 
         // Update/Upload Image
         try {
@@ -87,7 +112,7 @@ export default {
           getFile = filePath;
 
           console.log(getFile);
-        } catch {
+        } catch(error) {
           alert(error.message)
         } finally {
           this.uploading = false

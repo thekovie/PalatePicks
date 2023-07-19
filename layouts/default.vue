@@ -41,7 +41,7 @@ export default {
         isLoggedIn: false,
         loggedInUser: "",
         loggedUserProfile: [],
-        dataSession: {}
+        dataSession: {},
       }
     },
     methods: {

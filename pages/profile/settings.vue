@@ -167,7 +167,7 @@ export default {
           last_name: this.lastName,
           school: this.school,
           username: this.username,
-          profile_img_src: this.ProfileImage
+          profile_img_src: this.imageUrl
         }
       })
       if (error) throw error;
