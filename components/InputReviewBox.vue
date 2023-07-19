@@ -129,6 +129,7 @@ export default {
     },
     removeMedia(index) {
       this.mediaItems.splice(index, 1);
+      this.fileLocs.splice(index, 1);
     },
     closeReviewBox() {
       this.$emit('close');
