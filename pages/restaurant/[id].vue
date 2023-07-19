@@ -53,13 +53,10 @@
           </div>
           <div class="review-filters mt-20 flex flex-col w-auto items-end">
             <div class="create-review">
-              <div v-show="(loggedInUser !== '')">
-                <button v-show="!isRestoOwner" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+              <button v-show="!isRestoOwner" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
                 <span class="text-white text-base uppercase mr-6">Make a review</span>
                 <img src="~/assets/icons/Plus.svg" />
               </button>
-              </div>
-
             </div>
             <div class="filter-area mt-20">
               <div class="filter-title text-3xl font-semibold font mb-6">
@@ -108,12 +105,17 @@
 
   export default {
     props: {
+      session: Object,
       loggedInUser: String,
-      loggedUserProfile: Object,
+      loggedUserProfile: Array
     },
     methods: {
       openReviewBox() {
-        this.isReviewBoxOpen = true
+        if (!this.loggedUserProfile.length) {
+          this.$router.push('/login')
+        } else {
+          this.isReviewBoxOpen = true
+        }
       },
       closeReviewBox() {
         this.isReviewBoxOpen = false
@@ -131,26 +133,24 @@
         this.loading = true;
         this.Restaurant = ref([]);
 
-
-
-          const { data, error } = await this.supabase
+        const { data, error } = await this.supabase
           .from('restaurants')
           .select()
           .eq('name', useRoute().params.id)
           .maybeSingle();
 
 
-          if (error) {
-            console.log(error)
-          }
-          if(data){
-            console.log(data);
-            this.Restaurant = data;
-            this.rating = data.rating
-            console.log('AAAAA')
-          }
+        if (error) {
+          console.log(error)
+        }
+        if(data){
+          console.log(data);
+          this.Restaurant = data;
+          this.rating = data.rating
+          console.log('AAAAA')
+        }
 
-          this.loading = false;
+        this.loading = false;
       },
 
       reviewFileTypeChecker(file) {
@@ -188,7 +188,8 @@
 
         this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId);
 
-        if(!(this.loggedInUser === '')){
+        // TODO: Wrong conditionals, must check in restaurants table if the logged in user is the owner of the restaurant
+        if(!(this.loggedUserProfile.length)){
           if(this.loggedUserProfile.restaurantName === this.restoId){
             this.isRestoOwner = true
           }
