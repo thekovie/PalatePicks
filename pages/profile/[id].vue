@@ -1,4 +1,5 @@
 <template>
+  <Preloader v-if="loading" :loading="loading" />
   <div class="min-h-screen mt-24">
     <div class="profile justify-center flex flex-col items-center"> <!--Profile-->
       <img :src="Profile.profile_img_src" alt="Avatar" class=" w-48 h-48 rounded-full mt-5 object-center object-cover border-green border-[3px]"/>
@@ -36,10 +37,12 @@ export default {
         reviews: ReviewList,
         Profile: {},
         filteredReviews: {},
+        loading: true,
       }
   },
   methods: {
     async getProfile(){
+      this.loading = true;
       this.Profile = ref([]);
 
       const { data, error } = await this.supabase
@@ -57,7 +60,7 @@ export default {
           this.Profile = data;
           console.log('Profile Loaded')
         }
-
+        this.loading = false;
     }
 
 
@@ -84,5 +87,6 @@ export default {
 
       }
   }
+
 }
 </script>

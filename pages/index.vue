@@ -1,4 +1,5 @@
 <template>
+  <Preloader v-if="loading" :loading="loading" />
   <div class="min-h-screen mb-24">
     <div class="upper-part h-96 sm:h-[586px] min-w-screen gradient-bg flex flex-col justify-center items-center">
       <div class="text-center text-2xl sm:text-3xl font-bold text-white">
@@ -21,7 +22,7 @@
         </div>
       </div>
       <div class="budget-restaurants">
-        <div class="text-3xl font-semibold mt-20 mb-10 text-center sm:text-left">
+        <div @click="this.$emit('stop')" class="text-3xl font-semibold mt-20 mb-10 text-center sm:text-left">
           Budget Restaurants
         </div>
         <div class="budget-restaurants-list flex flex-col sm:flex-wrap sm:flex-row">
@@ -36,33 +37,14 @@
   // import Restaurants from '~/assets/json/restaurants.json'
 
   export default {
-    setup() {
-      const supabase = useSupabaseClient();
-      const establishments = ref([])
-
-      async function fetchRestaurants() {
-        const { data, error } = await supabase
-          .from('restaurants')
-          .select()
-        if (error) {
-          console.log(error)
-        } else {
-          establishments.value = data
-          console.log(data)
-        }
-      }
-
-      onMounted(() => {
-        fetchRestaurants()
-      })
-
-      return {
-        establishments
-      }
-    },
     async beforeMount() {
       this.$emit('retrieveSession');
     },
+
+    async mounted() {
+      await this.fetchRestaurants();
+    },
+
     props: {
       session: Object,
       loggedInUser: String,
@@ -72,8 +54,26 @@
     data() {
       return {
         firstName: '',
+        establishments: {}
       }
     },
+
+    methods: {
+      async fetchRestaurants() {
+        this.loading = true;
+        const supabase = useSupabaseClient();
+        const { data, error } = await supabase
+          .from('restaurants')
+          .select()
+        if (error) {
+          console.log(error)
+        } else {
+          this.establishments = data
+          console.log(data)
+        }
+        this.loading = false;
+      }
+    }
   }
 </script>
 

@@ -1,4 +1,5 @@
 <template>
+  <Preloader v-if="loading" :loading="loading" />
   <div v-if="checkLoggedUserInfo">
     <div class="Content-Section my-10 mx-40"> <!--Content Section-->
 
@@ -158,6 +159,7 @@ export default {
       return `/profile/${this.loggedInUser}`;
     },
     async updateGeneralInfo(){
+      this.loading = true;
       const supabase = useSupabaseClient();
 
       const { data, error } = await supabase.auth.updateUser({
@@ -171,6 +173,7 @@ export default {
         }
       })
       if (error) throw error;
+      this.loading = false;
       alert('Your changes have been successfully saved!')
       this.$emit('retrieveSession')
       this.$router.push('/profile/settings')
@@ -178,13 +181,18 @@ export default {
 
     },
     async updateEmail(){
+      this.loading = true;
       const supabase = useSupabaseClient();
 
       const { data, error } = await supabase.auth.updateUser({email: this.email})
       if (error) throw error;
+
+      this.loading = false;
+
       alert('A confirmation link has been sent to both your old and new email addresses. Please confirm to update your email.')
     },
     async updatePassword(){
+      this.loading = true;
       const supabase = useSupabaseClient();
 
       const { data, error } = await supabase.rpc('verify_user_password', {password: this.currentPassword })
@@ -194,6 +202,7 @@ export default {
       if(data){
         await this.changePassword()
       }else{
+        this.loading = false;
         alert('The current password you have entered is incorrect/invalid. Please ensure that the current password you entered is correct.')
       }
 
@@ -203,10 +212,12 @@ export default {
 
       const { data, error } = await supabase.auth.updateUser({password: this.newPassword})
       if (error) throw error;
+      this.loading = false;
       alert('Your password has been successfully changed!')
 
     },
     async getRawPath(path) {
+       this.loading = true;
         const supabase = useSupabaseClient();
         this.rawFilePath = path
 
@@ -223,6 +234,8 @@ export default {
           this.imageUrl = data.publicUrl
           console.log(this.imageUrl)
         }
+
+        this.loading = false;
       },
   },
   data() {
@@ -243,7 +256,8 @@ export default {
       isImageDefault: false,
       userProfiles: UserProfiles,
       userProfile: {},
-      imageUrl: ""
+      imageUrl: "",
+      loading: true,
     };
   },
   computed: {
@@ -258,8 +272,10 @@ export default {
         this.email = this.loggedUserProfile[0].email
         this.ProfileImage = this.loggedUserProfile[0].profile_img_src
 
+        this.loading = false;
         return true
       }else{
+        this.loading = false;
         return false
       }
 
