@@ -51,8 +51,8 @@
                     </div>
                   </div>
                   <button @click="toggleUploadModal" class="mt-3 bg-green text-white px-12 py-1 rounded-3xl">Change Avatar</button>
-                  <div class="absolute top-0 bottom-0 left-0 right-0" v-if="showUploadModal"> <!-- Upload Picture Modal -->
-                    <UploadPicture @close="toggleUploadModal" @return="getImageSrc($event)"/>
+                  <div class="absolute top-0 bottom-0 left-0 right-0 z-50" v-if="showUploadModal"> <!-- Upload Picture Modal -->
+                    <UploadPicture @close="toggleUploadModal" @return="getImageSrc($event)" :loggedUserProfile="loggedUserProfile" @returnFilePath="getRawPath"/>
                   </div>
               </div>
           </div>
@@ -167,6 +167,7 @@ export default {
           last_name: this.lastName,
           school: this.school,
           username: this.username,
+          profile_img_src: this.imageUrl
         }
       })
       if (error) throw error;
@@ -204,7 +205,25 @@ export default {
       if (error) throw error;
       alert('Your password has been successfully changed!')
 
-    }
+    },
+    async getRawPath(path) {
+        const supabase = useSupabaseClient();
+        this.rawFilePath = path
+
+        console.log('What I got from the modal:' + this.rawFilePath)
+
+        // Get Image from Storage
+        const {data, error} = await supabase.storage
+          .from('profile-pictures')
+          .getPublicUrl(this.rawFilePath)
+
+        if (error) {
+          console.log(error)
+        } else {
+          this.imageUrl = data.publicUrl
+          console.log(this.imageUrl)
+        }
+      },
   },
   data() {
     return {
@@ -224,6 +243,7 @@ export default {
       isImageDefault: false,
       userProfiles: UserProfiles,
       userProfile: {},
+      imageUrl: ""
     };
   },
   computed: {
