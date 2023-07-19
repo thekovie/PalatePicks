@@ -1,4 +1,5 @@
 <template>
+    <Preloader v-if="loading" :loading="loading" />
   <div class="header sticky top-0 flex flex-wrap justify-between items-center bg-white text-green flex-row p-5 border-b min-w-screen border-solid z-10">
     <div class="left flex flex-row items-center">
       <NuxtLink class="logo font-cursive normal-case font-bold text-3xl justify-start" to="/">PalatePicks</NuxtLink>
@@ -17,7 +18,7 @@
 
   </div>
 
-  <NuxtPage :loggedInUser="loggedInUser" :session="dataSession" :loggedUserProfile="loggedUserProfile" @retrieveSession="retrieveSession" />
+  <NuxtPage :loggedInUser="loggedInUser" :session="dataSession" :loggedUserProfile="loggedUserProfile" @retrieveSession="retrieveSession"  />
 
   <div class="footer min-w-screen flex flex-col sm:flex-row sm:justify-between bg-green h-full sm:h-32 bottom-0 sm:items-center p-8 sm:px-20 text-white">
     <div class="left justify-start">
@@ -41,19 +42,24 @@ export default {
         isLoggedIn: false,
         loggedInUser: "",
         loggedUserProfile: [],
-        dataSession: {}
+        dataSession: {},
+        loading: false
       }
     },
     methods: {
       async logout() {
+        this.loading = true
         const supabase = useSupabaseClient();
         const { error } = await supabase.auth.signOut()
 
         this.dataSession = {};
         this.loggedUserProfile = []
+        this.isLoggedIn = false;
 
+        this.loading = false;
       },
       async retrieveSession(){
+        this.loading = true
         const supabase = useSupabaseClient();
 
         try{
@@ -82,7 +88,7 @@ export default {
         }catch(error){
           alert(error.message)
         }
-
+        this.loading = false
       },
       async getProfile(session){
         const supabase = useSupabaseClient();
@@ -111,7 +117,9 @@ export default {
       }else{
         this.isLoggedIn = false
       }
-
+    },
+    toggleLoading(){
+      this.loading = !this.loading
     }
 }
 

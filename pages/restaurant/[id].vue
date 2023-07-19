@@ -1,4 +1,5 @@
 <template>
+  <Preloader v-if="loading" :loading="loading" />
   <div class="min-h-screen pb-80">
     <div class="h-[250px] md:h-[586px] min-w-screen flex flex-col pl-4 md:pl-56 md:pr-64 justify-center text-white" :style="`background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Restaurant.imageHeader}); background-size: cover; background-position: center;`">
       <div class="resto-title font-bold text-3xl md:text-5xl">
@@ -127,7 +128,7 @@
         }
       },
       async getRestaurant(){
-
+        this.loading = true;
         this.Restaurant = ref([]);
 
 
@@ -149,7 +150,7 @@
             console.log('AAAAA')
           }
 
-
+          this.loading = false;
       },
 
       reviewFileTypeChecker(file) {
@@ -168,7 +169,8 @@
           filteredRestoReviews: {},
           userProfiles: UserProfiles,
           Restaurant: {},
-          rating: 0
+          rating: 0,
+          loading: true,
       }
     },
     computed: {
@@ -178,7 +180,6 @@
       await this.getRestaurant()
 
       console.log(this.Restaurant)
-
 
       // If no restaurant object is found (no keys)
       if(Object.keys(this.Restaurant).length === 0){
@@ -191,13 +192,8 @@
           if(this.loggedUserProfile.restaurantName === this.restoId){
             this.isRestoOwner = true
           }
-}
+        }
       }
-
-
-
-
-
     }
   }
 </script>

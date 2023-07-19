@@ -1,4 +1,5 @@
 <template>
+  <Preloader v-if="loading" :loading="loading" />
   <div class="flex flex-col lg:flex-row min-w-screen min-h-screen ">
 
     <!-- Login Image -->
@@ -60,7 +61,8 @@ export default {
       password: '',
       email: '',
       rememberMe: false,
-      userProfile: {}
+      userProfile: {},
+      loading: false,
     }
   },
   methods: {
@@ -69,6 +71,7 @@ export default {
 
     },
     async login(){
+      this.loading = true;
       const supabase = useSupabaseClient();
 
       try{
@@ -78,14 +81,12 @@ export default {
         });
 
         if (error) throw error;
-
-        alert("You have successfully signed in! Redirecting you to the homepage...");
         this.$router.push('/')
 
       }catch(error){
         alert(error.message);
       }
-
+      this.loading = false;
     },
   },
 

@@ -1,4 +1,5 @@
 <template>
+    <Preloader v-if="loading" :loading="loading" />
     <!-- Whole Register Division Container -->
     <div class="flex flex-col-reverse sm:flex-row bg-green_lightbg min-w-screen min-h-screen">
       <!-- Register Division -->
@@ -59,10 +60,12 @@ export default {
       image: "https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg",
       isImageDefault: true,
       errorMsg: '',
+      loading: false,
     }
   },
   methods: {
     async userRegister() {
+      this.loading = true;
       const supabase = useSupabaseClient();
 
       if (this.password !== this.confirmPass) {
@@ -73,6 +76,7 @@ export default {
         setTimeout(() => {
           this.errorMsg = "";
         }, 3000);
+        this.loading = false;
         return;
       }
 
@@ -97,6 +101,7 @@ export default {
       } catch (error) {
         alert(error.message);
       }
+      this.loading = false;
     },
   }
 }
