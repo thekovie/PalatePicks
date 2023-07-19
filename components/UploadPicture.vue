@@ -1,4 +1,5 @@
 <template>
+  <Preloader v-if="loading" :loading="loading" />
   <!-- Upload Picture Parent Container and Backdrop-->
   <div class="bg-[#000000]/50 top-0 w-[100%] h-[100%] fixed" @click.self="closeModal">
 
@@ -40,6 +41,7 @@ export default {
         supabase: useSupabaseClient(),
         uploading: false,
         rawFilePath: '',
+        loading: false,
       }
     },
     methods: {
@@ -59,11 +61,11 @@ export default {
           this.isImageDefault = true;
         }
       },
+
+
       async deleteImage(profileFileName){
-
-
-
-        try{
+        this.loading = true;
+        try {
           const { data, error } = await this.supabase
           .storage
           .from('profile-pictures')
@@ -72,11 +74,12 @@ export default {
         }catch(error){
           alert(error.message)
         }
+        this.loading = false;
       },
       async uploadImage(e) {
         const file = e.target.files[0];
         let getFile = '';
-
+        this.loading = true;
 
           if(this.loggedUserProfile[0].profile_img_src !== 'https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg'){
             console.log("EXECUTED")
@@ -115,7 +118,7 @@ export default {
         } catch(error) {
           alert(error.message)
         } finally {
-          this.uploading = false
+          this.loading = false
         }
 
         try {
@@ -134,6 +137,7 @@ export default {
           console.error('Error downloading image: ', error.message)
         }
 
+        this.uploading = false;
         this.rawFilePath = getFile;
       },
     }
