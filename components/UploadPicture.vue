@@ -3,7 +3,7 @@
   <div class="bg-[#000000]/50 top-0 w-[100%] h-[100%] fixed" @click.self="closeModal">
 
     <!-- Child Container -->
-    <div class="bg-white w-[600px] h-[600px] mt-[50px] mx-auto rounded-[10px] p-[40px] flex flex-col ">
+    <div class="bg-white w-[600px] h-[600px] mt-[50px] mx-auto rounded-[10px] p-[40px] flex flex-col">
 
       <!-- Upload Picture Caption-->
       <div class="font-bold text-[48px]">Upload your avatar</div>
@@ -22,7 +22,7 @@
       <label for="image-upload" class="cursor-pointer font-bold text-black mb-[15px] w-[100px] border-[#c0c0c0] border-[1px] text-center rounded-[5px] p-1">
         Choose file
       </label>
-      <input id="image-upload" type="file" accept="image/png, image/jpeg, image/jpg" @change="fileChange">
+      <input id="image-upload" type="file" accept="image/png, image/jpeg, image/jpg" @change="uploadImage">
 
       <!-- Finish avatar creation -->
       <button class="bg-green rounded-[34.5px] h-[40px] text-white text-[16px] mb-[34px] text-center py-[10px] cursor-pointer" @click="submitAvatar"> Submit </button>
@@ -32,35 +32,85 @@
 
 <script>
 export default {
-    props: [],
+    props: ['loggedUserProfile'],
     data(){
       return {
         isImageDefault: true,
-        image: ""
+        image: "",
+        supabase: useSupabaseClient(),
+        uploading: false,
+        rawFilePath: '',
       }
     },
     methods: {
       closeModal(){
         this.$emit('close');
+        this.$emit('return', this.image);
       },
-      fileChange(e){
-        const file = e.target.files[0];
-        this.image = URL.createObjectURL(file);
-        this.isImageDefault = false;
-        console.log(this.image);
-      },
-      submitAvatar(){
 
+      submitAvatar(){
         if(this.isImageDefault){
           alert('Please upload an avatar before submitting.');
         } else{
           this.$emit('close');
           this.$emit('return', this.image)
+          this.$emit('returnFilePath', this.rawFilePath);
+          console.log('AFTER DOWNLOAD, HERE IS RAW FILE NAME: ', this.rawFilePath);
           this.isImageDefault = true;
         }
+      },
 
 
-      }
+      async uploadImage(e) {
+        const file = e.target.files[0];
+        let getFile = '';
+
+        // Update/Upload Image
+        try {
+          this.uploading = true;
+
+          if (!file) {
+            throw new Error('You must select an image to upload.')
+          }
+          const fileExt = file.name.split('.').pop()
+          const fileName = `${this.loggedUserProfile[0].id}.${fileExt}`
+          const filePath = `${fileName}`
+
+          const {error: uploadError} = await this.supabase.storage
+            .from('profile-pictures')
+            .upload(filePath, file)
+
+          if (uploadError) {
+            throw uploadError
+          }
+
+          getFile = filePath;
+
+          console.log(getFile);
+        } catch {
+          alert(error.message)
+        } finally {
+          this.uploading = false
+        }
+
+        try {
+          const {data, error} = await this.supabase.storage
+            .from('profile-pictures')
+            .download(getFile)
+
+          if (error) {
+            throw error
+          }
+
+          const url = URL.createObjectURL(data)
+          this.image = url;
+          this.isImageDefault = false;
+        } catch (error) {
+          console.error('Error downloading image: ', error.message)
+        }
+
+        this.rawFilePath = getFile;
+      },
     }
 }
 </script>

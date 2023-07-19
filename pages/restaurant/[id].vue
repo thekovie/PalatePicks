@@ -1,13 +1,14 @@
 <template>
   <div class="min-h-screen pb-80">
-    <div class="h-[586px] min-w-screen flex flex-col pl-56 pr-64 justify-center text-white" :style="`background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Restaurant.imageHeader}); background-size: cover; background-position: center;`">
-      <div class="resto-title font-bold text-5xl">
+    <div class="h-[250px] md:h-[586px] min-w-screen flex flex-col pl-4 md:pl-56 md:pr-64 justify-center text-white" :style="`background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Restaurant.imageHeader}); background-size: cover; background-position: center;`">
+      <div class="resto-title font-bold text-3xl md:text-5xl">
         {{ Restaurant.name }}
       </div>
       <div class="resto-ratings flex mt-3">
         <div class="resto-rating text-2xl flex pr-3">
           <img v-for="i in Restaurant.rating" class="star-icon w-25 h-25" src="~/assets/icons/Star.svg" alt="star" :key="i" />
-          <img v-for="i in 5 - Restaurant.rating" class="star-icon w-25 h-25" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
+         <img v-for="i in 5 - rating" class="star-icon w-25 h-25" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
+
         </div>
         <div class="dot text-2xl pr-3">
           ·
@@ -18,17 +19,17 @@
           </span>
         </div>
       </div>
-      <div class="resto-description text-lg font-light mt-3">
+      <div class="resto-description md:text-lg font-light mt-3">
         {{ Restaurant.description }}
       </div>
     </div>
-    <div class="body px-20">
+    <div class="body px-4 md:px-20">
       <div class="gallery">
         <div class="gallery-title text-3xl font-semibold mt-20 mb-10">
           Gallery
         </div>
         <div class="gallery-photos flex overflow-x-auto">
-            <div v-for="(media, index) in Restaurant.gallery" :key="index" class="gallery-photo w-[500px] h-[500px] mr-10 mb-10">
+            <div v-for="(media, index) in Restaurant.gallery" :key="index" class="gallery-photo w-80 h-80 md:w-[500px] md:h-[500px] mr-10 mb-10">
               <img v-if="reviewFileTypeChecker(media)" class="min-w-[500px] h-full object-cover mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
               <video v-else class="min-w-[500px] h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
               <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
@@ -39,7 +40,7 @@
               </div>
           </div>
         </div>
-        <div class="reviews flex flex-row justify-between">
+        <div class="reviews flex flex-col-reverse md:flex-row justify-between">
           <div class="left-portion">
             <div class="reviews-title text-3xl font-semibold mt-20 mb-10">
               Reviews
@@ -103,15 +104,13 @@
 <script>
   import reviews from '~/assets/json/reviews.json'
   import UserProfiles from '~/assets/json/UserProfiles.json'
-  import Restaurants from '~/assets/json/restaurants.json'
-
 
   export default {
     props: {
       loggedInUser: String,
       loggedUserProfile: Object,
     },
-  methods: {
+    methods: {
       openReviewBox() {
         this.isReviewBoxOpen = true
       },
@@ -127,38 +126,77 @@
           this.isImage = false;
         }
       },
+      async getRestaurant(){
+
+        this.Restaurant = ref([]);
+
+
+
+          const { data, error } = await this.supabase
+          .from('restaurants')
+          .select()
+          .eq('name', useRoute().params.id)
+          .maybeSingle();
+
+
+          if (error) {
+            console.log(error)
+          }
+          if(data){
+            console.log(data);
+            this.Restaurant = data;
+            this.rating = data.rating
+            console.log('AAAAA')
+          }
+
+
+      },
+
       reviewFileTypeChecker(file) {
         return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
       },
     },
     data() {
       return {
+          supabase: useSupabaseClient(),
           restoId: useRoute().params.id,
           isReviewBoxOpen: false,
           isRestoOwner: false,
-          restaurant: Restaurants,
           showMediaView: false,
           selectedMedia: '',
           restoReviews: reviews,
           filteredRestoReviews: {},
           userProfiles: UserProfiles,
-
+          Restaurant: {},
+          rating: 0
       }
     },
     computed: {
-      Restaurant() {
-        return this.restaurant.filter((restaurant) => restaurant.name  === this.restoId)[0]
-      }
+
     },
-    mounted(){
-      this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId)
+    async mounted(){
+      await this.getRestaurant()
 
-    //   if(!(this.loggedInUser === '')){
+      console.log(this.Restaurant)
 
-    //     if(this.loggedUserProfile.restaurantName === this.restoId){
-    //       this.isRestoOwner = true
-    //     }
-    // }
+
+      // If no restaurant object is found (no keys)
+      if(Object.keys(this.Restaurant).length === 0){
+        throw createError({ statusCode: 404, statusMessage: 'Restaurant not found...', fatal: true})
+      }else{
+
+        this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId);
+
+        if(!(this.loggedInUser === '')){
+          if(this.loggedUserProfile.restaurantName === this.restoId){
+            this.isRestoOwner = true
+          }
+}
+      }
+
+
+
+
 
     }
   }

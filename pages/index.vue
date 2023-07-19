@@ -1,30 +1,30 @@
 <template>
   <div class="min-h-screen mb-24">
-    <div class="upper-part h-[586px] min-w-screen gradient-bg flex flex-col justify-center items-center">
-      <div class="text-center text-3xl font-bold text-white">
-          <span v-show="!(loggedInUser === '')">Hi, {{ firstName }}!</span> What are you craving lately?
+    <div class="upper-part h-96 sm:h-[586px] min-w-screen gradient-bg flex flex-col justify-center items-center">
+      <div class="text-center text-2xl sm:text-3xl font-bold text-white">
+          <span v-if="loggedUserProfile.length">Hi, {{ loggedUserProfile[0].first_name }}!</span> What are you craving lately?
       </div>
       <div class="search-center-box mt-4 flex">
-        <input type="text" class="search-bar w-[600px] bg-white h-14 rounded-s-3xl pl-4 pr-4 focus:outline-none" placeholder="Search restaurant here" />
+        <input type="text" class="search-bar sm:w-[600px] bg-white h-14 rounded-s-3xl pl-4 pr-4 focus:outline-none" placeholder="Search restaurant here" />
         <div class="search-btn w-16 h-14 pr-10 rounded-e-3xl pt-4 bg-white items-center">
           <img class="w-5 h-5 bg-white" src="~/assets/icons/Search.svg" alt="search" />
         </div>
       </div>
     </div>
-    <section class="homepage px-20">
+    <section class="homepage px-1 sm:px-20">
       <div class="top-restaurants">
-        <div class="text-3xl font-semibold mt-20 mb-10">
+        <div class="text-3xl font-semibold mt-20 mb-10 text-center sm:text-left">
           Top Restaurants
         </div>
-        <div class="top-restaurants-list flex flex-wrap">
-          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
+        <div class="top-restaurants-list flex flex-col sm:flex-wrap sm:flex-row">
+          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" :restaurant="establishments" />
         </div>
       </div>
       <div class="budget-restaurants">
-        <div class="text-3xl font-semibold mt-20 mb-10">
+        <div class="text-3xl font-semibold mt-20 mb-10 text-center sm:text-left">
           Budget Restaurants
         </div>
-        <div class="budget-restaurants-list flex flex-wrap">
+        <div class="budget-restaurants-list flex flex-col sm:flex-wrap sm:flex-row">
           <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
         </div>
       </div>
@@ -33,25 +33,47 @@
 </template>
 
 <script>
-  import Restaurants from '~/assets/json/restaurants.json'
+  // import Restaurants from '~/assets/json/restaurants.json'
 
   export default {
-    mounted() {
-      if (this.loggedInUser !== '') {
-        this.firstName = this.loggedUserProfile.firstName
+    setup() {
+      const supabase = useSupabaseClient();
+      const establishments = ref([])
+
+      async function fetchRestaurants() {
+        const { data, error } = await supabase
+          .from('restaurants')
+          .select()
+        if (error) {
+          console.log(error)
+        } else {
+          establishments.value = data
+          console.log(data)
+        }
+      }
+
+      onMounted(() => {
+        fetchRestaurants()
+      })
+
+      return {
+        establishments
       }
     },
+    async beforeMount() {
+      this.$emit('retrieveSession');
+    },
     props: {
+      session: Object,
       loggedInUser: String,
-      loggedUserProfile: Object
+      loggedUserProfile: Array
     },
 
     data() {
       return {
-        establishments: Restaurants,
         firstName: '',
       }
-    }
+    },
   }
 </script>
 
