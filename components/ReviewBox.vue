@@ -65,7 +65,7 @@
         </div>
 
         <div v-if="showModifyReview" @close="toggleModifyReview">
-          <ModifyReview @close="toggleModifyReview" :reviewSubject="reviewSubject" :reviewerPhotoSrc="reviewerPhotoSrc" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile"/>
+          <ModifyReview @close="toggleModifyReview" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile"/>
         </div>
 
         <div v-if="showMediaView" @close="toggleMediaView">

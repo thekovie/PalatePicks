@@ -17,7 +17,7 @@
       </div>
       <div class="review-part flex pt-8">
         <div class="reviewer-photo w-20 h-20 rounded-full mr-3 border-4 border-green">
-            <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile.profileImgSrc" alt="user" />
+            <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile[0].profile_img_src" alt="user" />
         </div>
         <div class="review-content flex flex-col gap-5 mt-1">
           <div class="review-title">
