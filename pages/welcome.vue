@@ -1,4 +1,5 @@
 <template>
+  <Preloader v-if="loading" :loading="loading" />
   <div v-if="checkIfNewUser" class="min-h-screen mx-4 sm:mt-32 sm:mx-60 md:mx-10">
     <div class="side-to-side flex flex-col sm:flex-row justify-center">
       <div class="left-side flex flex-col border-grey border-b sm:border-r sm:border-b-0 border-grey-300 pr-10 py-20">
@@ -18,14 +19,21 @@
           <div class="bg-green min-w-[250px] min-h-[250px] max-w-[250px] max-h-[250px] rounded-[100%] p-[3px] m-[10px] cursor-pointer">
             <div class="bg-white w-full h-full rounded-[100%]">
               <!-- <div v-if="isImageDefault" class="default-user-img w-[100%] h-[100%] rounded-[100%] relative mx-auto top-[28px]"></div> -->
-              <img :src="ProfileImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover bg-white object-center">
+              <img :src="localImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover bg-white object-center">
             </div>
           </div>
-          <button v-if="(image === '')" @click="toggleUploadModal" class="mt-10 bg-green text-white px-12 py-1 rounded-3xl">Upload Avatar</button>
-          <button v-else @click="updateImage" class="mt-10 bg-green text-white px-12 py-1 rounded-3xl">Save Avatar</button>
-          <div class="absolute top-0 bottom-0 left-0 right-0" v-if="showUploadModal"> <!-- Upload Picture Modal -->
-            <UploadPicture @close="toggleUploadModal" @return="getImageSrc" @returnFilePath="getRawPath" :loggedUserProfile="loggedUserProfile"/>
+          <div class="mt-3">
+            <div>
+              <label for="image-upload" class="cursor-pointer font-bold text-black mb-[15px] w-[100px] border-[#c0c0c0] border-[1px] text-center rounded-[5px] p-1">
+                Choose Image
+              </label>
+              <input id="image-upload" type="file" accept="image/png, image/jpeg, image/jpg" @change="chooseFile">
+            </div>
+
+            <button class="cursor-pointer bg-green text-white mb-[15px] w-[100px] border-[#c0c0c0] border-[1px] text-center rounded-[5px] p-1" @click="addProfilePicture">Save Avatar</button>
+
           </div>
+
         </div>
       </div>
     </div>
@@ -49,51 +57,125 @@
         isImageDefault: true,
         ProfileImage: "https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg",
         rawFilePath: '',
+        fileLoc: null,
+        localImage: "https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg",
+        avatarName: "",
+        supabase: useSupabaseClient(),
       }
     },
     methods: {
       toggleUploadModal() {
         this.showUploadModal = !this.showUploadModal
       },
-      getImageSrc(image) {
-        this.image = image
-        this.isImageDefault = false
-        this.ProfileImage = this.image
-      },
-      async getRawPath(path) {
-        const supabase = useSupabaseClient();
-        this.rawFilePath = path
+      chooseFile(event){
+        const file = event.target.files[0];
 
-        console.log('What I got from the modal:' + this.rawFilePath)
+        this.fileLoc = file;
+        this.localImage = URL.createObjectURL(file);
 
-        // Get Image from Storage
-        const {data, error} = await supabase.storage
+        const fileExt = this.fileLoc.name.split('.').pop();
+
+
+        this.avatarName = `${Math.random()}.${fileExt}`;
+
+        console.log(this.avatarName)
+
+
+    },
+    async addProfilePicture(){
+      this.loading = true;
+      let imageName = "";
+      let imageUrl = "";
+
+      const supabase = useSupabaseClient();
+
+
+        // UPLOAD PICTURE
+        try{
+          const { data, error } = await this.supabase.storage
           .from('profile-pictures')
-          .getPublicUrl(this.rawFilePath)
+          .upload(`${this.loggedUserProfile[0].id}/${this.avatarName}`, this.fileLoc, {
+            cacheControl: 3600,
+            upsert: false,
+          })
 
-        if (error) {
+
+        }catch(error){
           console.log(error)
-        } else {
-          this.image = data.publicUrl
-          console.log(this.image)
         }
-      },
-      async updateImage() {
-        const supabase = useSupabaseClient();
 
-        // Update User Profile Image
-        const {data, error} = await supabase.auth.updateUser({
-          data: {
-            profile_img_src: this.image
+
+        try{
+          const { data, error } = await this.supabase.storage
+          .from('profile-pictures')
+          .list(`${this.loggedUserProfile[0].id}/`)
+
+          imageName = data[0].name;
+
+          console.log('GHJADWGHJAWGJHAWDJHGADW')
+          console.log(imageName)
+
+          try{
+
+            const{data, error} = await this.supabase.storage
+            .from('profile-pictures')
+            .getPublicUrl(`${this.loggedUserProfile[0].id}/${imageName}`)
+
+
+            if(error){
+              throw error;
+            }
+          }catch(error){
+            console.log(error)
           }
-        })
-        if (error) {
+
+
+        }catch(error){
           console.log(error)
-        } else {
-          alert("Profile picture has been updated!")
-          this.$router.push('/')
         }
-      }
+
+
+
+
+
+
+
+
+        try{
+            const { data, error } = await this.supabase.storage
+            .from('profile-pictures')
+            .getPublicUrl(`${this.loggedUserProfile[0].id}/${imageName}`)
+
+            if(error){
+              throw error;
+            }
+
+            imageUrl = data.publicUrl;
+
+          }catch(error){
+            console.log(error)
+          }
+
+
+
+
+
+
+      const { data, error } = await supabase.auth.updateUser({
+        data: {
+          profile_img_src: imageUrl
+        }
+      })
+      if (error) throw error;
+      this.loading = false;
+      alert('Your changes have been successfully saved!')
+      this.$emit('retrieveSession')
+      this.$router.push('/')
+
+
+
+    },
+
     },
     computed: {
       checkIfNewUser() {
@@ -104,7 +186,7 @@
             this.$router.push('/')
           }
         } else {
-          this.$router.push('/')
+          //this.$router.push('/')
           return false;
         }
       }
