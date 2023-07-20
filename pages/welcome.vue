@@ -104,6 +104,7 @@
             this.$router.push('/')
           }
         } else {
+          this.$router.push('/')
           return false;
         }
       }
