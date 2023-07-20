@@ -135,8 +135,8 @@ export default {
   props: {
     loggedInUser: String,
     loggedUserProfile: Array,
-    session: Object
   },
+  emits: ["retrieveSession"],
   methods: {
     saveChanges(){
       alert('Your changes have been successfully saved!');
@@ -268,11 +268,6 @@ export default {
 
 
 
-
-
-
-
-
         try{
             const { data, error } = await this.supabase.storage
             .from('profile-pictures')
@@ -283,6 +278,7 @@ export default {
             }
 
             imageUrl = data.publicUrl;
+            this.finalImageUrl = imageUrl;
 
           }catch(error){
             console.log(error)
@@ -303,6 +299,24 @@ export default {
           profile_img_src: imageUrl
         }
       })
+
+
+      try{
+        const { error } = await supabase
+        .from('profiles')
+        .update({ bio: this.bio, first_name: this.firstName, last_name: this.lastName, school: this.school, username: this.username, profile_img_src: this.finalImageUrl })
+        .eq('id', this.loggedUserProfile[0].id)
+
+
+        if(error){
+          throw error
+        }
+      }catch(error){
+
+      }
+
+
+
       if (error) throw error;
       this.loading = false;
       alert('Your changes have been successfully saved!')
@@ -382,6 +396,7 @@ export default {
       localImage: "",
       avatarName: "",
       supabase: useSupabaseClient(),
+      finalImageUrl: ""
     };
   },
   computed: {

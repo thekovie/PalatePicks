@@ -18,7 +18,7 @@
 
   </div>
 
-  <NuxtPage :loggedInUser="loggedInUser" :session="dataSession" :loggedUserProfile="loggedUserProfile" @retrieveSession="retrieveSession"  />
+  <NuxtPage :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" @retrieveSession="retrieveSession"  />
 
   <div class="footer min-w-screen flex flex-col sm:flex-row sm:justify-between bg-green h-full sm:h-32 bottom-0 sm:items-center p-8 sm:px-20 text-white">
     <div class="left justify-start">
@@ -63,10 +63,12 @@ export default {
         const supabase = useSupabaseClient();
 
         try{
-          const { data, error } = await supabase.auth.getSession();
+          const { data, error } = await supabase.auth.refreshSession()
+          const { session, user} = data
 
           console.log('RETRIEVED DATA SESSION')
-          console.log(data)
+          console.log(session)
+          console.log(user)
 
           if(data.session !== null){
             this.isLoggedIn = true;
@@ -100,6 +102,24 @@ export default {
           console.log(session.session.user.user_metadata.username)
           console.log(data)
           this.loggedUserProfile = data;
+
+          try{
+            const { data, error } = await supabase.auth.updateUser({
+            data: {
+              bio: this.loggedUserProfile[0].bio,
+              first_name: this.loggedUserProfile[0].first_name,
+              last_name: this.loggedUserProfile[0].last_name,
+              school: this.loggedUserProfile[0].school,
+              username: this.loggedUserProfile[0].username,
+              profile_img_src: this.loggedUserProfile[0].profile_img_src
+            }
+            })
+            if(error){
+              throw error;
+            }
+          }catch(error){
+            console.log(error)
+          }
 
         }catch(error){
           alert(error.message)

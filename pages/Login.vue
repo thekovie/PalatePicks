@@ -55,6 +55,7 @@ export default {
     loggedInUser: String,
     loggedUserProfile: Object
   },
+  emits: ['retrieveSession'],
   data(){
     return {
       userName: '',

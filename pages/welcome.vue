@@ -1,5 +1,5 @@
 <template>
-  <Preloader v-if="loading" :loading="loading" />
+  <Preloader v-if="loading" :loading="loading" class="z-50"/>
   <div v-if="checkIfNewUser" class="min-h-screen mx-4 sm:mt-32 sm:mx-60 md:mx-10">
     <div class="side-to-side flex flex-col sm:flex-row justify-center">
       <div class="left-side flex flex-col border-grey border-b sm:border-r sm:border-b-0 border-grey-300 pr-10 py-20">
@@ -46,7 +46,6 @@
       this.$emit('retrieveSession');
     },
     props: {
-      session: Object,
       loggedInUser: String,
       loggedUserProfile: Array
     },
@@ -61,6 +60,7 @@
         localImage: "https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg",
         avatarName: "",
         supabase: useSupabaseClient(),
+        loading: true
       }
     },
     methods: {
@@ -92,6 +92,7 @@
 
         // UPLOAD PICTURE
         try{
+
           const { data, error } = await this.supabase.storage
           .from('profile-pictures')
           .upload(`${this.loggedUserProfile[0].id}/${this.avatarName}`, this.fileLoc, {
@@ -134,13 +135,6 @@
           console.log(error)
         }
 
-
-
-
-
-
-
-
         try{
             const { data, error } = await this.supabase.storage
             .from('profile-pictures')
@@ -166,6 +160,19 @@
           profile_img_src: imageUrl
         }
       })
+
+
+      try{
+        const { error } = await supabase
+        .from('profiles')
+        .update({ profile_img_src: imageUrl })
+        .eq('id', this.loggedUserProfile[0].id)
+
+      }catch(error){
+        console.log(error)
+      }
+
+
       if (error) throw error;
       this.loading = false;
       alert('Your changes have been successfully saved!')
@@ -179,17 +186,21 @@
     },
     computed: {
       checkIfNewUser() {
+        this.loading = true
         if (this.loggedUserProfile.length) {
           if (this.loggedUserProfile[0].profile_img_src === 'https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg') {
+            this.loading = false
             return true;
           } else {
             this.$router.push('/')
           }
         } else {
-          //this.$router.push('/')
           return false;
         }
       }
+    },
+    mounted(){
+
     }
   }
 </script>
