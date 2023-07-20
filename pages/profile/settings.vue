@@ -225,7 +225,7 @@ export default {
           const { data, error } = await this.supabase.storage
           .from('profile-pictures')
           .upload(`${this.loggedUserProfile[0].id}/${this.avatarName}`, this.fileLoc, {
-            cacheControl: 3600,
+            cacheControl: 0,
             upsert: false,
           })
 

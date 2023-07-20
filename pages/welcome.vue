@@ -95,8 +95,8 @@
 
           const { data, error } = await this.supabase.storage
           .from('profile-pictures')
-          .upload(`${this.loggedUserProfile[0].id}/${this.avatarName}`, this.fileLoc, {
-            cacheControl: 3600,
+          .upload(`${this.loggedUserProfile[0].id}/avatar`, this.fileLoc, {
+            cacheControl: 0,
             upsert: false,
           })
 
