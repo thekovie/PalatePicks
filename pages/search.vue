@@ -4,6 +4,9 @@
     <div class="mx-40 my-10">
       <h1 class="text-2xl font-bold">Search results for</h1>
       <p class="text-lg">"{{ search }}"</p>
+      <NuxtLink to="/">
+        <button class="back-button bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 my-5">Back to Home</button>
+      </NuxtLink>
       <div class="mt-5 flex flex-wrap">
         <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
       </div>
