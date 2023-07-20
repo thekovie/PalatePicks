@@ -46,9 +46,11 @@
           View Comments
         </button>
 
-        <button v-show="username === loggedInUser" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
-          Modify Review
-        </button>
+        <div v-if="loggedUserProfile.length">
+          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
+            Modify Review
+          </button>
+        </div>
 
 
         <button v-if="isRestoOwner" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
@@ -56,10 +58,11 @@
         </button>
 
 
-
-        <button v-show="!isRestoOwner && (username !== loggedInUser) && (loggedInUser !== '')" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
-          Mark as Helpful
-        </button>
+        <div v-if="loggedUserProfile.length">
+          <button v-if="!isRestoOwner && (username !== loggedUserProfile[0].username)" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+            Mark as Helpful
+          </button>
+        </div>
 
         <div v-if="showModifyReview" @close="toggleModifyReview">
           <ModifyReview @close="toggleModifyReview" :reviewSubject="reviewSubject" :reviewerPhotoSrc="reviewerPhotoSrc" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile"/>
@@ -70,7 +73,7 @@
         </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
-          <FullReview @close="toggleFullReview" :userProfile="userProfile" :username="username" :loggedInUser="loggedInUser" :isRestoOwner="isRestoOwner" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :comments="comments"/>
+          <FullReview @close="toggleFullReview" :userProfile="userProfile" :username="username" :isRestoOwner="isRestoOwner" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :reviewId="reviewId" />
         </div>
       </div>
     </div>
@@ -78,7 +81,6 @@
 </template>
 
 <script>
-import UserProfiles from '~/assets/json/UserProfiles.json'
 
 export default {
   props: {
@@ -109,15 +111,15 @@ export default {
     gallery: {
       type: Array
     },
-    loggedInUser: {
-      type: String
-    },
     loggedUserProfile: {
       type: Object
     },
     restoId: {
       type: String
-    }
+    },
+    reviewId: {
+      type: String
+    },
   },
   data() {
     return{
@@ -130,7 +132,6 @@ export default {
       lastName: "",
       profileImgSrc: "",
       school: "",
-      userProfiles: UserProfiles,
       userProfile: {},
     }
   },
@@ -155,14 +156,31 @@ export default {
     },
     getProfileLink(username) {
       return `/profile/${username}`;
+    },
+
+    async getuserInfo() {
+      const supabase = useSupabaseClient();
+
+      try {
+        const { data, error } = await supabase
+        .from('profiles')
+        .select()
+        .eq('username', this.username)
+
+        this.userProfile = data[0]
+      } catch (error) {
+        console.log(error)
+      }
     }
+
   },
-  mounted() {
-    this.userProfile = this.userProfiles.filter((userProfiles) => userProfiles.username === this.username)[0]
+  async mounted() {
+    await this.getuserInfo()
+
     this.school = this.userProfile.school
-    this.profileImgSrc = this.userProfile.profileImgSrc
-    this.firstName = this.userProfile.firstName
-    this.lastName = this.userProfile.lastName
+    this.profileImgSrc = this.userProfile.profile_img_src
+    this.firstName = this.userProfile.first_name
+    this.lastName = this.userProfile.last_name
 
 
   }

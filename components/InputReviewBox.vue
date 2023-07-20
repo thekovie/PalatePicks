@@ -208,14 +208,8 @@ export default {
         const {data, error} = await this.supabase.storage
         .from('reviews-gallery')
         .list(`${reviewId}/`);
-        console.log(`Finding files in ${reviewId}/`)
-        console.log(data);
-        // console.log(data.url);
-        // console.log(data[0].review_id);
-        // const reviewId = data[0].review_id;
 
         mediaFiles = data.map((file) => `${reviewId}/${file.name}`);
-        console.log(mediaFiles);
 
 
         try {
@@ -265,8 +259,9 @@ export default {
         console.log(error);
       }
       finally {
-        this.$emit('close');
         this.loading = false;
+        this.$emit('close');
+        this.$router.push(`/restaurants/${this.name}`);
       }
     },
   },

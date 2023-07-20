@@ -5,7 +5,7 @@
 
 
     <!-- Main Review Div Container-->
-    <div class="bg-green_lightbg flex flex-col w-[1200px] h-[85%] mx-auto rounded-[28px] self-center overflow-y-auto py-[60px] pl-[53px] pr-[131px]">
+    <div class="bg-green_lightbg flex flex-col w-[1200px] h-[85%] mx-auto rounded-[28px] self-center overflow-y-auto py-[60px] px-20">
 
         <!-- Review Header -->
         <div class="flex flex-row justify-between">
@@ -15,12 +15,12 @@
           <div class="flex">
               <!-- Profile Picture-->
               <div class="bg-green min-w-[104px] min-h-[104px] max-w-[104px] max-h-[104px] rounded-[100%] p-[2.69px]">
-                <img class="w-full h-full rounded-full object-cover" :src="userProfile.profileImgSrc" alt="user" />
+                <img class="w-full h-full rounded-full object-cover" :src="userProfile.profile_img_src" alt="user" />
               </div>
 
               <!-- User Info-->
               <div class="ml-[17px]">
-                <p class="font-bold text-[28px]">{{ userProfile.firstName }} {{ userProfile.lastName }}</p>
+                <p class="font-bold text-[28px]">{{ userProfile.first_name }} {{ userProfile.last_name }}</p>
                 <p class="text-grey text-[16px] hover:underline cursor-pointer"> <router-link :to="getProfileLink(username)">@{{ userProfile.username }}</router-link></p>
                 <p class="text-grey text-[16px]">{{ userProfile.school }}</p>
                 <div class="flex flex-row relative left-[-3px]">
@@ -58,25 +58,25 @@
         </div>
 
         <!-- Mark as Helpful button (If user is Logged in)-->
-        <button v-if="!(loggedInUser === '') && !(loggedInUser === username) && !isRestoOwner" class="min-w-[205px] min-h-[50px] rounded-[41px] bg-green text-white relative top-[66px] self-end">Mark as Helpful</button>
+        <button v-if="(loggedUserProfile.length) && (loggedUserProfile[0].username !== username) && !isRestoOwner" class="min-w-[205px] min-h-[50px] rounded-[41px] bg-green text-white relative top-[66px] self-end">Mark as Helpful</button>
 
         <!-- Comment Section Header -->
         <div class="font-bold text-[33px] mt-[70px]">Comments</div>
 
 
         <!-- Write Comment Section -->
-        <div v-if="(loggedInUser !== '')" class="flex flex-row mt-[16px]">
+        <div v-if="(loggedUserProfile.length)" class="flex flex-row mt-[16px]">
 
           <!-- Profile Picture-->
           <div class="bg-green min-w-[71px] min-h-[71px] max-w-[71px] max-h-[71px] rounded-[100%] p-[1.94px] mr-[21px]">
-            <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile.profileImgSrc" alt="user" />
+            <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile[0].profile_img_src" alt="user" />
           </div>
 
           <!-- Write Comment Text Area-->
-          <textarea class="resize-y border-green border-[1px] rounded-[15px] w-[852px] px-[25px] py-[20px] mr-[18px]" placeholder="Write a comment..."></textarea>
+          <textarea v-model="commentField" class="resize-y border-green border-[1px] rounded-[15px] w-[852px] px-[25px] py-[20px] mr-[18px]" placeholder="Write a comment..."></textarea>
 
           <!-- Send button -->
-          <div class="bg-green min-h-[48px] min-w-[48px] max-h-[48px] max-w-[48px] rounded-full justify-self-end mt-[15px] flex cursor-pointer">
+          <div class="bg-green min-h-[48px] min-w-[48px] max-h-[48px] max-w-[48px] rounded-full justify-self-end mt-[15px] flex cursor-pointer" @click="pushComment">
             <img class="self-center mx-auto relative left-[-1px] top-[2px]" src="~/assets/icons/Navigation-01.svg" />
           </div>
         </div>
@@ -92,29 +92,22 @@
 
         <!-- Comments are shown if there are comments (obviously)-->
         <div v-if="comments.length > 0">
-
           <div v-for="comment in comments" :key="comment.commentID" class="flex flex-col">
+            <Comment :comment="comment" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId" :isRestoOwner="isRestoOwner"/>
 
-
-            <Comment :comment="comment"/>
-
-
-            <!-- Comment Replies -->
-            <div v-if="comment.replies.length > 0">
+            <!-- Comment Replies | THIS FEATURE IS DEPRECATED -->
+            <!-- <div v-if="comment.replies.length > 0">
               <div v-for="reply in comment.replies" :key="reply.date" class="ml-[95px] mt-[75px]">
-
                 <Comment :comment="reply"/>
 
               </div>
-            </div>
+            </div> -->
 
             <!-- Comment Border-->
             <div class="w-[100%] min-h-[2px] max-h-[2px] bg-[#d9d9d9] mt-[82px] mb-[47.5px]"></div>
-
           </div>
-
-
         </div>
+        <div v-else class="text-[20px] mt-[50px]">No comments yet.</div>
 
 
     </div>
@@ -149,21 +142,18 @@ export default {
       helpfulCount: {
         type: Number
       },
-      comments: {
-        type: Array
-      },
       gallery: {
         type: Array
-      },
-      loggedInUser: {
-        type: String
       },
       loggedUserProfile: {
         type: Object
       },
       isRestoOwner: {
         type: Boolean
-      }
+      },
+      reviewId: {
+        type: String
+      },
     },
 
   data(){
@@ -172,6 +162,8 @@ export default {
       showMediaView: false,
       selectedMedia: '',
       isImage: '',
+      commentField: '',
+      comments: {},
     }
   },
 
@@ -194,7 +186,56 @@ export default {
       reviewFileTypeChecker(file) {
         return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
       },
+      async getComments() {
+        try {
+          const supabase = useSupabaseClient();
+
+          const { data, error } = await supabase
+            .from('comments')
+            .select('*')
+            .eq('review_ref', this.reviewId)
+            .order('created_at', { ascending: true });
+
+          if (error) {
+            throw error;
+          }
+          this.comments = data;
+
+        } catch(error) {
+          console.log(error);
+        }
+      },
+
+      async pushComment() {
+        try {
+          const supabase = useSupabaseClient();
+
+          const { data, error } = await supabase
+            .from('comments')
+            .insert([
+              {
+                review_ref: this.reviewId,
+                username: this.loggedUserProfile[0].username,
+                content: this.commentField,
+              }
+            ]);
+
+          if (error) {
+            throw error;
+          }
+          alert('Comment posted!')
+          this.commentField = '';
+          this.getComments();
+
+        } catch(error) {
+          console.log(error);
+        }
+      },
     },
+
+  async mounted() {
+    await this.getComments();
+  },
 }
 </script>
 
