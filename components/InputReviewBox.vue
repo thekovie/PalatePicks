@@ -261,7 +261,7 @@ export default {
       finally {
         this.loading = false;
         this.$emit('close');
-        this.$router.push(`/restaurants/${this.name}`);
+        this.$router.push(`/restaurant/${this.name}`);
       }
     },
   },
