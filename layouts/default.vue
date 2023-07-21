@@ -22,7 +22,7 @@
 
   <div class="footer min-w-screen flex flex-col sm:flex-row sm:justify-between bg-green h-full sm:h-32 bottom-0 sm:items-center p-8 sm:px-20 text-white">
     <div class="left justify-start">
-      <div class="logo font-cursive normal-case font-bold text-3xl" @click="logout">PalatePicks</div>
+      <div class="logo font-cursive normal-case font-bold text-3xl">PalatePicks</div>
       <div class="font-light">Fueling Student Appetites, One Bite at a Time</div>
     </div>
     <div class="right mt-10 sm:mt-0 sm:text-right text-xs sm:justify-end">
@@ -56,7 +56,12 @@ export default {
         this.loggedUserProfile = []
         this.isLoggedIn = false;
 
+
         this.loading = false;
+
+        location.reload(true)
+
+
       },
       async retrieveSession(){
         this.loading = true
@@ -101,23 +106,7 @@ export default {
           console.log(data)
           this.loggedUserProfile = data;
 
-          try{
-            const { data, error } = await supabase.auth.updateUser({
-            data: {
-              bio: this.loggedUserProfile[0].bio,
-              first_name: this.loggedUserProfile[0].first_name,
-              last_name: this.loggedUserProfile[0].last_name,
-              school: this.loggedUserProfile[0].school,
-              username: this.loggedUserProfile[0].username,
-              profile_img_src: this.loggedUserProfile[0].profile_img_src
-            }
-            })
-            if(error){
-              throw error;
-            }
-          }catch(error){
-            console.log(error)
-          }
+
 
         }catch(error){
           alert(error.message)
