@@ -1,5 +1,6 @@
 <template>
-<div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex" @click.self="closeModifyReview">
+  <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex" @click.self="closeModifyReview">
+  <CustomLoader v-if="loading" :loading="loading" :status="status" />
   <div class="bg-green_lightbg flex flex-col w-[1000px] h-[70%] mx-auto rounded-[28px] self-center overflow-y-auto py-12 px-10">
     <h2 class="rate-title font-semibold text-3xl">Modify your Review</h2>
     <div class="font-light text-grey text-lg">Change of heart? Write them down (or delete it).</div>
@@ -48,9 +49,11 @@
               </div>
             </div>
             <div v-else class="add-media flex flex-col items-center justify-center w-[90px] h-[90px] p-4 mr-6 mb-6 rounded-3xl border-2 border-grey cursor-pointer">
-              <img v-if="mediaItems.length < 5" src="~/assets/images/camera-icon.png" alt="camera icon" @click="openFileInput"/>
-              <div class=" text-xs"> {{ mediaItems.length }} / 5</div>
-              <input ref="fileInput" type="file" accept="image/*, video/*" class="block" @change="handleFileUpload" />
+              <label for="media-upload" class="flex flex-col items-center justify-center">
+                <img v-if="mediaItems.length < 5" src="~/assets/images/camera-icon.png" alt="camera icon"/>
+                <div class="text-xs"> {{ mediaItems.length }} / 5</div>
+              </label>
+              <input id="media-upload" ref="fileInput" type="file" accept="image/*, video/*" class="block" @change="handleFileUpload" />
             </div>
           </div>
 
@@ -131,6 +134,7 @@
         reviewContent: this.mainReview,
         fileLocs: [],
         loading: false,
+        status: ''
       };
     },
     mounted() {
@@ -205,6 +209,7 @@
       async updateReview(event) {
         event.preventDefault();
 
+        this.status = 'Updating review...';
         this.loading = true;
 
 
@@ -387,6 +392,8 @@
       },
 
       async deleteReview() {
+        this.status = 'Deleting review...';
+        this.loading = true;
 
         if (!confirm("Are you sure you want to delete this review?")) {
           return;
@@ -435,8 +442,15 @@
         finally {
           this.$emit('update');
           this.$emit('close');
+          this.loading = false;
         }
       },
     }
   }
 </script>
+
+<style scoped>
+  input[type="file"] {
+    display: none;
+  }
+</style>

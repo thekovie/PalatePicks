@@ -7,7 +7,7 @@
         <circle class="spinner_qM83 spinner_ZTLf" cx="20" cy="12" r="3" fill="green"/>
       </svg>
     </div>
-    <div class="text-2xl font-semibold mt-4 text-green">Loading...</div>
+    <div class="text-2xl font-semibold mt-4 text-green">{{ this.status }}</div>
   </div>
 </template>
 
@@ -17,7 +17,10 @@
       loading: {
         type: Boolean,
         required: true,
-      }
+      },
+      status: {
+        type: String,
+      },
     },
   }
 </script>
