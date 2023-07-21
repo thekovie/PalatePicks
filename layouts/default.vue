@@ -63,12 +63,10 @@ export default {
         const supabase = useSupabaseClient();
 
         try{
-          const { data, error } = await supabase.auth.refreshSession()
-          const { session, user} = data
-
+          const { data, error } = await supabase.auth.getSession()
           console.log('RETRIEVED DATA SESSION')
-          console.log(session)
-          console.log(user)
+          console.log(data)
+
 
           if(data.session !== null){
             this.isLoggedIn = true;

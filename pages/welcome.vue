@@ -95,7 +95,7 @@
 
           const { data, error } = await this.supabase.storage
           .from('profile-pictures')
-          .upload(`${this.loggedUserProfile[0].id}/avatar`, this.fileLoc, {
+          .upload(`${this.loggedUserProfile[0].id}/${this.avatarName}`, this.fileLoc, {
             cacheControl: 0,
             upsert: false,
           })
@@ -160,17 +160,6 @@
           profile_img_src: imageUrl
         }
       })
-
-
-      try{
-        const { error } = await supabase
-        .from('profiles')
-        .update({ profile_img_src: imageUrl })
-        .eq('id', this.loggedUserProfile[0].id)
-
-      }catch(error){
-        console.log(error)
-      }
 
 
       if (error) throw error;

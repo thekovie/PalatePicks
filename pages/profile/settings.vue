@@ -278,7 +278,6 @@ export default {
             }
 
             imageUrl = data.publicUrl;
-            this.finalImageUrl = imageUrl;
 
           }catch(error){
             console.log(error)
@@ -301,20 +300,6 @@ export default {
       })
 
 
-      try{
-        const { error } = await supabase
-        .from('profiles')
-        .update({ bio: this.bio, first_name: this.firstName, last_name: this.lastName, school: this.school, username: this.username, profile_img_src: this.finalImageUrl })
-        .eq('id', this.loggedUserProfile[0].id)
-
-
-        if(error){
-          throw error
-        }
-      }catch(error){
-
-      }
-
 
 
       if (error) throw error;
@@ -323,15 +308,6 @@ export default {
       this.$emit('retrieveSession')
       this.$router.push('/profile/settings')
 
-      // try{
-      //   const { data, error } = await supabase.auth.getSession();
-
-      //   console.log('DATAAA')
-      //   console.log()
-
-      // }catch(error){
-      //   console.log(error)
-      // }
 
 
     },
