@@ -13,19 +13,17 @@
     <div class="user-reviews px-20 mt-4">
       <p class="font-bold p-3">View {{ Profile.first_name }}'s Reviews</p>
       <div class="reviews-list flex flex-col gap-8 mb-24">
-        <UserReview v-for="review in filteredReviews" :key="review.reviewId" :username="review.username" :loggedInUser="loggedInUser" :restoName="review.restoID" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
+        <UserReview v-for="review in reviews" :key="review" :username="review.username" :loggedUserProfile="loggedUserProfile" :restoName="review.resto_name" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :gallery="review.review_gallery"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ReviewList from '~/assets/json/reviews.json'
 
 export default {
 
   props: {
-    // username: String,
     loggedInUser: String,
     loggedUserProfile: Array,
   },
@@ -34,9 +32,8 @@ export default {
         supabase: useSupabaseClient(),
         username: useRoute().params.id,
         isUserOwnerOfProfile: false,
-        reviews: ReviewList,
+        reviews: {},
         Profile: {},
-        filteredReviews: {},
         loading: true,
       }
   },
@@ -61,12 +58,34 @@ export default {
           console.log('Profile Loaded')
         }
         this.loading = false;
+    },
+
+    async getUserReviews () {
+      this.loading = true;
+      this.reviews = ref([]);
+
+      const { data, error } = await this.supabase
+          .from('reviews')
+          .select()
+          .eq('reviewer_username', useRoute().params.id)
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.log(error)
+        }
+        if(data){
+          console.log(data);
+          this.reviews = data;
+          console.log('Reviews Loaded')
+        }
+        this.loading = false;
     }
 
 
   },
   async mounted() {
     await this.getProfile()
+    await this.getUserReviews()
     console.log(this.Profile)
 
     if(Object.keys(this.Profile).length === 0){
