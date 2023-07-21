@@ -65,7 +65,7 @@
         </div>
 
         <div v-if="showModifyReview" @close="toggleModifyReview">
-          <ModifyReview @close="toggleModifyReview" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile"/>
+          <ModifyReview @close="toggleModifyReview" @update="this.$emit('update')" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId"/>
         </div>
 
         <div v-if="showMediaView" @close="toggleMediaView">
@@ -181,8 +181,6 @@ export default {
     this.profileImgSrc = this.userProfile.profile_img_src
     this.firstName = this.userProfile.first_name
     this.lastName = this.userProfile.last_name
-
-
-  }
+  },
 }
 </script>

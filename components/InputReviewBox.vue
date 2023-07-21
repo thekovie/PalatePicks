@@ -269,7 +269,7 @@ export default {
       finally {
         this.loading = false;
         this.$emit('close');
-        this.$router.push(`/restaurant/${this.name}`);
+        this.$emit('update');
       }
     },
   },

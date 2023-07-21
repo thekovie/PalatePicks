@@ -47,8 +47,8 @@
               Reviews
             </div>
             <div class="reviews-list flex flex-col gap-8">
-              <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
-              <ReviewBox v-if="(restoReviews.length)" v-for="review in restoReviews" :key="review" :username="review.reviewer_username" :loggedUserProfile="loggedUserProfile" :isRestoOwner="isRestoOwner" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :comments="review.comments" :reviewId="review.review_id" :gallery="review.review_gallery"/>
+              <InputReviewBox @update="getReviews" v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
+              <ReviewBox @update="getReviews" v-if="(restoReviews.length)" v-for="review in restoReviews" :key="review" :username="review.reviewer_username" :loggedUserProfile="loggedUserProfile" :isRestoOwner="isRestoOwner" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :comments="review.comments" :reviewId="review.review_id" :gallery="review.review_gallery"/>
               <div v-else class="no-reviews text-xl font-light text-grey mt-8">
                 No reviews yet. Be the first to review this restaurant!
               </div>
@@ -209,7 +209,7 @@
         } finally {
           this.loading = false;
         }
-      }
+      },
     },
     data() {
       return {
