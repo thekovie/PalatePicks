@@ -1,6 +1,6 @@
 <template>
   <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex" @click.self="closeModifyReview">
-  <Preloader v-if="loading" :loading="loading" :status="status" />
+  <CustomLoader v-if="loading" :loading="loading" :status="status" />
   <div class="bg-green_lightbg flex flex-col w-[1000px] h-[70%] mx-auto rounded-[28px] self-center overflow-y-auto py-12 px-10">
     <h2 class="rate-title font-semibold text-3xl">Modify your Review</h2>
     <div class="font-light text-grey text-lg">Change of heart? Write them down (or delete it).</div>

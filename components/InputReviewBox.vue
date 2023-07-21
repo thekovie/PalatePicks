@@ -1,6 +1,6 @@
 <template>
   <div v-if="isVisible" class="input-reviewbox flex flex-col bg-green_lightbg p-10 w-[1000px] rounded-3xl shadow-xl shadow-green">
-    <Preloader v-if="loading" :loading="loading" :status="status" />
+    <CustomLoader v-if="loading" :loading="loading" :status="status" />
     <h2 class="rate-title font-semibold text-3xl">Create a Review</h2>
     <div class=" font-light text-grey text-lg">You're now reviewing {{ name }}</div>
     <form>
