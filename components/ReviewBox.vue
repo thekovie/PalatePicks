@@ -6,8 +6,8 @@
           <img class="w-full h-full rounded-full object-cover" :src="profileImgSrc" alt="user" />
         </div>
         <div class="user-info text-center sm:text-left">
-          <div class="user-name text-2xl font-semibold">{{ firstName }} {{ lastName }}</div>
-          <div class="username text-sm font-light text-grey hover:underline cursor-pointer"><router-link :to="getProfileLink(username)">@{{ username }}</router-link></div>
+          <div class="user-name text-2xl font-semibold hover:underline cursor-pointer"><NuxtLink :to="getProfileLink(username)">{{ firstName }} {{ lastName }}</NuxtLink></div>
+          <div class="username text-sm font-light text-grey hover:underline cursor-pointer"><NuxtLink :to="getProfileLink(username)">@{{ username }}</NuxtLink></div>
           <div class="user-school text-sm font-light text-grey">{{ school }}</div>
         </div>
       </div>

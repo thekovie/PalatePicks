@@ -16,15 +16,15 @@
       <div>
         <!-- Name and Establishment Owner Tag (If est. owner)-->
         <div class="flex flex-row w-[100%]">
-          <div class="font-bold text-[20px] "> {{ userProfile.first_name }} {{ userProfile.last_name }} </div>
+          <div class="font-bold text-[20px] hover:underline cursor-pointer"><NuxtLink :to="`/profile/${comment.username}`">{{ userProfile.first_name }} {{ userProfile.last_name }}</NuxtLink></div>
           <div v-if="isEstablishmentOwner" class="min-h-[21px] min-w-[173px] text-white text-[12px] text-center self-center py-[2px] bg-green rounded-[41px] ml-[28px]">
             Establishment Owner
           </div>
         </div>
 
         <!-- Username -->
-        <div class="text-grey text-[12px]">
-          {{ comment.username}}
+        <div class="text-grey text-[12px] hover:underline cursor-pointer">
+          <NuxtLink :to="`/profile/${comment.username}`">@{{ comment.username}}</NuxtLink>
         </div>
 
         <!-- School -->

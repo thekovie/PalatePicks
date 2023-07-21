@@ -32,25 +32,6 @@
           <div class="helpful-count text-2xl font-semibold">{{ helpfulCount.toLocaleString("en-US")}}</div>
           <div class="helpful-text text-sm font-light text-grey">found this review helpful</div>
       </div>
-      <div class="right-buttons flex justify-around mr-3">
-        <button v-if="username === loggedInUser" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
-          Modify Review
-        </button>
-        <button v-if="isRestoOwner || (username === loggedInUser)" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
-          Delete Review
-        </button>
-        <button v-if="!isRestoOwner && (username !== loggedInUser) && (!loggedInUser === '')" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
-          Mark as Helpful
-        </button>
-
-        <div v-if="showModifyReview" @close="toggleModifyReview">
-          <ModifyReview @close="toggleModifyReview" :reviewSubject="reviewSubject" :reviewerPhotoSrc="reviewerPhotoSrc" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile"/>
-        </div>
-
-        <div v-if="showMediaView" @close="toggleMediaView">
-          <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -59,7 +40,7 @@
 export default {
   props: {
     username: String,
-    loggedInUser: String,
+    loggedUserProfile: Object,
     restoName: String,
     reviewSubject: String,
     mainReview: String,
