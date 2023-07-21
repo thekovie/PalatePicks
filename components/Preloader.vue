@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed w-full h-screen z-1000 overflow-hidden flex flex-col justify-center bg-white items-center" v-if="loading">
+  <div class="fixed w-full h-screen z-50 overflow-hidden flex flex-col justify-center bg-white items-center" v-if="loading">
     <div class="h-50 w-50 animate-pulse bg-green-300 rounded-full flex justify-center items-center" >
       <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <circle class="spinner_qM83" cx="4" cy="12" r="3" fill="green"/>
