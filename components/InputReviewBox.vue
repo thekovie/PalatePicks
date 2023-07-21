@@ -166,7 +166,7 @@ export default {
       if (this.fileLocs.length === 0) {
         this.loading = false;
         this.$emit('close');
-        this.$router.push(`/restaurant/${this.name}`);
+        this.$emit('update');
         return;
       }
 

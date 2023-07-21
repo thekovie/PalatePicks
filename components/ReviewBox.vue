@@ -35,6 +35,7 @@
     </div>
     <div class="review-posted-at text-sm font-light text-grey mt-4">
       {{ date }}
+      <span v-if="isEdited" class="italic text-grey">Edited</span>
     </div>
     <div class="review-footer flex flex-col sm:flex-row justify-between align-middle mt-5">
       <div class="found-helpful">
@@ -120,6 +121,9 @@ export default {
     reviewId: {
       type: String
     },
+    isEdited: {
+      type: Boolean
+    }
   },
   data() {
     return{

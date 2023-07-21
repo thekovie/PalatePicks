@@ -21,28 +21,39 @@
         </div>
         <div class="review-content flex flex-col gap-5 mt-1">
           <div class="review-title">
-            <input :value="reviewSubject" class="review-title-input w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" type="text" placeholder="Review Title" />
+            <input v-model="reviewTitle" class="review-title-input w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" type="text" placeholder="Review Title" />
           </div>
           <div class="review-text">
-            <textarea class="review-text-input w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" type="text" placeholder="Review Description">{{ mainReview }}</textarea>
+            <textarea class="review-text-input w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" />
           </div>
           <div class="review-gallery flex">
-            <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-6 mb-6 cursor-pointer" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
+            <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-6 mb-6" :class="{'opacity-30' : !pressedDelete, 'cursor-not-allowed' : !pressedDelete, 'cursor-pointer' : pressedDelete}" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
               <img v-if="media.isImage" class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" />
               <video v-else class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" no-controls />
-              <div v-if="media.isVideo && !media.hovered" class="video-icon absolute bg-black bg-opacity-30 w-[90px] h-[90px] p-8 rounded-3xl">
+              <div v-if="media.isVideo && !media.hovered && this.pressedDelete" class="video-icon absolute bg-black bg-opacity-30 w-[90px] h-[90px] p-8 rounded-3xl">
                 <img class="w-full h-full" src="~/assets/icons/Video.svg" />
               </div>
-              <div v-if="media.hovered" class="absolute bg-black bg-opacity-30 w-[90px] h-[90px] p-8 rounded-3xl" @click="removeMedia(index)">
+              <div v-if="media.hovered && this.pressedDelete" class="absolute bg-black bg-opacity-30 w-[90px] h-[90px] p-8 rounded-3xl" @click="removeMedia(index)">
                 <img class="w-full h-full" src="~/assets/icons/Trash.svg" />
               </div>
             </div>
-            <div class="add-media flex flex-col items-center justify-center w-[90px] h-[90px] p-4 mr-6 mb-6 rounded-3xl border-2 border-grey cursor-pointer">
+            <div v-if="!pressedDelete">
+              <div class="delete-media flex flex-col items-center justify-center w-[90px] h-[90px] p-4 mr-6 mb-6 rounded-3xl border-2 bg-red border-red cursor-pointer" @click="replaceMedia">
+                <!-- <img v-if="mediaItems.length < 5" src="~/assets/images/camera-icon.png" alt="camera icon" @click="openFileInput"/> -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-24 h-24">
+                  <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
+                </svg>
+                <div class="mt-1 text-xs text-center text-white uppercase">Delete</div>
+                <input ref="fileInput" type="file" accept="image/*, video/*" class="block" @change="handleFileUpload" />
+              </div>
+            </div>
+            <div v-else class="add-media flex flex-col items-center justify-center w-[90px] h-[90px] p-4 mr-6 mb-6 rounded-3xl border-2 border-grey cursor-pointer">
               <img v-if="mediaItems.length < 5" src="~/assets/images/camera-icon.png" alt="camera icon" @click="openFileInput"/>
               <div class=" text-xs"> {{ mediaItems.length }} / 5</div>
               <input ref="fileInput" type="file" accept="image/*, video/*" class="block" @change="handleFileUpload" />
             </div>
           </div>
+
           <div class="review-buttons flex justify-end">
             <button class="bg-white text-green rounded-3xl flex items-center font-light px-14 py-3 mr-4" @click="closeModifyReview">
               Cancel
@@ -50,7 +61,7 @@
             <button class="delete-review bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
               Delete Review
             </button>
-            <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+            <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="updateReview">
               Update Review
             </button>
           </div>
@@ -99,20 +110,34 @@
       },
       gallery: {
         type: Array
-      }
+      },
+      reviewId: {
+        type: String
+      },
     },
     data() {
       return {
         showModifyReview: true,
-        selectedRating: this.rating,
         stars: [1, 2, 3, 4, 5],
         starIcon: StarIcon,
         starBlankIcon: StarBlankIcon,
         mediaItems: [],
         openInputReviewBox: true,
+        pressedDelete: false,
+
+        supabase: useSupabaseClient(),
+        selectedRating: this.rating,
+        reviewTitle: this.reviewSubject,
+        reviewContent: this.mainReview,
+        fileLocs: [],
+        loading: false,
       };
     },
     mounted() {
+      if (this.gallery.length === 0) {
+        this.pressedDelete = true;
+      }
+
       this.gallery.forEach((source) => {
         const isImage = source.endsWith('.jpg') || source.endsWith('.jpeg') || source.endsWith('.png') || source.endsWith('.gif');
         const isVideo = source.endsWith('.mp4') || source.endsWith('.mov') || source.endsWith('.avi');
@@ -152,6 +177,8 @@
           const isImage = file.type.startsWith('image/');
           const isVideo = file.type.startsWith('video/');
 
+          this.fileLocs.push(file);
+
           this.mediaItems.push ({
             url: URL.createObjectURL(file),
             hovered: false,
@@ -163,10 +190,202 @@
       },
       removeMedia(index) {
         this.mediaItems.splice(index, 1);
+        this.fileLocs.splice(index, 1);
       },
       closeModifyReview() {
-        this.$emit('close')
+        if(confirm("Are you sure you want to cancel? All changes will not be saved.")) {
+          this.$emit('close')
+        }
       },
+      replaceMedia() {
+        this.mediaItems = [];
+        this.pressedDelete = true;
+      },
+
+      async updateReview(event) {
+        event.preventDefault();
+
+        this.loading = true;
+
+
+        let mediaUrls = [];
+        let mediaFiles = [];
+
+        // Update Input Fields ONLY (except Media)
+        try {
+          const {data, error} = await this.supabase
+            .from('reviews')
+            .update({
+              review_subject: this.reviewTitle,
+              content: this.reviewContent,
+              rating: this.selectedRating,
+              is_edited: true,
+            })
+            .eq('review_id', this.reviewId);
+
+          if (error) {
+            throw error;
+          }
+        } catch(error) {
+          console.log(error);
+        }
+
+        // Delete Media
+          try {
+            const {data, error} = await this.supabase
+              .from('reviews')
+              .update({
+                review_gallery: [],
+              })
+              .eq('review_id', this.reviewId);
+
+              let mediaToDelete = [];
+
+              try {
+                const { data, error} = await this.supabase.storage
+                  .from('reviews-gallery')
+                  .list(`${this.reviewId}/`);
+
+                if (error) {
+                  throw error;
+                }
+
+                mediaToDelete = data.map((file) => `${this.reviewId}/${file.name}`);
+                console.log(mediaToDelete);
+
+              } catch(error) {
+                console.log(error);
+              }
+
+            // Delete listed media from storage
+            try {
+              for (let i = 0; i < mediaToDelete.length; i++) {
+                const { data, error } = await this.supabase.storage
+                  .from('reviews-gallery')
+                  .remove([mediaToDelete[i]]);
+
+                if (error) {
+                  throw error;
+                }
+              }
+            } catch (error) {
+              console.log(error);
+            }
+
+            // Delete all media from database
+            try {
+              const { data, error } = await this.supabase
+                .from('reviews')
+                .update({
+                  review_gallery: [],
+                })
+                .eq('review_id', this.reviewId);
+
+              if (error) {
+                throw error;
+              }
+            } catch (error) {
+              console.log(error);
+            }
+
+
+            if (error) {
+              throw error;
+            }
+          } catch(error) {
+            console.log(error.message);
+          }
+
+        // Upload Media
+        try {
+          for (let i = 0; i < this.fileLocs.length; i++) {
+            const media = this.fileLocs[i];
+
+            const fileExt = media.name.split('.').pop();
+            const fileName = `${Math.random()}.${fileExt}`;
+            const filePath = `${this.reviewId}/${fileName}`;
+
+
+            const {data, error} = await this.supabase.storage
+              .from('reviews-gallery')
+              .upload(filePath, media, {
+                cacheControl: 1,
+                upsert: false,
+              })
+              if (error) {
+                throw error;
+              }
+          }
+          console.log('Uploaded media');
+        } catch(error) {
+          console.log(error);
+        }
+
+        // Get URL media files from supabase bucket
+        console.log('Getting media file path/s from bucket');
+
+        try {
+          const {data, error} = await this.supabase.storage
+          .from('reviews-gallery')
+          .list(`${this.reviewId}/`);
+
+          mediaFiles = [];
+          mediaFiles = data.map((file) => `${this.reviewId}/${file.name}`);
+
+
+          try {
+            for (let i = 0; i < mediaFiles.length; i++) {
+              const media = mediaFiles[i];
+              const {data, error} = await this.supabase.storage
+              .from('reviews-gallery')
+              .getPublicUrl(media);
+              console.log(data);
+              mediaUrls.push(data.publicUrl);
+            }
+            if (error) {
+              throw error;
+            }
+
+          } catch (error) {
+            console.log(error);
+          }
+
+
+
+
+          // Update review with media URL file path
+          console.log('Updating review with media file path');
+
+          try {
+            const {data, error} = await this.supabase
+            .from('reviews')
+            .update(
+              {
+                review_gallery: mediaUrls,
+              }
+            )
+            .eq('review_id', this.reviewId)
+
+            console.log('Updated review with media file path')
+            if (error) {
+              throw error;
+            }
+          } catch(error) {
+            console.log(error);
+          }
+          if (error) {
+            throw error;
+          }
+        } catch(error) {
+          console.log(error);
+        }
+        finally {
+          this.loading = false;
+          this.$emit('update');
+          this.$emit('close');
+        }
+
+      }
     }
   }
 </script>
