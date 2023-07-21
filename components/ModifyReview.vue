@@ -134,7 +134,7 @@
         reviewContent: this.mainReview,
         fileLocs: [],
         loading: false,
-        status: 'Updating...'
+        status: ''
       };
     },
     mounted() {
@@ -209,6 +209,7 @@
       async updateReview(event) {
         event.preventDefault();
 
+        this.status = 'Updating review...';
         this.loading = true;
 
 
@@ -391,6 +392,8 @@
       },
 
       async deleteReview() {
+        this.status = 'Deleting review...';
+        this.loading = true;
 
         if (!confirm("Are you sure you want to delete this review?")) {
           return;
@@ -439,6 +442,7 @@
         finally {
           this.$emit('update');
           this.$emit('close');
+          this.loading = false;
         }
       },
     }

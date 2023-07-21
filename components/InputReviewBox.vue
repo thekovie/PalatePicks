@@ -168,6 +168,7 @@ export default {
         this.loading = false;
         this.$emit('close');
         this.$emit('update');
+        location.reload(true);
         return;
       }
 
