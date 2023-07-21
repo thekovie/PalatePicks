@@ -46,6 +46,10 @@
 
 <script>
 export default {
+  props: {
+    loggedInUser: String,
+    loggedUserProfile: Array
+  },
   data(){
     return{
       firstName: '',

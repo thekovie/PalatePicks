@@ -48,10 +48,16 @@
               <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->
                 <div class="bg-green min-w-[150px] min-h-[150px] max-w-[150px] max-h-[150px] rounded-[100%] p-[3px] m-[10px] cursor-pointer">
                     <div class="bg-white w-[100%] h-[100%] rounded-[100%]">
-                      <img :src="ProfileImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover object-center">
+                      <img :src="localImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover object-center">
                     </div>
                   </div>
-                  <button @click="toggleUploadModal" class="mt-3 bg-green text-white px-12 py-1 rounded-3xl">Change Avatar</button>
+                  <div>
+                    <label for="image-upload" class="cursor-pointer bg-green text-white px-12 mt-6 py-1 rounded-3xl">
+                      Choose Image
+                    </label>
+                    <input id="image-upload" type="file" accept="image/png, image/jpeg, image/jpg" @change="chooseFile">
+                  </div>
+                  <!-- <button @click="chooseFile" class="">Change Avatar</button> -->
                   <div class="absolute top-0 bottom-0 left-0 right-0 z-50" v-if="showUploadModal"> <!-- Upload Picture Modal -->
                     <UploadPicture @close="toggleUploadModal" @return="getImageSrc($event)" :loggedUserProfile="loggedUserProfile" @returnFilePath="getRawPath"/>
                   </div>
@@ -129,8 +135,8 @@ export default {
   props: {
     loggedInUser: String,
     loggedUserProfile: Array,
-    session: Object
   },
+  emits: ["retrieveSession"],
   methods: {
     saveChanges(){
       alert('Your changes have been successfully saved!');
@@ -158,9 +164,129 @@ export default {
     getProfileLink(username) {
       return `/profile/${this.loggedInUser}`;
     },
+    chooseFile(event){
+      const file = event.target.files[0];
+
+      this.fileLoc = file;
+      this.localImage = URL.createObjectURL(file);
+
+      const fileExt = this.fileLoc.name.split('.').pop();
+
+
+      this.avatarName = `${Math.random()}.${fileExt}`;
+
+
+    },
     async updateGeneralInfo(){
       this.loading = true;
+      let imageName = "";
+      let imageUrl = "";
+
       const supabase = useSupabaseClient();
+
+
+
+        // LIST
+        try{
+          const { data, error } = await this.supabase.storage
+          .from('profile-pictures')
+          .list(`${this.loggedUserProfile[0].id}/`)
+
+          imageName = data[0].name;
+
+          console.log('GHJADWGHJAWGJHAWDJHGADW')
+          console.log(imageName)
+
+          if(error){
+              throw error;
+          }
+
+
+        }catch(error){
+          console.log(error)
+        }
+
+        // DELETE PICTURE
+        try{
+          const { data, error } = await this.supabase.storage
+          .from('profile-pictures')
+          .remove(`${this.loggedUserProfile[0].id}/${imageName}`)
+
+          if(error){
+            throw error;
+          }
+
+        }catch(error){
+          console.log(error)
+        }
+
+        // UPLOAD PICTURE
+        try{
+          const { data, error } = await this.supabase.storage
+          .from('profile-pictures')
+          .upload(`${this.loggedUserProfile[0].id}/${this.avatarName}`, this.fileLoc, {
+            cacheControl: 0,
+            upsert: false,
+          })
+
+
+
+
+        }catch(error){
+          console.log(error)
+        }
+
+
+        try{
+          const { data, error } = await this.supabase.storage
+          .from('profile-pictures')
+          .list(`${this.loggedUserProfile[0].id}/`)
+
+          imageName = data[0].name;
+
+          console.log('GHJADWGHJAWGJHAWDJHGADW')
+          console.log(imageName)
+
+          try{
+
+            const{data, error} = await this.supabase.storage
+            .from('profile-pictures')
+            .getPublicUrl(`${this.loggedUserProfile[0].id}/${imageName}`)
+
+
+            if(error){
+              throw error;
+            }
+          }catch(error){
+            console.log(error)
+          }
+
+
+        }catch(error){
+          console.log(error)
+        }
+
+
+
+        try{
+            const { data, error } = await this.supabase.storage
+            .from('profile-pictures')
+            .getPublicUrl(`${this.loggedUserProfile[0].id}/${imageName}`)
+
+            if(error){
+              throw error;
+            }
+
+            imageUrl = data.publicUrl;
+
+          }catch(error){
+            console.log(error)
+          }
+
+
+
+
+
 
       const { data, error } = await supabase.auth.updateUser({
         data: {
@@ -169,14 +295,19 @@ export default {
           last_name: this.lastName,
           school: this.school,
           username: this.username,
-          profile_img_src: this.imageUrl
+          profile_img_src: imageUrl
         }
       })
+
+
+
+
       if (error) throw error;
       this.loading = false;
       alert('Your changes have been successfully saved!')
       this.$emit('retrieveSession')
       this.$router.push('/profile/settings')
+
 
 
     },
@@ -216,27 +347,7 @@ export default {
       alert('Your password has been successfully changed!')
 
     },
-    async getRawPath(path) {
-       this.loading = true;
-        const supabase = useSupabaseClient();
-        this.rawFilePath = path
 
-        console.log('What I got from the modal:' + this.rawFilePath)
-
-        // Get Image from Storage
-        const {data, error} = await supabase.storage
-          .from('profile-pictures')
-          .getPublicUrl(this.rawFilePath)
-
-        if (error) {
-          console.log(error)
-        } else {
-          this.imageUrl = data.publicUrl
-          console.log(this.imageUrl)
-        }
-
-        this.loading = false;
-      },
   },
   data() {
     return {
@@ -256,8 +367,12 @@ export default {
       isImageDefault: false,
       userProfiles: UserProfiles,
       userProfile: {},
-      imageUrl: "",
       loading: true,
+      fileLoc: null,
+      localImage: "",
+      avatarName: "",
+      supabase: useSupabaseClient(),
+      finalImageUrl: ""
     };
   },
   computed: {
@@ -271,6 +386,7 @@ export default {
         this.bio = this.loggedUserProfile[0].bio
         this.email = this.loggedUserProfile[0].email
         this.ProfileImage = this.loggedUserProfile[0].profile_img_src
+        this.localImage = this.loggedUserProfile[0].profile_img_src
 
         this.loading = false;
         return true

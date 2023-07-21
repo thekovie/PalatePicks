@@ -71,6 +71,8 @@ export default {
           .from('profile-pictures')
           .remove([profileFileName])
 
+
+
         }catch(error){
           alert(error.message)
         }

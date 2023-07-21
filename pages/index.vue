@@ -49,11 +49,10 @@
     },
 
     props: {
-      session: Object,
       loggedInUser: String,
       loggedUserProfile: Array
     },
-
+    emits: ["retrieveSession", "stop"],
     data() {
       return {
         firstName: '',
