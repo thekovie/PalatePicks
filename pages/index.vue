@@ -56,8 +56,9 @@
     data() {
       return {
         firstName: '',
+        establishments: {},
+        loading: true,
         search: '',
-        establishments: {}
       }
     },
 

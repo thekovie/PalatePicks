@@ -47,19 +47,21 @@
               Reviews
             </div>
             <div class="reviews-list flex flex-col gap-8">
-              <InputReviewBox v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
-              <ReviewBox v-for="review in filteredRestoReviews" :key="review.reviewId" :username="review.username" :loggedInUser="loggedInUser" :loggedUserProfile="loggedUserProfile" :isRestoOwner="isRestoOwner" :reviewSubject="review.reviewSubject" :mainReview="review.mainReview" :rating="review.rating" :date="review.date" :helpfulCount="review.helpfulCount" :comments="review.comments" :gallery="review.reviewerGallery"/>
+              <InputReviewBox @update="getReviews" v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
+              <ReviewBox @update="getReviews" v-if="(restoReviews.length)" v-for="review in restoReviews" :key="review" :username="review.reviewer_username" :loggedUserProfile="loggedUserProfile" :isRestoOwner="isRestoOwner" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :comments="review.comments" :reviewId="review.review_id" :gallery="review.review_gallery" :isEdited="review.is_edited"/>
+              <div v-else class="no-reviews text-xl font-light text-grey mt-8">
+                No reviews yet. Be the first to review this restaurant!
+              </div>
             </div>
           </div>
           <div class="review-filters mt-20 flex flex-col w-auto items-end">
             <div class="create-review">
-              <div v-show="(loggedInUser !== '')">
-                <button v-show="!isRestoOwner" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
-                <span class="text-white text-base uppercase mr-6">Make a review</span>
-                <img src="~/assets/icons/Plus.svg" />
-              </button>
+              <div v-if="!hasReviewed">
+                <button v-if="!isRestoOwner" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+                  <span class="text-white text-base uppercase mr-6">Make a review</span>
+                  <img src="~/assets/icons/Plus.svg" />
+                </button>
               </div>
-
             </div>
             <div class="filter-area mt-20">
               <div class="filter-title text-3xl font-semibold font mb-6">
@@ -103,17 +105,20 @@
 </template>
 
 <script>
-  import reviews from '~/assets/json/reviews.json'
-  import UserProfiles from '~/assets/json/UserProfiles.json'
 
   export default {
     props: {
+      session: Object,
       loggedInUser: String,
-      loggedUserProfile: Object,
+      loggedUserProfile: Array
     },
     methods: {
       openReviewBox() {
-        this.isReviewBoxOpen = true
+        if (!this.loggedUserProfile.length) {
+          this.$router.push('/login')
+        } else {
+          this.isReviewBoxOpen = true
+        }
       },
       closeReviewBox() {
         this.isReviewBoxOpen = false
@@ -131,30 +136,79 @@
         this.loading = true;
         this.Restaurant = ref([]);
 
-
-
-          const { data, error } = await this.supabase
+        const { data, error } = await this.supabase
           .from('restaurants')
           .select()
           .eq('name', useRoute().params.id)
           .maybeSingle();
 
 
-          if (error) {
-            console.log(error)
-          }
-          if(data){
-            console.log(data);
-            this.Restaurant = data;
-            this.rating = data.rating
-            console.log('AAAAA')
-          }
+        if (error) {
+          console.log(error)
+        }
+        if(data){
+          console.log(data);
+          this.Restaurant = data;
+          this.rating = data.rating
+          console.log('AAAAA')
+        }
 
-          this.loading = false;
+        this.loading = false;
       },
 
       reviewFileTypeChecker(file) {
         return file.includes('jpg') || file.includes('png') || file.includes('jpeg') || file.includes('gif');
+      },
+
+      async getReviews() {
+        this.loading = true;
+        this.restoReviews = ref([]);
+
+        try {
+          const { data, error } = await this.supabase
+          .from('reviews')
+          .select()
+          .eq('resto_name', this.restoId);
+
+          if (data) {
+            this.restoReviews = data;
+          }
+
+          if (error) {
+            throw error
+          }
+        } catch(error) {
+          console.log(error)
+        } finally {
+          this.loading = false;
+        }
+      },
+
+      async didUserReview() {
+        this.loading = true;
+        this.hasReviewed = false;
+
+        try {
+          const { data, error } = await this.supabase
+          .from('reviews')
+          .select()
+          .eq('resto_name', this.restoId)
+          .eq('reviewer_username', this.loggedUserProfile[0].username);
+
+          this.query = data;
+
+          if (data.length > 0) {
+            this.hasReviewed = true;
+          }
+
+          if (error) {
+            throw error
+          }
+        } catch(error) {
+          console.log(error)
+        } finally {
+          this.loading = false;
+        }
       },
     },
     data() {
@@ -165,12 +219,12 @@
           isRestoOwner: false,
           showMediaView: false,
           selectedMedia: '',
-          restoReviews: reviews,
-          filteredRestoReviews: {},
-          userProfiles: UserProfiles,
+          restoReviews: {},
           Restaurant: {},
           rating: 0,
           loading: true,
+          hasReviewed: false,
+          query: {},
       }
     },
     computed: {
@@ -178,18 +232,21 @@
     },
     async mounted(){
       await this.getRestaurant()
+      await this.getReviews()
+      await this.didUserReview()
 
       console.log(this.Restaurant)
+      console.log(`This user has reviewed this restaurant: ${this.hasReviewed}`)
+      console.log(this.query)
 
       // If no restaurant object is found (no keys)
       if(Object.keys(this.Restaurant).length === 0){
         throw createError({ statusCode: 404, statusMessage: 'Restaurant not found...', fatal: true})
-      }else{
+      } else {
 
-        this.filteredRestoReviews = this.restoReviews.filter((restoReviews) => restoReviews.restoID === this.restoId);
-
-        if(!(this.loggedInUser === '')){
-          if(this.loggedUserProfile.restaurantName === this.restoId){
+        // Checks if current logged in user is restaurant owner
+        if(this.loggedUserProfile.length){
+          if(this.Restaurant.owner === this.loggedUserProfile[0].username){
             this.isRestoOwner = true
           }
         }
