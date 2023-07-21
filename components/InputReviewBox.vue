@@ -89,7 +89,7 @@ export default {
       selectedRating: 0,
       fileLocs: [],
       loading: false,
-      status: 'Posting...',
+      status: '',
     };
   },
   methods: {
@@ -143,6 +143,7 @@ export default {
       let mediaFiles = [];
 
       // Upload review except media
+      this.status = 'Posting...';
       this.loading = true;
       try {
         const {data, error} = await this.supabase
