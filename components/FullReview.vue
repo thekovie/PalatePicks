@@ -20,8 +20,8 @@
 
               <!-- User Info-->
               <div class="ml-[17px]">
-                <p class="font-bold text-[28px]">{{ userProfile.first_name }} {{ userProfile.last_name }}</p>
-                <p class="text-grey text-[16px] hover:underline cursor-pointer"> <router-link :to="getProfileLink(username)">@{{ userProfile.username }}</router-link></p>
+                <p class="font-bold text-[28px] hover:underline cursor-pointer"><NuxtLink :to="getProfileLink(username)">{{ userProfile.first_name }} {{ userProfile.last_name }}</NuxtLink></p>
+                <p class="text-grey text-[16px] hover:underline cursor-pointer"> <NuxtLink :to="getProfileLink(username)">@{{ userProfile.username }}</NuxtLink></p>
                 <p class="text-grey text-[16px]">{{ userProfile.school }}</p>
                 <div class="flex flex-row relative left-[-3px]">
                   <img v-for="i in rating" class="star-icon w-25 h-25" src="~/assets/icons/Star.svg" alt="star" :key="i" />
