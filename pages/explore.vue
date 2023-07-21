@@ -18,7 +18,7 @@
 
           <!-- Restaurants Div Container-->
           <div class="flex flex-wrap">
-            <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
+            <RestoBox v-for="establishment in sortedEstablishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
           </div>
       </div>
 
@@ -34,8 +34,14 @@
       return {
         establishments: Restaurants
       }
+    },
+    computed: {
+      sortedEstablishments() {
+        return [...this.establishments].sort((a, b) => a.name.localeCompare(b.name));
+      },
     }
   }
+
 </script>
 
 <style scoped>
