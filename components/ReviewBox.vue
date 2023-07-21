@@ -39,7 +39,7 @@
     </div>
     <div class="review-footer flex flex-col sm:flex-row justify-between align-middle mt-5">
       <div class="found-helpful">
-          <div class="helpful-count text-2xl font-semibold">{{ helpfulCount.toLocaleString("en-US")}}</div>
+          <div class="helpful-count text-2xl font-semibold">{{ updatedHelpfulCount }}</div>
           <div class="helpful-text text-sm font-light text-grey">found this review helpful</div>
       </div>
       <div class="right-buttons flex justify-around mr-3">
@@ -60,7 +60,7 @@
 
 
         <div v-if="loggedUserProfile.length">
-          <button v-if="!isRestoOwner && (username !== loggedUserProfile[0].username)" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+          <button v-if="!isRestoOwner && (username !== loggedUserProfile[0].username)" :class="markButtonClass" @click="markAsHelpful">
             Mark as Helpful
           </button>
         </div>
@@ -137,6 +137,13 @@ export default {
       profileImgSrc: "",
       school: "",
       userProfile: {},
+      markButtonClass: "bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4",
+      markedButtonClass: "bg-[#93cfa9] text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4",
+      unmarkedButtonClass: "bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4",
+      isReviewMarkedByUser: false,
+      isButtonMarked: false,
+      updatedHelpfulCount: 0
+
     }
   },
   methods: {
@@ -175,7 +182,100 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    }
+    },
+    async markAsHelpful(){
+        const supabase = useSupabaseClient();
+
+        // CHECK IF A STRING IS IN AN ARRAY
+        try{
+          const { data, error } = await supabase
+            .from('reviews')
+            .select()
+            .eq('review_id', this.reviewId)
+
+
+          if (error) {
+            throw new Error(error.message);
+          }
+
+          if (data.length > 0) {
+            console.log(data[0].users_liked)
+            console.log("Did user already marked the review as helpful?");
+            console.log(data[0].users_liked.includes(this.loggedUserProfile[0].username));
+
+
+
+            let listOfUsersLiked = data[0].users_liked;
+
+            // If review wasn't marked by user yet
+            if(!this.isReviewMarkedByUser){
+
+              this.updatedHelpfulCount = data[0].helpful_count + 1;
+
+
+              listOfUsersLiked.push(this.loggedUserProfile[0].username);
+              console.log(listOfUsersLiked);
+              console.log(this.updatedHelpfulCount)
+
+
+
+              try{
+                const { error } = await supabase
+                  .from('reviews')
+                  .update({ users_liked: listOfUsersLiked, helpful_count: this.updatedHelpfulCount})
+                  .eq('review_id', this.reviewId)
+
+
+                  console.log('HERE')
+
+                  this.markButtonClass = this.markedButtonClass;
+                  this.isReviewMarkedByUser = true;
+                  this.isButtonMarked = true;
+
+              }catch(error){
+                console.log(error)
+              }
+            }else{
+              let index = listOfUsersLiked.indexOf(this.loggedUserProfile[0].username);
+              listOfUsersLiked.splice(index, 1);
+
+              this.updatedHelpfulCount = data[0].helpful_count - 1;
+
+              console.log(listOfUsersLiked);
+              console.log(this.updatedHelpfulCount)
+
+              try{
+                const { error } = await supabase
+                  .from('reviews')
+                  .update({ users_liked: listOfUsersLiked, helpful_count: this.updatedHelpfulCount})
+                  .eq('review_id', this.reviewId)
+
+
+                  console.log('HERE')
+
+                  this.markButtonClass = this.unmarkedButtonClass;
+                  this.isReviewMarkedByUser = false;
+
+              }catch(error){
+                console.log(error)
+              }
+
+            }
+
+
+          } else {
+            console.log('No rows found with the matching string.');
+          }
+
+
+
+        }catch(error){
+          console.log(error)
+        }
+      }
+
+  },
+  async beforeUpdate(){
 
   },
   async mounted() {
@@ -185,6 +285,35 @@ export default {
     this.profileImgSrc = this.userProfile.profile_img_src
     this.firstName = this.userProfile.first_name
     this.lastName = this.userProfile.last_name
+
+
+    if(!this.isRestoOwner && (this.username !== this.loggedUserProfile[0].username)){
+      const supabase = useSupabaseClient();
+
+      const { data, error } = await supabase
+              .from('reviews')
+              .select()
+              .eq('review_id', this.reviewId)
+
+      this.updatedHelpfulCount = data[0].helpful_count;
+      console.log("HELPFUL COUNT IS " + this.updatedHelpfulCount)
+      console.log(data)
+
+      if(data[0].users_liked.includes(this.loggedUserProfile[0].username)){
+        this.markButtonClass = this.markedButtonClass;
+        this.isReviewMarkedByUser = true;
+        this.isButtonMarked = true;
+
+      }
+
+      console.log(data[0].users_liked)
+
+
+      console.log("Did user already mark the review as helpful?");
+      console.log(data[0].users_liked.includes(this.loggedUserProfile[0].username));
+    }
+
+
   },
 }
 </script>
