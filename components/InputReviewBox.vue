@@ -268,8 +268,7 @@ export default {
       }
       finally {
         this.loading = false;
-        this.$emit('close');
-        this.$emit('update');
+        location.reload(true);
       }
     },
   },

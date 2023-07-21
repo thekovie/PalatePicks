@@ -58,7 +58,7 @@
             <button class="bg-white text-green rounded-3xl flex items-center font-light px-14 py-3 mr-4" @click="closeModifyReview">
               Cancel
             </button>
-            <button class="delete-review bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
+            <button class="delete-review bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="deleteReview">
               Delete Review
             </button>
             <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="updateReview">
@@ -384,8 +384,59 @@
           this.$emit('update');
           this.$emit('close');
         }
+      },
 
-      }
+      async deleteReview() {
+
+        if (!confirm("Are you sure you want to delete this review?")) {
+          return;
+        }
+
+        try {
+          const {data, error} = await this.supabase
+            .from('reviews')
+            .delete()
+            .eq('review_id', this.reviewId);
+
+          if (error) {
+            throw error;
+          }
+        } catch(error) {
+          console.log(error.message);
+        }
+
+        try {
+          const {data, error} = await this.supabase.storage
+            .from('reviews-gallery')
+            .list(`${this.reviewId}/`);
+
+          if (error) {
+            throw error;
+          }
+
+          const mediaToDelete = data.map((file) => `${this.reviewId}/${file.name}`);
+
+          try {
+            for (let i = 0; i < mediaToDelete.length; i++) {
+              const { data, error } = await this.supabase.storage
+                .from('reviews-gallery')
+                .remove([mediaToDelete[i]]);
+
+              if (error) {
+                throw error;
+              }
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        } catch(error) {
+          console.log(error.message);
+        }
+        finally {
+          this.$emit('update');
+          this.$emit('close');
+        }
+      },
     }
   }
 </script>
