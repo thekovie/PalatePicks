@@ -6,10 +6,13 @@
           <span v-if="loggedUserProfile.length">Hi, {{ loggedUserProfile[0].first_name }}!</span> What are you craving lately?
       </div>
       <div class="search-center-box mt-4 flex">
-        <input type="text" class="search-bar sm:w-[600px] bg-white h-14 rounded-s-3xl pl-4 pr-4 focus:outline-none" placeholder="Search restaurant here" />
-        <div class="search-btn w-16 h-14 pr-10 rounded-e-3xl pt-4 bg-white items-center">
-          <img class="w-5 h-5 bg-white" src="~/assets/icons/Search.svg" alt="search" />
-        </div>
+        <input type="text" class="search-bar sm:w-[600px] bg-white h-14 rounded-s-3xl pl-4 pr-4 focus:outline-none" placeholder="Search restaurant here" v-model="search" @keyup.enter="enterSearch"/>
+        <NuxtLink :to="{ name: 'search', query: { search: search } }">
+          <div class="search-btn w-16 h-14 pr-10 rounded-e-3xl pt-4 bg-white items-center">
+            <img class="w-5 h-5 bg-white" src="~/assets/icons/Search.svg" alt="search" />
+          </div>
+        </NuxtLink>
+
       </div>
     </div>
     <section class="homepage px-1 sm:px-20">
@@ -54,6 +57,7 @@
     data() {
       return {
         firstName: '',
+        search: '',
         establishments: {}
       }
     },
@@ -72,9 +76,11 @@
           console.log(data)
         }
         this.loading = false;
+      },
+      enterSearch() {
+        this.$router.push({ name: 'search', query: { search: this.search } })
       }
-    }
-  }
+  }}
 </script>
 
 <style scoped>
