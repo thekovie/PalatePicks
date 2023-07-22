@@ -96,7 +96,7 @@ export default {
 
 <style scoped>
   .login-bg {
-    background-image: url("../assets/images/login-image.jpg");
+    background-image: url("~/assets/images/login-image.jpg");
     background-size: cover;
     background-position: center;
   }

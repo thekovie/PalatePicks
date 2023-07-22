@@ -97,7 +97,7 @@ export default {
               bio: this.bio,
               profile_img_src: this.image,
             },
-            emailRedirectTo: '/login'
+            emailRedirectTo: 'https://palatepicks.vercel.app/welcome'
           }
         });
         if (error) throw error;
