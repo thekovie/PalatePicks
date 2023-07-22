@@ -388,7 +388,7 @@
           this.loading = false;
           this.$emit('update');
           this.$emit('close');
-          location.reload(true)
+          this.$emit('reloadRating')
         }
       },
 
