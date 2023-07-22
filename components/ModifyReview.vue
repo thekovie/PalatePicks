@@ -235,6 +235,15 @@
           console.log(error);
         }
 
+        if (this.fileLocs.length === 0) {
+          console.log("No media to upload")
+          this.loading = false;
+          this.$emit('update');
+          this.$emit('close');
+          this.$emit('reloadRating')
+          return;
+        }
+
         // Delete Media
           try {
             const {data, error} = await this.supabase
@@ -354,9 +363,6 @@
           } catch (error) {
             console.log(error);
           }
-
-
-
 
           // Update review with media URL file path
           console.log('Updating review with media file path');
