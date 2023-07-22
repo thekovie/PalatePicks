@@ -24,14 +24,8 @@
           <input type="password" placeholder="Password" class="py-[10px] px-[32px] rounded-[34.5px] lg:h-[69px] border-[1px] border-solid border-green mt-[22px]" v-model="password" required>
 
           <!-- Remember me and forgot password option -->
-          <div class="flex flex-row justify-between mt-[33px]">
-            <div class="flex flex-row">
-              <input type="checkbox" class="checkbox-properties border-0 lg:w-[24px] lg:h-[24px] rounded-[5px] ml-[5px] mr-[13px] relative md:top-[3px]" v-model="rememberMe">
-              <p class="remember-me text-grey lg:text-[20px]">Remember me</p>
-            </div>
-
-            <div class="text-grey flex lg:mt-4 lg:ml-8 lg:text-[20px]">Forgot password?</div>
-
+          <div class="flex flex-row justify-between mt-1">
+            <NuxtLink to="/forgot-password" class="text-grey cursor-pointer hover:underline flex lg:mt-4 lg:ml-8 lg:text-[20px]">Forgot password?</NuxtLink>
           </div>
 
           <!-- Login Button -->
@@ -63,7 +57,7 @@ export default {
       email: '',
       rememberMe: false,
       userProfile: {},
-      loading: false,
+      loading: true,
     }
   },
   methods: {
@@ -87,9 +81,31 @@ export default {
       }catch(error){
         alert(error.message);
       }
+
       this.loading = false;
     },
   },
+  async mounted(){
+    const supabase = useSupabaseClient();
+
+    try{
+      const { data, error } = await supabase.auth.getSession()
+
+      if(data.session !== null){
+        this.$router.push('/')
+      }else{
+        this.loading = false;
+      }
+
+      if(error){
+        throw error;
+      }
+
+    }catch(error){
+      console.log(error)
+    }
+
+  }
 
 }
 </script>
