@@ -54,7 +54,7 @@
               </div>
             </div>
           </div>
-          <div class="review-filters mt-20 flex flex-col w-auto items-end">
+          <div class="review-filters mt-20 flex flex-col w-auto sm:items-end">
             <div class="create-review">
               <div v-if="!hasReviewed">
                 <button v-if="!isRestoOwner" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
@@ -63,38 +63,56 @@
                 </button>
               </div>
             </div>
-            <div class="filter-area mt-20">
+            <div class="filter-area flex flex-col mt-20">
               <div class="filter-title text-3xl font-semibold font mb-6">
                 Filter Reviews
               </div>
-              <div class="search-review">
-                <input class="search-review-input w-[300px] h-[50px] rounded-3xl px-6 border-2 focus:outline-green" type="text" placeholder="Search reviews" />
+              <div class="search-review relative">
+                <input class="search-review-input block w-full h-[50px] rounded-3xl pl-6 pr-16 border-2 focus:outline-green" type="text" placeholder="Search reviews" />
+                <button class="search-review-button absolute top-0 right-0 h-[50px] text-white rounded-r-3xl flex items-center  border-black px-6 py-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </button>
               </div>
-              <div class="star-filter flex flex-col mt-5">
-                <div class="five-stars flex">
-                  <input class="mx-8" type="checkbox" id="five-stars" name="five-stars" value="five-stars" />
+              <div class="filter flex flex-col mt-5 border-t-2 pt-4 border-grey">
+                <div class="new-to-old flex">
+                  <input class="mx-8" type="radio" id="new-to-old" name="new-to-old" value="new-to-old" />
+                  <label class="text-lg font-light" for="new-to-old">Newest to Oldest</label>
+                </div>
+                <div class="old-to-new flex mt-2 pb-4 border-b-2 border-grey">
+                  <input class="mx-8" type="radio" id="old-to-new" name="old-to-new" value="old-to-new" />
+                  <label class="text-lg font-light" for="old-to-new">Oldest to Newest</label>
+                </div>
+                <div class="five-stars flex mt-4">
+                  <input class="mx-8" type="radio" id="five-stars" name="five-stars" value="five-stars" />
                   <img v-for="i in 5" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
                 </div>
                 <div class="four-stars flex mt-2">
-                  <input class="mx-8" type="checkbox" id="four-stars" name="four-stars" value="four-stars" />
+                  <input class="mx-8" type="radio" id="four-stars" name="four-stars" value="four-stars" />
                   <img v-for="i in 4" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
                   <img v-for="i in 5-4" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
                 </div>
                 <div class="three-stars flex mt-2">
-                  <input class="mx-8" type="checkbox" id="three-stars" name="three-stars" value="three-stars" />
+                  <input class="mx-8" type="radio" id="three-stars" name="three-stars" value="three-stars" />
                   <img v-for="i in 3" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
                   <img v-for="i in 5-3" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
                 </div>
                 <div class="two-stars flex mt-2">
-                  <input class="mx-8" type="checkbox" id="two-stars" name="two-stars" value="two-stars" />
+                  <input class="mx-8" type="radio" id="two-stars" name="two-stars" value="two-stars" />
                   <img v-for="i in 2" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
                   <img v-for="i in 5-2" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
                 </div>
                 <div class="one-star flex mt-2">
-                  <input class="mx-8" type="checkbox" id="one-star" name="one-star" value="one-star" />
+                  <input class="mx-8" type="radio" id="one-star" name="one-star" value="one-star" />
                   <img v-for="i in 1" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
                   <img v-for="i in 5-1" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
                 </div>
+              </div>
+              <div class="reset-filters">
+                <button class="back-button bg-green text-white rounded-3xl text-center w-full font-light my-5 h-[45px]">
+                  RESET FILTERS
+                </button>
               </div>
             </div>
           </div>
