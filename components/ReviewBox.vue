@@ -66,7 +66,7 @@
         </div>
 
         <div v-if="showModifyReview" @close="toggleModifyReview">
-          <ModifyReview @close="toggleModifyReview" @update="this.$emit('update')" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId"/>
+          <ModifyReview @close="toggleModifyReview" @update="this.$emit('update')" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId" @reloadRating="reloadRating"/>
         </div>
 
         <div v-if="showMediaView" @close="toggleMediaView">
@@ -168,7 +168,9 @@ export default {
     getProfileLink(username) {
       return `/profile/${username}`;
     },
-
+    reloadRating(){
+      this.$emit('refreshRating');
+    },
     async getuserInfo() {
       const supabase = useSupabaseClient();
 
