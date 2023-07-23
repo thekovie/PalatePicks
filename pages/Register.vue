@@ -101,7 +101,8 @@ export default {
           }
         });
         if (error) throw error;
-        alert("Your account has been successfully registered! Check your email to confirm your account.");
+        alert("Your account has been successfully registered! Please check your confirmation email to confirm your account. If you do not see the confirmation email, please try to check your spam or junk emails.");
+        this.$router.push('/')
       } catch (error) {
         alert(error.message);
       }
