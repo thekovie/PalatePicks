@@ -186,9 +186,6 @@ export default {
         console.log(error)
       }
     },
-    async delay(ms){
-      return new Promise((resolve) => setTimeout(resolve, ms));
-    },
     async markAsHelpful(){
 
         this.isMarkButtonDisabled = true;
