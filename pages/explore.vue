@@ -1,5 +1,6 @@
 <template>
   <!-- Explore Page Main Div Container -->
+  <Preloader v-if="loading" :loading="loading" />
   <div class="flex flex-col min-h-screen">
 
     <!-- Introduction Div -->
@@ -31,9 +32,16 @@ export default {
   components: {
     RestoBox,
   },
+  emits: ['retrieveSession'],
+  props: {
+    loggedInUser: String,
+    loggedUserProfile: Array,
+    session: Object
+  },
   data() {
     return {
       establishments: [],
+      loading: true
     };
   },
   async created() {
@@ -41,6 +49,7 @@ export default {
   },
   methods: {
     async fetchRestaurants() {
+      this.loading = true;
       const supabase = useSupabaseClient();
       try {
         const { data, error } = await supabase.from('restaurants').select();
@@ -52,6 +61,8 @@ export default {
       } catch (error) {
         console.error(error);
       }
+
+      this.loading = false;
     },
   },
 };
