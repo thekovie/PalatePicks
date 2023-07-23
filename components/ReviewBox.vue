@@ -48,7 +48,7 @@
         </button>
 
         <div v-if="loggedUserProfile.length">
-          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white text- rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
+          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-4 mr-4" @click="toggleModifyReview">
             Modify Review
           </button>
         </div>
@@ -60,7 +60,7 @@
 
 
         <div v-if="loggedUserProfile.length">
-          <button v-if="!isRestoOwner && (username !== loggedUserProfile[0].username)" :class="markButtonClass" @click="markAsHelpful">
+          <button v-if="!isRestoOwner && (username !== loggedUserProfile[0].username)" :class="markButtonClass" @click="markAsHelpful" :disabled="isMarkButtonDisabled">
             Mark as Helpful
           </button>
         </div>
@@ -142,7 +142,8 @@ export default {
       unmarkedButtonClass: "bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4",
       isReviewMarkedByUser: false,
       isButtonMarked: false,
-      updatedHelpfulCount: 0
+      isMarkButtonDisabled: false,
+      updatedHelpfulCount: 0,
 
     }
   },
@@ -184,6 +185,8 @@ export default {
       }
     },
     async markAsHelpful(){
+
+        this.isMarkButtonDisabled = true;
         const supabase = useSupabaseClient();
 
         // CHECK IF A STRING IS IN AN ARRAY
@@ -200,7 +203,7 @@ export default {
 
           if (data.length > 0) {
             console.log(data[0].users_liked)
-            console.log("Did user already marked the review as helpful?");
+            console.log("Did user already mark the review as helpful?");
             console.log(data[0].users_liked.includes(this.loggedUserProfile[0].username));
 
 
@@ -272,6 +275,8 @@ export default {
         }catch(error){
           console.log(error)
         }
+
+        this.isMarkButtonDisabled = false;
       }
 
   },

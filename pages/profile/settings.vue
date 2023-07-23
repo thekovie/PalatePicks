@@ -14,14 +14,20 @@
             <p>Your Personal Account</p>
           </div>
 
-          <div class="basis-1/4 text-right pe-20"> <!--Go back to personal profile-->
-            <NuxtLink class="hover:underline cursor-pointer" :to="`/profile/${loggedUserProfile[0].username}`">Go Back to Personal Profile</NuxtLink>
+          <div class="basis-1/4 flex text-right pe-20"> <!--Go back to personal profile-->
+
+            <NuxtLink class="hover:underline cursor-pointer flex" :to="`/profile/${loggedUserProfile[0].username}`">
+              <span class="mr-1">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                </svg>
+              </span>Go Back to Personal Profile</NuxtLink>
           </div>
 
         </div>
 
         <!--General-->
-        <p class="General font-bold text-xl border-b border-green mt-10">General</p>
+        <p class="General font-bold text-xl border-b border-green mt-10 pb-1">General</p>
 
         <div>
           <div class="flex">
@@ -36,13 +42,13 @@
                   <input type="text" v-model="lastName" class="border-green border rounded w-full px-2">
                 </div>
               </div>
-              <div class="mt-5"> <!--Username-->
-                <label>Username<br></label>
-                <input type="text" v-model="username" class="border-green border rounded w-full px-2">
-              </div>
               <div class="mt-5"> <!--School-->
                 <label>School/University<br></label>
                 <input type="text" v-model="school" class="border-green border rounded w-full px-2">
+              </div>
+              <div class="mt-5"> <!--Bio-->
+                <label>Bio<br></label>
+                <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2"></textarea>
               </div>
             </div>
               <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->
@@ -63,15 +69,12 @@
                   </div>
               </div>
           </div>
-          <div class="mt-5"> <!--Bio-->
-            <label>Bio<br></label>
-            <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2"></textarea>
-          </div>
+
           <button class="bg-green text-white px-12 mt-5 py-1 rounded-3xl" @click="updateGeneralInfo">Save Changes</button>
         </div>
 
         <!--Email-->
-        <p class="font-bold text-xl border-b border-green mt-10">Email</p>
+        <p class="font-bold text-xl border-b border-green mt-10 pb-1">Email</p>
 
         <div class="flex">
           <div class="basis-4/5 mt-5">
@@ -91,7 +94,7 @@
         </div>
 
         <!--Password-->
-        <p class="font-bold text-xl border-b border-green mt-10">Change Password</p>
+        <p class="font-bold text-xl border-b border-green mt-10 pb-1">Change Password</p>
 
         <div>
           <div class="mr-20 mt-5">
@@ -160,9 +163,6 @@ export default {
     getImageSrc(e){
       this.ProfileImage = e;
       this.isImageDefault = false;
-    },
-    getProfileLink(username) {
-      return `/profile/${this.loggedInUser}`;
     },
     chooseFile(event){
       const file = event.target.files[0];
@@ -294,7 +294,6 @@ export default {
           first_name: this.firstName,
           last_name: this.lastName,
           school: this.school,
-          username: this.username,
           profile_img_src: imageUrl
         }
       })
@@ -400,7 +399,7 @@ export default {
   },
   async mounted(){
 
-
+    this.loading = false;
 
   },
   beforeUpdate(){
