@@ -50,6 +50,7 @@ export default {
     loggedInUser: String,
     loggedUserProfile: Array
   },
+  emits: ['retrieveSession'],
   data(){
     return{
       firstName: '',
@@ -84,28 +85,51 @@ export default {
         return;
       }
 
-      try {
-        const { user, data, session, error } = await supabase.auth.signUp({
-          email: this.email,
-          password: this.password,
-          options: {
-            data: {
-              first_name: this.firstName,
-              last_name: this.lastName,
-              username: this.userName,
-              school: this.school,
-              bio: this.bio,
-              profile_img_src: this.image,
-            },
-            emailRedirectTo: 'https://palatepicks.vercel.app/welcome'
+      try{
+        const { data, error } = await supabase
+        .from('profiles')
+        .select()
+        .eq('email', this.email)
+
+
+        if(!data.length){
+          try {
+            const { user, data, session, error } = await supabase.auth.signUp({
+              email: this.email,
+              password: this.password,
+              options: {
+                data: {
+                  first_name: this.firstName,
+                  last_name: this.lastName,
+                  username: this.userName,
+                  school: this.school,
+                  bio: this.bio,
+                  profile_img_src: this.image,
+                },
+                emailRedirectTo: 'https://palatepicks.vercel.app/welcome'
+              }
+            });
+            if (error) throw error;
+            alert("Your account has been successfully registered! Please check your confirmation email to confirm your account. If you do not see the confirmation email, please try to check your spam or junk emails.");
+            this.$router.push('/')
+          } catch (error) {
+            if(error.message === 'duplicate key value violates unique constraint "profiles_username_key"'){
+              alert("User registration failed. Username already exists.")
+              this.$router.push('/')
+            }else{
+              alert(error.message);
+              this.userName = "";
+            }
           }
-        });
-        if (error) throw error;
-        alert("Your account has been successfully registered! Please check your confirmation email to confirm your account. If you do not see the confirmation email, please try to check your spam or junk emails.");
-        this.$router.push('/')
-      } catch (error) {
+        }else{
+          alert("User registration failed. Email already exists.");
+        }
+
+
+      }catch(error){
         alert(error.message);
       }
+
       this.loading = false;
     },
   },
