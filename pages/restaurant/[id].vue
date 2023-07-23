@@ -5,6 +5,9 @@
       <div class="resto-title font-bold text-3xl md:text-5xl">
         {{ Restaurant.name }}
       </div>
+      <div v-if="isRestoOwner" class="text-green text-lg mt-4 bg-white w-56 text-center font-light rounded-2xl p-1">
+        RESTAURANT OWNER
+      </div>
       <div class="resto-ratings flex mt-3">
         <div class="resto-rating text-2xl flex pr-3">
           <img v-for="i in Restaurant.rating" class="star-icon w-25 h-25" src="~/assets/icons/Star.svg" alt="star" :key="i" />
@@ -27,7 +30,7 @@
     <div class="body px-4 md:px-20">
       <div class="gallery">
         <div class="gallery-title text-3xl font-semibold mt-20 mb-10">
-          Gallery
+          <span v-if="isRestoOwner">Your </span>Gallery
         </div>
         <div class="gallery-photos flex overflow-x-auto">
             <div v-for="(media, index) in Restaurant.gallery" :key="index" class="gallery-photo w-80 h-80 md:w-[500px] md:h-[500px] mr-10 mb-10">
@@ -44,7 +47,7 @@
         <div class="reviews flex flex-col-reverse md:flex-row justify-between">
           <div class="left-portion">
             <div class="reviews-title text-3xl font-semibold mt-20 mb-10">
-              Reviews
+              <span v-if="isRestoOwner">Your Restaurant's </span> Reviews
             </div>
             <div class="reviews-list flex flex-col gap-8">
               <InputReviewBox @update="getReviews" v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
