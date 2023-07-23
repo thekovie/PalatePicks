@@ -60,7 +60,7 @@
 
 
         <div v-if="loggedUserProfile.length">
-          <button v-if="!isRestoOwner && (username !== loggedUserProfile[0].username)" :class="markButtonClass" @click="markAsHelpful">
+          <button v-if="!isRestoOwner && (username !== loggedUserProfile[0].username)" :class="markButtonClass" @click="markAsHelpful" :disabled="isMarkButtonDisabled">
             Mark as Helpful
           </button>
         </div>
@@ -142,7 +142,8 @@ export default {
       unmarkedButtonClass: "bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4",
       isReviewMarkedByUser: false,
       isButtonMarked: false,
-      updatedHelpfulCount: 0
+      isMarkButtonDisabled: false,
+      updatedHelpfulCount: 0,
 
     }
   },
@@ -190,8 +191,7 @@ export default {
     },
     async markAsHelpful(){
 
-
-        await this.delay(250);
+        this.isMarkButtonDisabled = true;
         const supabase = useSupabaseClient();
 
         // CHECK IF A STRING IS IN AN ARRAY
@@ -280,6 +280,8 @@ export default {
         }catch(error){
           console.log(error)
         }
+
+        this.isMarkButtonDisabled = false;
       }
 
   },
