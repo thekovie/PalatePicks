@@ -57,9 +57,6 @@
           </div>
         </div>
 
-        <!-- Mark as Helpful button (If user is Logged in)-->
-        <button v-if="(loggedUserProfile.length) && (loggedUserProfile[0].username !== username) && !isRestoOwner" class="min-w-[205px] min-h-[50px] rounded-[41px] bg-green text-white relative top-[66px] self-end">Mark as Helpful</button>
-
         <!-- Comment Section Header -->
         <div class="font-bold text-[33px] mt-[70px]">Comments</div>
 

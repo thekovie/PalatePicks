@@ -48,15 +48,10 @@
         </button>
 
         <div v-if="loggedUserProfile.length">
-          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-4 mr-4" @click="toggleModifyReview">
+          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl flex items-center text-sm h-12 font-light px-6 py-4 mr-4" @click="toggleModifyReview">
             Modify Review
           </button>
         </div>
-
-
-        <button v-if="isRestoOwner" class="bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
-          Delete Review
-        </button>
 
 
         <div v-if="loggedUserProfile.length">
