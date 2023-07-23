@@ -77,7 +77,7 @@
 
               if(data){
                 const {error} = await supabase.auth.resetPasswordForEmail(this.email, {
-                  redirectTo: 'http://localhost:3000/update-password',
+                  redirectTo: 'https://palatepicks.vercel.app/update-password',
                 })
 
                 if(error){
