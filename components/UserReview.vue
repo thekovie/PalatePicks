@@ -2,7 +2,7 @@
 <div class="review-box flex flex-col bg-green_lightbg p-10 w-[1000px] rounded-3xl">
     <div class="review-info flex flex-col items-start">
       <div class="restaurant name text-3xl font-bold hover:underline cursor-pointer">
-        <router-link :to="`/restaurant/${restoName}`">{{ restoName }}</router-link>
+        <NuxtLink :to="`/restaurant/${restoName}`">{{ restoName }}</NuxtLink>
       </div>
       <div class="reviewer-rating text-xl flex pr-3 mt-2 mb-4">
           <img v-for="i in rating" class="star-icon w-25 h-25" src="~/assets/icons/Star.svg" alt="star" :key="i" />

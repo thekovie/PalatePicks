@@ -50,11 +50,13 @@
               <InputReviewBox @update="getReviews" v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
               <ReviewBox @update="getReviews" v-if="(restoReviews.length)" v-for="review in restoReviews" :key="review" @refreshRating="getRestaurant" :username="review.reviewer_username" :loggedUserProfile="loggedUserProfile" :isRestoOwner="isRestoOwner" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :comments="review.comments" :reviewId="review.review_id" :gallery="review.review_gallery" :isEdited="review.is_edited"/>
               <div v-else class="no-reviews text-xl font-light text-grey mt-8">
-                <span v-show="!isReviewBoxOpen">No reviews yet. Be the first to review this restaurant!</span>
+                <span v-show="!isReviewBoxOpen && !isSearchingReview && !isFilteringReview">No reviews yet. Be the first to review this restaurant!</span>
+                <span v-show="isSearchingReview">No review found matching "{{ this.lastSearchQuery }}".</span>
+                <span v-show="isFilteringReview">No review found matching the requested filter.</span>
               </div>
             </div>
           </div>
-          <div class="review-filters mt-20 flex flex-col w-auto items-end">
+          <div class="review-filters mt-20 flex flex-col w-auto sm:items-end">
             <div class="create-review">
               <div v-if="!hasReviewed">
                 <button v-if="!isRestoOwner" :disabled="isReviewBoxOpen" :isVisible="isReviewBoxOpen" @click="openReviewBox" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4">
@@ -63,38 +65,35 @@
                 </button>
               </div>
             </div>
-            <div class="filter-area mt-20">
+            <div class="filter-area flex flex-col mt-20">
               <div class="filter-title text-3xl font-semibold font mb-6">
                 Filter Reviews
               </div>
-              <div class="search-review">
-                <input class="search-review-input w-[300px] h-[50px] rounded-3xl px-6 border-2 focus:outline-green" type="text" placeholder="Search reviews" />
+              <div class="search-review relative">
+                <input class="search-review-input block w-full h-[50px] rounded-3xl pl-6 pr-16 border-2 focus:outline-green" v-model="searchQuery" type="text" placeholder="Search reviews" @keyup.enter="searchReview" required/>
+                <button class="search-review-button absolute top-0 right-0 h-[50px] text-white rounded-r-3xl flex items-center  border-black px-6 py-3" @click="searchReview">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="pt-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </button>
               </div>
-              <div class="star-filter flex flex-col mt-5">
-                <div class="five-stars flex">
-                  <input class="mx-8" type="checkbox" id="five-stars" name="five-stars" value="five-stars" />
-                  <img v-for="i in 5" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
-                </div>
-                <div class="four-stars flex mt-2">
-                  <input class="mx-8" type="checkbox" id="four-stars" name="four-stars" value="four-stars" />
-                  <img v-for="i in 4" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
-                  <img v-for="i in 5-4" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
-                </div>
-                <div class="three-stars flex mt-2">
-                  <input class="mx-8" type="checkbox" id="three-stars" name="three-stars" value="three-stars" />
-                  <img v-for="i in 3" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
-                  <img v-for="i in 5-3" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
-                </div>
-                <div class="two-stars flex mt-2">
-                  <input class="mx-8" type="checkbox" id="two-stars" name="two-stars" value="two-stars" />
-                  <img v-for="i in 2" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
-                  <img v-for="i in 5-2" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
-                </div>
-                <div class="one-star flex mt-2">
-                  <input class="mx-8" type="checkbox" id="one-star" name="one-star" value="one-star" />
-                  <img v-for="i in 1" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star.svg" alt="star" :key="i" />
-                  <img v-for="i in 5-1" class="star-icon w-25 h-25 mr-2" src="~/assets/icons/Star-blank.svg" alt="star" :key="i" />
-                </div>
+              <div class="filter flex flex-row items-center align-middle mt-5 border-t-2 pt-4 border-grey relative">
+                <select ref="filterOptions" class="filter-select block w-full h-[50px] text-black rounded-3xl pl-6 pr-16 border-2 focus:outline-green appearance-none" v-model="selectedFilter" @change="filterReviews">
+                  <option value="" disabled selected>Filter by</option>
+                  <option value="new-to-old">New to Old Reviews</option>
+                  <option value="old-to-new">Old to New Reviews</option>
+                  <option value="most-helpful">Most Helpful</option>
+                  <option value="five-stars">5 Star Ratings</option>
+                  <option value="four-stars">4 Star Ratings</option>
+                  <option value="three-stars">3 Star Ratings</option>
+                  <option value="two-stars">2 Star Ratings</option>
+                  <option value="one-star">1 Star Ratings</option>
+                </select>
+              </div>
+              <div class="reset-filters">
+                <button class="back-button bg-green text-white rounded-3xl text-center w-full font-light my-5 h-[45px]" @click="getReviews">
+                  RESET FILTERS
+                </button>
               </div>
             </div>
           </div>
@@ -163,6 +162,11 @@
       async getReviews() {
         this.loading = true;
         this.restoReviews = ref([]);
+        this.isSearchingReview = false;
+        this.isFilteringReview = false;
+        this.lastSearchQuery = '';
+        this.searchQuery = '';
+        this.selectedFilter = '';
 
         try {
           const { data, error } = await this.supabase
@@ -184,6 +188,100 @@
         }
       },
 
+      async searchReview() {
+        this.loading = true;
+        this.isSearchingReview = true;
+        this.restoReviews = ref([]);
+        this.lastSearchQuery = this.searchQuery;
+        this.isFilteringReview = false;
+        this.selectedFilter = '';
+
+        try {
+          const { data, error } = await this.supabase
+          .from('reviews')
+          .select()
+          .eq('resto_name', this.restoId)
+          .ilike('content', `%${this.searchQuery}%`);
+
+          if (data) {
+            this.restoReviews = data;
+          }
+
+          if (error) {
+            throw error
+          }
+        } catch(error) {
+          console.log(error)
+        } finally {
+          this.loading = false;
+        }
+      },
+
+      async filterReviews() {
+        this.loading = true;
+        this.isFilteringReview = true;
+        this.restoReviews = ref([]);
+        var starNo = 0;
+
+
+        if (this.selectedFilter === 'five-stars' || this.selectedFilter === 'four-stars' || this.selectedFilter === 'three-stars' || this.selectedFilter === 'two-stars' || this.selectedFilter === 'one-stars') {
+          try {
+
+            if (this.selectedFilter === 'five-stars') {
+              starNo = 5;
+            } else if (this.selectedFilter === 'four-stars') {
+              starNo = 4;
+            } else if (this.selectedFilter === 'three-stars') {
+              starNo = 3;
+            } else if (this.selectedFilter === 'two-stars') {
+              starNo = 2;
+            } else if (this.selectedFilter === 'one-stars') {
+              starNo = 1;
+            }
+
+            const { data, error } = await this.supabase
+            .from('reviews')
+            .select()
+            .eq('resto_name', this.restoId)
+            .eq('rating', starNo);
+
+            if (data) {
+              this.restoReviews = data;
+            }
+
+            if (error) {
+              throw error
+            }
+          } catch(error) {
+            console.log(error)
+          } finally {
+            this.loading = false;
+          }
+        } else {
+          try {
+            const { data, error } = await this.supabase
+            .from('reviews')
+            .select()
+            .eq('resto_name', this.restoId)
+            .order('created_at', { ascending: this.selectedFilter === 'old-to-new' })
+            .order('created_at', { ascending: this.selectedFilter === 'new-to-old' })
+            .order('helpful_count', { ascending: this.selectedFilter === 'most-helpful' })
+
+            if (data) {
+              this.restoReviews = data;
+            }
+
+            if (error) {
+              throw error
+            }
+          } catch(error) {
+            console.log(error)
+          } finally {
+            this.loading = false;
+          }
+        }
+      },
+
       async didUserReview() {
         this.loading = true;
         this.hasReviewed = false;
@@ -194,8 +292,6 @@
           .select()
           .eq('resto_name', this.restoId)
           .eq('reviewer_username', this.loggedUserProfile[0].username);
-
-          this.query = data;
 
           if (data.length > 0) {
             this.hasReviewed = true;
@@ -224,7 +320,12 @@
           rating: 0,
           loading: true,
           hasReviewed: false,
-          query: {},
+
+          searchQuery: '',
+          lastSearchQuery: '',
+          selectedFilter: '',
+          isSearchingReview: false,
+          isFilteringReview: false,
       }
     },
     computed: {
@@ -237,7 +338,6 @@
 
       console.log(this.Restaurant)
       console.log(`This user has reviewed this restaurant: ${this.hasReviewed}`)
-      console.log(this.query)
 
       // If no restaurant object is found (no keys)
       if(Object.keys(this.Restaurant).length === 0){
