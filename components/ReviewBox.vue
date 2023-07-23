@@ -42,13 +42,13 @@
           <div class="helpful-count text-2xl font-semibold">{{ updatedHelpfulCount }}</div>
           <div class="helpful-text text-sm font-light text-grey">found this review helpful</div>
       </div>
-      <div class="right-buttons flex justify-around mr-3">
-        <button class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 sm:mr-4" @click="toggleFullReview">
+      <div class="right-buttons flex mt-4 sm:mt-0 justify-around mr-3">
+        <button class="bg-green text-white text-sm rounded-3xl flex items-center font-light px-6 py-3 sm:mr-4" @click="toggleFullReview">
           View Comments
         </button>
 
         <div v-if="loggedUserProfile.length">
-          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
+          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white text- rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="toggleModifyReview">
             Modify Review
           </button>
         </div>
@@ -66,7 +66,7 @@
         </div>
 
         <div v-if="showModifyReview" @close="toggleModifyReview">
-          <ModifyReview @close="toggleModifyReview" @update="this.$emit('update')" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId" @reloadRating="reloadRating"/>
+          <ModifyReview @close="toggleModifyReview" @update="this.$emit('update')" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId"/>
         </div>
 
         <div v-if="showMediaView" @close="toggleMediaView">
@@ -168,9 +168,7 @@ export default {
     getProfileLink(username) {
       return `/profile/${username}`;
     },
-    reloadRating(){
-      this.$emit('refreshRating');
-    },
+
     async getuserInfo() {
       const supabase = useSupabaseClient();
 

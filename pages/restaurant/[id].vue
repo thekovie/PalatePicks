@@ -50,7 +50,8 @@
               <InputReviewBox @update="getReviews" v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
               <ReviewBox @update="getReviews" v-if="(restoReviews.length)" v-for="review in restoReviews" :key="review" @refreshRating="getRestaurant" :username="review.reviewer_username" :loggedUserProfile="loggedUserProfile" :isRestoOwner="isRestoOwner" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :comments="review.comments" :reviewId="review.review_id" :gallery="review.review_gallery" :isEdited="review.is_edited"/>
               <div v-else class="no-reviews text-xl font-light text-grey mt-8">
-                <span v-show="!isReviewBoxOpen">No reviews yet. Be the first to review this restaurant!</span>
+                <span v-show="!isReviewBoxOpen && !isSearchingReview">No reviews yet. Be the first to review this restaurant!</span>
+                <span v-show="isSearchingReview">No review found matching "{{ this.lastSearchQuery }}".</span>
               </div>
             </div>
           </div>
@@ -68,8 +69,8 @@
                 Filter Reviews
               </div>
               <div class="search-review relative">
-                <input class="search-review-input block w-full h-[50px] rounded-3xl pl-6 pr-16 border-2 focus:outline-green" type="text" placeholder="Search reviews" />
-                <button class="search-review-button absolute top-0 right-0 h-[50px] text-white rounded-r-3xl flex items-center  border-black px-6 py-3">
+                <input class="search-review-input block w-full h-[50px] rounded-3xl pl-6 pr-16 border-2 focus:outline-green" v-model="searchQuery" type="text" placeholder="Search reviews" @keyup.enter="searchReview" required/>
+                <button class="search-review-button absolute top-0 right-0 h-[50px] text-white rounded-r-3xl flex items-center  border-black px-6 py-3" @click="searchReview">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                   </svg>
@@ -110,7 +111,7 @@
                 </div>
               </div>
               <div class="reset-filters">
-                <button class="back-button bg-green text-white rounded-3xl text-center w-full font-light my-5 h-[45px]">
+                <button class="back-button bg-green text-white rounded-3xl text-center w-full font-light my-5 h-[45px]" @click="getReviews">
                   RESET FILTERS
                 </button>
               </div>
@@ -202,6 +203,33 @@
         }
       },
 
+      async searchReview() {
+        this.loading = true;
+        this.isSearchingReview = true;
+        this.restoReviews = ref([]);
+        this.lastSearchQuery = this.searchQuery;
+
+        try {
+          const { data, error } = await this.supabase
+          .from('reviews')
+          .select()
+          .eq('resto_name', this.restoId)
+          .ilike('content', `%${this.searchQuery}%`);
+
+          if (data) {
+            this.restoReviews = data;
+          }
+
+          if (error) {
+            throw error
+          }
+        } catch(error) {
+          console.log(error)
+        } finally {
+          this.loading = false;
+        }
+      },
+
       async didUserReview() {
         this.loading = true;
         this.hasReviewed = false;
@@ -212,8 +240,6 @@
           .select()
           .eq('resto_name', this.restoId)
           .eq('reviewer_username', this.loggedUserProfile[0].username);
-
-          this.query = data;
 
           if (data.length > 0) {
             this.hasReviewed = true;
@@ -242,7 +268,11 @@
           rating: 0,
           loading: true,
           hasReviewed: false,
-          query: {},
+
+          searchQuery: '',
+          lastSearchQuery: '',
+          selectedFilter: '',
+          isSearchingReview: false,
       }
     },
     computed: {
@@ -255,7 +285,6 @@
 
       console.log(this.Restaurant)
       console.log(`This user has reviewed this restaurant: ${this.hasReviewed}`)
-      console.log(this.query)
 
       // If no restaurant object is found (no keys)
       if(Object.keys(this.Restaurant).length === 0){
