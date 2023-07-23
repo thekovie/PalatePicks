@@ -24,8 +24,9 @@
           <input type="password" placeholder="Password" class="py-[10px] px-[32px] rounded-[34.5px] lg:h-[69px] border-[1px] border-solid border-green mt-[22px]" v-model="password" required>
 
           <!-- Remember me and forgot password option -->
-          <div class="flex flex-row justify-between mt-1">
-            <NuxtLink to="/forgot-password" class="text-grey cursor-pointer hover:underline flex lg:mt-4 lg:ml-8 lg:text-[20px]">Forgot password?</NuxtLink>
+          <div class="flex flex-row mt-1 items-center align-middle">
+            <span class="text-grey flex lg:mt-4 lg:ml-2 lg:text-lg">Forgot Password?</span>
+            <NuxtLink to="/forgot-password" class="text-grey font-bold cursor-pointer hover:underline flex lg:mt-4 lg:ml-2 lg:text-lg">Click here</NuxtLink>
           </div>
 
           <!-- Login Button -->
