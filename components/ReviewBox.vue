@@ -43,7 +43,7 @@
           <div class="helpful-text text-sm font-light text-grey">found this review helpful</div>
       </div>
       <div class="right-buttons flex mt-4 sm:mt-0 justify-around mr-3">
-        <button class="bg-green text-white text-sm rounded-3xl flex items-center font-light px-6 py-3 sm:mr-4" @click="toggleFullReview">
+        <button class="bg-green text-white text-sm rounded-3xl flex items-center font-light px-6 py-3 h-12 sm:mr-4" @click="toggleFullReview">
           View Comments
         </button>
 
@@ -137,9 +137,9 @@ export default {
       profileImgSrc: "",
       school: "",
       userProfile: {},
-      markButtonClass: "bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4",
-      markedButtonClass: "bg-[#93cfa9] text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4",
-      unmarkedButtonClass: "bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4",
+      markButtonClass: "bg-green text-white rounded-3xl flex items-center text-sm font-light px-6 py-3 h-12 mr-4",
+      markedButtonClass: "bg-[#93cfa9] text-white rounded-3xl flex items-center text-sm font-light px-6 py-3 h-12 mr-4",
+      unmarkedButtonClass: "bg-green text-white rounded-3xl flex items-center font-light text-sm px-6 py-3 h-12 mr-4",
       isReviewMarkedByUser: false,
       isButtonMarked: false,
       isMarkButtonDisabled: false,
