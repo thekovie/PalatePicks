@@ -50,9 +50,9 @@
               <InputReviewBox @update="getReviews" v-if="isReviewBoxOpen" @close="closeReviewBox" :name="restoId"  :isVisible="isReviewBoxOpen" :loggedUserProfile="loggedUserProfile" />
               <ReviewBox @update="getReviews" v-if="(restoReviews.length)" v-for="review in restoReviews" :key="review" @refreshRating="getRestaurant" :username="review.reviewer_username" :loggedUserProfile="loggedUserProfile" :isRestoOwner="isRestoOwner" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :comments="review.comments" :reviewId="review.review_id" :gallery="review.review_gallery" :isEdited="review.is_edited"/>
               <div v-else class="no-reviews text-xl font-light text-grey mt-8">
-                <span v-show="!isReviewBoxOpen && !isSearchingReview && !isFilteringReview">No reviews yet. Be the first to review this restaurant!</span>
-                <span v-show="isSearchingReview">No review found matching "{{ this.lastSearchQuery }}".</span>
-                <span v-show="isFilteringReview">No review found matching the requested filter.</span>
+                <span v-if="!isReviewBoxOpen && !isSearchingReview && !isFilteringReview">No reviews yet. Be the first to review this restaurant!</span>
+                <span v-else-if="isSearchingReview">No review found matching "{{ this.lastSearchQuery }}".</span>
+                <span v-else-if="isFilteringReview">No review found matching the requested filter.</span>
               </div>
             </div>
           </div>
