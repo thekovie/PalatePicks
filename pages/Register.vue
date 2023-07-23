@@ -118,7 +118,7 @@ export default {
               this.$router.push('/')
             }else{
               alert(error.message);
-              this.$router.push('/register')
+              this.userName = "";
             }
           }
         }else{
