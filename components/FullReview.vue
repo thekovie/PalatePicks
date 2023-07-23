@@ -33,7 +33,7 @@
 
           <!-- Date -->
           <div class="text-[20px] text-grey">
-            {{  date }}
+            {{  formattedDate }}
           </div>
 
         </div>
@@ -94,14 +94,6 @@
         <div v-if="comments.length > 0">
           <div v-for="comment in comments" :key="comment.commentID" class="flex flex-col">
             <Comment :comment="comment" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId" :isRestoOwner="isRestoOwner"/>
-
-            <!-- Comment Replies | THIS FEATURE IS DEPRECATED -->
-            <!-- <div v-if="comment.replies.length > 0">
-              <div v-for="reply in comment.replies" :key="reply.date" class="ml-[95px] mt-[75px]">
-                <Comment :comment="reply"/>
-
-              </div>
-            </div> -->
 
             <!-- Comment Border-->
             <div class="w-[100%] min-h-[2px] max-h-[2px] bg-[#d9d9d9] mt-[82px] mb-[47.5px]"></div>
@@ -164,6 +156,7 @@ export default {
       isImage: '',
       commentField: '',
       comments: {},
+      formattedDate: (new Date(this.date)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Asia/Manila' })
     }
   },
 

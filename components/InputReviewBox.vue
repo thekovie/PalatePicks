@@ -47,7 +47,7 @@
             <button class="bg-white text-green rounded-3xl flex items-center font-light px-14 py-3 mr-4" @click="closeReviewBox">
               Cancel
             </button>
-            <button v-if="selectedRating > 0" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="handleSubmit($event)">
+            <button v-if="selectedRating > 0 && reviewTitle !== '' && reviewContent !== ''" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="handleSubmit($event)">
               Submit Review
             </button>
             <button v-else class="bg-[#93cfa9] text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" disabled>

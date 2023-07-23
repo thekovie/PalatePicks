@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="review-posted-at text-sm font-light text-grey mt-4">
-      {{ date }}
+      Posted at {{ formattedDate }}
     </div>
     <div class="review-footer flex justify-between align-middle mt-5">
       <div class="found-helpful">
@@ -57,6 +57,7 @@ export default {
         selectedMedia: '',
         showMediaView: false,
         showModifyReview: false,
+        formattedDate: (new Date(this.date)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Asia/Manila' }),
       }
     },
   methods: {
