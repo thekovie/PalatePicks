@@ -56,10 +56,8 @@ export default {
         this.loggedUserProfile = []
         this.isLoggedIn = false;
 
-
-        this.loading = false;
-
         location.reload(true)
+
 
 
       },
