@@ -84,6 +84,10 @@
               console.log(data)
             }
 
+            if(error){
+              throw error;
+            }
+
         }catch(error){
           console.log(error)
         }
@@ -101,6 +105,10 @@
               this.budgetEstablishments = data;
               console.log("BUDGET RESTAURANTS")
               console.log(data)
+            }
+
+            if(error){
+              throw error;
             }
 
         }catch(error){
