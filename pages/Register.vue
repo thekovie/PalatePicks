@@ -64,7 +64,7 @@ export default {
       image: "https://svzmkssqmtayeyoylwlk.supabase.co/storage/v1/object/public/profile-pictures/default.jpg",
       isImageDefault: true,
       errorMsg: '',
-      loading: false,
+      loading: true,
     }
   },
   methods: {
@@ -108,6 +108,27 @@ export default {
       }
       this.loading = false;
     },
+  },
+  async mounted(){
+    const supabase = useSupabaseClient();
+
+    try{
+      const { data, error } = await supabase.auth.getSession()
+
+      if(data.session !== null){
+        this.$router.push('/')
+      }else{
+        this.loading = false;
+      }
+
+      if(error){
+        throw error;
+      }
+
+    }catch(error){
+      console.log(error)
+    }
+
   }
 }
 </script>

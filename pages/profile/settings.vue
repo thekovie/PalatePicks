@@ -399,7 +399,7 @@ export default {
   },
   async mounted(){
 
-
+    this.loading = false;
 
   },
   beforeUpdate(){

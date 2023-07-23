@@ -1,5 +1,5 @@
 <template>
-    <Preloader v-if="loading" :loading="loading" />
+  <Preloader v-if="loading" :loading="loading" />
   <div class="header sticky top-0 flex flex-wrap justify-between items-center bg-white text-green flex-row p-5 border-b min-w-screen border-solid z-10">
     <div class="left flex flex-row items-center">
       <NuxtLink class="logo font-cursive normal-case font-bold text-3xl justify-start" to="/">PalatePicks</NuxtLink>
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div v-if="isLoggedIn">
-      <NavUserProfile  :session="dataSession" :loggedUserProfile="loggedUserProfile" @logout="logout"/>
+      <NavUserProfile :session="dataSession" :loggedUserProfile="loggedUserProfile" @logout="logout"/>
     </div>
     <div v-else>
       <NavUser />
