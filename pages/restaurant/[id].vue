@@ -224,7 +224,7 @@
         var starNo = 0;
 
 
-        if (this.selectedFilter === 'five-stars' || this.selectedFilter === 'four-stars' || this.selectedFilter === 'three-stars' || this.selectedFilter === 'two-stars' || this.selectedFilter === 'one-stars') {
+        if (this.selectedFilter === 'five-stars' || this.selectedFilter === 'four-stars' || this.selectedFilter === 'three-stars' || this.selectedFilter === 'two-stars' || this.selectedFilter === 'one-star') {
           try {
 
             if (this.selectedFilter === 'five-stars') {
