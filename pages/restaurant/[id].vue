@@ -111,6 +111,7 @@
       loggedInUser: String,
       loggedUserProfile: Array
     },
+    emits: ['retrieveSession'],
     methods: {
       openReviewBox() {
         if (!this.loggedUserProfile.length) {
@@ -287,19 +288,22 @@
         this.hasReviewed = false;
 
         try {
-          const { data, error } = await this.supabase
-          .from('reviews')
-          .select()
-          .eq('resto_name', this.restoId)
-          .eq('reviewer_username', this.loggedUserProfile[0].username);
+          if(this.loggedUserProfile.length){
+            const { data, error } = await this.supabase
+              .from('reviews')
+              .select()
+              .eq('resto_name', this.restoId)
+              .eq('reviewer_username', this.loggedUserProfile[0].username);
 
-          if (data.length > 0) {
-            this.hasReviewed = true;
+              if (data.length > 0) {
+                this.hasReviewed = true;
+              }
+
+              if (error) {
+                throw error
+              }
           }
 
-          if (error) {
-            throw error
-          }
         } catch(error) {
           console.log(error)
         } finally {

@@ -291,32 +291,34 @@ export default {
     this.firstName = this.userProfile.first_name
     this.lastName = this.userProfile.last_name
 
+    if(this.loggedUserProfile.length){
+        if(!this.isRestoOwner && (this.username !== this.loggedUserProfile[0].username)){
+        const supabase = useSupabaseClient();
 
-    if(!this.isRestoOwner && (this.username !== this.loggedUserProfile[0].username)){
-      const supabase = useSupabaseClient();
+        const { data, error } = await supabase
+                .from('reviews')
+                .select()
+                .eq('review_id', this.reviewId)
 
-      const { data, error } = await supabase
-              .from('reviews')
-              .select()
-              .eq('review_id', this.reviewId)
+        this.updatedHelpfulCount = data[0].helpful_count;
+        console.log("HELPFUL COUNT IS " + this.updatedHelpfulCount)
+        console.log(data)
 
-      this.updatedHelpfulCount = data[0].helpful_count;
-      console.log("HELPFUL COUNT IS " + this.updatedHelpfulCount)
-      console.log(data)
+        if(data[0].users_liked.includes(this.loggedUserProfile[0].username)){
+          this.markButtonClass = this.markedButtonClass;
+          this.isReviewMarkedByUser = true;
+          this.isButtonMarked = true;
 
-      if(data[0].users_liked.includes(this.loggedUserProfile[0].username)){
-        this.markButtonClass = this.markedButtonClass;
-        this.isReviewMarkedByUser = true;
-        this.isButtonMarked = true;
+        }
 
+        console.log(data[0].users_liked)
+
+
+        console.log("Did user already mark the review as helpful?");
+        console.log(data[0].users_liked.includes(this.loggedUserProfile[0].username));
       }
-
-      console.log(data[0].users_liked)
-
-
-      console.log("Did user already mark the review as helpful?");
-      console.log(data[0].users_liked.includes(this.loggedUserProfile[0].username));
     }
+
 
 
   },
