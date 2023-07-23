@@ -21,7 +21,7 @@
           Top Restaurants
         </div>
         <div class="top-restaurants-list flex flex-col sm:flex-wrap sm:flex-row">
-          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" :restaurant="establishments" />
+          <RestoBox v-for="establishment in topEstablishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" :restaurant="establishments" />
         </div>
       </div>
       <div class="budget-restaurants">
@@ -29,7 +29,7 @@
           Budget Restaurants
         </div>
         <div class="budget-restaurants-list flex flex-col sm:flex-wrap sm:flex-row">
-          <RestoBox v-for="establishment in establishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
+          <RestoBox v-for="establishment in budgetEstablishments" :key="establishment.id" :imageHeader="establishment.imageHeader" :name="establishment.name" :description="establishment.description" :rating="establishment.rating" :price="establishment.price" />
         </div>
       </div>
     </section>
@@ -57,6 +57,8 @@
       return {
         firstName: '',
         establishments: {},
+        topEstablishments: {},
+        budgetEstablishments: {},
         loading: true,
         search: '',
       }
@@ -65,16 +67,46 @@
     methods: {
       async fetchRestaurants() {
         this.loading = true;
+
         const supabase = useSupabaseClient();
-        const { data, error } = await supabase
-          .from('restaurants')
-          .select()
-        if (error) {
+
+        // Fetch top restaurants
+        try{
+          const { data, error } = await supabase
+            .from('restaurants')
+            .select()
+            .gte('rating', 4)
+            .order('rating', { ascending: false })
+
+            if(data){
+              console.log("TOP RESTAURANTS")
+              this.topEstablishments = data;
+              console.log(data)
+            }
+
+        }catch(error){
           console.log(error)
-        } else {
-          this.establishments = data
-          console.log(data)
         }
+
+        // Fetch budget restaurants
+
+        try{
+          const { data, error } = await supabase
+            .from('restaurants')
+            .select()
+            .lte('price', 2)
+            .order('price', { ascending: true})
+
+            if(data){
+              this.budgetEstablishments = data;
+              console.log("BUDGET RESTAURANTS")
+              console.log(data)
+            }
+
+        }catch(error){
+          console.log(error)
+        }
+
         this.loading = false;
       },
       enterSearch() {
