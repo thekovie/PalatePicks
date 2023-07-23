@@ -72,16 +72,11 @@
               <div class="filter-title text-3xl font-semibold font mb-6">
                 Filter Reviews
               </div>
-              <div class="search-review relative">
-                <input class="search-review-input block w-full h-[50px] rounded-3xl pl-6 pr-16 border-2 focus:outline-green" v-model="searchQuery" type="text" placeholder="Search reviews" @keyup.enter="searchReview" required/>
-                <button class="search-review-button absolute top-0 right-0 h-[50px] text-white rounded-r-3xl flex items-center  border-black px-6 py-3" @click="searchReview">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="pt-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                  </svg>
-                </button>
+              <div class="search-review">
+                <input class="search-review-input w-full h-[50px] rounded-3xl pl-6 pr-16 border-2 focus:outline-green" v-model="searchQuery" type="text" placeholder="Search reviews" @keyup.enter="searchReview" required/>
               </div>
-              <div class="filter flex flex-row items-center align-middle mt-5 border-t-2 pt-4 border-grey relative">
-                <select ref="filterOptions" class="filter-select block w-full h-[50px] text-black rounded-3xl pl-6 pr-16 border-2 focus:outline-green appearance-none" v-model="selectedFilter" @change="filterReviews">
+              <div class="filter flex flex-row items-center align-middle mt-5 border-t-2 pt-4 border-grey">
+                <select ref="filterOptions" class="filter-select w-full h-[50px] text-black rounded-3xl pl-6 pr-16 border-2 focus:outline-green appearance-none" v-model="selectedFilter" @change="filterReviews">
                   <option value="" disabled selected>Filter by</option>
                   <option value="new-to-old">New to Old Reviews</option>
                   <option value="old-to-new">Old to New Reviews</option>
