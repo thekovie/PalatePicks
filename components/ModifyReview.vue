@@ -64,7 +64,7 @@
             <button class="delete-review bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="deleteReview">
               Delete Review
             </button>
-            <button v-if="selectedRating > 0" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="updateReview">
+            <button v-if="selectedRating > 0 && reviewTitle !== '' && reviewContent !== ''" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="updateReview">
               Update Review
             </button>
 

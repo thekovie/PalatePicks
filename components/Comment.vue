@@ -40,7 +40,7 @@
   </div>
 
   <!-- Date -->
-  <div class="text-grey text-[12px]">{{ comment.created_at }}</div>
+  <div class="text-grey text-[12px]">{{ formattedDate }}</div>
 
 </div>
 <!-- Comment Content -->
@@ -70,6 +70,7 @@ export default {
       isEstablishmentOwner: false,
       userProfile: {},
       username: this.comment.username,
+      formattedDate: (new Date(this.comment.created_at)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Asia/Manila' }),
     }
   },
 
