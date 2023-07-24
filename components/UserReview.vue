@@ -33,6 +33,9 @@
           <div class="helpful-text text-sm font-light text-grey">found this review helpful</div>
       </div>
     </div>
+    <div v-if="showMediaView" @close="closeMediaView">
+      <ViewMedia @close="closeMediaView" :media="selectedMedia" :isImage="isImage" />
+    </div>
   </div>
 </template>
 
@@ -63,6 +66,9 @@ export default {
   methods: {
     toggleModifyReview(){
       this.showModifyReview = !this.showModifyReview;
+    },
+    closeMediaView() {
+      this.showMediaView = false;
     },
     toggleMediaView(media) {
       this.showMediaView = !this.showMediaView;
