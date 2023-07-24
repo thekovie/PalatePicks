@@ -185,99 +185,83 @@ export default {
       const supabase = useSupabaseClient();
 
 
-
-        // LIST
-        try{
-          const { data, error } = await this.supabase.storage
-          .from('profile-pictures')
-          .list(`${this.loggedUserProfile[0].id}/`)
-
-          imageName = data[0].name;
-
-          console.log('GHJADWGHJAWGJHAWDJHGADW')
-          console.log(imageName)
-
-          if(error){
-              throw error;
-          }
-
-
-        }catch(error){
-          console.log(error)
-        }
-
-        // DELETE PICTURE
-        try{
-          const { data, error } = await this.supabase.storage
-          .from('profile-pictures')
-          .remove(`${this.loggedUserProfile[0].id}/${imageName}`)
-
-          if(error){
-            throw error;
-          }
-
-        }catch(error){
-          console.log(error)
-        }
-
-        // UPLOAD PICTURE
-        try{
-          const { data, error } = await this.supabase.storage
-          .from('profile-pictures')
-          .upload(`${this.loggedUserProfile[0].id}/${this.avatarName}`, this.fileLoc, {
-            cacheControl: 0,
-            upsert: false,
-          })
-
-
-
-
-        }catch(error){
-          console.log(error)
-        }
-
-
-        try{
-          const { data, error } = await this.supabase.storage
-          .from('profile-pictures')
-          .list(`${this.loggedUserProfile[0].id}/`)
-
-          imageName = data[0].name;
-
-          console.log('GHJADWGHJAWGJHAWDJHGADW')
-          console.log(imageName)
-
+        if(this.fileLoc){
+            // LIST
           try{
+              const { data, error } = await this.supabase.storage
+              .from('profile-pictures')
+              .list(`${this.loggedUserProfile[0].id}/`)
 
-            const{data, error} = await this.supabase.storage
-            .from('profile-pictures')
-            .getPublicUrl(`${this.loggedUserProfile[0].id}/${imageName}`)
+              imageName = data[0].name;
+
+              console.log('GHJADWGHJAWGJHAWDJHGADW')
+              console.log(imageName)
+
+              if(error){
+                  throw error;
+              }
 
 
-            if(error){
-              throw error;
-            }
           }catch(error){
             console.log(error)
           }
 
-
-        }catch(error){
-          console.log(error)
-        }
-
-
-
-        try{
+          // DELETE PICTURE
+          try{
             const { data, error } = await this.supabase.storage
             .from('profile-pictures')
-            .getPublicUrl(`${this.loggedUserProfile[0].id}/${imageName}`)
+            .remove(`${this.loggedUserProfile[0].id}/${imageName}`)
 
             if(error){
               throw error;
             }
 
-            imageUrl = data.publicUrl;
+          }catch(error){
+            console.log(error)
+          }
+
+
+          // UPLOAD PICTURE
+          try{
+            const { data, error } = await this.supabase.storage
+            .from('profile-pictures')
+            .upload(`${this.loggedUserProfile[0].id}/${this.avatarName}`, this.fileLoc, {
+              cacheControl: 0,
+              upsert: false,
+            })
+
+
+
+
+          }catch(error){
+            console.log(error)
+          }
+
+
+          try{
+            const { data, error } = await this.supabase.storage
+            .from('profile-pictures')
+            .list(`${this.loggedUserProfile[0].id}/`)
+
+            imageName = data[0].name;
+
+            console.log('GHJADWGHJAWGJHAWDJHGADW')
+            console.log(imageName)
+
+            try{
+
+              const{data, error} = await this.supabase.storage
+              .from('profile-pictures')
+              .getPublicUrl(`${this.loggedUserProfile[0].id}/${imageName}`)
+
+
+              if(error){
+                throw error;
+              }
+            }catch(error){
+              console.log(error)
+            }
+
 
           }catch(error){
             console.log(error)
@@ -285,23 +269,53 @@ export default {
 
 
 
+          try{
+              const { data, error } = await this.supabase.storage
+              .from('profile-pictures')
+              .getPublicUrl(`${this.loggedUserProfile[0].id}/${imageName}`)
 
+              if(error){
+                throw error;
+              }
 
+              imageUrl = data.publicUrl;
 
-      const { data, error } = await supabase.auth.updateUser({
-        data: {
-          bio: this.bio,
-          first_name: this.firstName,
-          last_name: this.lastName,
-          school: this.school,
-          profile_img_src: imageUrl
+          }catch(error){
+            console.log(error)
+          }
         }
-      })
 
 
 
+      if(this.fileLoc){
+          const { data, error } = await supabase.auth.updateUser({
+          data: {
+            bio: this.bio,
+            first_name: this.firstName,
+            last_name: this.lastName,
+            school: this.school,
+            profile_img_src: imageUrl
+          }
+        })
 
-      if (error) throw error;
+        if (error) throw error;
+
+
+      }else{
+        const { data, error } = await supabase.auth.updateUser({
+          data: {
+            bio: this.bio,
+            first_name: this.firstName,
+            last_name: this.lastName,
+            school: this.school
+          }
+        })
+
+        if (error) throw error;
+
+      }
+
+
       this.loading = false;
       alert('Your changes have been successfully saved!')
       this.$emit('retrieveSession')
@@ -371,7 +385,8 @@ export default {
       localImage: "",
       avatarName: "",
       supabase: useSupabaseClient(),
-      finalImageUrl: ""
+      finalImageUrl: "",
+      fileLoc: null,
     };
   },
   computed: {

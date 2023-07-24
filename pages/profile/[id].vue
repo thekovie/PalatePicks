@@ -27,6 +27,7 @@ export default {
     loggedInUser: String,
     loggedUserProfile: Array,
   },
+  emits: ['retrieveSession'],
   data() {
       return {
         supabase: useSupabaseClient(),
