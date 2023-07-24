@@ -39,8 +39,8 @@
               <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
                 <img class="w-full h-full" src="~/assets/icons/Video.svg" />
               </div>
-              <div v-if="showMediaView" @close="toggleMediaView">
-                <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
+              <div v-if="showMediaView" @close="closeMediaView">
+                <ViewMedia @close="closeMediaView" :media="selectedMedia" :isImage="isImage" />
               </div>
           </div>
         </div>
@@ -121,8 +121,11 @@
       closeReviewBox() {
         this.isReviewBoxOpen = false
       },
+      closeMediaView() {
+        this.showMediaView = false;
+      },
       toggleMediaView(media) {
-        this.showMediaView = !this.showMediaView;
+        this.showMediaView = true;
         this.selectedMedia = media;
         if (this.reviewFileTypeChecker(media)) {
           this.isImage = true;
