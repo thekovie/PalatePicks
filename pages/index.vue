@@ -43,7 +43,10 @@
     setup() {
       useSeoMeta({
         title: 'PalatePicks | Fueling Student Appetites, One Bite at a Time',
+        ogDescription: 'Are you a student on a tight budget, looking to savor the best food options in town without breaking the bank? Look no further than PalatePicks, the ultimate web application designed exclusively for students seeking delectable dining experiences within their budget range.',
         description: 'Are you a student on a tight budget, looking to savor the best food options in town without breaking the bank? Look no further than PalatePicks, the ultimate web application designed exclusively for students seeking delectable dining experiences within their budget range.',
+        image: 'https://i.imgur.com/14qTVqA.png',
+        ogImage: 'https://i.imgur.com/14qTVqA.png',
         url: 'https://palatepicks.vercel.app/',
         keywords: 'food, restaurant, review, food review, restaurant review, foodie, foodie review, foodie restaurant review, foodie review, foodie restaurant review, foodie restaurant, foodie restaurant review, foodie restaurant review',
       })
