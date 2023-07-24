@@ -1,12 +1,14 @@
 <template>
-  <div v-if="isVisible" class="input-reviewbox flex flex-col bg-green_lightbg p-10 w-[1000px] rounded-3xl shadow-xl shadow-green">
+  <div v-if="isVisible" class="input-reviewbox flex flex-col bg-green_lightbg w-full p-10 md:w-[1000px] rounded-3xl shadow-xl shadow-green">
     <CustomLoader v-if="loading" :loading="loading" :status="status" />
     <h2 class="rate-title font-semibold text-3xl">Create a Review</h2>
     <div class=" font-light text-grey text-lg">You're now reviewing {{ name }}</div>
     <form>
-      <div class="rate-stars flex pr-3 pt-5 items-center">
-        <img class="h-10 w-10 cursor-pointer" v-for="(star, index) in stars" :key="index" @click="toggleRating(index + 1)" :src="getStarIcon(index)" :alt="getStarAlt(index)" @click.prevent />
-        <div class="rate-meaning ml-4">
+      <div class="rate-stars flex flex-col md:flex-row pr-3 pt-5 md:items-center">
+        <div class="flex flex-row">
+          <img class="h-10 w-10 cursor-pointer" v-for="(star, index) in stars" :key="index" @click="toggleRating(index + 1)" :src="getStarIcon(index)" :alt="getStarAlt(index)" @click.prevent />
+        </div>
+        <div class="rate-meaning ml-1 md:ml-4">
           <div v-if="selectedRating === 0" class="text-sm font-light text-grey">Select your rating</div>
           <div v-if="selectedRating === 1" class="text-sm font-light text-grey">Poor</div>
           <div v-if="selectedRating === 2" class="text-sm font-light text-grey">Fair</div>
@@ -15,19 +17,19 @@
           <div v-if="selectedRating === 5" class="text-sm font-light text-grey">Excellent</div>
         </div>
       </div>
-      <div class="review-part flex pt-8">
-        <div class="reviewer-photo w-20 h-20 rounded-full mr-3 border-4 border-green">
+      <div class="review-part flex flex-col md:flex-row pt-8">
+        <div class="reviewer-photo w-20 h-20 invisible md:visible rounded-full mr-3 border-4 border-green">
             <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile[0].profile_img_src" alt="user" />
         </div>
         <div class="review-content flex flex-col gap-5 mt-1">
           <div class="review-title">
-            <input class="review-title-input w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" v-model="reviewTitle" type="text" placeholder="Review Title" />
+            <input class="review-title-input w-full md:w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" v-model="reviewTitle" type="text" placeholder="Review Title" />
           </div>
           <div class="review-text">
-            <textarea class="review-text-input w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" />
+            <textarea class="review-text-input w-full md:w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" />
           </div>
-          <div class="review-gallery flex">
-            <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-6 mb-6 cursor-pointer" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
+          <div class="review-gallery flex flex-wrap md:flex-row">
+            <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-2 md:mr-6 mb-6 cursor-pointer" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
               <img v-if="media.isImage" class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" />
               <video v-else class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" no-controls />
               <div v-if="media.isVideo && !media.hovered" class="video-icon absolute bg-black bg-opacity-30 w-[90px] h-[90px] p-8 rounded-3xl">
@@ -43,14 +45,14 @@
               <input ref="fileInput" type="file" accept="image/*, video/*" class="block" @change="handleFileUpload" />
             </div>
           </div>
-          <div class="review-buttons flex justify-end">
-            <button class="bg-white text-green rounded-3xl flex items-center font-light px-14 py-3 mr-4" @click="closeReviewBox">
+          <div class="review-buttons flex flex-col justify-center md:flex-row md:justify-end">
+            <button class="bg-white text-green rounded-3xl flex items-center justify-center font-light px-14 w-full md:w-40 py-3 mr-4" @click="closeReviewBox">
               Cancel
             </button>
-            <button v-if="selectedRating > 0 && reviewTitle !== '' && reviewContent !== ''" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="handleSubmit($event)">
+            <button v-if="selectedRating > 0 && reviewTitle !== '' && reviewContent !== ''" class="bg-green text-white rounded-3xl flex items-center justify-center font-light px-6 w-full mt-4 md:mt-0 md:w-40 py-3 mr-4" @click="handleSubmit($event)">
               Submit Review
             </button>
-            <button v-else class="bg-[#93cfa9] text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" disabled>
+            <button v-else class="bg-[#93cfa9] text-white rounded-3xl flex items-center justify-center font-light w-full mt-4 md:mt-0 md:w-40 px-6 py-3 mr-4" disabled>
               Submit Review
             </button>
           </div>
