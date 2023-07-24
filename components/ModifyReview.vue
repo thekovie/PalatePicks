@@ -455,6 +455,7 @@
         finally {
           this.$emit('update');
           this.$emit('close');
+          this.$emit('reloadRating')
           this.loading = false;
         }
       },

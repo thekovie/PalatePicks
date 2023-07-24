@@ -61,7 +61,7 @@
         </div>
 
         <div v-if="showModifyReview" @close="toggleModifyReview">
-          <ModifyReview @close="toggleModifyReview" @update="this.$emit('update')" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId"/>
+          <ModifyReview @close="toggleModifyReview" @update="this.$emit('update')" @reloadRating="this.$emit('refreshRating')" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId"/>
         </div>
 
         <div v-if="showMediaView" @close="closeMediaView">
