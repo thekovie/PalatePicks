@@ -134,6 +134,19 @@
 <script>
 
 export default {
+  setup() {
+    useSeoMeta({
+      title: `Settings | PalatePicks`,
+      ogTitle: `Settings | PalatePicks`,
+      description: `Profile Settings`,
+      ogDescription: 'Profile Settings',
+      image: 'https://i.imgur.com/14qTVqA.png',
+      ogImage: 'https://i.imgur.com/14qTVqA.png',
+      url: `https://palatepicks.vercel.app/profile/settings`,
+      keywords: 'food, restaurant, review, food review, restaurant review, foodie, foodie review, foodie restaurant review, foodie review, foodie restaurant review, foodie restaurant, foodie restaurant review, foodie restaurant review',
+    })
+  },
+
   props: {
     loggedInUser: String,
     loggedUserProfile: Array,
