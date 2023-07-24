@@ -161,10 +161,8 @@
           console.log(error)
         }
         if(data){
-          console.log(data);
           this.Restaurant = data;
           this.rating = data.rating
-          console.log('AAAAA')
         }
 
         this.loading = false;
@@ -353,9 +351,6 @@
       await this.getRestaurant()
       await this.getReviews()
       await this.didUserReview()
-
-      console.log(this.Restaurant)
-      console.log(`This user has reviewed this restaurant: ${this.hasReviewed}`)
 
       // If no restaurant object is found (no keys)
       if(Object.keys(this.Restaurant).length === 0){

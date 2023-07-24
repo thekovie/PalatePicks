@@ -67,17 +67,10 @@ export default {
 
         try{
           const { data, error } = await supabase.auth.getSession()
-          console.log('RETRIEVED DATA SESSION')
-          console.log(data)
-
 
           if(data.session !== null){
             this.isLoggedIn = true;
             this.dataSession = data;
-            console.log("IN")
-            console.log(this.dataSession);
-            console.log("IS LOGGED IN")
-            console.log(this.isLoggedIn)
 
             this.getProfile(this.dataSession)
 
@@ -98,14 +91,7 @@ export default {
 
         try{
           const { data, error } = await supabase.from('profiles').select().eq('id', '' + session.session.user.id)
-
-          console.log('PROFILE')
-          console.log(session.session.user.user_metadata.username)
-          console.log(data)
           this.loggedUserProfile = data;
-
-
-
         }catch(error){
           alert(error.message)
         }

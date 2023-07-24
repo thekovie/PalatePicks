@@ -92,9 +92,9 @@
             .order('rating', { ascending: false })
 
             if(data){
-              console.log("TOP RESTAURANTS")
+
               this.topEstablishments = data;
-              console.log(data)
+
             }
 
             if(error){
@@ -116,8 +116,6 @@
 
             if(data){
               this.budgetEstablishments = data;
-              console.log("BUDGET RESTAURANTS")
-              console.log(data)
             }
 
             if(error){
