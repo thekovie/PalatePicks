@@ -107,6 +107,7 @@
     setup() {
       useSeoMeta({
         title: `${useRoute().params.id} | PalatePicks`,
+        ogTitle: `${useRoute().params.id} | PalatePicks`,
         description: `View ${useRoute().params.id}'s reviews on PalatePicks`,
         ogDescription: `View ${useRoute().params.id}'s reviews on PalatePicks`,
         image: 'https://i.imgur.com/14qTVqA.png',
