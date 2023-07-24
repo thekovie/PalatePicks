@@ -14,9 +14,9 @@
         :class="['bg-green_light', 'px-3', 'rounded-b-2xl', 'text-black', 'dropdown-menu', { 'show': isDropdownOpen }]"
         ref="dropdownMenu"
       >
-        <NuxtLink :to="`/profile/${loggedUserProfile[0].username}`" class="text-sm px-2 py-2" @click="closeDropdown('click')">View Profile<br></NuxtLink>
-        <NuxtLink to="/profile/settings" class="text-sm px-2 py-2" @click="closeDropdown('click')">Edit Profile<br></NuxtLink>
-        <NuxtLink to="/" class="text-sm px-2 py-2 text-red" @click="closeDropdownAndLogout('click')">Logout<br></NuxtLink>
+        <NuxtLink :to="`/profile/${loggedUserProfile[0].username}`" class="menu-item px-2 py-2" @click="closeDropdown('click')">View Profile<br></NuxtLink>
+        <NuxtLink to="/profile/settings" class="menu-item px-2 py-2" @click="closeDropdown('click')">Edit Profile<br></NuxtLink>
+        <NuxtLink to="/" class="menu-item px-2 py-2 text-red" @click="closeDropdownAndLogout('click')">Logout<br></NuxtLink>
       </div>
     </div>
   </div>
@@ -89,6 +89,13 @@ export default {
   top: 100%;
   right: 0;
   display: none;
+  padding-bottom: 10px;
+}
+
+.menu-item {
+  display: block;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 .dropdown-menu.show {
