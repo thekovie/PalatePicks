@@ -13,6 +13,10 @@ PalatePicks is a web application created solely for educational purposes and ser
 ## Project
 This project was done by [Nuxt](https://nuxt.com/) (web framework) and [Supabase](supabase.com/) (database).
 
+## Pre-requisites
+1. [NodeJS](https://nodejs.org/en) (npm is included here)
+2. [pnpm](https://pnpm.io/) (_Optional, but this is faster than npm_)
+
 ## Installation
 1. Clone or download the `main` repository.
 2. Open the terminal and `cd` to the PalatePicks project folder.
