@@ -95,7 +95,6 @@ export default {
       this.filteredReviews = this.reviews.filter((reviews) => reviews.username === this.username)
     }
 
-    console.log(this.loggedUserProfile[0].profile_img_src)
   },
   beforeUpdate(){
     if(this.loggedUserProfile.length){
