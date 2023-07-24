@@ -28,7 +28,7 @@
       <div v-for="(media, index) in gallery" :key="index"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex">
         <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
         <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
-        <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 rounded-3xl" @click="toggleMediaView(media)">
+        <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 cursor-pointer rounded-3xl" @click="toggleMediaView(media)">
           <img class="w-full h-full" src="~/assets/icons/Video.svg" />
         </div>
       </div>
@@ -64,8 +64,8 @@
           <ModifyReview @close="toggleModifyReview" @update="this.$emit('update')" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :gallery="gallery" :loggedUserProfile="loggedUserProfile" :reviewId="reviewId"/>
         </div>
 
-        <div v-if="showMediaView" @close="toggleMediaView">
-          <ViewMedia @close="toggleMediaView" :media="selectedMedia" :isImage="isImage" />
+        <div v-if="showMediaView" @close="closeMediaView">
+          <ViewMedia @close="closeMediaView" :media="selectedMedia" :isImage="isImage" />
         </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
@@ -150,8 +150,11 @@ export default {
     toggleModifyReview(){
       this.showModifyReview = !this.showModifyReview;
     },
+    closeMediaView() {
+      this.showMediaView = false;
+    },
     toggleMediaView(media) {
-      this.showMediaView = !this.showMediaView;
+      this.showMediaView = true
       this.selectedMedia = media;
       if (this.reviewFileTypeChecker(media)) {
         this.isImage = true;
