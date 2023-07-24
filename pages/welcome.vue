@@ -22,15 +22,15 @@
               <img :src="localImage" alt="Choose a picture!" class="w-[100%] h-[100%] rounded-[100%] object-cover bg-white object-center">
             </div>
           </div>
-          <div class="mt-3">
+          <div class="mt-3 flex flex-col gap-4 justify-center items-center">
             <div>
-              <label for="image-upload" class="cursor-pointer font-bold text-black mb-[15px] w-[100px] border-[#c0c0c0] border-[1px] text-center rounded-[5px] p-1">
+              <label for="image-upload" class="cursor-pointer font-bold text-black mb-[15px] w-[100px] border-[#c0c0c0] border-[1px] text-center rounded-[5px] p-2">
                 Choose Image
               </label>
               <input id="image-upload" type="file" accept="image/png, image/jpeg, image/jpg" @change="chooseFile">
             </div>
 
-            <button class="cursor-pointer bg-green text-white mb-[15px] w-[100px] border-[#c0c0c0] border-[1px] text-center rounded-[5px] p-1" @click="addProfilePicture">Save Avatar</button>
+            <button class="cursor-pointer bg-green text-white mb-[15px] w-32 border-[#c0c0c0] border-[1px] text-center rounded-[5px] p-2" @click="addProfilePicture">Save Avatar</button>
 
           </div>
 
@@ -195,5 +195,7 @@
 </script>
 
 <style scoped>
-
+  input[type="file"] {
+    display: none;
+  }
 </style>
