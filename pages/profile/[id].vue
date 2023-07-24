@@ -13,7 +13,10 @@
     <div class="user-reviews px-20 mt-4">
       <p class="font-bold p-3">View {{ Profile.first_name }}'s Reviews</p>
       <div class="reviews-list flex flex-col gap-8 mb-24">
-        <UserReview v-for="review in reviews" :key="review" :username="review.username" :loggedUserProfile="loggedUserProfile" :restoName="review.resto_name" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :gallery="review.review_gallery"/>
+        <UserReview v-if="reviews.length" v-for="review in reviews" :key="review" :username="review.username" :loggedUserProfile="loggedUserProfile" :restoName="review.resto_name" :reviewSubject="review.review_subject" :mainReview="review.content" :rating="review.rating" :date="review.created_at" :helpfulCount="review.helpful_count" :gallery="review.review_gallery"/>
+        <div v-else class="flex flex-col ml-3 mt-24 justify-center text-center">
+          <p class="text-lg font-light text-grey mt-4">{{ Profile.first_name }} doesn't have reviews yet.</p>
+        </div>
       </div>
     </div>
   </div>
