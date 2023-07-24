@@ -21,7 +21,21 @@
 
 <script>
 
+
+
 export default {
+  setup() {
+    useSeoMeta({
+      title: `@${useRoute().params.id} | PalatePicks`,
+      ogTitle: `@${useRoute().params.id} | PalatePicks`,
+      description: `View ${useRoute().params.id}'s profile on PalatePicks`,
+      ogDescription: `View ${useRoute().params.id}'s profile on PalatePicks`,
+      image: 'https://i.imgur.com/14qTVqA.png',
+      ogImage: 'https://i.imgur.com/14qTVqA.png',
+      url: `https://palatepicks.vercel.app/profile/${useRoute().params.id}`,
+      keywords: 'food, restaurant, review, food review, restaurant review, foodie, foodie review, foodie restaurant review, foodie review, foodie restaurant review, foodie restaurant, foodie restaurant review, foodie restaurant review',
+    })
+  },
 
   props: {
     loggedInUser: String,
