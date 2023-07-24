@@ -132,7 +132,6 @@
 </template>
 
 <script>
-import UserProfiles from '~/assets/json/UserProfiles.json';
 
 export default {
   props: {
