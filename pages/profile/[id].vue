@@ -71,9 +71,7 @@ export default {
           console.log(error)
         }
         if(data){
-          console.log(data);
           this.Profile = data;
-          console.log('Profile Loaded')
         }
         this.loading = false;
     },
@@ -92,9 +90,7 @@ export default {
           console.log(error)
         }
         if(data){
-          console.log(data);
           this.reviews = data;
-          console.log('Reviews Loaded')
         }
         this.loading = false;
     }
@@ -104,7 +100,6 @@ export default {
   async mounted() {
     await this.getProfile()
     await this.getUserReviews()
-    console.log(this.Profile)
 
     if(Object.keys(this.Profile).length === 0){
       throw createError({ statusCode: 404, statusMessage: 'User not found...', fatal: true})

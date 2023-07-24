@@ -201,12 +201,6 @@ export default {
           }
 
           if (data.length > 0) {
-            console.log(data[0].users_liked)
-            console.log("Did user already mark the review as helpful?");
-            console.log(data[0].users_liked.includes(this.loggedUserProfile[0].username));
-
-
-
             let listOfUsersLiked = data[0].users_liked;
 
             // If review wasn't marked by user yet
@@ -216,8 +210,6 @@ export default {
 
 
               listOfUsersLiked.push(this.loggedUserProfile[0].username);
-              console.log(listOfUsersLiked);
-              console.log(this.updatedHelpfulCount)
 
 
 
@@ -226,9 +218,6 @@ export default {
                   .from('reviews')
                   .update({ users_liked: listOfUsersLiked, helpful_count: this.updatedHelpfulCount})
                   .eq('review_id', this.reviewId)
-
-
-                  console.log('HERE')
 
                   this.markButtonClass = this.markedButtonClass;
                   this.isReviewMarkedByUser = true;
@@ -243,17 +232,11 @@ export default {
 
               this.updatedHelpfulCount = data[0].helpful_count - 1;
 
-              console.log(listOfUsersLiked);
-              console.log(this.updatedHelpfulCount)
-
               try{
                 const { error } = await supabase
                   .from('reviews')
                   .update({ users_liked: listOfUsersLiked, helpful_count: this.updatedHelpfulCount})
                   .eq('review_id', this.reviewId)
-
-
-                  console.log('HERE')
 
                   this.markButtonClass = this.unmarkedButtonClass;
                   this.isReviewMarkedByUser = false;
@@ -300,8 +283,6 @@ export default {
                 .eq('review_id', this.reviewId)
 
         this.updatedHelpfulCount = data[0].helpful_count;
-        console.log("HELPFUL COUNT IS " + this.updatedHelpfulCount)
-        console.log(data)
 
         if(data[0].users_liked.includes(this.loggedUserProfile[0].username)){
           this.markButtonClass = this.markedButtonClass;
@@ -309,17 +290,8 @@ export default {
           this.isButtonMarked = true;
 
         }
-
-        console.log(data[0].users_liked)
-
-
-        console.log("Did user already mark the review as helpful?");
-        console.log(data[0].users_liked.includes(this.loggedUserProfile[0].username));
       }
     }
-
-
-
   },
 }
 </script>

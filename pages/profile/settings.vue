@@ -377,7 +377,6 @@ export default {
       showUploadModal: false,
       ProfileImage: '',
       isImageDefault: false,
-      userProfiles: UserProfiles,
       userProfile: {},
       loading: true,
       fileLoc: null,
