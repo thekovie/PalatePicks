@@ -43,7 +43,7 @@
     title: 'PalatePicks | Fueling Student Appetites, One Bite at a Time',
     description: 'Are you a student on a tight budget, looking to savor the best food options in town without breaking the bank? Look no further than PalatePicks, the ultimate web application designed exclusively for students seeking delectable dining experiences within their budget range.',
     url: 'https://palatepicks.vercel.app/',
-    keywords: 'food, restaurant, review, food review, restaurant review, foodie, foodie review, foodie restaurant review, foodie review, foodie restaurant review, foodie restaurant, foodie restaurant review, foodie restaurant review,
+    keywords: 'food, restaurant, review, food review, restaurant review, foodie, foodie review, foodie restaurant review, foodie review, foodie restaurant review, foodie restaurant, foodie restaurant review, foodie restaurant review',
   })
 
   export default {
