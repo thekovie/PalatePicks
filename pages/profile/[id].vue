@@ -21,7 +21,17 @@
 
 <script>
 
+
+
 export default {
+  setup() {
+    useSeoMeta({
+      title: `@${useRoute().params.id} | PalatePicks`,
+      description: `View ${useRoute().params.id}'s profile on PalatePicks`,
+      url: `https://palatepicks.vercel.app/profile/${useRoute().params.id}`,
+      keywords: 'food, restaurant, review, food review, restaurant review, foodie, foodie review, foodie restaurant review, foodie review, foodie restaurant review, foodie restaurant, foodie restaurant review, foodie restaurant review',
+    })
+  },
 
   props: {
     loggedInUser: String,
