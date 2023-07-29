@@ -4,7 +4,7 @@
     <div class="left flex flex-row items-center">
       <NuxtLink class="logo font-cursive normal-case font-bold text-3xl justify-start hidden md:block" to="/">PalatePicks</NuxtLink>
       <NuxtLink class="logo font-cursive normal-case font-bold text-3xl justify-start md:hidden" to="/">
-        <img src="/src/PalatePicks.svg" alt="PalatePicks Logo" class="w-10 h-10" />
+        <img src="~/PalatePicks.svg" alt="PalatePicks Logo" class="w-10 h-10" />
       </NuxtLink>
       <div class="nav-menu uppercase ml-6 space-x-9">
         <NuxtLink to="/">Home</NuxtLink>
