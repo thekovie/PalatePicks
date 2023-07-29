@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen px-4 md:px-24 pb-24 mt-20">
     <div class="flex items-center">
-      <img src="~/public/PalatePicks.svg" alt="PalatePicks Logo" class="w-16 h-16">
+      <img src="/PalatePicks.svg" alt="PalatePicks Logo" class="w-16 h-16">
       <span class="title font-medium text-4xl ml-3 text-green">About <span class="font-cursive">PalatePicks</span></span>
     </div>
     <div class="mission flex flex-col mt-10">
