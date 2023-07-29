@@ -6,6 +6,7 @@
       <div class="nav-menu uppercase ml-6 space-x-9">
         <NuxtLink to="/">Home</NuxtLink>
         <NuxtLink to="/explore">Explore </NuxtLink>
+        <NuxtLink to="/about">About</NuxtLink>
       </div>
     </div>
     <div v-if="isLoggedIn">
