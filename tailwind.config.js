@@ -24,6 +24,7 @@ module.exports = {
     fontFamily: {
       'sans': ['Wix Madefor Text', 'sans-serif'],
       'cursive': ['Comfortaa', 'cursive'],
+      'monospace': ['JetBrains Mono', 'monospace']
     },
     extend: {
       spacing: {
