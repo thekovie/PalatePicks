@@ -273,25 +273,31 @@ export default {
     this.firstName = this.userProfile.first_name
     this.lastName = this.userProfile.last_name
 
-    if(this.loggedUserProfile.length){
-        if(!this.isRestoOwner && (this.username !== this.loggedUserProfile[0].username)){
-        const supabase = useSupabaseClient();
+    const supabase = useSupabaseClient();
 
-        const { data, error } = await supabase
-                .from('reviews')
-                .select()
-                .eq('review_id', this.reviewId)
+    try{
+      const { data, error } = await supabase
+              .from('reviews')
+              .select()
+              .eq('review_id', this.reviewId)
 
-        this.updatedHelpfulCount = data[0].helpful_count;
+      this.updatedHelpfulCount = data[0].helpful_count;
 
-        if(data[0].users_liked.includes(this.loggedUserProfile[0].username)){
-          this.markButtonClass = this.markedButtonClass;
-          this.isReviewMarkedByUser = true;
-          this.isButtonMarked = true;
+      if(this.loggedUserProfile.length){
+          if(!this.isRestoOwner && (this.username !== this.loggedUserProfile[0].username)){
 
+          if(data[0].users_liked.includes(this.loggedUserProfile[0].username)){
+            this.markButtonClass = this.markedButtonClass;
+            this.isReviewMarkedByUser = true;
+            this.isButtonMarked = true;
+
+          }
         }
       }
+    }catch(error){
+      console.log(error);
     }
+
   },
 }
 </script>
