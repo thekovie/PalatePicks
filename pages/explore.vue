@@ -4,17 +4,17 @@
   <div class="flex flex-col min-h-screen">
 
     <!-- Introduction Div -->
-    <div class="gradient-bg h-[708px] min-w-screen -z-50 py-[273px]">
-      <div class="text-white font-bold text-6xl z-50 w-[670px] text-center mx-auto">Find food with ease, for the busy you.</div>
+    <div class="gradient-bg h-[708px] min-w-screen -z-50 px-2 py-[273px]">
+      <div class="text-white font-bold text-4xl md:text-6xl z-50 w-full md:w-[670px] text-center mx-auto">Find food with ease, for the busy you.</div>
       <div class="bg-black/60 absolute top-0 left-0 w-[100%] h-[100%] -z-50">
     </div>
 
   </div>
 
   <!-- Content Div Container -->
-  <div class="px-[55px] mb-[94px]">
+  <div class="md:px-[55px] mb-[94px]">
     <!-- Explore foods caption-->
-    <div class="font-bold text-5xl my-[44px] pb-7 border-b-[1.5px] border-b-[#d9d9d9]">Explore Foods and Restaurants </div>
+    <div class="font-bold text-3xl text-center md:text-left md:text-5xl my-[44px] px-8 pb-7 border-b-[1.5px] border-b-[#d9d9d9]">Explore Foods and Restaurants </div>
 
     <!-- Restaurants Div Container-->
     <div class="flex flex-wrap">

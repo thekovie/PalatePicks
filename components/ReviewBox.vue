@@ -24,8 +24,8 @@
     <div class="review-content text-md sm:text-lg font-light">
       {{ mainReview }}
     </div>
-    <div class="review-gallery flex mt-8">
-      <div v-for="(media, index) in gallery" :key="index"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex">
+    <div class="review-gallery flex flex-wrap md:flex-row mt-8">
+      <div v-for="(media, index) in gallery" :key="index"  class="review-photo h-32 w-32 md:w-[150px] md:h-[150px] mr-6 mb-6 flex">
         <img v-if="reviewFileTypeChecker(media)" class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review photo" @click="toggleMediaView(media)"/>
         <video v-else class="w-full h-full object-cover flex mr-3 rounded-3xl cursor-pointer hover:filter hover:brightness-75" :src="media" alt="review video" no-controls />
         <div v-if="!reviewFileTypeChecker(media)" class="video-icon absolute bg-black bg-opacity-30 w-[150px] h-[150px] p-14 cursor-pointer rounded-3xl" @click="toggleMediaView(media)">
@@ -42,13 +42,13 @@
           <div class="helpful-count text-2xl font-semibold">{{ updatedHelpfulCount }}</div>
           <div class="helpful-text text-sm font-light text-grey">found this review helpful</div>
       </div>
-      <div class="right-buttons flex mt-4 sm:mt-0 justify-around mr-3">
-        <button class="bg-green text-white text-sm rounded-3xl flex items-center font-light px-6 py-3 h-12 sm:mr-4" @click="toggleFullReview">
+      <div class="right-buttons flex mt-4 flex-col justify-center md:flex-row md:mt-0 md:justify-around mr-3">
+        <button class="bg-green text-white text-sm rounded-3xl items-center font-light px-6 py-3 h-12 sm:mr-4" @click="toggleFullReview">
           View Comments
         </button>
 
         <div v-if="loggedUserProfile.length">
-          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl flex items-center text-sm h-12 font-light px-6 py-4 mr-4" @click="toggleModifyReview">
+          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl w-full items-center mt-2 md:mt-0 text-sm h-12 font-light px-6 py-4 md:mr-4" @click="toggleModifyReview">
             Modify Review
           </button>
         </div>
@@ -132,9 +132,9 @@ export default {
       profileImgSrc: "",
       school: "",
       userProfile: {},
-      markButtonClass: "bg-green text-white rounded-3xl flex items-center text-sm font-light px-6 py-3 h-12 mr-4",
-      markedButtonClass: "bg-[#93cfa9] text-white rounded-3xl flex items-center text-sm font-light px-6 py-3 h-12 mr-4",
-      unmarkedButtonClass: "bg-green text-white rounded-3xl flex items-center font-light text-sm px-6 py-3 h-12 mr-4",
+      markButtonClass: "bg-green text-white rounded-3xl items-center text-sm font-light px-6 py-3 w-full h-12 mt-2 md:mt-0 md:mr-4",
+      markedButtonClass: "bg-[#93cfa9] text-white rounded-3xl items-center text-sm font-light px-6 py-3 w-full h-12 mt-2 md:mt-0 md:mr-4",
+      unmarkedButtonClass: "bg-green text-white rounded-3xl items-center font-light text-sm px-6 py-3 w-full h-12 mt-2 md:mt-0 md:mr-4",
       isReviewMarkedByUser: false,
       isButtonMarked: false,
       isMarkButtonDisabled: false,

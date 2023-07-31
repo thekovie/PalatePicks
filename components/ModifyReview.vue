@@ -1,13 +1,15 @@
 <template>
   <div class="bg-black bg-opacity-50 top-0 left-0 w-screen h-[100vh] fixed flex" @click.self="closeModifyReview">
   <CustomLoader v-if="loading" :loading="loading" :status="status" />
-  <div class="bg-green_lightbg flex flex-col w-[1000px] h-[70%] mx-auto rounded-[28px] self-center overflow-y-auto py-12 px-10">
+  <div class="bg-green_lightbg flex flex-col md:w-[1000px] h-[80%] md:h-[70%] mx-auto rounded-[28px] self-center overflow-y-auto py-12 px-10">
     <h2 class="rate-title font-semibold text-3xl">Modify your Review</h2>
     <div class="font-light text-grey text-lg">Change of heart? Write them down (or delete it).</div>
     <form>
-      <div class="rate-stars flex pr-3 pt-5 items-center">
-        <img class="h-10 w-10 cursor-pointer" v-for="(star, index) in stars" :key="index" @click="toggleRating(index + 1)" :src="getStarIcon(index)" :alt="getStarAlt(index)" @click.prevent />
-        <div class="rate-meaning ml-4">
+      <div class="rate-stars flex flex-col md:flex-row pr-3 pt-5 md:items-center">
+        <div class="flex flex-row">
+          <img class="h-10 w-10 cursor-pointer" v-for="(star, index) in stars" :key="index" @click="toggleRating(index + 1)" :src="getStarIcon(index)" :alt="getStarAlt(index)" @click.prevent />
+        </div>
+        <div class="rate-meaning ml-1 md:ml-4">
           <div v-if="selectedRating === 0" class="text-sm font-light text-grey">Select your rating</div>
           <div v-if="selectedRating === 1" class="text-sm font-light text-grey">Poor</div>
           <div v-if="selectedRating === 2" class="text-sm font-light text-grey">Fair</div>
@@ -16,18 +18,18 @@
           <div v-if="selectedRating === 5" class="text-sm font-light text-grey">Excellent</div>
         </div>
       </div>
-      <div class="review-part flex pt-8">
-        <div class="reviewer-photo w-20 h-20 rounded-full mr-3 border-4 border-green">
+      <div class="review-part flex flex-col md:flex-row pt-8">
+        <div class="reviewer-photo w-20 h-20 hidden md:block rounded-full mr-3 border-4 border-green">
             <img class="w-full h-full rounded-full object-cover" :src="loggedUserProfile[0].profile_img_src" alt="user" />
         </div>
         <div class="review-content flex flex-col gap-5 mt-1">
           <div class="review-title">
-            <input v-model="reviewTitle" class="review-title-input w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" type="text" placeholder="Review Title" />
+            <input v-model="reviewTitle" class="review-title-input w-full md:w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" type="text" placeholder="Review Title" />
           </div>
           <div class="review-text">
-            <textarea class="review-text-input w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" />
+            <textarea class="review-text-input w-full md:w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" />
           </div>
-          <div class="review-gallery flex">
+          <div class="review-gallery flex flex-wrap md:flex-row">
             <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-6 mb-6" :class="{'opacity-30' : !pressedDelete, 'cursor-not-allowed' : !pressedDelete, 'cursor-pointer' : pressedDelete}" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
               <img v-if="media.isImage" class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" />
               <video v-else class="w-full h-full object-cover rounded-3xl border-2 border-grey" :src="media.url" :alt="'Media Item ' + (index + 1)" no-controls />
@@ -57,18 +59,18 @@
             </div>
           </div>
 
-          <div class="review-buttons flex justify-end">
-            <button class="bg-white text-green rounded-3xl flex items-center font-light px-14 py-3 mr-4" @click="closeModifyReview">
+          <div class="review-buttons flex flex-col justify-center md:flex-row md:justify-end">
+            <button class="bg-white text-green rounded-3xl flex items-center justify-center font-light px-14 w-full md:w-56 md:h-14 py-3 mr-4" @click="closeModifyReview">
               Cancel
             </button>
-            <button class="delete-review bg-red text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="deleteReview">
+            <button class="delete-review bg-red text-white rounded-3xl flex items-center justify-center font-light px-14 w-full mt-4 md:mt-0 md:w-56 md:h-14 py-3 mr-4" @click="deleteReview">
               Delete Review
             </button>
-            <button v-if="selectedRating > 0 && reviewTitle !== '' && reviewContent !== ''" class="bg-green text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" @click="updateReview">
+            <button v-if="selectedRating > 0 && reviewTitle !== '' && reviewContent !== ''" class="bg-green text-white rounded-3xl flex items-center justify-center font-light px-14 w-full mt-4 md:mt-0 md:w-60 md:h-14 py-3 mr-4" @click="updateReview">
               Update Review
             </button>
 
-            <button v-else class="bg-[#93cfa9] text-white rounded-3xl flex items-center font-light px-6 py-3 mr-4" disabled>
+            <button v-else class="bg-[#93cfa9] text-white rounded-3xl flex items-center justify-center font-light px-14 w-full mt-4 md:mt-0 md:w-56 md:h-14 py-3 mr-4" disabled>
               Update Review
             </button>
 
