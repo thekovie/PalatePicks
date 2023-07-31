@@ -243,7 +243,7 @@
           console.log(error);
         }
 
-        if (this.fileLocs.length === 0) {
+        if (this.fileLocs.length === 0 && this.pressedDelete === false) {
           console.log("No media to upload")
           this.loading = false;
           this.$emit('update');
@@ -254,6 +254,7 @@
 
         // Delete Media
           try {
+            console.log('Deleting media from database');
             const {data, error} = await this.supabase
               .from('reviews')
               .update({
@@ -318,6 +319,15 @@
             console.log(error.message);
           }
 
+
+        if (this.pressedDelete === true && this.fileLocs.length === 0) {
+          console.log("No media to upload since no files to upload and all media was deleted")
+          this.loading = false;
+          this.$emit('update');
+          this.$emit('close');
+          this.$emit('reloadRating')
+          return;
+        }
         // Upload Media
         try {
           for (let i = 0; i < this.fileLocs.length; i++) {
