@@ -32,5 +32,5 @@ npm run build # or npm run dev (for developer mode)
 
 ### Reminders
 - Before you begin, please take note that after registering an account and using the "forget password" feature, you will be redirected to our [live website](https://palatepicks.vercel.app/) and not the `localhost`.
-- Contact the repository owner to get Environmental Variables (`.env`) file for the website to be functional locally.
+- Contact the repository owner to get the environmental variables (`.env`) file for the website to be functional locally.
 - An Internet connection is required for the web app to load its external assets and to communicate with the database.
