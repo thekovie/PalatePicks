@@ -248,7 +248,7 @@
               starNo = 3;
             } else if (this.selectedFilter === 'two-stars') {
               starNo = 2;
-            } else if (this.selectedFilter === 'one-stars') {
+            } else if (this.selectedFilter === 'one-star') {
               starNo = 1;
             }
 
