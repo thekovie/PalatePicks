@@ -11,7 +11,7 @@ _PalatePicks is a web application for CCAPDEV class at De La Salle University._
 PalatePicks is a web application created solely for educational purposes and serves as a simulated platform designed as part of a school project. All reviews, ratings, and opinions displayed on the website are entirely fictional and do not reflect the real experiences or sentiments of any individuals or establishments.
 
 ## Project
-This project was done by [Nuxt](https://nuxt.com/) (web framework) and [Supabase](supabase.com/) (database).
+This project was done by [NuxtJS](https://nuxt.com/) (web framework) and [Supabase](supabase.com/) (database).
 
 ## Pre-requisites
 1. [NodeJS](https://nodejs.org/en) (npm is included here)
@@ -31,4 +31,6 @@ npm run build # or npm run dev (for developer mode)
 5. Explore the webpage!
 
 ### Reminders
-Before you begin, please take note that after registering an account and using the "forget password" feature, you will be redirected to our [live website](https://palatepicks.vercel.app/) and not the `localhost`.
+- Before you begin, please take note that after registering an account and using the "forget password" feature, you will be redirected to our [live website](https://palatepicks.vercel.app/) and not the `localhost`.
+- Contact the repository owner to get Environmental Variables (`.env`) file for the website to be functional locally.
+- An Internet connection is required for the web app to load its external assets and to communicate with the database.
