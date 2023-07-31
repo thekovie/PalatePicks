@@ -160,6 +160,7 @@ export default {
   methods: {
       closeFullReview(){
         this.$emit('close');
+        this.$emit('update');
       },
       getProfileLink(username) {
         return `/profile/${username}`;
@@ -219,6 +220,26 @@ export default {
 
         } catch(error) {
           console.log(error);
+        }
+
+        // Update to TRUE if the owner commented on the review
+        if (this.isRestoOwner) {
+          try {
+            const supabase = useSupabaseClient();
+
+            const {data, error} = await supabase
+              .from('reviews')
+              .update({
+                owner_replied: true,
+              })
+              .eq('review_id', this.reviewId);
+
+            if (error) {
+              throw error;
+            }
+          } catch (error) {
+            console.log(error);
+          }
         }
       },
     },

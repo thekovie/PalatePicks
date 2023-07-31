@@ -97,6 +97,7 @@ export default {
         .from('restaurants')
         .select()
         .eq('owner', this.username)
+        .eq('name', useRoute().params.id)
 
         if (data.length > 0) {
           this.isEstablishmentOwner = true

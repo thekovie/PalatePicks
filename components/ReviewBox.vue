@@ -33,7 +33,15 @@
         </div>
       </div>
     </div>
-    <div class="review-posted-at text-sm font-light text-grey mt-4">
+    <div v-if="didOwnerReply" class="owner-replied mt-4 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-6 h-6 mr-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+      </svg>
+      <div class="reply-status">
+        <span class="font-light text-grey text-md">{{ this.restoId }} replied to this review!</span>
+      </div>
+    </div>
+    <div class="review-posted-at text-sm font-light text-grey" :class="{ 'mt-4' : !didOwnerReply, 'mt-6': didOwnerReply}">
       Posted at {{ formattedDate }}
       <span v-if="isEdited" class="italic text-grey">Edited</span>
     </div>
@@ -43,7 +51,7 @@
           <div class="helpful-text text-sm font-light text-grey">found this review helpful</div>
       </div>
       <div class="right-buttons flex mt-4 flex-col justify-center md:flex-row md:mt-0 md:justify-around mr-3">
-        <button class="bg-green text-white text-sm rounded-3xl items-center font-light px-6 py-3 h-12 sm:mr-4" @click="toggleFullReview">
+        <button class="bg-green text-white text-sm rounded-3xl items-center font-light px-6 py-3 h-12 sm:mr-4" @click="openFullReview">
           View Comments
         </button>
 
@@ -69,7 +77,7 @@
         </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
-          <FullReview @close="toggleFullReview" :userProfile="userProfile" :username="username" :isRestoOwner="isRestoOwner" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :reviewId="reviewId" />
+          <FullReview @close="closeFullReview" :userProfile="userProfile" :username="username" :isRestoOwner="isRestoOwner" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :reviewId="reviewId" />
         </div>
       </div>
     </div>
@@ -118,6 +126,9 @@ export default {
     },
     isEdited: {
       type: Boolean
+    },
+    didOwnerReply: {
+      type: Boolean
     }
   },
   data() {
@@ -144,8 +155,12 @@ export default {
     }
   },
   methods: {
-    toggleFullReview(){
-      this.showFullReview = !this.showFullReview;
+    openFullReview(){
+      this.showFullReview = true;
+    },
+    closeFullReview(){
+      this.showFullReview = false;
+      this.$emit('update');
     },
     toggleModifyReview(){
       this.showModifyReview = !this.showModifyReview;
