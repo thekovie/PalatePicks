@@ -44,11 +44,11 @@
               </div>
               <div class="mt-5"> <!--School-->
                 <label>School/University<br></label>
-                <input type="text" v-model="school" class="border-green border rounded w-full px-2">
+                <input type="text" v-model="school" class="border-green border rounded w-full px-2" maxlength="100" required>
               </div>
               <div class="mt-5"> <!--Bio-->
                 <label>Bio<br></label>
-                <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2"></textarea>
+                <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2" maxlength="500"></textarea>
               </div>
             </div>
               <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->

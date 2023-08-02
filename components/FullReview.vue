@@ -72,7 +72,7 @@
           </div>
 
           <!-- Write Comment Text Area-->
-          <textarea v-model="commentField" class="resize-y border-green border-[1px] rounded-[15px] w-[852px] px-[25px] py-[20px] mr-[18px]" placeholder="Write a comment..."></textarea>
+          <textarea v-model="commentField" class="resize-y border-green border-[1px] rounded-[15px] w-[852px] px-[25px] py-[20px] mr-[18px]" placeholder="Write a comment..." maxlength="500"></textarea>
 
           <!-- Send button -->
           <div class="bg-green min-h-[48px] min-w-[48px] max-h-[48px] max-w-[48px] rounded-full justify-self-end mt-[15px] flex cursor-pointer" @click="pushComment">
