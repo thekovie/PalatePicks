@@ -271,7 +271,29 @@
           } finally {
             this.loading = false;
           }
-        } else {
+        } else if (this.selectedFilter === 'most-helpful') {
+          try {
+            const { data, error } = await this.supabase
+            .from('reviews')
+            .select()
+            .eq('resto_name', this.restoId)
+            .order('helpful_count', { ascending: false });
+
+            if (data) {
+              this.restoReviews = data;
+            }
+
+            if (error) {
+              throw error
+            }
+          } catch(error) {
+            console.log(error)
+          } finally {
+            this.loading = false;
+          }
+
+        }
+        else {
           try {
             const { data, error } = await this.supabase
             .from('reviews')
@@ -279,7 +301,6 @@
             .eq('resto_name', this.restoId)
             .order('created_at', { ascending: this.selectedFilter === 'old-to-new' })
             .order('created_at', { ascending: this.selectedFilter === 'new-to-old' })
-            .order('helpful_count', { ascending: this.selectedFilter === 'most-helpful' })
 
             if (data) {
               this.restoReviews = data;
