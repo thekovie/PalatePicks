@@ -30,9 +30,9 @@
           <!-- Confirm Password -->
           <input type="password" placeholder="Confirm Password" class="mt-[22px]" v-model="confirmPass" required>
           <!-- School/University -->
-          <input type="text" placeholder="School/University" class="mt-[22px]" v-model="school" required>
+          <input type="text" placeholder="School/University (Optional)" class="mt-[22px]" v-model="school" maxlength="100" required>
           <!-- Bio -->
-          <textarea v-model="bio" rows="5" class="resize-none mt-[22px] mb-[22px] rounded-[15px] px-[32px] py-[10px] border-solid border-[1px] border-green" placeholder="Tell us something about yourself! (Optional)"></textarea>
+          <textarea v-model="bio" rows="5" class="resize-none mt-[22px] mb-[22px] rounded-[15px] px-[32px] py-[10px] border-solid border-[1px] border-green" placeholder="Tell us something about yourself! (Optional)" maxlength="500"></textarea>
           <!-- Register Button -->
           <button class="bg-green rounded-[34.5px] h-[40px] text-white text-[16px] mb-[34px]">Register</button>
           <!-- Redirect to login page -->

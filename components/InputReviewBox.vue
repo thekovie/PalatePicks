@@ -23,10 +23,10 @@
         </div>
         <div class="review-content flex flex-col gap-5 mt-1">
           <div class="review-title">
-            <input class="review-title-input w-full md:w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" v-model="reviewTitle" type="text" placeholder="Review Title" />
+            <input class="review-title-input w-full md:w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" v-model="reviewTitle" type="text" placeholder="Review Title" maxlength="50" />
           </div>
           <div class="review-text">
-            <textarea class="review-text-input w-full md:w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" />
+            <textarea class="review-text-input w-full md:w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" maxlength="500" />
           </div>
           <div class="review-gallery flex flex-wrap md:flex-row">
             <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-2 md:mr-6 mb-6 cursor-pointer" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
