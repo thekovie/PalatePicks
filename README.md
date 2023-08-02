@@ -5,7 +5,8 @@ Are you a student on a tight budget, looking to savor the best food options in t
 
 _PalatePicks is a web application for CCAPDEV class at De La Salle University._
 
-![image](https://github.com/thekovie/PalatePicks/assets/40118781/3d136d78-7717-4fff-a8af-f8c101edabdf)
+![image](https://github.com/thekovie/PalatePicks/assets/40118781/974310e2-7cdb-4855-911c-bc5fc7909029)
+
 
 ## Disclaimer
 PalatePicks is a web application created solely for educational purposes and serves as a simulated platform designed as part of a school project. All reviews, ratings, and opinions displayed on the website are entirely fictional and do not reflect the real experiences or sentiments of any individuals or establishments.
