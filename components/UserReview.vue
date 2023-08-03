@@ -14,7 +14,6 @@
     </div>
     <div class="review-content text-lg font-light">
       {{ mainReview }}
-      <span v-if="isEdited" class="italic text-grey">Edited</span>
     </div>
     <div class="review-gallery flex mt-8">
       <div v-for="(media, index) in gallery" :key="index"  class="review-photo w-[150px] h-[150px] mr-6 mb-6 flex">
@@ -29,6 +28,7 @@
     </div>
     <div class="review-posted-at text-sm font-light text-grey mt-4">
       Posted at {{ formattedDate }}
+      <span v-if="isEdited" class="italic text-grey">Edited</span>
     </div>
     <div class="review-footer flex justify-between align-middle mt-5">
       <div class="found-helpful">
