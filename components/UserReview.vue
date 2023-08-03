@@ -28,6 +28,7 @@
     </div>
     <div class="review-posted-at text-sm font-light text-grey mt-4">
       Posted at {{ formattedDate }}
+      <span v-if="isEdited" class="italic text-grey">Edited</span>
     </div>
     <div class="review-footer flex justify-between align-middle mt-5">
       <div class="found-helpful">
@@ -52,6 +53,7 @@ export default {
     gallery: Array,
     rating: Number,
     date: String,
+    isEdited: Boolean,
     helpfulCount: Number,
     comments: Array,
   },

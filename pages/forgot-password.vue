@@ -47,6 +47,19 @@
 <script>
 
   export default {
+    setup() {
+      useSeoMeta({
+        title: `Forgot Password | PalatePicks`,
+        ogTitle: `Forgot Password | PalatePicks`,
+        description: `Forgot Password | PalatePicks`,
+        ogDescription: `Forgot Password | PalatePicks`,
+        image: 'https://i.imgur.com/14qTVqA.png',
+        ogImage: 'https://i.imgur.com/14qTVqA.png',
+        url: `https://palatepicks.vercel.app/forgot-password`,
+        keywords: 'food, restaurant, review, food review, restaurant review, foodie, foodie review, foodie restaurant review, foodie review, foodie restaurant review, foodie restaurant, foodie restaurant review, foodie restaurant review',
+      })
+    },
+
     data(){
       return{
         email: "",

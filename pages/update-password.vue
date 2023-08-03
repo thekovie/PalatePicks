@@ -67,6 +67,18 @@
 <script>
 
   export default {
+    setup() {
+      useSeoMeta({
+        title: `Update Password | PalatePicks`,
+        ogTitle: `Update Password | PalatePicks`,
+        description: `Update Password | PalatePicks`,
+        ogDescription: `Update Password | PalatePicks`,
+        image: 'https://i.imgur.com/14qTVqA.png',
+        ogImage: 'https://i.imgur.com/14qTVqA.png',
+        url: `https://palatepicks.vercel.app/update-password`,
+        keywords: 'food, restaurant, review, food review, restaurant review, foodie, foodie review, foodie restaurant review, foodie review, foodie restaurant review, foodie restaurant, foodie restaurant review, foodie restaurant review',
+      })
+    },
     data(){
       return{
         loading: true,
