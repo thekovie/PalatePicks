@@ -58,7 +58,7 @@
         </button>
 
         <div v-if="loggedUserProfile.length">
-          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl w-full items-center mt-2 md:mt-0 text-sm h-12 font-light px-6 py-4 md:mr-4" @click="toggleModifyReview">
+          <button v-if="username === loggedUserProfile[0].username" class="bg-green text-white rounded-3xl w-full items-center mt-2 md:mt-0 text-sm h-12 font-light px-6 py-3 md:mr-4" @click="toggleModifyReview">
             Modify Review
           </button>
         </div>
