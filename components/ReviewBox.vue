@@ -79,7 +79,7 @@
         </div>
 
         <div v-if="showFullReview" @close="toggleFullReview">
-          <FullReview @close="closeFullReview" :userProfile="userProfile" :username="username" :isRestoOwner="isRestoOwner" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :reviewId="reviewId" />
+          <FullReview @close="closeFullReview" :userProfile="userProfile" :username="username" :isRestoOwner="isRestoOwner" :loggedUserProfile="loggedUserProfile" :gallery="gallery" :reviewSubject="reviewSubject" :isEdited="isEdited" :mainReview="mainReview" :rating="rating" :date="date" :helpfulCount="helpfulCount" :reviewId="reviewId" />
         </div>
       </div>
     </div>
