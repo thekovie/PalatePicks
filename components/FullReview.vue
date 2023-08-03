@@ -34,17 +34,14 @@
           <!-- Date -->
           <div class="text-[20px] text-grey">
             {{  formattedDate }}
-            <span v-if="isEdited" class="italic text-grey">Edited</span>
           </div>
 
         </div>
 
 
 
-        <!-- Review Title -->
-        <div class="font-bold text-[33px] mt-6">{{ reviewSubject }}</div>
         <!-- User Main Review -->
-        <div class="text-[20px] mt-4">{{ mainReview }}</div>
+        <div class="text-[20px] mt-[35px]">{{ mainReview }}</div>
 
         <!-- User Gallery Review -->
         <div class="flex mt-[50px]">
@@ -132,9 +129,6 @@ export default {
       },
       date: {
         type: String
-      },
-      isEdited: {
-        type: Boolean
       },
       helpfulCount: {
         type: Number

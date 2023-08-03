@@ -1,6 +1,6 @@
 <template>
   <Preloader v-if="loading" :loading="loading" />
-  <div v-if="checkLoggedUserInfo" class="min-h-screen">
+  <div v-if="checkLoggedUserInfo">
     <div class="Content-Section my-10 mx-40"> <!--Content Section-->
 
         <div class="Profile-Section flex flex-row items-center"> <!--Profile Section-->
