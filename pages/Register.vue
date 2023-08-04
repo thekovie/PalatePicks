@@ -26,15 +26,19 @@
           <!-- Email -->
           <input type="text" placeholder="Email" class="mt-[22px]" v-model="email" required>
           <!-- Password -->
-          <input type="password" placeholder="Password" class="mt-[22px]" v-model="password" required>
+          <input type="password" placeholder="Password" class="mt-[22px]" v-model="password" @focus="isPasswordFocused = true" @blur="isPasswordFocused = false" :class="{'focus:outline-red': password.length < 6}" required>
+          <div v-show="password.length < 6 && isPasswordFocused" class="text-red text-xs mt-2 ml-1">Password must be at least 6 characters.</div>
           <!-- Confirm Password -->
-          <input type="password" placeholder="Confirm Password" class="mt-[22px]" v-model="confirmPass" required>
+          <input type="password" placeholder="Confirm Password" class="mt-[22px]" v-model="confirmPass" @focus="isConfirmPassFocused = true" @blur="isConfirmPassFocused = false" :class="{'focus:outline-red': password !== confirmPass}" required>
+          <div v-show="password !== confirmPass && isConfirmPassFocused" class="text-red text-xs mt-2 ml-1">Password does not match.</div>
           <!-- School/University -->
-          <input type="text" placeholder="School/University (Optional)" class="mt-[22px]" v-model="school" maxlength="100" required>
+          <input type="text" placeholder="School/University (Optional)" class="mt-[22px]" v-model="school" maxlength="100" :class="{'focus:outline-red': school.length === 100}" required>
+          <div v-show="school.length === 100" class="text-red text-xs mt-2 ml-1">School/University must be less than or equal to 100 characters.</div>
           <!-- Bio -->
-          <textarea v-model="bio" rows="5" class="resize-none mt-[22px] mb-[22px] rounded-[15px] px-[32px] py-[10px] border-solid border-[1px] border-green" placeholder="Tell us something about yourself! (Optional)" maxlength="500"></textarea>
+          <textarea v-model="bio" rows="5" class="resize-none mt-[22px] rounded-[15px] px-[32px] py-[10px] border-solid border-[1px] border-green" placeholder="Tell us something about yourself! (Optional)" maxlength="500" :class="{'focus:outline-red': bio.length === 500}" required />
+          <div v-show="bio.length === 500" class="text-red text-xs mt-2 ml-1">Bio must be less than or equal to 500 characters.</div>
           <!-- Register Button -->
-          <button class="bg-green rounded-[34.5px] h-[40px] text-white text-[16px] mb-[34px]">Register</button>
+          <button class="bg-green rounded-[34.5px] h-[40px] text-white text-[16px] mt-[22px] mb-[34px]">Register</button>
           <!-- Redirect to login page -->
           <div class="text-grey">Already a member? <NuxtLink class="font-bold" to="/login">Login here!</NuxtLink> </div>
         </div>
@@ -58,7 +62,9 @@ export default {
       userName: '',
       email: '',
       password: '',
+      isPasswordFocused: false,
       confirmPass: '',
+      isConfirmPassFocused: false,
       school: '',
       bio: '',
       showUploadModal: false,
