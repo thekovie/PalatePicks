@@ -1,6 +1,5 @@
 <template>
   <div v-if="isVisible" class="input-reviewbox flex flex-col bg-green_lightbg w-full p-10 md:w-[1000px] rounded-3xl shadow-xl shadow-green">
-    <CustomLoader v-if="loading" :loading="loading" :status="status" />
     <h2 class="rate-title font-semibold text-3xl">Create a Review</h2>
     <div class=" font-light text-grey text-lg">You're now reviewing {{ name }}</div>
     <form>
@@ -93,8 +92,6 @@ export default {
       reviewContent: '',
       selectedRating: 0,
       fileLocs: [],
-      loading: false,
-      status: '',
     };
   },
   methods: {
@@ -146,10 +143,9 @@ export default {
       let reviewId = '';
       let mediaUrls = [];
       let mediaFiles = [];
+      this.$emit('preload');
 
       // Upload review except media
-      this.status = 'Posting...';
-      this.loading = true;
       try {
         const {data, error} = await this.supabase
         .from('reviews')
@@ -171,7 +167,7 @@ export default {
 
       // Skip if no media
       if (this.fileLocs.length === 0) {
-        this.loading = false;
+        this.$emit('preload');
         this.$emit('close');
         this.$emit('update');
         location.reload(true);
@@ -275,7 +271,7 @@ export default {
         console.log(error);
       }
       finally {
-        this.loading = false;
+        this.$emit('preload');
         location.reload(true);
       }
     },
