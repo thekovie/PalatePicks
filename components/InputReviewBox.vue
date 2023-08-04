@@ -1,6 +1,5 @@
 <template>
   <div v-if="isVisible" class="input-reviewbox flex flex-col bg-green_lightbg w-full p-10 md:w-[1000px] rounded-3xl shadow-xl shadow-green">
-    <CustomLoader v-if="loading" :loading="loading" :status="status" />
     <h2 class="rate-title font-semibold text-3xl">Create a Review</h2>
     <div class=" font-light text-grey text-lg">You're now reviewing {{ name }}</div>
     <form>
@@ -23,10 +22,12 @@
         </div>
         <div class="review-content flex flex-col gap-5 mt-1">
           <div class="review-title">
-            <input class="review-title-input w-full md:w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" v-model="reviewTitle" type="text" placeholder="Review Title" maxlength="50" />
+            <input class="review-title-input w-full md:w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" v-model="reviewTitle" type="text" placeholder="Review Title" maxlength="50" :class="{'focus:outline-red' : reviewTitle.length === 50}" />
+            <div v-show="reviewTitle.length === 50" class="text-xs mt-2 ml-1 text-red">Maximum of 50 characters only</div>
           </div>
           <div class="review-text">
-            <textarea class="review-text-input w-full md:w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" maxlength="500" />
+            <textarea class="review-text-input w-full md:w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" maxlength="500" :class="{'focus:outline-red' : reviewContent.length === 500}" />
+            <div v-show="reviewContent.length === 500" class="text-xs mt-2 ml-1 text-red">Maximum of 500 characters only</div>
           </div>
           <div class="review-gallery flex flex-wrap md:flex-row">
             <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-2 md:mr-6 mb-6 cursor-pointer" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
@@ -93,8 +94,6 @@ export default {
       reviewContent: '',
       selectedRating: 0,
       fileLocs: [],
-      loading: false,
-      status: '',
     };
   },
   methods: {
@@ -146,10 +145,9 @@ export default {
       let reviewId = '';
       let mediaUrls = [];
       let mediaFiles = [];
+      this.$emit('preload');
 
       // Upload review except media
-      this.status = 'Posting...';
-      this.loading = true;
       try {
         const {data, error} = await this.supabase
         .from('reviews')
@@ -171,7 +169,7 @@ export default {
 
       // Skip if no media
       if (this.fileLocs.length === 0) {
-        this.loading = false;
+        this.$emit('preload');
         this.$emit('close');
         this.$emit('update');
         location.reload(true);
@@ -275,7 +273,7 @@ export default {
         console.log(error);
       }
       finally {
-        this.loading = false;
+        this.$emit('preload');
         location.reload(true);
       }
     },

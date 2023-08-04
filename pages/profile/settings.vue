@@ -44,11 +44,17 @@
               </div>
               <div class="mt-5"> <!--School-->
                 <label>School/University<br></label>
-                <input type="text" v-model="school" class="border-green border rounded w-full px-2" maxlength="100" required>
+                <input type="text" v-model="school" class="border-green border rounded w-full px-2" maxlength="100" :class="{'focus:outline-red': school.length === 100}" required>
+                <div v-show="school.length === 100" class="text-red text-xs mt-1">
+                  You have reached the maximum number of characters allowed for your school/university. (100 characters only)
+                </div>
               </div>
               <div class="mt-5"> <!--Bio-->
                 <label>Bio<br></label>
-                <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2" maxlength="500"></textarea>
+                <textarea rows="4" v-model="bio" class="border-green border rounded w-full px-2" maxlength="500" :class="{'focus:outline-red': bio.length === 500}" />
+                <div v-show="bio.length === 500" class="text-red text-xs">
+                  You have reached the maximum number of characters allowed for your bio. (500 characters only)
+                </div>
               </div>
             </div>
               <div class="flex flex-col place-items-center mt-5 basis-1/4"> <!--Avatar-->
@@ -76,9 +82,9 @@
         <!--Email-->
         <p class="font-bold text-xl border-b border-green mt-10 pb-1">Email</p>
 
-        <div class="flex">
+        <div class="flex flex-col">
           <div class="basis-4/5 mt-5">
-            <label>Email<br></label>
+            <label>Email</label>
             <input type="email" v-model="email" class="border-green border rounded w-full px-2" required >
           </div>
 
@@ -104,19 +110,22 @@
           </div>
 
           <div class="mr-20 mt-4 flex">
-            <div class="basis-1/2 me-10">
-              <label>New Password<br></label>
-              <input type="password" id="newpassword" v-model="newPassword" class="border-green border rounded w-full px-2" required>
+            <div class="basis-1/2 me-10 flex flex-col">
+              <label>New Password </label>
+              <input type="password" id="newpassword" v-model="newPassword" class="border-green border rounded w-full px-2" :class="{'focus:outline-red' : newPassword.length < 6}" required>
+              <div v-show="newPassword.length < 6" class="text-red text-xs mt-1">
+                Your password must be at least 6 characters long.
+              </div>
             </div>
 
-            <div class="basis-1/2">
-              <label>Confirm New Password<br></label>
-              <input type="password" v-model="confirmNewPassword" class="border-green border rounded w-full px-2" required>
+            <div class="basis-1/2 flex flex-col">
+              <label>Confirm New Password</label>
+              <input type="password" v-model="confirmNewPassword" class="border-green border rounded w-full px-2" @focus="isConfirmPasswordFocused = true" @blur="isConfirmPasswordFocused = false" required>
+              <p v-if="newPassword !== confirmNewPassword && isConfirmPasswordFocused" class="text-xs my-2 text-red">New and confirm password fields do not match!</p>
             </div>
 
           </div>
 
-          <p v-if="newPassword !== confirmNewPassword" class="text-xs my-2 text-red">New and confirm password fields do not match! Please ensure that you have entered them correctly.</p>
 
 
           <button v-if="newPassword === confirmNewPassword" class="bg-green text-white px-8 py-1 mt-5 rounded-3xl" @click="updatePassword">Update Password</button>
@@ -386,6 +395,7 @@ export default {
       currentPassword: "",
       newPassword: "",
       confirmNewPassword: "",
+      isConfirmPasswordFocused: false,
       bio: "",
       showUploadModal: false,
       ProfileImage: '',

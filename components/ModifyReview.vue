@@ -24,10 +24,12 @@
         </div>
         <div class="review-content flex flex-col gap-5 mt-1">
           <div class="review-title">
-            <input v-model="reviewTitle" class="review-title-input w-full md:w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" type="text" placeholder="Review Title" maxlength="50" />
+            <input v-model="reviewTitle" class="review-title-input w-full md:w-[600px] h-14 rounded-2xl px-6 border-1 focus:outline-green" type="text" placeholder="Review Title" maxlength="50" :class="{ 'focus:outline-red': reviewTitle.length === 50 }" />
+            <div v-show="reviewTitle.length === 50" class="text-xs mt-2 ml-1 text-red">Maximum of 50 characters only</div>
           </div>
           <div class="review-text">
-            <textarea class="review-text-input w-full md:w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" maxlength="500" />
+            <textarea class="review-text-input w-full md:w-[800px] h-[200px] rounded-2xl px-6 py-3 border-1 focus:outline-green" v-model="reviewContent" type="text" placeholder="Review Description" maxlength="500" :class="{ 'focus:outline-red': reviewContent.length === 500 }" />
+            <div v-show="reviewContent.length === 500" class="text-xs mt-2 ml-1 text-red">Maximum of 500 characters only</div>
           </div>
           <div class="review-gallery flex flex-wrap md:flex-row">
             <div v-for="(media, index) in mediaItems" :key="index" class="media-items flex items-center justify-center w-[90px] h-[90px] mr-6 mb-6" :class="{'opacity-30' : !pressedDelete, 'cursor-not-allowed' : !pressedDelete, 'cursor-pointer' : pressedDelete}" @mouseover="media.hovered = true" @mouseleave="media.hovered = false">
@@ -70,7 +72,7 @@
               Update Review
             </button>
 
-            <button v-else class="bg-[#93cfa9] text-white rounded-3xl flex items-center justify-center font-light px-14 w-full mt-4 md:mt-0 md:w-56 md:h-14 py-3 mr-4" disabled>
+            <button v-else class="bg-[#93cfa9] text-white rounded-3xl flex items-center justify-center font-light px-14 w-full mt-4 md:mt-0 md:w-60 md:h-14 py-3 mr-4" disabled>
               Update Review
             </button>
 
