@@ -11,7 +11,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/supabase": "^0.3.8",
-    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@nuxtjs/tailwindcss": "^6.8.1",
     "@types/node": "^18",
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.6.1",
