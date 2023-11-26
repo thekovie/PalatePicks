@@ -39,13 +39,13 @@
         <span class="subtitle font-bold text-2xl">NPM Packages</span>
         <span class="text-lg mt-5">The following NPM packages were used in the development of this web application:</span>
         <div class="packages mt-1 flex flex-col font-light font-monospace">
-          <span class="text-md">@nuxt/devtools 0.6.7</span>
-          <span class="text-md">@nuxtjs/supabase 0.3.8</span>
-          <span class="text-md">@types/node 18.16.19</span>
-          <span class="text-md">autoprefixer 10.4.14</span>
-          <span class="text-md">nuxt 3.6.1</span>
-          <span class="text-md">postcss 8.4.24</span>
-          <span class="text-md">tailwindcss 3.3.2</span>
+          <span class="text-md">@nuxt/devtools</span>
+          <span class="text-md">@nuxtjs/supabase</span>
+          <span class="text-md">@types/node</span>
+          <span class="text-md">autoprefixer</span>
+          <span class="text-md">nuxt</span>
+          <span class="text-md">postcss</span>
+          <span class="text-md">tailwindcss</span>
         </div>
       </div>
     </div>
