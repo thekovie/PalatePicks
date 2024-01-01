@@ -10,8 +10,8 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxtjs/supabase": "^1.1.4",
-    "@nuxtjs/tailwindcss": "^6.10.1",
+    "@nuxtjs/supabase": "^1.1.5",
+    "@nuxtjs/tailwindcss": "^6.10.3",
     "@types/node": "^20",
     "autoprefixer": "^10.4.16",
     "nuxt": "^3.9.0",
