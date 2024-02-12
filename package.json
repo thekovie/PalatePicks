@@ -11,11 +11,11 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/supabase": "^1.1.6",
-    "@nuxtjs/tailwindcss": "^6.11.3",
+    "@nuxtjs/tailwindcss": "^6.11.4",
     "@types/node": "^20",
     "autoprefixer": "^10.4.17",
     "nuxt": "^3.10.1",
-    "postcss": "^8.4.34",
+    "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1"
   }
 }
